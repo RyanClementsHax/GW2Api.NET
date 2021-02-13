@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Json;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace GW2Api.NET.V1

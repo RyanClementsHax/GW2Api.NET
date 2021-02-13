@@ -21,20 +21,40 @@ namespace GW2Api.NET.V1
 
         public Gw2ApiV1(HttpClient httpClient)
         {
+            if (httpClient is null) throw new ArgumentNullException(nameof(httpClient));
+
             _httpClient = httpClient;
-            _httpClient.BaseAddress = _baseAddress;
+            _httpClient.BaseAddress ??= _baseAddress;
         }
 
         private Task<T> GetAsync<T>(string resource)
-            => _httpClient.GetFromJsonAsync<T>(resource, _serializerOptions);
+        {
+            if (resource is null) throw new ArgumentNullException(nameof(resource));
+
+            return _httpClient.GetFromJsonAsync<T>(resource, _serializerOptions);
+        }
 
         private Task<T> GetAsync<T>(string resource, IDictionary<string, string> paramMap)
-            => _httpClient.GetFromJsonAsync<T>(resource.AddParams(paramMap), _serializerOptions);
+        {
+            if (resource is null) throw new ArgumentNullException(nameof(resource));
+            if (paramMap is null) throw new ArgumentNullException(nameof(paramMap));
+
+            return _httpClient.GetFromJsonAsync<T>(resource.AddParams(paramMap), _serializerOptions);
+        }
 
         private Task<T> GetAsync<T>(string resource, CancellationToken token)
-            => _httpClient.GetFromJsonAsync<T>(resource, _serializerOptions, token);
+        {
+            if (resource is null) throw new ArgumentNullException(nameof(resource));
+
+            return _httpClient.GetFromJsonAsync<T>(resource, _serializerOptions, token);
+        }
 
         private Task<T> GetAsync<T>(string resource, IDictionary<string, string> paramMap, CancellationToken token)
-            => _httpClient.GetFromJsonAsync<T>(resource.AddParams(paramMap), _serializerOptions, token);
+        {
+            if (resource is null) throw new ArgumentNullException(nameof(resource));
+            if (paramMap is null) throw new ArgumentNullException(nameof(paramMap));
+
+            return _httpClient.GetFromJsonAsync<T>(resource.AddParams(paramMap), _serializerOptions, token);
+        }
     }
 }

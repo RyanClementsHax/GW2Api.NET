@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GW2Api.NET.IntegrationTests.V1.Colors
 {
-    [TestClass]
+    [TestClass, TestCategory("Large")]
     public class ColorsTests
     {
         private IGw2ApiV1 _api;

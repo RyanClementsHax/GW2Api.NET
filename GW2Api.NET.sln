@@ -5,7 +5,15 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GW2Api.NET", "GW2Api.NET\GW2Api.NET.csproj", "{2264C5D2-7F84-4D6D-9C5A-842D943675D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2Api.NET.IntegrationTests", "GW2Api.NET.IntegrationTests\GW2Api.NET.IntegrationTests.csproj", "{C4FDD93F-B42F-4A90-A853-55EB6DDBFE8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GW2Api.NET.IntegrationTests", "GW2Api.NET.IntegrationTests\GW2Api.NET.IntegrationTests.csproj", "{C4FDD93F-B42F-4A90-A853-55EB6DDBFE8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4B059BC1-6FBB-426C-A5AB-3EC616259A1F}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2Api.NET.Tests", "GW2Api.NET.Tests\GW2Api.NET.Tests.csproj", "{9E5002C6-7BD4-4FF8-BB0E-409C183872D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +29,10 @@ Global
 		{C4FDD93F-B42F-4A90-A853-55EB6DDBFE8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4FDD93F-B42F-4A90-A853-55EB6DDBFE8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4FDD93F-B42F-4A90-A853-55EB6DDBFE8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E5002C6-7BD4-4FF8-BB0E-409C183872D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E5002C6-7BD4-4FF8-BB0E-409C183872D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E5002C6-7BD4-4FF8-BB0E-409C183872D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E5002C6-7BD4-4FF8-BB0E-409C183872D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

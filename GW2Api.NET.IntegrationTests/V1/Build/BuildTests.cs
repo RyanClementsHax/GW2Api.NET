@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GW2Api.NET.IntegrationTests.V1.Build
 {
-    [TestClass]
+    [TestClass, TestCategory("Large")]
     public class BuildTests
     {
         private IGw2ApiV1 _api;
