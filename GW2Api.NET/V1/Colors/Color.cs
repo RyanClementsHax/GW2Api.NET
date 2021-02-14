@@ -1,13 +1,15 @@
-﻿namespace GW2Api.NET.V1.Colors
+﻿using System.Collections.Generic;
+
+namespace GW2Api.NET.V1.Colors
 {
     public record Color(
         string ColorId,
         string Name,
-        int[] BaseRgb,
+        IReadOnlyCollection<int> BaseRgb,
         ColorModel Cloth,
         ColorModel Leather,
         ColorModel Metal,
         int? Item,
-        string[] Categories
+        IReadOnlyCollection<string> Categories
     );
 }

@@ -1,4 +1,6 @@
-﻿namespace GW2Api.NET.V1.Colors
+﻿using System.Collections.Generic;
+
+namespace GW2Api.NET.V1.Colors
 {
     public record ColorModel(
         int Brightness,
@@ -6,6 +8,6 @@
         int Hue,
         double Saturation,
         double Lightness,
-        int[] Rgb
+        IReadOnlyCollection<int> Rgb
     );
 }
