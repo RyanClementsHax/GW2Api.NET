@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace GW2Api.NET.IntegrationTests.V1.Colors
 {
     [TestClass, TestCategory("Large")]
-    public class ColorsTests
+    public class FilesTests
     {
         private IGw2ApiV1 _api;
         private CultureInfo _cultureInfo;
@@ -23,16 +23,17 @@ namespace GW2Api.NET.IntegrationTests.V1.Colors
         }
 
         [TestMethod]
-        public async Task GetAllColorsAsync_AnyCulture_ReturnsColorsInThatCulture()
+        public async Task GetAllColorsAsync_AnyCulture_ReturnsColorsInThatCultureWithColorIds()
         {
             var colors = await _api.GetAllColorsAsync(_cultureInfo);
 
             Assert.IsTrue(colors.Any());
             CollectionAssert.Contains(colors.Values.Select(x => x.Name).ToList(), _enUsColorName);
+            colors.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.ColorId));
         }
 
         [TestMethod]
-        public async Task GetAllColorsAsync_CancellationToken_ReturnsColorsInThatCulture()
+        public async Task GetAllColorsAsync_CancellationToken_ReturnsColorsInThatCultureWithColorIds()
         {
             using var cts = TestData.CreateDefaultTokenSource();
 
@@ -40,6 +41,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Colors
 
             Assert.IsTrue(colors.Any());
             CollectionAssert.Contains(colors.Values.Select(x => x.Name).ToList(), _enUsColorName);
+            colors.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.ColorId));
         }
     }
 }

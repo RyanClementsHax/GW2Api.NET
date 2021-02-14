@@ -8,8 +8,4 @@
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="V1\Files\" />
-  </ItemGroup>
-
 </Project>
