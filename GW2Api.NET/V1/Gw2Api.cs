@@ -27,29 +27,10 @@ namespace GW2Api.NET.V1
             _httpClient.BaseAddress ??= _baseAddress;
         }
 
-        private Task<T> GetAsync<T>(string resource)
-        {
-            if (resource is null) throw new ArgumentNullException(nameof(resource));
+        private Task<T> GetAsync<T>(string resource, CancellationToken token = default)
+            => GetAsync<T>(resource, new Dictionary<string, string>(), token);
 
-            return _httpClient.GetFromJsonAsync<T>(resource, _serializerOptions);
-        }
-
-        private Task<T> GetAsync<T>(string resource, IDictionary<string, string> paramMap)
-        {
-            if (resource is null) throw new ArgumentNullException(nameof(resource));
-            if (paramMap is null) throw new ArgumentNullException(nameof(paramMap));
-
-            return _httpClient.GetFromJsonAsync<T>(resource.AddParams(paramMap), _serializerOptions);
-        }
-
-        private Task<T> GetAsync<T>(string resource, CancellationToken token)
-        {
-            if (resource is null) throw new ArgumentNullException(nameof(resource));
-
-            return _httpClient.GetFromJsonAsync<T>(resource, _serializerOptions, token);
-        }
-
-        private Task<T> GetAsync<T>(string resource, IDictionary<string, string> paramMap, CancellationToken token)
+        private Task<T> GetAsync<T>(string resource, IDictionary<string, string> paramMap, CancellationToken token = default)
         {
             if (resource is null) throw new ArgumentNullException(nameof(resource));
             if (paramMap is null) throw new ArgumentNullException(nameof(paramMap));

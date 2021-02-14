@@ -10,17 +10,7 @@ namespace GW2Api.NET.V1
     {
         private static readonly string _filesResource = "files.json";
 
-        public async Task<IDictionary<string, File>> GetAllFilesAsync()
-            => (await GetAsync<IDictionary<string, File>>(_filesResource))
-                .ToDictionary(
-                    x => x.Key,
-                    x => x.Value with
-                    {
-                        FileName = x.Key
-                    }
-                );
-
-        public async Task<IDictionary<string, File>> GetAllFilesAsync(CancellationToken token)
+        public async Task<IDictionary<string, File>> GetAllFilesAsync(CancellationToken token = default)
             => (await GetAsync<IDictionary<string, File>>(_filesResource, token))
                 .ToDictionary(
                     x => x.Key,

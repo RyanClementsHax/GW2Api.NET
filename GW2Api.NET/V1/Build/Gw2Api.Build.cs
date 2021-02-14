@@ -7,8 +7,7 @@ namespace GW2Api.NET.V1
     {
         private static readonly string _buildResource = "build.json";
 
-        public Task<Build> GetBuildAsync() => GetAsync<Build>(_buildResource);
-
-        public Task<Build> GetBuildAsync(CancellationToken token) => GetAsync<Build>(_buildResource, token);
+        public Task<Build> GetBuildAsync(CancellationToken token = default)
+            => GetAsync<Build>(_buildResource, token);
     }
 }

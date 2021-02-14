@@ -7,7 +7,6 @@ namespace GW2Api.NET.V1
 {
     public partial interface IGw2ApiV1
     {
-        Task<IDictionary<string, File>> GetAllFilesAsync();
-        Task<IDictionary<string, File>> GetAllFilesAsync(CancellationToken token);
+        Task<IDictionary<string, File>> GetAllFilesAsync(CancellationToken token = default);
     }
 }
