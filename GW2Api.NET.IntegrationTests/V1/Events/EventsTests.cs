@@ -20,10 +20,12 @@ namespace GW2Api.NET.IntegrationTests.V1.Events
         [TestMethod]
         public async Task GetAllAvailableEventsDetails_NoParams_GetsAllEventDetailsWithFileIds()
         {
-            var files = await _api.GetAllAvailableEventsDetails();
+            var eventDetails = await _api.GetAllAvailableEventsDetails();
 
-            Assert.IsTrue(files.Any());
-            files.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
+            var item = eventDetails.Where(x => x.Value.Flags.Any()).First().Value;
+
+            Assert.IsTrue(eventDetails.Any());
+            eventDetails.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
         }
 
         [TestMethod]
@@ -31,10 +33,12 @@ namespace GW2Api.NET.IntegrationTests.V1.Events
         {
             using var cts = TestData.CreateDefaultTokenSource();
 
-            var files = await _api.GetAllAvailableEventsDetails();
+            var eventDetails = await _api.GetAllAvailableEventsDetails(token: cts.Token);
 
-            Assert.IsTrue(files.Any());
-            files.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
+            var item = eventDetails.Where(x => x.Value.Flags.Any()).First().Value;
+
+            Assert.IsTrue(eventDetails.Any());
+            eventDetails.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
         }
     }
 }

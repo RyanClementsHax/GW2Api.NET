@@ -1,6 +1,6 @@
 ﻿namespace GW2Api.NET.V1.Events
 {
-    public enum EventFlags
+    public enum EventFlag
     {
         GroupEvent,
         MapWide,

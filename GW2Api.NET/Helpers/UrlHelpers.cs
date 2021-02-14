@@ -13,7 +13,10 @@ namespace GW2Api.NET.Helpers
             queryStr.Add(paramsMap.Aggregate(new NameValueCollection(),
                 (seed, current) =>
                 {
-                    seed.Add(current.Key, current.Value);
+                    if (current.Value is not null)
+                    {
+                        seed.Add(current.Key, current.Value);
+                    }
                     return seed;
                 }
             ));

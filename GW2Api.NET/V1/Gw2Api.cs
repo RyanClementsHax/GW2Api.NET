@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,9 +15,13 @@ namespace GW2Api.NET.V1
     {
         private readonly Uri _baseAddress = new Uri("https://api.guildwars2.com/v1/");
         private readonly HttpClient _httpClient;
-        private readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions
+        private readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions()
         {
-            PropertyNamingPolicy = new SnakeCaseNamingPolicy()
+            PropertyNamingPolicy = new SnakeCaseNamingPolicy(),
+            Converters =
+            {
+                new JsonStringEnumMemberConverter(new SnakeCaseNamingPolicy())
+            },
         };
 
         public Gw2ApiV1(HttpClient httpClient)
