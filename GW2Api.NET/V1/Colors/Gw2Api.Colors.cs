@@ -12,7 +12,7 @@ namespace GW2Api.NET.V1
     {
         private static readonly string _colorsResource = "colors.json";
 
-        public async Task<IDictionary<string, Color>> GetAllColorsAsync(CultureInfo cultureInfo, CancellationToken token = default)
+        public async Task<IReadOnlyDictionary<string, Color>> GetAllColorsAsync(CultureInfo cultureInfo, CancellationToken token = default)
         {
             if (cultureInfo is null) throw new ArgumentNullException(nameof(cultureInfo));
 
@@ -27,7 +27,7 @@ namespace GW2Api.NET.V1
                 x => x.Key,
                 x => x.Value with
                 {
-                    ColorId = x.Key
+                    Id = x.Key
                 }
             );
         }

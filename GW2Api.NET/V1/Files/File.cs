@@ -2,7 +2,7 @@
 {
     public record File(
         int FileId,
-        string FileName,
+        string Name,
         string Signature
     );
 }

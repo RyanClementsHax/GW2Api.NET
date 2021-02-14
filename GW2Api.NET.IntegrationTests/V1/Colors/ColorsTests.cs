@@ -29,7 +29,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Colors
 
             Assert.IsTrue(colors.Any());
             CollectionAssert.Contains(colors.Values.Select(x => x.Name).ToList(), _enUsColorName);
-            colors.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.ColorId));
+            colors.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
         }
 
         [TestMethod]
@@ -41,7 +41,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Colors
 
             Assert.IsTrue(colors.Any());
             CollectionAssert.Contains(colors.Values.Select(x => x.Name).ToList(), _enUsColorName);
-            colors.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.ColorId));
+            colors.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
         }
     }
 }

@@ -5,6 +5,6 @@ namespace GW2Api.NET.V1
 {
     public partial interface IGw2ApiV1
     {
-        Task<Build> GetBuildAsync(CancellationToken token = default);
+        Task<Build.Build> GetBuildAsync(CancellationToken token = default);
     }
 }

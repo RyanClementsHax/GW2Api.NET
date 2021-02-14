@@ -3,7 +3,7 @@
 namespace GW2Api.NET.V1.Colors
 {
     public record Color(
-        string ColorId,
+        string Id,
         string Name,
         IReadOnlyCollection<int> BaseRgb,
         ColorModel Cloth,

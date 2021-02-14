@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace GW2Api.NET.IntegrationTests.V1.Files
+namespace GW2Api.NET.IntegrationTests.V1.Events
 {
     [TestClass, TestCategory("Large")]
     public class EventsTests
@@ -18,23 +18,23 @@ namespace GW2Api.NET.IntegrationTests.V1.Files
         }
 
         [TestMethod]
-        public async Task GetAllFilesAsync_NoParameters_ReturnsFilesWithFileNames()
+        public async Task GetAllAvailableEventsDetails_NoParams_GetsAllEventDetailsWithFileIds()
         {
-            var files = await _api.GetAllFilesAsync();
+            var files = await _api.GetAllAvailableEventsDetails();
 
             Assert.IsTrue(files.Any());
-            files.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Name));
+            files.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
         }
 
         [TestMethod]
-        public async Task GetAllFilesAsync_CancellationToken_ReturnsFilesWithFileNames()
+        public async Task GetAllAvailableEventsDetails_CancellationToken_GetsAllEventDetailsWithFileIds()
         {
             using var cts = TestData.CreateDefaultTokenSource();
 
-            var files = await _api.GetAllFilesAsync(cts.Token);
+            var files = await _api.GetAllAvailableEventsDetails();
 
             Assert.IsTrue(files.Any());
-            files.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Name));
+            files.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
         }
     }
 }
