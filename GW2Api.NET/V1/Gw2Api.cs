@@ -20,7 +20,8 @@ namespace GW2Api.NET.V1
             PropertyNamingPolicy = new SnakeCaseNamingPolicy(),
             Converters =
             {
-                new JsonStringEnumMemberConverter(new SnakeCaseNamingPolicy())
+                new JsonStringEnumMemberConverter(new SnakeCaseNamingPolicy()),
+                new Vector3JsonConverter()
             },
         };
 
