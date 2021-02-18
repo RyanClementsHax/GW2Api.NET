@@ -22,8 +22,6 @@ namespace GW2Api.NET.IntegrationTests.V1.Events
         {
             var eventDetails = await _api.GetAllAvailableEventsDetails();
 
-            var item = eventDetails.Where(x => x.Value.Flags.Any()).First().Value;
-
             Assert.IsTrue(eventDetails.Any());
             eventDetails.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
         }

@@ -21,7 +21,8 @@ namespace GW2Api.NET.V1
             Converters =
             {
                 new JsonStringEnumMemberConverter(new SnakeCaseNamingPolicy()),
-                new Vector3JsonConverter()
+                new Vector3JsonConverter(),
+                new Vector2JsonConverter()
             },
         };
 

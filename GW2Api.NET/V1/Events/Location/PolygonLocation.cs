@@ -7,7 +7,7 @@ namespace GW2Api.NET.V1.Events.Locations
     [JsonDiscriminator("poly")]
     public record PolygonLocation(
         Vector3 Center,
-        IReadOnlyCollection<double> ZRange,
-        IReadOnlyCollection<IReadOnlyCollection<double>> Points
+        Vector2 ZRange,
+        IReadOnlyCollection<Vector2> Points
     ) : Location(Center);
 }
