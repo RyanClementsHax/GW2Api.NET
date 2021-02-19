@@ -1,4 +1,4 @@
-﻿namespace GW2Api.NET.V1.Events
+﻿namespace GW2Api.NET.V1.Events.Dto
 {
     public enum EventFlag
     {

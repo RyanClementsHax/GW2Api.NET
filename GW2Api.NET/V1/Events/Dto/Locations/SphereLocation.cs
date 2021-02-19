@@ -1,12 +1,11 @@
 ﻿using GW2Api.NET.Json;
 using System.Numerics;
 
-namespace GW2Api.NET.V1.Events.Locations
+namespace GW2Api.NET.V1.Events.Dto.Locations
 {
-    [JsonDiscriminator("cylinder")]
-    public record CylinderLocation(
+    [JsonDiscriminator("sphere")]
+    public record SphereLocation(
         Vector3 Center,
-        double Height,
         double Radius,
         double Rotation
     ) : Location(Center);

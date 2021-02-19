@@ -1,4 +1,4 @@
-﻿using GW2Api.NET.V1.Builds;
+﻿using GW2Api.NET.V1.Builds.Dto;
 using System.Threading;
 using System.Threading.Tasks;
 

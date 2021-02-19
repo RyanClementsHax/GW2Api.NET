@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace GW2Api.NET.V1.World
+namespace GW2Api.NET.V1.World.Dto
 {
     public record WorldName(
         [property: JsonPropertyName("id")]

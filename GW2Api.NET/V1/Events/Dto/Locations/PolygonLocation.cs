@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace GW2Api.NET.V1.Events.Locations
+namespace GW2Api.NET.V1.Events.Dto.Locations
 {
     [JsonDiscriminator("poly")]
     public record PolygonLocation(

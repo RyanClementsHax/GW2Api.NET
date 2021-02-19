@@ -1,4 +1,4 @@
-﻿using GW2Api.NET.V1.Colors;
+﻿using GW2Api.NET.V1.Colors.Dto;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;

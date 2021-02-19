@@ -1,6 +1,6 @@
 ﻿using GW2Api.NET.Helpers;
 using GW2Api.NET.Json;
-using GW2Api.NET.V1.Guilds;
+using GW2Api.NET.V1.Guilds.Dto;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;

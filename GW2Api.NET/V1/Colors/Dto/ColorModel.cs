@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace GW2Api.NET.V1.Colors
+namespace GW2Api.NET.V1.Colors.Dto
 {
     public record ColorModel(
         int Brightness,

@@ -1,4 +1,4 @@
-﻿using GW2Api.NET.V1.Files;
+﻿using GW2Api.NET.V1.Files.Dto;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
