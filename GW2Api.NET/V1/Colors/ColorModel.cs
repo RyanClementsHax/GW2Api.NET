@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Numerics;
 
 namespace GW2Api.NET.V1.Colors
 {
@@ -8,6 +8,6 @@ namespace GW2Api.NET.V1.Colors
         int Hue,
         double Saturation,
         double Lightness,
-        IReadOnlyCollection<int> Rgb
+        Vector3 Rgb
     );
 }

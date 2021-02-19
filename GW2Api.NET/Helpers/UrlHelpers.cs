@@ -20,7 +20,9 @@ namespace GW2Api.NET.Helpers
                     return seed;
                 }
             ));
-            return $"{url}{queryStr}";
+            return queryStr.Count > 0
+                ? $"{url}?{queryStr}"
+                : url;
         }
     }
 }

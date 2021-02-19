@@ -11,36 +11,42 @@ namespace GW2Api.NET.IntegrationTests.V1.Colors
     public class FilesTests
     {
         private IGw2ApiV1 _api;
-        private CultureInfo _cultureInfo;
-        private string _enUsColorName;
 
         [TestInitialize]
         public void Setup()
         {
             _api = new Gw2ApiV1(new HttpClient());
-            _cultureInfo = new CultureInfo("en-US");
-            _enUsColorName = "Starry Night";
+        }
+
+        [TestMethod]
+        public async Task GetAllColorsAsync_NoParams_ReturnsColorsWithColorIds()
+        {
+            var colors = await _api.GetAllColorsAsync();
+
+            Assert.IsTrue(colors.Any());
+            colors.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
         }
 
         [TestMethod]
         public async Task GetAllColorsAsync_AnyCulture_ReturnsColorsInThatCultureWithColorIds()
         {
-            var colors = await _api.GetAllColorsAsync(_cultureInfo);
+            var cultureInfo = new CultureInfo("es-MX");
+            var esMxColorName = "Tiza";
+            var colors = await _api.GetAllColorsAsync(cultureInfo);
 
             Assert.IsTrue(colors.Any());
-            CollectionAssert.Contains(colors.Values.Select(x => x.Name).ToList(), _enUsColorName);
+            CollectionAssert.Contains(colors.Values.Select(x => x.Name).ToList(), esMxColorName);
             colors.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
         }
 
         [TestMethod]
-        public async Task GetAllColorsAsync_CancellationToken_ReturnsColorsInThatCultureWithColorIds()
+        public async Task GetAllColorsAsync_CancellationToken_ReturnsColorsWithColorIds()
         {
             using var cts = TestData.CreateDefaultTokenSource();
 
-            var colors = await _api.GetAllColorsAsync(_cultureInfo, cts.Token);
+            var colors = await _api.GetAllColorsAsync(token: cts.Token);
 
             Assert.IsTrue(colors.Any());
-            CollectionAssert.Contains(colors.Values.Select(x => x.Name).ToList(), _enUsColorName);
             colors.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
         }
     }

@@ -12,12 +12,11 @@ namespace GW2Api.NET.V1
     {
         private static readonly string _eventsResource = "event_details.json";
 
-        public async Task<IReadOnlyDictionary<Guid, EventDetails>> GetAllAvailableEventsDetails(string eventId = null, CultureInfo cultureInfo = null, CancellationToken token = default)
+        public async Task<IReadOnlyDictionary<Guid, EventDetail>> GetAllAvailableEventsDetails(CultureInfo cultureInfo = null, CancellationToken token = default)
             => (await GetAsync<EventDetailsResponse>(
                     _eventsResource,
                     new Dictionary<string, string>
                     {
-                        { "event_id", eventId },
                         { "lang", cultureInfo?.TwoLetterISOLanguageName }
                     },
                     token
@@ -28,5 +27,22 @@ namespace GW2Api.NET.V1
                         Id = x.Key
                     }
                 );
+
+        public async Task<EventDetail> GetEventDetail(Guid eventId, CultureInfo cultureInfo = null, CancellationToken token = default)
+            => (await GetAsync<EventDetailsResponse>(
+                    _eventsResource,
+                    new Dictionary<string, string>
+                    {
+                        { "event_id", eventId.ToString() },
+                        { "lang", cultureInfo?.TwoLetterISOLanguageName }
+                    },
+                    token
+                )).Events.ToDictionary(
+                    x => x.Key,
+                    x => x.Value with
+                    {
+                        Id = x.Key
+                    }
+                ).First().Value;
     }
 }

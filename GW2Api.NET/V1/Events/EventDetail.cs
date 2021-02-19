@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GW2Api.NET.V1.Events
 {
-    public record EventDetails(
+    public record EventDetail(
         Guid Id,
         string Name,
         int Level,
