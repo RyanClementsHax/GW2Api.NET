@@ -1,7 +1,9 @@
-﻿namespace GW2Api.NET.V1.Maps
+﻿using System.Text.Json.Serialization;
+
+namespace GW2Api.NET.V1.Maps
 {
     public record MapName(
-        int MapId,
+        [property: JsonPropertyName("id")] string MapId,
         string Name
     );
 }
