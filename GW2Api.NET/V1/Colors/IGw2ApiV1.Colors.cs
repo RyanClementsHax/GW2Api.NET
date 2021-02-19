@@ -8,6 +8,6 @@ namespace GW2Api.NET.V1
 {
     public partial interface IGw2ApiV1
     {
-        Task<IReadOnlyDictionary<string, Color>> GetAllColorsAsync(CultureInfo cultureInfo = null, CancellationToken token = default);
+        Task<IReadOnlyDictionary<string, Color>> GetAllColorsAsync(CultureInfo lang = null, CancellationToken token = default);
     }
 }

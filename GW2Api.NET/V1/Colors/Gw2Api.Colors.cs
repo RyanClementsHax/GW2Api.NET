@@ -11,12 +11,12 @@ namespace GW2Api.NET.V1
     {
         private static readonly string _colorsResource = "colors.json";
 
-        public async Task<IReadOnlyDictionary<string, Color>> GetAllColorsAsync(CultureInfo cultureInfo = null, CancellationToken token = default)
+        public async Task<IReadOnlyDictionary<string, Color>> GetAllColorsAsync(CultureInfo lang = null, CancellationToken token = default)
             => (await GetAsync<ColorsResponse>(
                 _colorsResource,
                 new Dictionary<string, string>
                 {
-                    { "lang", cultureInfo?.TwoLetterISOLanguageName }
+                    { "lang", lang?.TwoLetterISOLanguageName }
                 },
                 token
             )).Colors.ToDictionary(

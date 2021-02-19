@@ -8,6 +8,6 @@ namespace GW2Api.NET.V1
 {
     public partial interface IGw2ApiV1
     {
-        Task<IReadOnlyCollection<WorldName>> GetAllWorldNames(CultureInfo cultureInfo = null, CancellationToken token = default);
+        Task<IReadOnlyCollection<WorldName>> GetAllWorldNames(CultureInfo lang = null, CancellationToken token = default);
     }
 }

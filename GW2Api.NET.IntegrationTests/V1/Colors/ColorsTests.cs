@@ -30,10 +30,10 @@ namespace GW2Api.NET.IntegrationTests.V1.Colors
         [TestMethod]
         public async Task GetAllColorsAsync_AnyCulture_ReturnsColorsInThatCultureWithColorIds()
         {
-            var cultureInfo = new CultureInfo("es-MX");
+            var lang = new CultureInfo("es-MX");
             var esMxColorName = "Tiza";
 
-            var colors = await _api.GetAllColorsAsync(cultureInfo);
+            var colors = await _api.GetAllColorsAsync(lang);
 
             Assert.IsTrue(colors.Any());
             CollectionAssert.Contains(colors.Values.Select(x => x.Name).ToList(), esMxColorName);

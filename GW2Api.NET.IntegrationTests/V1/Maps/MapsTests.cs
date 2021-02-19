@@ -29,10 +29,10 @@ namespace GW2Api.NET.IntegrationTests.V1.Maps
         [TestMethod]
         public async Task GetAllMapNames_AnyCulture_ReturnsMapNamesInThatCulture()
         {
-            var cultureInfo = new CultureInfo("es-MX");
+            var lang = new CultureInfo("es-MX");
             var esMxMapName = "Valle de la Reina";
 
-            var mapNames = await _api.GetAllMapNames(cultureInfo);
+            var mapNames = await _api.GetAllMapNames(lang);
 
             Assert.IsTrue(mapNames.Any());
             CollectionAssert.Contains(mapNames.Select(x => x.Name).ToList(), esMxMapName);

@@ -3,7 +3,9 @@
 namespace GW2Api.NET.V1.World
 {
     public record WorldName(
-        [property: JsonPropertyName("id")] string WorldId,
+        [property: JsonPropertyName("id")]
+        string WorldId,
+
         string Name
     )
     {

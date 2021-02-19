@@ -29,10 +29,10 @@ namespace GW2Api.NET.IntegrationTests.V1.World
         [TestMethod]
         public async Task GetAllWorldNames_AnyCulture_ReturnsWorldNamesInThatCulture()
         {
-            var cultureInfo = new CultureInfo("es-MX");
+            var lang = new CultureInfo("es-MX");
             var esMxWorldName = "Roca del Yunque";
 
-            var worldNames = await _api.GetAllWorldNames(cultureInfo);
+            var worldNames = await _api.GetAllWorldNames(lang);
 
             Assert.IsTrue(worldNames.Any());
             CollectionAssert.Contains(worldNames.Select(x => x.Name).ToList(), esMxWorldName);
