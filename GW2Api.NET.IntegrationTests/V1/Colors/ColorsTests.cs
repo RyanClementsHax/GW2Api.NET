@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace GW2Api.NET.IntegrationTests.V1.Colors
 {
-    [TestClass, TestCategory("Large")]
-    public class FilesTests
+    [TestClass, TestCategory("Large"), TestCategory("Colors")]
+    public class ColorsTests
     {
         private IGw2ApiV1 _api;
 
@@ -32,6 +32,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Colors
         {
             var cultureInfo = new CultureInfo("es-MX");
             var esMxColorName = "Tiza";
+
             var colors = await _api.GetAllColorsAsync(cultureInfo);
 
             Assert.IsTrue(colors.Any());

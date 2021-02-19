@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GW2Api.NET.IntegrationTests.V1.Events
 {
-    [TestClass, TestCategory("Large")]
+    [TestClass, TestCategory("Large"), TestCategory("Events")]
     public class EventsTests
     {
         private IGw2ApiV1 _api;

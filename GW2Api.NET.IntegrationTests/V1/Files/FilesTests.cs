@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace GW2Api.NET.IntegrationTests.V1.Files
 {
-    [TestClass, TestCategory("Large")]
-    public class EventsTests
+    [TestClass, TestCategory("Large"), TestCategory("Files")]
+    public class FilesTests
     {
         private IGw2ApiV1 _api;
 
