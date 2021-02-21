@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace GW2Api.NET.Json
 {
-    class StringToIntConverter : JsonConverter<int>
+    internal class StringToIntConverter : JsonConverter<int>
     {
 
         public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

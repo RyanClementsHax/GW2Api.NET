@@ -8,15 +8,14 @@ namespace GW2Api.NET.V1.Items.Dto
         [property: JsonConverter(typeof(StringToIntConverter))] int ItemId,
         string Name,
         string Description,
-        string Type,
         [property: JsonConverter(typeof(StringToIntConverter))] int Level,
-        string Rarity,
+        Rarity Rarity,
         [property: JsonConverter(typeof(StringToIntConverter))] int VendorValue,
         [property: JsonConverter(typeof(StringToIntConverter))] int IconFileId,
         string IconFileSignature,
         [property: JsonConverter(typeof(StringToIntConverter))] int DefaultSkin,
-        IReadOnlyCollection<string> GameTypes,
-        IReadOnlyCollection<string> Flags,
-        IReadOnlyCollection<string> Restrictions
+        IReadOnlyCollection<GameType> GameTypes,
+        IReadOnlyCollection<Flag> Flags,
+        IReadOnlyCollection<Restriction> Restrictions
     );
 }
