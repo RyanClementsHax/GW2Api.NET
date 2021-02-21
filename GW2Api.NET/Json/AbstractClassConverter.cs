@@ -16,7 +16,7 @@ namespace GW2Api.NET.Json
                 .GetTypes()
                 .Where(x => x.IsClass && x.IsSubclassOf(typeof(T)) && x.GetCustomAttributes(typeof(JsonDiscriminatorAttribute)).Any())
                 .ToDictionary(
-                    x => ((JsonDiscriminatorAttribute)x.GetCustomAttribute(typeof(JsonDiscriminatorAttribute))).Discriminator,
+                    x => ((JsonDiscriminatorAttribute)x.GetCustomAttribute(typeof(JsonDiscriminatorAttribute))).Discriminator.ToLower(),
                     x => x
                 );
 
@@ -31,7 +31,7 @@ namespace GW2Api.NET.Json
                 {
                     var typeValue = typeProp.GetString();
 
-                    if (_discriminatorToTypeMap.TryGetValue(typeValue, out var type))
+                    if (_discriminatorToTypeMap.TryGetValue(typeValue.ToLower(), out var type))
                     {
                         return JsonSerializer.Deserialize(doc.RootElement.GetRawText(), type, options) as T;
                     }

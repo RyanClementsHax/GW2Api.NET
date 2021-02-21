@@ -36,11 +36,10 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
         }
 
         [TestMethod]
-        public async Task GetItemDetail_ValidItemId_ReturnsThatItemDetail()
+        [DataRow(6, "((208738))")] // weapon
+        [DataRow(3000, "Strong Apprentice Pants")] // armor
+        public async Task GetItemDetail_ValidWeaponItemId_ReturnsThatItemDetail(int itemId, string itemName)
         {
-            var itemId = 6;
-            var itemName = "((208738))";
-
             var itemDetail = await _api.GetItemDetail(itemId);
 
             Assert.AreEqual(itemName, itemDetail.Name);
