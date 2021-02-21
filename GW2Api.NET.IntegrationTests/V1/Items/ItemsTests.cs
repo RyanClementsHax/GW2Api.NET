@@ -34,5 +34,28 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
 
             Assert.IsTrue(itemIds.Any());
         }
+
+        [TestMethod]
+        public async Task GetItemDetail_ValidItemId_ReturnsThatItemDetail()
+        {
+            var itemId = 6;
+            var itemName = "((208738))";
+
+            var itemDetail = await _api.GetItemDetail(itemId);
+
+            Assert.AreEqual(itemName, itemDetail.Name);
+        }
+
+        [TestMethod]
+        public async Task GetItemDetail_ValidItemIdAndCancellationToken_ReturnsThatItemDetail()
+        {
+            using var cts = TestData.CreateDefaultTokenSource();
+            var itemId = 6;
+            var itemName = "((208738))";
+
+            var itemDetail = await _api.GetItemDetail(itemId, token: cts.Token);
+
+            Assert.AreEqual(itemName, itemDetail.Name);
+        }
     }
 }

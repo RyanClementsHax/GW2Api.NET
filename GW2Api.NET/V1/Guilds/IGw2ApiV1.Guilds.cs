@@ -7,7 +7,7 @@ namespace GW2Api.NET.V1
 {
     public partial interface IGw2ApiV1
     {
-        Task<GuildDetails> GetGuildDetails(Guid guildId, CancellationToken token = default);
-        Task<GuildDetails> GetGuildDetails(string guildName, CancellationToken token = default);
+        Task<GuildDetail> GetGuildDetail(Guid guildId, CancellationToken token = default);
+        Task<GuildDetail> GetGuildDetail(string guildName, CancellationToken token = default);
     }
 }

@@ -40,7 +40,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Events
         }
 
         [TestMethod]
-        public async Task GetEventsDetail_ValidEventId_GetsThatOneEvent()
+        public async Task GetEventDetail_ValidEventId_GetsThatOneEvent()
         {
             var eventId = (await _api.GetAllAvailableEventsDetails()).First().Value.Id;
 
@@ -50,7 +50,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Events
         }
 
         [TestMethod]
-        public async Task GetEventsDetail_InValidEventId_Throws400()
+        public async Task GetEventDetail_InValidEventId_Throws400()
         {
             var ex = await Assert.ThrowsExceptionAsync<HttpRequestException>(() =>
                 _api.GetEventDetail(Guid.NewGuid())

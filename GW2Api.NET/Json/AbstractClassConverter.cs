@@ -7,11 +7,11 @@ using System.Text.Json.Serialization;
 
 namespace GW2Api.NET.Json
 {
-    internal class AbstractClassJsonConverter<T> : JsonConverter<T> where T : class
+    internal class AbstractClassConverter<T> : JsonConverter<T> where T : class
     {
         private IDictionary<string, Type> _discriminatorToTypeMap;
 
-        public AbstractClassJsonConverter()
+        public AbstractClassConverter()
             => _discriminatorToTypeMap = Assembly.GetAssembly(typeof(T))
                 .GetTypes()
                 .Where(x => x.IsClass && x.IsSubclassOf(typeof(T)) && x.GetCustomAttributes(typeof(JsonDiscriminatorAttribute)).Any())

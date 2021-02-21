@@ -2,7 +2,7 @@
 
 namespace GW2Api.NET.V1.Guilds.Dto
 {
-    public record GuildDetails(
+    public record GuildDetail(
         Guid GuildId,
         string GuildName,
         string Tag,

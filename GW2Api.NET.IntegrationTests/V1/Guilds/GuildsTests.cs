@@ -18,45 +18,45 @@ namespace GW2Api.NET.IntegrationTests.V1.Guilds
         }
 
         [TestMethod]
-        public async Task GetGuildDetails_GuildIdThatExists_ReturnsThoseGuildDetails()
+        public async Task GetGuildDetail_GuildIdThatExists_ReturnsThatGuildDetail()
         {
             var guildId = new Guid("75FD83CF-0C45-4834-BC4C-097F93A487AF");
 
-            var guildDetails = await _api.GetGuildDetails(guildId);
+            var guildDetail = await _api.GetGuildDetail(guildId);
 
-            Assert.AreEqual(guildId, guildDetails.GuildId);
+            Assert.AreEqual(guildId, guildDetail.GuildId);
         }
 
         [TestMethod]
-        public async Task GetGuildDetails_GuildIdThatExistsAndCancellationToken_ReturnsThoseGuildDetails()
+        public async Task GetGuildDetail_GuildIdThatExistsAndCancellationToken_ReturnsThatGuildDetail()
         {
             using var cts = TestData.CreateDefaultTokenSource();
             var guildId = new Guid("75FD83CF-0C45-4834-BC4C-097F93A487AF");
 
-            var guildDetails = await _api.GetGuildDetails(guildId, cts.Token);
+            var guildDetail = await _api.GetGuildDetail(guildId, cts.Token);
 
-            Assert.AreEqual(guildId, guildDetails.GuildId);
+            Assert.AreEqual(guildId, guildDetail.GuildId);
         }
 
         [TestMethod]
-        public async Task GetGuildDetails_GuildNameThatExists_ReturnsThoseGuildDetails()
+        public async Task GetGuildDetail_GuildNameThatExists_ReturnsThatGuildDetail()
         {
             var guildName = "Veterans Of Lions Arch";
 
-            var guildDetails = await _api.GetGuildDetails(guildName);
+            var guildDetail = await _api.GetGuildDetail(guildName);
 
-            Assert.AreEqual(guildName, guildDetails.GuildName);
+            Assert.AreEqual(guildName, guildDetail.GuildName);
         }
 
         [TestMethod]
-        public async Task GetGuildDetails_GuildNameThatExistsAndCancellationToken_ReturnsThoseGuildDetails()
+        public async Task GetGuildDetail_GuildNameThatExistsAndCancellationToken_ReturnsThatGuildDetail()
         {
             using var cts = TestData.CreateDefaultTokenSource();
             var guildName = "Veterans Of Lions Arch";
 
-            var guildDetails = await _api.GetGuildDetails(guildName, cts.Token);
+            var guildDetail = await _api.GetGuildDetail(guildName, cts.Token);
 
-            Assert.AreEqual(guildName, guildDetails.GuildName);
+            Assert.AreEqual(guildName, guildDetail.GuildName);
         }
     }
 }
