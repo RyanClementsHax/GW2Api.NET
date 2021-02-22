@@ -5,11 +5,12 @@ using System.Text.Json.Serialization;
 namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Armor
 {
     public record ArmorSubDetail(
-        string Type,
-        string WeightClass,
+        ArmorType Type,
+        WeightClass WeightClass,
         [property: JsonConverter(typeof(StringToIntConverter))] int Defense,
-        IReadOnlyCollection<string> InfusionSlots,
-        object InfixUpgrade,
+        IReadOnlyCollection<InfusionType> InfusionSlots,
+        double AttributeAdjustment,
+        InfixUpgrade InfixUpgrade,
         [property: JsonConverter(typeof(StringToNullableIntConverter))] int? SuffixItemId,
         [property: JsonConverter(typeof(StringToNullableIntConverter))] int? SecondarySuffixItemId
     );

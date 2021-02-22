@@ -37,8 +37,8 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
 
         [TestMethod]
         [DataRow(6, "((208738))")] // weapon
-        [DataRow(3000, "Strong Apprentice Pants")] // armor
-        public async Task GetItemDetail_ValidWeaponItemId_ReturnsThatItemDetail(int itemId, string itemName)
+        [DataRow(100, "Rampager's Seer Coat of Divinity")] // armor
+        public async Task GetItemDetail_ValidItemId_ReturnsThatItemDetail(int itemId, string itemName)
         {
             var itemDetail = await _api.GetItemDetail(itemId);
 

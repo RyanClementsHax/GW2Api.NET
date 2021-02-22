@@ -1,0 +1,13 @@
+﻿namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Armor
+{
+    public enum ArmorType
+    {
+        Boots,
+        Coat,
+        Gloves,
+        Helm,
+        HelmAcquatic,
+        Leggings,
+        Shoulders
+    }
+}
