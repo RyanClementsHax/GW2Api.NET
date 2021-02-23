@@ -13,9 +13,8 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.UpgradeComponent
         int VendorValue,
         int IconFileId,
         string IconFileSignature,
-        int DefaultSkin,
         IReadOnlyCollection<GameType> GameTypes,
-        IReadOnlyCollection<Flag> Flags,
+        IReadOnlyCollection<ItemFlag> Flags,
         IReadOnlyCollection<Restriction> Restrictions,
 
         object UpgradeComponent
@@ -28,7 +27,6 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.UpgradeComponent
         VendorValue,
         IconFileId,
         IconFileSignature,
-        DefaultSkin,
         GameTypes,
         Flags,
         Restrictions

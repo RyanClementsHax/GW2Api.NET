@@ -1,6 +1,6 @@
 ﻿namespace GW2Api.NET.V1.Items.Dto
 {
-    public enum Flag
+    public enum ItemFlag
     {
         AccountBindOnUse,
         AccountBound,

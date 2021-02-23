@@ -1,5 +1,6 @@
 ﻿using GW2Api.NET.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Weapon
 {
@@ -13,12 +14,12 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Weapon
         int VendorValue,
         int IconFileId,
         string IconFileSignature,
-        int DefaultSkin,
         IReadOnlyCollection<GameType> GameTypes,
-        IReadOnlyCollection<Flag> Flags,
+        IReadOnlyCollection<ItemFlag> Flags,
         IReadOnlyCollection<Restriction> Restrictions,
 
-        WeaponSubDetail Weapon
+        WeaponSubDetail Weapon,
+        [property: JsonConverter(typeof(StringToIntConverter))] int DefaultSkin
     ) : ItemDetail(
         ItemId,
         Name,
@@ -28,7 +29,6 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Weapon
         VendorValue,
         IconFileId,
         IconFileSignature,
-        DefaultSkin,
         GameTypes,
         Flags,
         Restrictions

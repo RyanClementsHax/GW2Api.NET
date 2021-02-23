@@ -13,12 +13,9 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.CraftingMaterial
         int VendorValue,
         int IconFileId,
         string IconFileSignature,
-        int DefaultSkin,
         IReadOnlyCollection<GameType> GameTypes,
-        IReadOnlyCollection<Flag> Flags,
-        IReadOnlyCollection<Restriction> Restrictions,
-
-        object CraftingMaterial
+        IReadOnlyCollection<ItemFlag> Flags,
+        IReadOnlyCollection<Restriction> Restrictions
     ) : ItemDetail(
         ItemId,
         Name,
@@ -28,7 +25,6 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.CraftingMaterial
         VendorValue,
         IconFileId,
         IconFileSignature,
-        DefaultSkin,
         GameTypes,
         Flags,
         Restrictions
