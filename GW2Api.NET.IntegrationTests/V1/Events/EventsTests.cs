@@ -1,4 +1,5 @@
 ﻿using GW2Api.NET.V1;
+using GW2Api.NET.V1.Events.Dto.Locations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
@@ -40,13 +41,20 @@ namespace GW2Api.NET.IntegrationTests.V1.Events
         }
 
         [TestMethod]
-        public async Task GetEventDetail_ValidEventId_GetsThatOneEvent()
+        [DataRow(typeof(PolygonLocation))]
+        [DataRow(typeof(SphereLocation))]
+        [DataRow(typeof(CylinderLocation))]
+        public async Task GetEventDetail_ValidEventId_GetsThatOneEvent(Type type)
         {
-            var eventId = (await _api.GetAllAvailableEventsDetails()).First().Value.Id;
+            var eventId = (await _api.GetAllAvailableEventsDetails())
+                .First(x => x.Value.Location.GetType() == type)
+                .Value
+                .Id;
 
             var eventDetail = await _api.GetEventDetail(eventId);
 
             Assert.AreEqual(eventId, eventDetail.Id);
+            Assert.AreEqual(eventDetail.Location.GetType(), type);
         }
 
         [TestMethod]

@@ -17,7 +17,7 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Consumable
         IReadOnlyCollection<ItemFlag> Flags,
         IReadOnlyCollection<Restriction> Restrictions,
 
-        object Consumable
+        ConsumableSubDetail Consumable
     ) : ItemDetail(
         ItemId,
         Name,

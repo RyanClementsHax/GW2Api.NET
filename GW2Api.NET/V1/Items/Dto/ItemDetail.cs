@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 namespace GW2Api.NET.V1.Items.Dto
 {
     [JsonConverter(typeof(AbstractClassConverter<ItemDetail>))]
-    public record ItemDetail(
+    public abstract record ItemDetail(
         [property: JsonConverter(typeof(StringToIntConverter))] int ItemId,
         string Name,
         string Description,

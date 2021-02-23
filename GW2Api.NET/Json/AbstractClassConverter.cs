@@ -9,25 +9,42 @@ namespace GW2Api.NET.Json
 {
     internal class AbstractClassConverter<T> : JsonConverter<T> where T : class
     {
-        private IDictionary<string, Type> _discriminatorToTypeMap;
+        private readonly IDictionary<string, Type> _discriminatorToTypeMap = new Dictionary<string, Type>();
+        private readonly string _discriminatorFieldName = "type";
 
         public AbstractClassConverter()
-            => _discriminatorToTypeMap = Assembly.GetAssembly(typeof(T))
+        {
+            var types = Assembly.GetAssembly(typeof(T))
                 .GetTypes()
-                .Where(x => x.IsClass && x.IsSubclassOf(typeof(T)) && x.GetCustomAttributes(typeof(JsonDiscriminatorAttribute)).Any())
-                .ToDictionary(
-                    x => ((JsonDiscriminatorAttribute)x.GetCustomAttribute(typeof(JsonDiscriminatorAttribute))).Discriminator.ToLower(),
-                    x => x
+                .Where(x =>
+                    x.IsClass
+                    && x.IsSubclassOf(typeof(T))
+                    && x.GetCustomAttributes(typeof(JsonDiscriminatorAttribute)).Any()
                 );
+            foreach (var type in types)
+            {
+                var discriminator = ((JsonDiscriminatorAttribute)type.GetCustomAttribute(typeof(JsonDiscriminatorAttribute)))
+                    .Discriminator
+                    .ToLower();
+                if (!_discriminatorToTypeMap.TryAdd(discriminator, type))
+                {
+                    _discriminatorToTypeMap.TryGetValue(discriminator, out var existingType);
+                    throw new JsonException($"Multiple types declared the same discriminator for the same {nameof(AbstractClassConverter<T>)}: {type.FullName} and {existingType.FullName}");
+                }
+            }
+        }
+
+        public AbstractClassConverter(string discriminatorFieldName) : this()
+            => _discriminatorFieldName = discriminatorFieldName;
 
         public override bool CanConvert(Type typeToConvert) =>
-            typeToConvert.IsAssignableFrom(typeof(T));
+            typeof(T).IsAssignableFrom(typeToConvert);
 
         public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (JsonDocument.TryParseValue(ref reader, out var doc))
             {
-                if (doc.RootElement.TryGetProperty("type", out var typeProp))
+                if (doc.RootElement.TryGetProperty(_discriminatorFieldName, out var typeProp))
                 {
                     var typeValue = typeProp.GetString();
 

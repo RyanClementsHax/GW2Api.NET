@@ -4,6 +4,8 @@
     {
         AccountBindOnUse,
         AccountBound,
+        BulkConsume,
+        DeleteWarning,
         HideSuffix,
         MonsterOnly,
         NoMysticForge,
@@ -13,6 +15,7 @@
         NoUnderwater,
         SoulbindOnAcquire,
         SoulBindOnUse,
+        Tonic,
         Unique
     }
 }
