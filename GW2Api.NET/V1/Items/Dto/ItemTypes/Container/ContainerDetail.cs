@@ -18,7 +18,7 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Container
         IReadOnlyCollection<Flag> Flags,
         IReadOnlyCollection<Restriction> Restrictions,
 
-        object Container
+        ContainerSubDetail Container
     ) : ItemDetail(
         ItemId,
         Name,

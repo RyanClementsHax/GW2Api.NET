@@ -40,6 +40,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
         [DataRow(100, "Rampager's Seer Coat of Divinity")] // armor
         [DataRow(56, "Strong Back Brace")] // back
         [DataRow(9480, "8 Slot Invisible Bag")] // bag
+        [DataRow(36520, "Bag of Coins")] // container
         [DataRow(6, "((208738))")] // weapon
         public async Task GetItemDetail_ValidItemId_ReturnsThatItemDetail(int itemId, string itemName)
         {
