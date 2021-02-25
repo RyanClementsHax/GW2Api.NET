@@ -1,10 +1,10 @@
 ﻿using GW2Api.NET.Json.Attributes;
 using System.Collections.Generic;
 
-namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Trophy
+namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Trinket
 {
-    [JsonDiscriminator("Trophy")]
-    public record TrophyDetail(
+    [JsonDiscriminator("Trinket")]
+    public record TrinketDetail(
         int ItemId,
         string Name,
         string Description,
@@ -15,7 +15,9 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Trophy
         string IconFileSignature,
         IReadOnlyCollection<GameType> GameTypes,
         IReadOnlyCollection<ItemFlag> Flags,
-        IReadOnlyCollection<Restriction> Restrictions
+        IReadOnlyCollection<Restriction> Restrictions,
+
+        TrinketSubDetail Trinket
     ) : ItemDetail(
         ItemId,
         Name,

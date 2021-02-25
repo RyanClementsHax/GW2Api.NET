@@ -54,7 +54,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
             Assert.IsTrue(itemIds.Any());
         }
 
-        // missing gathering, tool types
+        // missing gathering, tool, trait, trinket types
         [TestMethod]
         [DataRow(100, "Rampager's Seer Coat of Divinity", typeof(ArmorDetail))]
         [DataRow(56, "Strong Back Brace", typeof(BackDetail))]
