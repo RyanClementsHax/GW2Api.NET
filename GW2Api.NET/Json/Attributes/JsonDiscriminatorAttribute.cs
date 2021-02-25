@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GW2Api.NET.Json
+namespace GW2Api.NET.Json.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     internal class JsonDiscriminatorAttribute : Attribute
@@ -8,8 +8,6 @@ namespace GW2Api.NET.Json
         public string Discriminator { get; init; }
 
         public JsonDiscriminatorAttribute(string discriminator)
-        {
-            this.Discriminator = discriminator;
-        }
+            => Discriminator = discriminator;
     }
 }

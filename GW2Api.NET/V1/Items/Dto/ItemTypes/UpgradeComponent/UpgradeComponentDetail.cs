@@ -1,4 +1,4 @@
-﻿using GW2Api.NET.Json;
+﻿using GW2Api.NET.Json.Attributes;
 using System.Collections.Generic;
 
 namespace GW2Api.NET.V1.Items.Dto.ItemTypes.UpgradeComponent

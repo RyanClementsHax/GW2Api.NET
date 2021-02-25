@@ -1,4 +1,4 @@
-﻿using GW2Api.NET.Json;
+﻿using GW2Api.NET.Json.Attributes;
 using System.Numerics;
 
 namespace GW2Api.NET.V1.Events.Dto.Locations

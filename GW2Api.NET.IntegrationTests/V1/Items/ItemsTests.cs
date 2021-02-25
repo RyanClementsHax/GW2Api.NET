@@ -22,10 +22,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
         private IGw2ApiV1 _api;
 
         [TestInitialize]
-        public void Setup()
-        {
-            _api = new Gw2ApiV1(new HttpClient());
-        }
+        public void Setup() => _api = new Gw2ApiV1(new HttpClient());
 
         [TestMethod]
         public async Task GetAllItemIds_NoParams_ReturnsItemIds()

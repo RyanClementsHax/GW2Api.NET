@@ -1,5 +1,7 @@
 ﻿using GW2Api.NET.Helpers;
 using GW2Api.NET.Json;
+using GW2Api.NET.Json.Converters;
+using GW2Api.NET.Json.NamingPolicies;
 using GW2Api.NET.V1.Events.Dto;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.Consumable.ConsumableTypes;
 using System;
@@ -22,7 +24,6 @@ namespace GW2Api.NET.V1
             PropertyNamingPolicy = new SnakeCaseNamingPolicy(),
             Converters =
             {
-                new AbstractClassConverter<Unlock>(discriminatorFieldName: "unlock_type"),
                 new SnakeCaseEnumConverter<EventFlag>(),
                 new JsonStringEnumMemberConverter(),
                 new Vector3JsonConverter(),

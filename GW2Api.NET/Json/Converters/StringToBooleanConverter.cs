@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace GW2Api.NET.Json
+namespace GW2Api.NET.Json.Converters
 {
     internal class StringToBooleanConverter : JsonConverter<bool>
     {
@@ -15,8 +15,6 @@ namespace GW2Api.NET.Json
             };
 
         public override void Write(Utf8JsonWriter writer, bool value, JsonSerializerOptions options)
-        {
-            throw new NotImplementedException();
-        }
+            => throw new NotImplementedException();
     }
 }

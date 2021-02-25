@@ -1,19 +1,21 @@
-﻿using System;
+﻿using GW2Api.NET.Json.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace GW2Api.NET.Json
+namespace GW2Api.NET.Json.Converters
 {
     internal class AbstractClassConverter<T> : JsonConverter<T> where T : class
     {
         private readonly IDictionary<string, Type> _discriminatorToTypeMap = new Dictionary<string, Type>();
-        private readonly string _discriminatorFieldName = "type";
+        private readonly string _discriminatorFieldName;
 
         public AbstractClassConverter()
         {
+            _discriminatorFieldName = ((JsonDiscriminatorFieldNameAttribute)typeof(T).GetCustomAttribute(typeof(JsonDiscriminatorFieldNameAttribute)))?.FieldName ?? "type";
             var types = Assembly.GetAssembly(typeof(T))
                 .GetTypes()
                 .Where(x =>
@@ -34,9 +36,6 @@ namespace GW2Api.NET.Json
             }
         }
 
-        public AbstractClassConverter(string discriminatorFieldName) : this()
-            => _discriminatorFieldName = discriminatorFieldName;
-
         public override bool CanConvert(Type typeToConvert) =>
             typeof(T).IsAssignableFrom(typeToConvert);
 
@@ -48,14 +47,9 @@ namespace GW2Api.NET.Json
                 {
                     var typeValue = typeProp.GetString();
 
-                    if (_discriminatorToTypeMap.TryGetValue(typeValue.ToLower(), out var type))
-                    {
-                        return JsonSerializer.Deserialize(doc.RootElement.GetRawText(), type, options) as T;
-                    }
-                    else
-                    {
-                        throw new JsonException($"{typeValue} has not been mapped to a custom type yet!");
-                    }
+                    return _discriminatorToTypeMap.TryGetValue(typeValue.ToLower(), out var type)
+                        ? JsonSerializer.Deserialize(doc.RootElement.GetRawText(), type, options) as T
+                        : throw new JsonException($"{typeValue} has not been mapped to a custom type yet!");
                 }
 
                 throw new JsonException("Failed to extract type property, it might be missing?");
@@ -64,9 +58,6 @@ namespace GW2Api.NET.Json
             throw new JsonException("Failed to parse JsonDocument");
         }
 
-        public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
-        {
-            throw new NotImplementedException();
-        }
+        public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options) => throw new NotImplementedException();
     }
 }
