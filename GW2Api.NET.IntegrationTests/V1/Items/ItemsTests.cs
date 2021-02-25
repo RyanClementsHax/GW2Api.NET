@@ -9,6 +9,7 @@ using GW2Api.NET.V1.Items.Dto.ItemTypes.Container;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.CraftingMaterial;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.Gizmo;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.Minipet;
+using GW2Api.NET.V1.Items.Dto.ItemTypes.UpgradeComponent;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.Weapon;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -64,6 +65,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
         [DataRow(6, "((208738))", typeof(WeaponDetail))]
         [DataRow(22335, "Commander's Compendium", typeof(GizmoDetail))]
         [DataRow(20211, "Mini Black Moa", typeof(MinipetDetail))]
+        [DataRow(49424, "+1 Agony Infusion", typeof(UpgradeComponentDetail))]
         public async Task GetItemDetail_ValidItemId_ReturnsThatItemDetail(int itemId, string itemName, Type type)
         {
             var itemDetail = await _api.GetItemDetail(itemId);

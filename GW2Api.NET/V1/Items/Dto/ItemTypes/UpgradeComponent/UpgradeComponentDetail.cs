@@ -17,7 +17,7 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.UpgradeComponent
         IReadOnlyCollection<ItemFlag> Flags,
         IReadOnlyCollection<Restriction> Restrictions,
 
-        object UpgradeComponent
+        UpgradeComponentSubDetail UpgradeComponent
     ) : ItemDetail(
         ItemId,
         Name,

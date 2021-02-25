@@ -4,6 +4,7 @@
     {
         Defense,
         Offense,
-        Utility
+        Utility,
+        Infusion
     }
 }
