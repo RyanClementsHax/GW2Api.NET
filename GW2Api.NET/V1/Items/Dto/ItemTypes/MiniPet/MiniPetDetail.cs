@@ -1,10 +1,10 @@
 ﻿using GW2Api.NET.Json.Attributes;
 using System.Collections.Generic;
 
-namespace GW2Api.NET.V1.Items.Dto.ItemTypes.MiniPet
+namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Minipet
 {
     [JsonDiscriminator("MiniPet")]
-    public record MiniPetDetail(
+    public record MinipetDetail(
         int ItemId,
         string Name,
         string Description,
@@ -17,7 +17,7 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.MiniPet
         IReadOnlyCollection<ItemFlag> Flags,
         IReadOnlyCollection<Restriction> Restrictions,
 
-        object MiniPet
+        MinipetSubDetail Minipet
     ) : ItemDetail(
         ItemId,
         Name,

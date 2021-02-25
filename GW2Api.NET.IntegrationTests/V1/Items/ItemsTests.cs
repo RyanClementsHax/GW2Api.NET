@@ -8,6 +8,7 @@ using GW2Api.NET.V1.Items.Dto.ItemTypes.Consumable.ConsumableTypes.UnlockTypes;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.Container;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.CraftingMaterial;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.Gizmo;
+using GW2Api.NET.V1.Items.Dto.ItemTypes.Minipet;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.Weapon;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -17,6 +18,7 @@ using System.Threading.Tasks;
 
 namespace GW2Api.NET.IntegrationTests.V1.Items
 {
+    // some item detail types or sub stypes are missing test coverage due to how hard it is to find item detail that I can assert against
     [TestClass, TestCategory("Large"), TestCategory("Items")]
     public class ItemsTests
     {
@@ -52,6 +54,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
             Assert.IsTrue(itemIds.Any());
         }
 
+        // missing gathering, tool types
         [TestMethod]
         [DataRow(100, "Rampager's Seer Coat of Divinity", typeof(ArmorDetail))]
         [DataRow(56, "Strong Back Brace", typeof(BackDetail))]
@@ -60,6 +63,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
         [DataRow(13000, "Bronze Trident Head", typeof(CraftingMaterialDetail))]
         [DataRow(6, "((208738))", typeof(WeaponDetail))]
         [DataRow(22335, "Commander's Compendium", typeof(GizmoDetail))]
+        [DataRow(20211, "Mini Black Moa", typeof(MinipetDetail))]
         public async Task GetItemDetail_ValidItemId_ReturnsThatItemDetail(int itemId, string itemName, Type type)
         {
             var itemDetail = await _api.GetItemDetail(itemId);
@@ -92,6 +96,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
             Assert.AreEqual(((ConsumableDetail)itemDetail).Consumable.GetType(), type);
         }
 
+        // missing some types
         [TestMethod]
         [DataRow(10000, "Recipe: Satchel of Rejuvenating Masquerade Armor (Rare)", typeof(CraftingRecipe))]
         [DataRow(20356, "Abyss Dye", typeof(Dye))]

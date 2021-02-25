@@ -17,7 +17,7 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Tool
         IReadOnlyCollection<ItemFlag> Flags,
         IReadOnlyCollection<Restriction> Restrictions,
 
-        object Tool
+        ToolSubDetail Tool
     ) : ItemDetail(
         ItemId,
         Name,

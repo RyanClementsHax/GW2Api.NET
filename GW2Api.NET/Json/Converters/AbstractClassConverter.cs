@@ -16,6 +16,7 @@ namespace GW2Api.NET.Json.Converters
         public AbstractClassConverter()
         {
             _discriminatorFieldName = ((JsonDiscriminatorFieldNameAttribute)typeof(T).GetCustomAttribute(typeof(JsonDiscriminatorFieldNameAttribute)))?.FieldName ?? "type";
+
             var types = Assembly.GetAssembly(typeof(T))
                 .GetTypes()
                 .Where(x =>
@@ -23,6 +24,7 @@ namespace GW2Api.NET.Json.Converters
                     && x.IsSubclassOf(typeof(T))
                     && x.GetCustomAttributes(typeof(JsonDiscriminatorAttribute)).Any()
                 );
+
             foreach (var type in types)
             {
                 var discriminator = ((JsonDiscriminatorAttribute)type.GetCustomAttribute(typeof(JsonDiscriminatorAttribute)))
