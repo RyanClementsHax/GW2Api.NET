@@ -17,7 +17,7 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Gizmo
         IReadOnlyCollection<ItemFlag> Flags,
         IReadOnlyCollection<Restriction> Restrictions,
 
-        object Gizmo
+        GizmoSubDetail Gizmo
     ) : ItemDetail(
         ItemId,
         Name,
