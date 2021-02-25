@@ -6,7 +6,7 @@
         Coat,
         Gloves,
         Helm,
-        HelmAcquatic,
+        HelmAquatic,
         Leggings,
         Shoulders
     }

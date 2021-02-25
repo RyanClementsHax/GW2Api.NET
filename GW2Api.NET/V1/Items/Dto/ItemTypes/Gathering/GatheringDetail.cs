@@ -17,7 +17,7 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Gathering
         IReadOnlyCollection<ItemFlag> Flags,
         IReadOnlyCollection<Restriction> Restrictions,
 
-        object Gathering
+        GatheringSubDetail Gathering
     ) : ItemDetail(
         ItemId,
         Name,

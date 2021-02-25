@@ -39,6 +39,15 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
 
             var itemIds = await _api.GetAllItemIds(token: cts.Token);
 
+            //foreach (var item in itemIds)
+            //{
+            //    var itemDetail = await _api.GetItemDetail(item);
+            //    if(itemDetail is GatheringDetail)
+            //    {
+            //        break;
+            //    }
+            //}
+
             Assert.IsTrue(itemIds.Any());
         }
 
