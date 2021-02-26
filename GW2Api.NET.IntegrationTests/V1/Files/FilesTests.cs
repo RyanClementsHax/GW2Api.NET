@@ -12,10 +12,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Files
         private IGw2ApiV1 _api;
 
         [TestInitialize]
-        public void Setup()
-        {
-            _api = new Gw2ApiV1(new HttpClient());
-        }
+        public void Setup() => _api = new Gw2ApiV1(new HttpClient());
 
         [TestMethod]
         public async Task GetAllFilesAsync_NoParameters_ReturnsFilesWithFileNames()

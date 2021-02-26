@@ -13,37 +13,34 @@ namespace GW2Api.NET.IntegrationTests.V1.World
         private IGw2ApiV1 _api;
 
         [TestInitialize]
-        public void Setup()
-        {
-            _api = new Gw2ApiV1(new HttpClient());
-        }
+        public void Setup() => _api = new Gw2ApiV1(new HttpClient());
 
         [TestMethod]
-        public async Task GetAllWorldNames_NoParams_ReturnsWorldNames()
+        public async Task GetAllWorldNamesAsync_NoParams_ReturnsWorldNames()
         {
-            var worldNames = await _api.GetAllWorldNames();
+            var worldNames = await _api.GetAllWorldNamesAsync();
 
             Assert.IsTrue(worldNames.Any());
         }
 
         [TestMethod]
-        public async Task GetAllWorldNames_AnyCulture_ReturnsWorldNamesInThatCulture()
+        public async Task GetAllWorldNamesAsync_AnyCulture_ReturnsWorldNamesInThatCulture()
         {
             var lang = new CultureInfo("es-MX");
             var esMxWorldName = "Roca del Yunque";
 
-            var worldNames = await _api.GetAllWorldNames(lang);
+            var worldNames = await _api.GetAllWorldNamesAsync(lang);
 
             Assert.IsTrue(worldNames.Any());
             CollectionAssert.Contains(worldNames.Select(x => x.Name).ToList(), esMxWorldName);
         }
 
         [TestMethod]
-        public async Task GetAllWorldNames_CancellationToken_ReturnsWorldNames()
+        public async Task GetAllWorldNamesAsync_CancellationToken_ReturnsWorldNames()
         {
             using var cts = TestData.CreateDefaultTokenSource();
 
-            var worldNames = await _api.GetAllWorldNames(token: cts.Token);
+            var worldNames = await _api.GetAllWorldNamesAsync(token: cts.Token);
 
             Assert.IsTrue(worldNames.Any());
         }

@@ -10,7 +10,7 @@ namespace GW2Api.NET.V1
     {
         private static readonly string _guildResource = "guild_details.json";
 
-        public Task<GuildDetail> GetGuildDetail(Guid guildId, CancellationToken token = default)
+        public Task<GuildDetail> GetGuildDetailAsync(Guid guildId, CancellationToken token = default)
             => GetAsync<GuildDetail>(
                 _guildResource,
                 new Dictionary<string, string>
@@ -20,7 +20,7 @@ namespace GW2Api.NET.V1
                 token
             );
 
-        public Task<GuildDetail> GetGuildDetail(string guildName, CancellationToken token = default)
+        public Task<GuildDetail> GetGuildDetailAsync(string guildName, CancellationToken token = default)
             => GetAsync<GuildDetail>(
                 _guildResource,
                 new Dictionary<string, string>

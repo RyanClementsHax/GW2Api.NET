@@ -13,37 +13,34 @@ namespace GW2Api.NET.IntegrationTests.V1.Maps
         private IGw2ApiV1 _api;
 
         [TestInitialize]
-        public void Setup()
-        {
-            _api = new Gw2ApiV1(new HttpClient());
-        }
+        public void Setup() => _api = new Gw2ApiV1(new HttpClient());
 
         [TestMethod]
-        public async Task GetAllMapNames_NoParams_ReturnsMapNames()
+        public async Task GetAllMapNamesAsync_NoParams_ReturnsMapNames()
         {
-            var mapNames = await _api.GetAllMapNames();
+            var mapNames = await _api.GetAllMapNamesAsync();
 
             Assert.IsTrue(mapNames.Any());
         }
 
         [TestMethod]
-        public async Task GetAllMapNames_AnyCulture_ReturnsMapNamesInThatCulture()
+        public async Task GetAllMapNamesAsync_AnyCulture_ReturnsMapNamesInThatCulture()
         {
             var lang = new CultureInfo("es-MX");
             var esMxMapName = "Valle de la Reina";
 
-            var mapNames = await _api.GetAllMapNames(lang);
+            var mapNames = await _api.GetAllMapNamesAsync(lang);
 
             Assert.IsTrue(mapNames.Any());
             CollectionAssert.Contains(mapNames.Select(x => x.Name).ToList(), esMxMapName);
         }
 
         [TestMethod]
-        public async Task GetAllMapNames_CancellationToken_ReturnsMapNames()
+        public async Task GetAllMapNamesAsync_CancellationToken_ReturnsMapNames()
         {
             using var cts = TestData.CreateDefaultTokenSource();
 
-            var mapNames = await _api.GetAllMapNames(token: cts.Token);
+            var mapNames = await _api.GetAllMapNamesAsync(token: cts.Token);
 
             Assert.IsTrue(mapNames.Any());
         }

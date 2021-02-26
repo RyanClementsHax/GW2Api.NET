@@ -2,7 +2,7 @@
 
 namespace GW2Api.NET.V1.Colors.Dto
 {
-    internal record ColorsResponse(
+    internal record GetAllColorsResponse(
         IReadOnlyDictionary<string, Color> Colors
     );
 }

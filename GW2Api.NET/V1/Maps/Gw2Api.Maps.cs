@@ -10,7 +10,7 @@ namespace GW2Api.NET.V1
     {
         private static readonly string _mapsResource = "map_names.json";
 
-        public Task<IReadOnlyCollection<MapName>> GetAllMapNames(CultureInfo lang = null, CancellationToken token = default)
+        public Task<IReadOnlyCollection<MapName>> GetAllMapNamesAsync(CultureInfo lang = null, CancellationToken token = default)
             => GetAsync<IReadOnlyCollection<MapName>>(
                 _mapsResource,
                 new Dictionary<string, string>

@@ -8,6 +8,6 @@ namespace GW2Api.NET.V1
 {
     public partial interface IGw2ApiV1
     {
-        Task<IReadOnlyCollection<MapName>> GetAllMapNames(CultureInfo lang = null, CancellationToken token = default);
+        Task<IReadOnlyCollection<MapName>> GetAllMapNamesAsync(CultureInfo lang = null, CancellationToken token = default);
     }
 }

@@ -8,7 +8,7 @@ namespace GW2Api.NET.V1
 {
     public partial interface IGw2ApiV1
     {
-        Task<IReadOnlyCollection<int>> GetAllItemIds(CancellationToken token = default);
-        Task<ItemDetail> GetItemDetail(int itemId, CultureInfo lang = null, CancellationToken token = default);
+        Task<IReadOnlyCollection<int>> GetAllItemIdsAsync(CancellationToken token = default);
+        Task<ItemDetail> GetItemDetailAsync(int itemId, CultureInfo lang = null, CancellationToken token = default);
     }
 }

@@ -19,7 +19,8 @@ using System.Threading.Tasks;
 
 namespace GW2Api.NET.IntegrationTests.V1.Items
 {
-    // some item detail types or sub stypes are missing test coverage due to how hard it is to find item detail that I can assert against
+    // some item detail types or sub stypes are missing test coverage
+    // due to how hard it is to find item detail that I can assert against
     [TestClass, TestCategory("Large"), TestCategory("Items")]
     public class ItemsTests
     {
@@ -29,19 +30,19 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
         public void Setup() => _api = new Gw2ApiV1(new HttpClient());
 
         [TestMethod]
-        public async Task GetAllItemIds_NoParams_ReturnsItemIds()
+        public async Task GetAllItemIdsAsync_NoParams_ReturnsItemIds()
         {
-            var itemIds = await _api.GetAllItemIds();
+            var itemIds = await _api.GetAllItemIdsAsync();
 
             Assert.IsTrue(itemIds.Any());
         }
 
         [TestMethod]
-        public async Task GetAllItemIds_CancellationToken_ReturnsItemIds()
+        public async Task GetAllItemIdsAsync_CancellationToken_ReturnsItemIds()
         {
             using var cts = TestData.CreateDefaultTokenSource();
 
-            var itemIds = await _api.GetAllItemIds(token: cts.Token);
+            var itemIds = await _api.GetAllItemIdsAsync(token: cts.Token);
 
             //foreach (var item in itemIds)
             //{
@@ -55,6 +56,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
             Assert.IsTrue(itemIds.Any());
         }
 
+        // missing some types due to difficulty of procuring examples
         // missing gathering, tool, trait, trinket types
         [TestMethod]
         [DataRow(100, "Rampager's Seer Coat of Divinity", typeof(ArmorDetail))]
@@ -66,14 +68,15 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
         [DataRow(22335, "Commander's Compendium", typeof(GizmoDetail))]
         [DataRow(20211, "Mini Black Moa", typeof(MinipetDetail))]
         [DataRow(49424, "+1 Agony Infusion", typeof(UpgradeComponentDetail))]
-        public async Task GetItemDetail_ValidItemId_ReturnsThatItemDetail(int itemId, string itemName, Type type)
+        public async Task GetItemDetailAsync_ValidItemId_ReturnsThatItemDetail(int itemId, string itemName, Type type)
         {
-            var itemDetail = await _api.GetItemDetail(itemId);
+            var itemDetail = await _api.GetItemDetailAsync(itemId);
 
             Assert.AreEqual(itemName, itemDetail.Name);
             Assert.AreEqual(itemDetail.GetType(), type);
         }
 
+        // missing some types due to difficulty of procuring examples
         [TestMethod]
         [DataRow(36284, "Self-Style Hair Kit", typeof(AppearanceChange))]
         [DataRow(50018, "Maintenance Oil Station", typeof(Generic))] // with effect
@@ -89,23 +92,23 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
         [DataRow(20010, "Rejuvenation Booster", typeof(Halloween))]
         [DataRow(20017, "Trading Post Express", typeof(ContractNpc))]
         [DataRow(20349, "Upgrade Extractor", typeof(UpgradeRemoval))]
-        public async Task GetItemDetail_ValidConsumableItemId_ReturnsThatItemDetail(int itemId, string itemName, Type type)
+        public async Task GetItemDetailAsync_ValidConsumableItemId_ReturnsThatItemDetail(int itemId, string itemName, Type type)
         {
-            var itemDetail = await _api.GetItemDetail(itemId);
+            var itemDetail = await _api.GetItemDetailAsync(itemId);
 
             Assert.AreEqual(itemName, itemDetail.Name);
             Assert.IsTrue(itemDetail is ConsumableDetail);
             Assert.AreEqual(((ConsumableDetail)itemDetail).Consumable.GetType(), type);
         }
 
-        // missing some types
+        // missing some types due to difficulty of procuring examples
         [TestMethod]
         [DataRow(10000, "Recipe: Satchel of Rejuvenating Masquerade Armor (Rare)", typeof(CraftingRecipe))]
         [DataRow(20356, "Abyss Dye", typeof(Dye))]
         [DataRow(19988, "Limited-Use Cow Finisher", typeof(Content))]
-        public async Task GetItemDetail_ValidUnlockConsumableItemId_ReturnsThatItemDetail(int itemId, string itemName, Type type)
+        public async Task GetItemDetailAsync_ValidUnlockConsumableItemId_ReturnsThatItemDetail(int itemId, string itemName, Type type)
         {
-            var itemDetail = await _api.GetItemDetail(itemId);
+            var itemDetail = await _api.GetItemDetailAsync(itemId);
 
             Assert.AreEqual(itemName, itemDetail.Name);
             Assert.IsTrue(itemDetail is ConsumableDetail);
@@ -115,13 +118,13 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
         }
 
         [TestMethod]
-        public async Task GetItemDetail_ValidItemIdAndCancellationToken_ReturnsThatItemDetail()
+        public async Task GetItemDetailAsync_ValidItemIdAndCancellationToken_ReturnsThatItemDetail()
         {
             using var cts = TestData.CreateDefaultTokenSource();
             var itemId = 6;
             var itemName = "((208738))";
 
-            var itemDetail = await _api.GetItemDetail(itemId, token: cts.Token);
+            var itemDetail = await _api.GetItemDetailAsync(itemId, token: cts.Token);
 
             Assert.AreEqual(itemName, itemDetail.Name);
         }
