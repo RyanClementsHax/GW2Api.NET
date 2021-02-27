@@ -1,9 +1,7 @@
 ﻿using GW2Api.NET.Helpers;
-using GW2Api.NET.Json;
 using GW2Api.NET.Json.Converters;
 using GW2Api.NET.Json.NamingPolicies;
 using GW2Api.NET.V1.Events.Dto;
-using GW2Api.NET.V1.Items.Dto.ItemTypes.Consumable.ConsumableTypes;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
