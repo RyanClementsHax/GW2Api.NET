@@ -4,7 +4,7 @@ using System.Numerics;
 namespace GW2Api.NET.V1.Colors.Dto
 {
     public record Color(
-        string Id,
+        string ColorId,
         string Name,
         Vector3 BaseRgb,
         ColorModel Cloth,

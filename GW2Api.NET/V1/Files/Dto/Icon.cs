@@ -1,4 +1,4 @@
-﻿namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Consumable
+﻿namespace GW2Api.NET.V1.Files.Dto
 {
     public record Icon(
         int FileId,

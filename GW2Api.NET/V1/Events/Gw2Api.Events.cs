@@ -24,7 +24,7 @@ namespace GW2Api.NET.V1
                     x => x.Key,
                     x => x.Value with
                     {
-                        Id = x.Key
+                        EventId = x.Key
                     }
                 );
 
@@ -41,7 +41,7 @@ namespace GW2Api.NET.V1
                     x => x.Key,
                     x => x.Value with
                     {
-                        Id = x.Key
+                        EventId = x.Key
                     }
                 ).First().Value;
     }

@@ -21,7 +21,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Colors
             var colors = await _api.GetAllColorsAsync();
 
             Assert.IsTrue(colors.Any());
-            colors.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
+            colors.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.ColorId));
         }
 
         [TestMethod]
@@ -34,7 +34,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Colors
 
             Assert.IsTrue(colors.Any());
             CollectionAssert.Contains(colors.Values.Select(x => x.Name).ToList(), esMxColorName);
-            colors.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
+            colors.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.ColorId));
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Colors
             var colors = await _api.GetAllColorsAsync(token: cts.Token);
 
             Assert.IsTrue(colors.Any());
-            colors.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
+            colors.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.ColorId));
         }
     }
 }

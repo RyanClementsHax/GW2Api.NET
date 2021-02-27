@@ -1,5 +1,6 @@
 ﻿using GW2Api.NET.Json.Attributes;
 using GW2Api.NET.Json.Converters;
+using GW2Api.NET.V1.Files.Dto;
 using System.Text.Json.Serialization;
 
 namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Consumable.ConsumableTypes

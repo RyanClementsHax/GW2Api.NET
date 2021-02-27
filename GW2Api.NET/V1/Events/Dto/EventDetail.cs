@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace GW2Api.NET.V1.Events.Dto
 {
     public record EventDetail(
-        Guid Id,
+        Guid EventId,
         string Name,
         int Level,
         int MapId,

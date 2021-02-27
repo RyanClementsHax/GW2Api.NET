@@ -2,7 +2,7 @@
 
 namespace GW2Api.NET.V1.Items.Dto
 {
-    internal record ItemsResponse(
+    internal record GetAllItemIdsResponse(
         IReadOnlyCollection<int> Items
     );
 }

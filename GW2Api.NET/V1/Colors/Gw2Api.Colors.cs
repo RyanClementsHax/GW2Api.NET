@@ -23,7 +23,7 @@ namespace GW2Api.NET.V1
                 x => x.Key,
                 x => x.Value with
                 {
-                    Id = x.Key
+                    ColorId = x.Key
                 }
             );
     }

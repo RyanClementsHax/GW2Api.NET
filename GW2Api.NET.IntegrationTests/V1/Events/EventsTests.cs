@@ -23,7 +23,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Events
             var eventDetails = await _api.GetAllAvailableEventsDetailsAsync();
 
             Assert.IsTrue(eventDetails.Any());
-            eventDetails.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
+            eventDetails.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.EventId));
         }
 
         [TestMethod]
@@ -34,7 +34,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Events
             var eventDetails = await _api.GetAllAvailableEventsDetailsAsync(token: cts.Token);
 
             Assert.IsTrue(eventDetails.Any());
-            eventDetails.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.Id));
+            eventDetails.ToList().ForEach(x => Assert.AreEqual(x.Key, x.Value.EventId));
         }
 
         [TestMethod]
@@ -45,12 +45,11 @@ namespace GW2Api.NET.IntegrationTests.V1.Events
         {
             var eventId = (await _api.GetAllAvailableEventsDetailsAsync())
                 .First(x => x.Value.Location.GetType() == type)
-                .Value
-                .Id;
+                .Value.EventId;
 
             var eventDetail = await _api.GetEventDetailAsync(eventId);
 
-            Assert.AreEqual(eventId, eventDetail.Id);
+            Assert.AreEqual(eventId, eventDetail.EventId);
             Assert.AreEqual(eventDetail.Location.GetType(), type);
         }
 
