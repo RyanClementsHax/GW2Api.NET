@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace GW2Api.NET.IntegrationTests.V1.Files
 {
-    [TestClass, TestCategory("Large"), TestCategory("Files")]
+    [TestClass, TestCategory("Large"), TestCategory("V1"), TestCategory("V1 Files")]
     public class FilesTests
     {
         private IGw2ApiV1 _api;
 
         [TestInitialize]
-        public void Setup() => _api = new Gw2ApiV1(new HttpClient());
+        public void Setup()
+            => _api = new Gw2ApiV1(new HttpClient());
 
         [TestMethod]
         public async Task GetAllFilesAsync_NoParameters_ReturnsFilesWithFileNames()

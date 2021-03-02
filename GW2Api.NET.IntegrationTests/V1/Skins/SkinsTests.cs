@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace GW2Api.NET.IntegrationTests.V1.Skins
 {
-    [TestClass, TestCategory("Large"), TestCategory("Skins")]
+    [TestClass, TestCategory("Large"), TestCategory("V1"), TestCategory("V1 Skins")]
     public class SkinsTests
     {
         private IGw2ApiV1 _api;
 
         [TestInitialize]
-        public void Setup() => _api = new Gw2ApiV1(new HttpClient());
+        public void Setup()
+            => _api = new Gw2ApiV1(new HttpClient());
 
         [TestMethod]
         public async Task GetAllSkinIdsAsync_NoParams_ReturnsIds()
@@ -42,7 +43,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Skins
 
             var skinDetail = await _api.GetSkinDetailAsync(skinId);
 
-            Assert.AreEqual(skinDetail.Name, skinName);
+            Assert.AreEqual(skinName, skinDetail.Name);
         }
 
         [TestMethod]
@@ -55,7 +56,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Skins
 
             var skinDetail = await _api.GetSkinDetailAsync(skinId, token: cts.Token);
 
-            Assert.AreEqual(skinDetail.Name, skinName);
+            Assert.AreEqual(skinName, skinDetail.Name);
         }
 
         [TestMethod]
@@ -67,7 +68,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Skins
 
             var skinDetail = await _api.GetSkinDetailAsync(skinId, lang);
 
-            Assert.AreEqual(skinDetail.Name, skinName);
+            Assert.AreEqual(skinName, skinDetail.Name);
         }
 
         [TestMethod]
@@ -81,7 +82,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Skins
 
             var skinDetail = await _api.GetSkinDetailAsync(skinId, lang, cts.Token);
 
-            Assert.AreEqual(skinDetail.Name, skinName);
+            Assert.AreEqual(skinName, skinDetail.Name);
         }
     }
 }

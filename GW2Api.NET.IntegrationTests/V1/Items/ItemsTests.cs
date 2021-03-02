@@ -21,13 +21,14 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
 {
     // some item detail types or sub stypes are missing test coverage
     // due to how hard it is to find item detail that I can assert against
-    [TestClass, TestCategory("Large"), TestCategory("Items")]
+    [TestClass, TestCategory("Large"), TestCategory("V1"), TestCategory("V1 Items")]
     public class ItemsTests
     {
         private IGw2ApiV1 _api;
 
         [TestInitialize]
-        public void Setup() => _api = new Gw2ApiV1(new HttpClient());
+        public void Setup()
+            => _api = new Gw2ApiV1(new HttpClient());
 
         [TestMethod]
         public async Task GetAllItemIdsAsync_NoParams_ReturnsItemIds()
@@ -73,7 +74,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
             var itemDetail = await _api.GetItemDetailAsync(itemId);
 
             Assert.AreEqual(itemName, itemDetail.Name);
-            Assert.AreEqual(itemDetail.GetType(), type);
+            Assert.AreEqual(type, itemDetail.GetType());
         }
 
         // missing some types due to difficulty of procuring examples
@@ -98,7 +99,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
 
             Assert.AreEqual(itemName, itemDetail.Name);
             Assert.IsTrue(itemDetail is ConsumableDetail);
-            Assert.AreEqual(((ConsumableDetail)itemDetail).Consumable.GetType(), type);
+            Assert.AreEqual(type, ((ConsumableDetail)itemDetail).Consumable.GetType());
         }
 
         // missing some types due to difficulty of procuring examples
@@ -114,7 +115,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
             Assert.IsTrue(itemDetail is ConsumableDetail);
             var consumableDetail = itemDetail as ConsumableDetail;
             Assert.IsTrue(consumableDetail.Consumable is Unlock);
-            Assert.AreEqual(consumableDetail.Consumable.GetType(), type);
+            Assert.AreEqual(type, consumableDetail.Consumable.GetType());
         }
 
         [TestMethod]

@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace GW2Api.NET.IntegrationTests.V1.World
 {
-    [TestClass, TestCategory("Large"), TestCategory("World")]
+    [TestClass, TestCategory("Large"), TestCategory("V1"), TestCategory("V1 World")]
     public class WorldTests
     {
         private IGw2ApiV1 _api;
 
         [TestInitialize]
-        public void Setup() => _api = new Gw2ApiV1(new HttpClient());
+        public void Setup()
+            => _api = new Gw2ApiV1(new HttpClient());
 
         [TestMethod]
         public async Task GetAllWorldNamesAsync_NoParams_ReturnsWorldNames()

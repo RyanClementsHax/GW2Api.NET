@@ -1,19 +1,19 @@
 ﻿using GW2Api.NET.V1;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace GW2Api.NET.IntegrationTests.V1.Recipes
 {
-    [TestClass, TestCategory("Large"), TestCategory("Recipes")]
+    [TestClass, TestCategory("Large"), TestCategory("V1"), TestCategory("V1 Recipes")]
     public class RecipesTests
     {
         private IGw2ApiV1 _api;
 
         [TestInitialize]
-        public void Setup() => _api = new Gw2ApiV1(new HttpClient());
+        public void Setup()
+            => _api = new Gw2ApiV1(new HttpClient());
 
         [TestMethod]
         public async Task GetAllRecipeIdsAsync_NoParams_ReturnsIds()
@@ -41,7 +41,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Recipes
 
             var recipeDetail = await _api.GetRecipeDetailAsync(recipeId);
 
-            Assert.AreEqual(recipeDetail.OutputItemId, recipeOutputItemId);
+            Assert.AreEqual(recipeOutputItemId, recipeDetail.OutputItemId);
         }
 
         [TestMethod]
@@ -54,7 +54,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Recipes
 
             var recipeDetail = await _api.GetRecipeDetailAsync(recipeId, token: cts.Token);
 
-            Assert.AreEqual(recipeDetail.OutputItemId, recipeOutputItemId);
+            Assert.AreEqual(recipeOutputItemId, recipeDetail.OutputItemId);
         }
     }
 }

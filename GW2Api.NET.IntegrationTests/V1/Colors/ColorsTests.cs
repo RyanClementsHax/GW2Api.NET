@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace GW2Api.NET.IntegrationTests.V1.Colors
 {
-    [TestClass, TestCategory("Large"), TestCategory("Colors")]
+    [TestClass, TestCategory("Large"), TestCategory("V1"), TestCategory("V1 Colors")]
     public class ColorsTests
     {
         private IGw2ApiV1 _api;
 
         [TestInitialize]
-        public void Setup() => _api = new Gw2ApiV1(new HttpClient());
+        public void Setup()
+            => _api = new Gw2ApiV1(new HttpClient());
 
         [TestMethod]
         public async Task GetAllColorsAsync_NoParams_ReturnsColorsWithColorIds()

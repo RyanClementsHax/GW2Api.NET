@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 
 namespace GW2Api.NET.IntegrationTests.V1.Build
 {
-    [TestClass, TestCategory("Large"), TestCategory("Builds")]
+    [TestClass, TestCategory("Large"), TestCategory("V1"), TestCategory("V1 Builds")]
     public class BuildTests
     {
         private IGw2ApiV1 _api;
 
         [TestInitialize]
-        public void Setup() => _api = new Gw2ApiV1(new HttpClient());
+        public void Setup()
+            => _api = new Gw2ApiV1(new HttpClient());
 
         [TestMethod]
         public async Task GetBuildAsync_NoParams_ReturnsBuild()

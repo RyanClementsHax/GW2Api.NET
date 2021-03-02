@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace GW2Api.NET.IntegrationTests.V1.Guilds
 {
-    [TestClass, TestCategory("Large"), TestCategory("Guilds")]
+    [TestClass, TestCategory("Large"), TestCategory("V1"), TestCategory("V1 Guilds")]
     public class GuildsTests
     {
         private IGw2ApiV1 _api;
 
         [TestInitialize]
-        public void Setup() => _api = new Gw2ApiV1(new HttpClient());
+        public void Setup()
+            => _api = new Gw2ApiV1(new HttpClient());
 
         [TestMethod]
         public async Task GetGuildDetailAsync_GuildIdThatExists_ReturnsThatGuildDetail()

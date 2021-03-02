@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 
 namespace GW2Api.NET.IntegrationTests.V1.Events
 {
-    [TestClass, TestCategory("Large"), TestCategory("Events")]
+    [TestClass, TestCategory("Large"), TestCategory("V1"), TestCategory("V1 Events")]
     public class EventsTests
     {
         private IGw2ApiV1 _api;
 
         [TestInitialize]
-        public void Setup() => _api = new Gw2ApiV1(new HttpClient());
+        public void Setup()
+            => _api = new Gw2ApiV1(new HttpClient());
 
         [TestMethod]
         public async Task GetAllAvailableEventsDetailsAsync_NoParams_GetsAllEventDetailsWithFileIds()
@@ -50,7 +51,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Events
             var eventDetail = await _api.GetEventDetailAsync(eventId);
 
             Assert.AreEqual(eventId, eventDetail.EventId);
-            Assert.AreEqual(eventDetail.Location.GetType(), type);
+            Assert.AreEqual(type, eventDetail.Location.GetType());
         }
 
         [TestMethod]
