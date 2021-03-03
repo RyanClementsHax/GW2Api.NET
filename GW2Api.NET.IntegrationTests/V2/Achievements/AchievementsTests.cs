@@ -1,5 +1,7 @@
 using GW2Api.NET.V2;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
@@ -82,6 +84,99 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             var result = await _api.GetAchievementAsync(id, lang, cts.Token);
 
             Assert.AreEqual(name, result.Name);
+        }
+
+        [TestMethod]
+        public async Task GetAchievementsAsync_ValidIds_ReturnsThoseAchievements()
+        {
+            var ids = new List<int>
+            {
+                1840,
+                910,
+                2258
+            };
+            var names = new List<string>
+            {
+                "Daily Completionist",
+                "Tequatl the Sunless",
+                "Mistward Legguards"
+            };
+
+            var result = await _api.GetAchievementsAsync(ids);
+
+            CollectionAssert.AreEquivalent(names, result.Select(x => x.Name).ToList());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetAchievementsAsync_NullIds_ThrowsArgumentNullException()
+            => await _api.GetAchievementsAsync(ids: null);
+
+        [TestMethod]
+        public async Task GetAchievementsAsync_ValidIdsAndCancellationToken_ReturnsThoseAchievements()
+        {
+            using var cts = TestData.CreateDefaultTokenSource();
+            var ids = new List<int>
+            {
+                1840,
+                910,
+                2258
+            };
+            var names = new List<string>
+            {
+                "Daily Completionist",
+                "Tequatl the Sunless",
+                "Mistward Legguards"
+            };
+
+            var result = await _api.GetAchievementsAsync(ids, token: cts.Token);
+
+            CollectionAssert.AreEquivalent(names, result.Select(x => x.Name).ToList());
+        }
+
+        [TestMethod]
+        public async Task GetAchievementsAsync_ValidIdsAndLangProvidedAndCancellationToken_ReturnsThoseAchievementsTranslated()
+        {
+            using var cts = TestData.CreateDefaultTokenSource();
+            var ids = new List<int>
+            {
+                1840,
+                910,
+                2258
+            };
+            var lang = new CultureInfo("es-MX");
+            var names = new List<string>
+            {
+                "Perfeccionista del día",
+                "Tequatl el Sombrío",
+                "Perneras de guardaniebla"
+            };
+
+            var result = await _api.GetAchievementsAsync(ids, lang, cts.Token);
+
+            CollectionAssert.AreEquivalent(names, result.Select(x => x.Name).ToList());
+        }
+
+        [TestMethod]
+        public async Task GetAchievementsAsync_ValidIdsAndLangProvided_ReturnsThoseAchievementsTranslated()
+        {
+            var ids = new List<int>
+            {
+                1840,
+                910,
+                2258
+            };
+            var lang = new CultureInfo("es-MX");
+            var names = new List<string>
+            {
+                "Perfeccionista del día",
+                "Tequatl el Sombrío",
+                "Perneras de guardaniebla"
+            };
+
+            var result = await _api.GetAchievementsAsync(ids, lang);
+
+            CollectionAssert.AreEquivalent(names, result.Select(x => x.Name).ToList());
         }
     }
 }

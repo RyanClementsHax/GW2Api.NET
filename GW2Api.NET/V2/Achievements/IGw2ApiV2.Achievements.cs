@@ -10,5 +10,6 @@ namespace GW2Api.NET.V2
     {
         Task<IReadOnlyCollection<int>> GetAllAchievementIdsAsync(CancellationToken token = default);
         Task<Achievement> GetAchievementAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IEnumerable<Achievement>> GetAchievementsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
     }
 }
