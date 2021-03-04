@@ -11,6 +11,7 @@ namespace GW2Api.NET.V2
     public partial class Gw2ApiV2
     {
         private static readonly string _achievementsResource = "achievements";
+        private static readonly string _achievementsDailyResource = "achievements/daily";
 
         public Task<IReadOnlyCollection<int>> GetAllAchievementIdsAsync(CancellationToken token = default)
             => GetAsync<IReadOnlyCollection<int>>(_achievementsResource, token);
@@ -40,5 +41,8 @@ namespace GW2Api.NET.V2
                 token
             );
         }
+
+        public Task<DailyAchievements> GetTodaysDailyAchievementsAsync(CancellationToken token = default)
+            => GetAsync<DailyAchievements>(_achievementsDailyResource, token);
     }
 }

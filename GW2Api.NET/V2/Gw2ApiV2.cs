@@ -28,6 +28,7 @@ namespace GW2Api.NET.V2
                 new Vector2JsonConverter()
             },
         };
+        private readonly string _schemaVersion = "2019-05-16T00:00:00.000Z";
 
         public Gw2ApiV2(HttpClient httpClient)
         {
@@ -37,13 +38,16 @@ namespace GW2Api.NET.V2
             _httpClient.BaseAddress ??= _baseAddress;
         }
 
-        private Task<T> GetAsync<T>(string resource, CancellationToken token = default)
+        internal Task<T> GetAsync<T>(string resource, CancellationToken token = default)
             => GetAsync<T>(resource, new Dictionary<string, string>(), token);
 
-        private Task<T> GetAsync<T>(string resource, IDictionary<string, string> paramMap, CancellationToken token = default)
+        internal Task<T> GetAsync<T>(string resource, IDictionary<string, string> paramMap, CancellationToken token = default)
         {
             if (resource is null) throw new ArgumentNullException(nameof(resource));
             if (paramMap is null) throw new ArgumentNullException(nameof(paramMap));
+
+            if (!paramMap.TryAdd("v", _schemaVersion))
+                throw new InvalidOperationException($"This library only supports schema version: {_schemaVersion}");
 
             return _httpClient.GetFromJsonAsync<T>(resource.AddParams(paramMap), _serializerOptions, token);
         }

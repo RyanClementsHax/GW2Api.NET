@@ -178,5 +178,29 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
             CollectionAssert.AreEquivalent(names, result.Select(x => x.Name).ToList());
         }
+
+        [TestMethod]
+        public async Task GetTodaysDailyAchievementsAsync_NoParams_ReturnsTodaysDailies()
+        {
+            var result = await _api.GetTodaysDailyAchievementsAsync();
+
+            Assert.IsTrue(result.Pve.Any());
+            Assert.IsTrue(result.Pvp.Any());
+            Assert.IsTrue(result.Wvw.Any());
+            Assert.IsTrue(result.Fractals.Any());
+        }
+
+        [TestMethod]
+        public async Task GetTodaysDailyAchievementsAsync_CancellationToken_ReturnsTodaysDailies()
+        {
+            using var cts = TestData.CreateDefaultTokenSource();
+
+            var result = await _api.GetTodaysDailyAchievementsAsync(cts.Token);
+
+            Assert.IsTrue(result.Pve.Any());
+            Assert.IsTrue(result.Pvp.Any());
+            Assert.IsTrue(result.Wvw.Any());
+            Assert.IsTrue(result.Fractals.Any());
+        }
     }
 }
