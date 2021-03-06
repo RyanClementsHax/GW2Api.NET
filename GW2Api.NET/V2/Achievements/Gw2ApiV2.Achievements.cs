@@ -12,6 +12,8 @@ namespace GW2Api.NET.V2
     {
         private static readonly string _achievementsResource = "achievements";
         private static readonly string _achievementsDailyResource = "achievements/daily";
+        private static readonly string _achievementsDailyTomorrowResource = "achievements/daily/tomorrow";
+        private static readonly string _achievementsGroupsResource = "achievements/groups";
 
         public Task<IReadOnlyCollection<int>> GetAllAchievementIdsAsync(CancellationToken token = default)
             => GetAsync<IReadOnlyCollection<int>>(_achievementsResource, token);
@@ -44,5 +46,21 @@ namespace GW2Api.NET.V2
 
         public Task<DailyAchievements> GetTodaysDailyAchievementsAsync(CancellationToken token = default)
             => GetAsync<DailyAchievements>(_achievementsDailyResource, token);
+
+        public Task<DailyAchievements> GetTomorrowsDailyAchievementsAsync(CancellationToken token = default)
+            => GetAsync<DailyAchievements>(_achievementsDailyTomorrowResource, token);
+
+        public Task<IReadOnlyCollection<Guid>> GetAllAchievementGroupIdsAsync(CancellationToken token = default)
+            => GetAsync<IReadOnlyCollection<Guid>>(_achievementsGroupsResource, token);
+
+        public Task<AchievementGroup> GetAchievementGroupAsync(Guid id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<AchievementGroup>(
+                $"{_achievementsGroupsResource}/{id.ToString().ToUpper()}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
     }
 }

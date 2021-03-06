@@ -15,9 +15,10 @@ namespace GW2Api.NET.V2
 {
     public partial class Gw2ApiV2 : IGw2ApiV2
     {
-        private readonly Uri _baseAddress = new Uri("https://api.guildwars2.com/v2/");
+        private readonly Uri _baseAddress = new("https://api.guildwars2.com/v2/");
+        private readonly string _schemaVersion = "2019-05-16T00:00:00.000Z";
         private readonly HttpClient _httpClient;
-        private readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions()
+        private readonly JsonSerializerOptions _serializerOptions = new()
         {
             PropertyNamingPolicy = new SnakeCaseNamingPolicy(),
             Converters =
@@ -28,7 +29,6 @@ namespace GW2Api.NET.V2
                 new Vector2JsonConverter()
             },
         };
-        private readonly string _schemaVersion = "2019-05-16T00:00:00.000Z";
 
         public Gw2ApiV2(HttpClient httpClient)
         {
@@ -49,7 +49,8 @@ namespace GW2Api.NET.V2
             if (!paramMap.TryAdd("v", _schemaVersion))
                 throw new InvalidOperationException($"This library only supports schema version: {_schemaVersion}");
 
-            return _httpClient.GetFromJsonAsync<T>(resource.AddParams(paramMap), _serializerOptions, token);
+            var url = resource.AddParams(paramMap);
+            return _httpClient.GetFromJsonAsync<T>(url, _serializerOptions, token);
         }
     }
 }

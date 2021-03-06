@@ -1,4 +1,5 @@
 ﻿using GW2Api.NET.V2.Achievements.Dto;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
@@ -12,5 +13,8 @@ namespace GW2Api.NET.V2
         Task<Achievement> GetAchievementAsync(int id, CultureInfo lang = null, CancellationToken token = default);
         Task<IEnumerable<Achievement>> GetAchievementsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<DailyAchievements> GetTodaysDailyAchievementsAsync(CancellationToken token = default);
+        Task<DailyAchievements> GetTomorrowsDailyAchievementsAsync(CancellationToken token = default);
+        Task<IReadOnlyCollection<Guid>> GetAllAchievementGroupIdsAsync(CancellationToken token = default);
+        Task<AchievementGroup> GetAchievementGroupAsync(Guid id, CultureInfo lang = null, CancellationToken token = default);
     }
 }
