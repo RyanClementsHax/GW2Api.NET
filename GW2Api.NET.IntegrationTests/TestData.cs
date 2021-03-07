@@ -12,7 +12,10 @@ namespace GW2Api.NET.IntegrationTests
         public static IEnumerable<object[]> CancellationTokenSourceTestData()
             => new List<object>
             {
-                new Func<CancellationTokenSource>[] { () => null, () => CreateDefaultTokenSource() },
+                DefaultCtsFactories,
             }.Permute();
+
+        public static Func<CancellationTokenSource>[] DefaultCtsFactories { get; } =
+                new Func<CancellationTokenSource>[] { () => null, () => CreateDefaultTokenSource() };
     }
 }

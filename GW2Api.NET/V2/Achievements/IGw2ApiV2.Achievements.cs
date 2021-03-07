@@ -16,5 +16,7 @@ namespace GW2Api.NET.V2
         Task<DailyAchievements> GetTomorrowsDailyAchievementsAsync(CancellationToken token = default);
         Task<IReadOnlyCollection<Guid>> GetAllAchievementGroupIdsAsync(CancellationToken token = default);
         Task<AchievementGroup> GetAchievementGroupAsync(Guid id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IReadOnlyCollection<int>> GetAllAchievementCategoryIdsAsync(CancellationToken token = default);
+        Task<AchievementCategory> GetAchievementCategoryAsync(int id, CultureInfo lang = null, CancellationToken token = default);
     }
 }
