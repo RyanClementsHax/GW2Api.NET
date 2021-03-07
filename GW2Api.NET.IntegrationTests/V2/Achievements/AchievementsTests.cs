@@ -19,20 +19,13 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         public void Setup()
             => _api = new Gw2ApiV2(new HttpClient());
 
-        [TestMethod]
-        public async Task GetAllAchievementIdsAsync_NoParams_ReturnsAllIds()
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.CancellationTokenSourceTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllAchievementIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
-            var result = await _api.GetAllAchievementIdsAsync();
+            using var cts = ctsFactory();
 
-            Assert.IsTrue(result.Any());
-        }
-
-        [TestMethod]
-        public async Task GetAllAchievementIdsAsync_CancellationToken_ReturnsAllIds()
-        {
-            using var cts = TestData.CreateDefaultTokenSource();
-
-            var result = await _api.GetAllAchievementIdsAsync(cts.Token);
+            var result = await _api.GetAllAchievementIdsAsync(cts?.Token ?? default);
 
             Assert.IsTrue(result.Any());
         }
@@ -42,7 +35,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             {
                 2258,
                 new [] { null, new CultureInfo("ex-MX") },
-                new Func<CancellationTokenSource>[] { () => null, () => TestData.CreateDefaultTokenSource() }.ToObjectArray(),
+                new Func<CancellationTokenSource>[] { () => null, () => TestData.CreateDefaultTokenSource() },
                 "Mistward Legguards"
             }.Permute();
 
@@ -82,10 +75,13 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
         }
 
-        [TestMethod]
-        public async Task GetTodaysDailyAchievementsAsync_NoParams_ReturnsTodaysDailies()
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.CancellationTokenSourceTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetTodaysDailyAchievementsAsync_CancellationToken_ReturnsTodaysDailies(Func<CancellationTokenSource> ctsFactory)
         {
-            var result = await _api.GetTodaysDailyAchievementsAsync();
+            using var cts = ctsFactory();
+
+            var result = await _api.GetTodaysDailyAchievementsAsync(cts?.Token ?? default);
 
             Assert.IsTrue(result.Pve.Any());
             Assert.IsTrue(result.Pvp.Any());
@@ -93,12 +89,13 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             Assert.IsTrue(result.Fractals.Any());
         }
 
-        [TestMethod]
-        public async Task GetTodaysDailyAchievementsAsync_CancellationToken_ReturnsTodaysDailies()
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.CancellationTokenSourceTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetTomorrowsDailyAchievementsAsync_CancellationToken_ReturnsTodaysDailies(Func<CancellationTokenSource> ctsFactory)
         {
-            using var cts = TestData.CreateDefaultTokenSource();
+            using var cts = ctsFactory();
 
-            var result = await _api.GetTodaysDailyAchievementsAsync(cts.Token);
+            var result = await _api.GetTomorrowsDailyAchievementsAsync(cts?.Token ?? default);
 
             Assert.IsTrue(result.Pve.Any());
             Assert.IsTrue(result.Pvp.Any());
@@ -106,44 +103,13 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             Assert.IsTrue(result.Fractals.Any());
         }
 
-        [TestMethod]
-        public async Task GetTomorrowsDailyAchievementsAsync_NoParams_ReturnsTodaysDailies()
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.CancellationTokenSourceTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllAchievementGroupIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
-            var result = await _api.GetTomorrowsDailyAchievementsAsync();
+            using var cts = ctsFactory();
 
-            Assert.IsTrue(result.Pve.Any());
-            Assert.IsTrue(result.Pvp.Any());
-            Assert.IsTrue(result.Wvw.Any());
-            Assert.IsTrue(result.Fractals.Any());
-        }
-
-        [TestMethod]
-        public async Task GetTomorrowsDailyAchievementsAsync_CancellationToken_ReturnsTodaysDailies()
-        {
-            using var cts = TestData.CreateDefaultTokenSource();
-
-            var result = await _api.GetTomorrowsDailyAchievementsAsync(cts.Token);
-
-            Assert.IsTrue(result.Pve.Any());
-            Assert.IsTrue(result.Pvp.Any());
-            Assert.IsTrue(result.Wvw.Any());
-            Assert.IsTrue(result.Fractals.Any());
-        }
-
-        [TestMethod]
-        public async Task GetAllAchievementGroupIdsAsync_NoParams_ReturnsAllIds()
-        {
-            var result = await _api.GetAllAchievementGroupIdsAsync();
-
-            Assert.IsTrue(result.Any());
-        }
-
-        [TestMethod]
-        public async Task GetAllAchievementGroupIdsAsync_CancellationToken_ReturnsAllIds()
-        {
-            using var cts = TestData.CreateDefaultTokenSource();
-
-            var result = await _api.GetAllAchievementGroupIdsAsync(cts.Token);
+            var result = await _api.GetAllAchievementGroupIdsAsync(cts?.Token ?? default);
 
             Assert.IsTrue(result.Any());
         }
@@ -153,7 +119,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             {
                 Guid.Parse("A4ED8379-5B6B-4ECC-B6E1-70C350C902D2"),
                 new [] { null, new CultureInfo("ex-MX") },
-                new Func<CancellationTokenSource>[] { () => null, () => TestData.CreateDefaultTokenSource() }.ToObjectArray(),
+                new Func<CancellationTokenSource>[] { () => null, () => TestData.CreateDefaultTokenSource() },
                 "Story Journal"
             }.Permute();
 
@@ -167,8 +133,5 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
             Assert.AreEqual(name, result.Name);
         }
-
-        // TODO: remove need for .ToObjectArray()
-        // TODO: convert the rest of these tests to use factories
     }
 }

@@ -11,8 +11,8 @@ namespace GW2Api.NET.IntegrationTests
             IEnumerable<object[]> emptyProduct = new[] { Array.Empty<object>() };
             return source
                 .Select(x =>
-                    x is object[] paramArr
-                        ? paramArr
+                    x is object[] or Func<object>[]
+                        ? (object[])x
                         : new[] { x }
                 )
                 .AsEnumerable()
