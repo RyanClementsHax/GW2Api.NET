@@ -10,7 +10,7 @@ namespace GW2Api.NET.IntegrationTests
             => new(TimeSpan.FromMinutes(1));
 
         public static IEnumerable<object[]> CancellationTokenSourceTestData()
-            => new List<object>
+            => new List<object[]>
             {
                 DefaultCtsFactories,
             }.Permute();

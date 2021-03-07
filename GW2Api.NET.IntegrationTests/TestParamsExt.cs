@@ -7,16 +7,10 @@ namespace GW2Api.NET.IntegrationTests
 {
     public static class TestParamsExt
     {
-        public static IEnumerable<object[]> Permute(this IEnumerable<object> source)
+        public static IEnumerable<object[]> Permute(this IEnumerable<object[]> source)
         {
-            IEnumerable<object[]> emptyProduct = new[] { Array.Empty<object>() };
+            IEnumerable<object[]> emptyProduct = new[] { Array.Empty<object[]>() };
             return source
-                .Select(x =>
-                    x is object[] or Func<object>[]
-                        ? (object[])x
-                        : new[] { x }
-                )
-                .AsEnumerable()
                 .Aggregate(
                     emptyProduct,
                     (accumulator, sequence) =>

@@ -31,9 +31,9 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         }
 
         public static IEnumerable<object[]> GetAchievementAsync_TestData()
-            => new List<object>
+            => new List<object[]>
             {
-                2258,
+                new object[] { 2258 },
                 new [] { (null, "Mistward Legguards"), ("es", "Perneras de guardaniebla") }.ToLangStrObjectArray(),
                 TestData.DefaultCtsFactories
             }.Permute();
@@ -56,9 +56,9 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             => await _api.GetAchievementsAsync(ids: null);
 
         public static IEnumerable<object[]> GetAchievementsAsync_TestData()
-            => new List<object>
+            => new List<object[]>
             {
-                new List<int> { 1840, 910, 2258 },
+                new [] { new List<int> { 1840, 910, 2258 } },
                 new [] {
                     (null, new List<string> { "Daily Completionist", "Tequatl the Sunless", "Mistward Legguards" }.AsEnumerable()),
                     ("es", new List<string> { "Perfeccionista del día", "Tequatl el Sombrío", "Perneras de guardaniebla" }.AsEnumerable())
@@ -118,9 +118,9 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         }
 
         public static IEnumerable<object[]> GetAchievementGroupAsync_TestData()
-            => new List<object>
+            => new List<object[]>
             {
-                Guid.Parse("A4ED8379-5B6B-4ECC-B6E1-70C350C902D2"),
+                new object[] { Guid.Parse("A4ED8379-5B6B-4ECC-B6E1-70C350C902D2") },
                 new [] {(null, "Story Journal"), ("es", "Diario de historia") }.ToLangStrObjectArray(),
                 TestData.DefaultCtsFactories
             }.Permute();
@@ -149,9 +149,9 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         }
 
         public static IEnumerable<object[]> GetAchievementCategoryAsync_TestData()
-            => new List<object>
+            => new List<object[]>
             {
-                1,
+                new object [] { 1 },
                 new [] { (null, "Slayer"), ("es", "Asesino") }.ToLangStrObjectArray(),
                 TestData.DefaultCtsFactories
             }.Permute();
