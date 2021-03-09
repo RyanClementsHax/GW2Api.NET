@@ -38,7 +38,7 @@ Note that if no Api Keys are given, calling functions that need authentication w
 	{
 	  "ApiKey": "<your api key>",
 	  "AccountConfig": {
-		"Name": "<your account name>"
+	    "Name": "<your account name>"
 	  }
 	}
 	```
