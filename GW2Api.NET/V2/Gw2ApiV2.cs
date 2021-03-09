@@ -30,6 +30,8 @@ namespace GW2Api.NET.V2
             },
         };
 
+        public string ApiKey { get; set; }
+
         public Gw2ApiV2(HttpClient httpClient)
         {
             if (httpClient is null) throw new ArgumentNullException(nameof(httpClient));
@@ -37,6 +39,16 @@ namespace GW2Api.NET.V2
             _httpClient = httpClient;
             _httpClient.BaseAddress ??= _baseAddress;
         }
+
+        internal Task<T> GetAuthenticatedAsync<T>(string resource, string accessToken = null, CancellationToken token = default)
+            => GetAsync<T>(
+                resource,
+                new Dictionary<string, string>
+                {
+                    { "access_token", accessToken ?? ApiKey }
+                },
+                token
+            );
 
         internal Task<T> GetAsync<T>(string resource, CancellationToken token = default)
             => GetAsync<T>(resource, new Dictionary<string, string>(), token);

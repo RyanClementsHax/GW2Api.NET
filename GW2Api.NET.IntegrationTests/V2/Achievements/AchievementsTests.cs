@@ -20,7 +20,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             => _api = new Gw2ApiV2(new HttpClient());
 
         [DataTestMethod]
-        [DynamicData(nameof(TestData.CancellationTokenSourceTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetAllAchievementIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
@@ -79,7 +79,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(TestData.CancellationTokenSourceTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetTodaysDailyAchievementsAsync_CancellationToken_ReturnsTodaysDailies(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
@@ -93,7 +93,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(TestData.CancellationTokenSourceTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetTomorrowsDailyAchievementsAsync_CancellationToken_ReturnsTodaysDailies(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
@@ -107,7 +107,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(TestData.CancellationTokenSourceTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetAllAchievementGroupIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
@@ -138,7 +138,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         }
 
         [DataTestMethod]
-        [DynamicData(nameof(TestData.CancellationTokenSourceTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetAllAchievementCategoryIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();

@@ -1,7 +1,9 @@
-﻿namespace GW2Api.NET.V2.Achievements.Dto
+﻿using GW2Api.NET.V2.Common;
+
+namespace GW2Api.NET.V2.Achievements.Dto
 {
     public record RequiredAccess(
-        Product Product,
+        Content Product,
         AccessCondition Condition
     );
 }
