@@ -39,9 +39,7 @@ Note that if no Api Keys are given, calling functions that need authentication w
 	  "ApiKey": "<your api key>",
 	  "AccountConfig": {
 		"Name": "<your account name>"
-		// other config
 	  }
-	  // other config
 	}
 	```
 3. Run the authenticated tests in visual studio
