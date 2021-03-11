@@ -34,18 +34,11 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
             Assert.IsTrue(result.Any());
         }
 
-        public static IEnumerable<object[]> GetAccountAchievementAsync_TestData()
-            => new List<object[]>
-            {
-                new object[] { 1 },
-                DefaultApiKeys,
-                TestData.DefaultCtsFactories
-            }.Permute();
-
         [DataTestMethod]
-        [DynamicData(nameof(GetAccountAchievementAsync_TestData), DynamicDataSourceType.Method)]
-        public async Task GetAccountAchievementAsync_ValidId_ReturnsThatAchievement(int id, string apiKey, Func<CancellationTokenSource> ctsFactory)
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountAchievementAsync_ValidId_ReturnsThatAchievement(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
+            var id = _accountConfig.AccountAchievements.First();
             using var cts = ctsFactory();
 
             var result = await _api.GetAccountAchievementAsync(id, apiKey, cts?.Token ?? default);
@@ -53,18 +46,11 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
             Assert.AreEqual(id, result.Id);
         }
 
-        public static IEnumerable<object[]> GetAccountAchievementsAsync_TestData()
-            => new List<object[]>
-            {
-                new [] { new List<int> { 1, 2, 3 } },
-                DefaultApiKeys,
-                TestData.DefaultCtsFactories
-            }.Permute();
-
         [DataTestMethod]
-        [DynamicData(nameof(GetAccountAchievementsAsync_TestData), DynamicDataSourceType.Method)]
-        public async Task GetAccountAchievementsAsync_ValidId_ReturnsThatAchievement(IEnumerable<int> ids, string apiKey, Func<CancellationTokenSource> ctsFactory)
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountAchievementsAsync_ValidId_ReturnsThatAchievement(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
+            var ids = _accountConfig.AccountAchievements;
             using var cts = ctsFactory();
 
             var result = await _api.GetAccountAchievementsAsync(ids, apiKey, cts?.Token ?? default);

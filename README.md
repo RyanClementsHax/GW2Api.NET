@@ -38,8 +38,13 @@ Note that if no Api Keys are given, calling functions that need authentication w
 	{
 	  "ApiKey": "<your api key>",
 	  "AccountConfig": {
-	    "Name": "<your account name>"
+	    "Name": "<your account name>",
+		"AccountAchievements": [ 1, 2, 3 ]
 	  }
 	}
 	```
+	- `ApiKey`: The Api Key to use in the tests (should have all permissions)
+	- `AccountConfig`
+		- `Name`: Your account's name
+		- `AccountAchievements`: A list of some ids of the achievements your account has
 3. Run the authenticated tests in visual studio
