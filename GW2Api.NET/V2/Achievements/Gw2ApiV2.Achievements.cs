@@ -63,6 +63,21 @@ namespace GW2Api.NET.V2
                 },
                 token
             );
+        public Task<IEnumerable<AchievementGroup>> GetAchievementGroupsAsync(IEnumerable<Guid> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IEnumerable<AchievementGroup>>(
+                _achievementsGroupsResource,
+                new Dictionary<string, string>
+                {
+                    { "ids", string.Join(",", ids.Select(x => x.ToString().ToUpper()))},
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+        }
 
         public Task<IReadOnlyCollection<int>> GetAllAchievementCategoryIdsAsync(CancellationToken token = default)
             => GetAsync<IReadOnlyCollection<int>>(_achievementsCategoriesResource, token);
@@ -76,5 +91,21 @@ namespace GW2Api.NET.V2
                 },
                 token
             );
+
+        public Task<IEnumerable<AchievementCategory>> GetAchievementCategoriesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IEnumerable<AchievementCategory>>(
+                _achievementsCategoriesResource,
+                new Dictionary<string, string>
+                {
+                    { "ids", string.Join(",", ids.Select(x => x.ToString()))},
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+        }
     }
 }

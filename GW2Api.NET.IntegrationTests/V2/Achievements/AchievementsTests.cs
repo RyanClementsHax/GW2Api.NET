@@ -137,6 +137,40 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             Assert.AreEqual(name, result.Name);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetAchievementGroupsAsync_NullIds_ThrowsArgumentNullException()
+            => await _api.GetAchievementGroupsAsync(ids: null);
+
+        public static IEnumerable<object[]> GetAchievementGroupsAsync_TestData()
+            => new List<object[]>
+            {
+                new [] {
+                    new List<Guid> {
+                        Guid.Parse("AACBCEF3-BFEE-405B-967D-30A989589AD7"),
+                        Guid.Parse("A4ED8379-5B6B-4ECC-B6E1-70C350C902D2"),
+                        Guid.Parse("56A82BB9-6B07-4AB0-89EE-E4A6D68F5C47"),
+                    }
+                },
+                new [] {
+                    (null, new List<string> { "Bonus Events", "Story Journal", "General" }.AsEnumerable()),
+                    ("es", new List<string> { "Eventos de bonificación", "Diario de historia", "Logros generales" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetAchievementGroupsAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetAchievementGroupsAsync_ValidAchievementGroupId_ReturnsThatAchievementGroup(IEnumerable<Guid> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, names) = langNamesTuple;
+
+            var result = await _api.GetAchievementGroupsAsync(ids, lang, cts?.Token ?? default);
+
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
+
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetAllAchievementCategoryIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
@@ -166,6 +200,34 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             var result = await _api.GetAchievementCategoryAsync(id, lang, cts?.Token ?? default);
 
             Assert.AreEqual(name, result.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetAchievementCategoriesAsync_NullIds_ThrowsArgumentNullException()
+            => await _api.GetAchievementCategoriesAsync(ids: null);
+
+        public static IEnumerable<object[]> GetAchievementCategoriesAsync_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<int> { 1, 2, 3 } },
+                new [] {
+                    (null, new List<string> { "Slayer", "Hero", "PvP Conqueror" }.AsEnumerable()),
+                    ("es", new List<string> { "Asesino", "Héroe", "Conquistador PvP" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetAchievementCategoriesAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetAchievementCategoriesAsync_ValidAchievementGroupId_ReturnsThatAchievementGroup(IEnumerable<int> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, names) = langNamesTuple;
+
+            var result = await _api.GetAchievementCategoriesAsync(ids, lang, cts?.Token ?? default);
+
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
         }
     }
 }
