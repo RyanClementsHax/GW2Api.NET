@@ -41,14 +41,19 @@ namespace GW2Api.NET.V2
         }
 
         internal Task<T> GetAuthenticatedAsync<T>(string resource, string accessToken = null, CancellationToken token = default)
-            => GetAsync<T>(
+            => GetAuthenticatedAsync<T>(
                 resource,
-                new Dictionary<string, string>
-                {
-                    { "access_token", accessToken ?? ApiKey }
-                },
+                new Dictionary<string, string>(),
+                accessToken,
                 token
             );
+
+        internal Task<T> GetAuthenticatedAsync<T>(string resource, IDictionary<string, string> paramMap, string accessToken = null, CancellationToken token = default)
+        {
+            paramMap["access_token"] = accessToken ?? ApiKey;
+
+            return GetAsync<T>(resource, paramMap, token);
+        }
 
         internal Task<T> GetAsync<T>(string resource, CancellationToken token = default)
             => GetAsync<T>(resource, new Dictionary<string, string>(), token);

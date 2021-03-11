@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
@@ -24,5 +25,11 @@ namespace GW2Api.NET.Helpers
                 ? $"{url}?{queryStr}"
                 : url;
         }
+
+        public static string ToUrlParam(this IEnumerable<int> source)
+            => string.Join(",", source.Select(x => x.ToString()));
+
+        public static string ToUrlParam(this IEnumerable<Guid> source)
+            => string.Join(",", source.Select(x => x.ToString().ToUpper()));
     }
 }

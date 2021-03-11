@@ -40,7 +40,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
         [DataTestMethod]
         [DynamicData(nameof(GetAchievementAsync_TestData), DynamicDataSourceType.Method)]
-        public async Task GetAchievementAsync_ValidAchievementId_ReturnsThatAchievement(int id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAchievementAsync_ValidId_ReturnsThatAchievement(int id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var (lang, name) = langNameTuple;
@@ -80,7 +80,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetTodaysDailyAchievementsAsync_CancellationToken_ReturnsTodaysDailies(Func<CancellationTokenSource> ctsFactory)
+        public async Task GetTodaysDailyAchievementsAsync_AnyParams_ReturnsTodaysDailies(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
@@ -94,7 +94,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetTomorrowsDailyAchievementsAsync_CancellationToken_ReturnsTodaysDailies(Func<CancellationTokenSource> ctsFactory)
+        public async Task GetTomorrowsDailyAchievementsAsync_AnyParams_ReturnsTomorrowsDailies(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
@@ -127,7 +127,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
         [DataTestMethod]
         [DynamicData(nameof(GetAchievementGroupAsync_TestData), DynamicDataSourceType.Method)]
-        public async Task GetAchievementGroupAsync_ValidAchievementGroupId_ReturnsThatAchievementGroup(Guid id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAchievementGroupAsync_ValidId_ReturnsThatAchievementGroup(Guid id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var (lang, name) = langNameTuple;
@@ -161,7 +161,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
         [DataTestMethod]
         [DynamicData(nameof(GetAchievementGroupsAsync_TestData), DynamicDataSourceType.Method)]
-        public async Task GetAchievementGroupsAsync_ValidAchievementGroupId_ReturnsThatAchievementGroup(IEnumerable<Guid> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAchievementGroupsAsync_ValidIds_ReturnsThoseAchievementGroups(IEnumerable<Guid> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var (lang, names) = langNamesTuple;
@@ -192,7 +192,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
         [DataTestMethod]
         [DynamicData(nameof(GetAchievementCategoryAsync_TestData), DynamicDataSourceType.Method)]
-        public async Task GetAchievementCategoryAsync_ValidAchievementCategoryId_ReturnsThatAchievementCategory(int id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAchievementCategoryAsync_ValidId_ReturnsThatAchievementCategory(int id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var (lang, name) = langNameTuple;
@@ -220,7 +220,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
         [DataTestMethod]
         [DynamicData(nameof(GetAchievementCategoriesAsync_TestData), DynamicDataSourceType.Method)]
-        public async Task GetAchievementCategoriesAsync_ValidAchievementGroupId_ReturnsThatAchievementGroup(IEnumerable<int> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAchievementCategoriesAsync_ValidIds_ReturnsThoseAchievementCategories(IEnumerable<int> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var (lang, names) = langNamesTuple;

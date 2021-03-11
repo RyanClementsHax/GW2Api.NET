@@ -1,4 +1,5 @@
-﻿using GW2Api.NET.V2.Achievements.Dto;
+﻿using GW2Api.NET.Helpers;
+using GW2Api.NET.V2.Achievements.Dto;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -32,13 +33,14 @@ namespace GW2Api.NET.V2
 
         public Task<IEnumerable<Achievement>> GetAchievementsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
         {
-            if (ids is null) throw new ArgumentNullException(nameof(ids));
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
 
             return GetAsync<IEnumerable<Achievement>>(
                 _achievementsResource,
                 new Dictionary<string, string>
                 {
-                    { "ids", string.Join(",", ids.Select(x => x.ToString()))},
+                    { "ids", ids.ToUrlParam() },
                     { "lang", lang?.TwoLetterISOLanguageName }
                 },
                 token
@@ -72,7 +74,7 @@ namespace GW2Api.NET.V2
                 _achievementsGroupsResource,
                 new Dictionary<string, string>
                 {
-                    { "ids", string.Join(",", ids.Select(x => x.ToString().ToUpper()))},
+                    { "ids", ids.ToUrlParam() },
                     { "lang", lang?.TwoLetterISOLanguageName }
                 },
                 token
@@ -101,7 +103,7 @@ namespace GW2Api.NET.V2
                 _achievementsCategoriesResource,
                 new Dictionary<string, string>
                 {
-                    { "ids", string.Join(",", ids.Select(x => x.ToString()))},
+                    { "ids", ids.ToUrlParam() },
                     { "lang", lang?.TwoLetterISOLanguageName }
                 },
                 token
