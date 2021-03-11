@@ -21,6 +21,19 @@ namespace GW2Api.NET.IntegrationTests.V2
         public void Setup()
         {
             _mockHandler = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+            _mockHandler.Protected()
+               .Setup<Task<HttpResponseMessage>>(
+                  "SendAsync",
+                  ItExpr.IsAny<HttpRequestMessage>(),
+                  ItExpr.IsAny<CancellationToken>()
+               )
+               .ReturnsAsync(new HttpResponseMessage()
+               {
+                   StatusCode = HttpStatusCode.OK,
+                   Content = new StringContent("{}"),
+               })
+               .Verifiable();
+
             _api = new Gw2ApiV2(new HttpClient(_mockHandler.Object));
         }
 
@@ -40,6 +53,49 @@ namespace GW2Api.NET.IntegrationTests.V2
             var api = new Gw2ApiV2(new HttpClient(_mockHandler.Object));
 
             await api.GetAsync<object>("/some/resource", paramMap);
+        }
+
+        [TestMethod]
+        public async Task GetAuthenticatedAsync_NoToken_UsesDefault()
+        {
+            var api = new Gw2ApiV2(new HttpClient(_mockHandler.Object))
+            {
+                ApiKey = "default_key"
+            };
+
+            await api.GetAuthenticatedAsync<object>("/some/resource");
+
+            _mockHandler.Protected().Verify(
+                "SendAsync",
+                Times.Exactly(1),
+                ItExpr.Is<HttpRequestMessage>(req =>
+                    req.Method == HttpMethod.Get
+                    && req.RequestUri.ToString().Contains($"access_token={api.ApiKey}")
+                ),
+                ItExpr.IsAny<CancellationToken>()
+            );
+        }
+
+        [TestMethod]
+        public async Task GetAuthenticatedAsync_Token_UsesThatToken()
+        {
+            var api = new Gw2ApiV2(new HttpClient(_mockHandler.Object))
+            {
+                ApiKey = "default_key"
+            };
+            var token = $"not_{api.ApiKey}";
+
+            await api.GetAuthenticatedAsync<object>("/some/resource", token);
+
+            _mockHandler.Protected().Verify(
+                "SendAsync",
+                Times.Exactly(1),
+                ItExpr.Is<HttpRequestMessage>(req =>
+                    req.Method == HttpMethod.Get
+                    && req.RequestUri.ToString().Contains($"access_token={token}")
+                ),
+                ItExpr.IsAny<CancellationToken>()
+            );
         }
     }
 }
