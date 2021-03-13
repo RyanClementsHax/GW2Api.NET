@@ -113,5 +113,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
             Assert.IsTrue(result.Any());
             CollectionAssert.IsSubsetOf(_accountConfig.FinisherIds.ToList(), result.Select(x => x.Id).ToList());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountGlidersAsync_ValidApiKey_ReturnsTheAccountsGliders(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAccountGlidersAsync(apiKey, cts?.Token ?? default);
+
+            Assert.IsTrue(result.Any());
+            CollectionAssert.IsSubsetOf(_accountConfig.GliderIds.ToList(), result.ToList());
+        }
     }
 }
