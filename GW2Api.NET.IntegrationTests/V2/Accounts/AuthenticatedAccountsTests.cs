@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,7 +37,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
         public async Task GetAccountAchievementAsync_ValidId_ReturnsThatAchievement(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
-            var id = _accountConfig.AccountAchievements.First();
+            var id = _accountConfig.AchievementIds.First();
             using var cts = ctsFactory();
 
             var result = await _api.GetAccountAchievementAsync(id, apiKey, cts?.Token ?? default);
@@ -50,7 +49,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
         public async Task GetAccountAchievementsAsync_ValidId_ReturnsThatAchievement(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
-            var ids = _accountConfig.AccountAchievements;
+            var ids = _accountConfig.AchievementIds;
             using var cts = ctsFactory();
 
             var result = await _api.GetAccountAchievementsAsync(ids, apiKey, cts?.Token ?? default);
@@ -100,6 +99,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
             var result = await _api.GetAccountDyesAsync(apiKey, cts?.Token ?? default);
 
             Assert.IsTrue(result.Any());
+            CollectionAssert.IsSubsetOf(_accountConfig.DyeIds.ToList(), result.ToList());
         }
 
         [DataTestMethod]
@@ -111,6 +111,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
             var result = await _api.GetAccountFinishersAsync(apiKey, cts?.Token ?? default);
 
             Assert.IsTrue(result.Any());
+            CollectionAssert.IsSubsetOf(_accountConfig.FinisherIds.ToList(), result.Select(x => x.Id).ToList());
         }
     }
 }

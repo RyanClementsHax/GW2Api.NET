@@ -39,12 +39,16 @@ Note that if no Api Keys are given, calling functions that need authentication w
 	  "ApiKey": "<your api key>",
 	  "AccountConfig": {
 	    "Name": "<your account name>",
-		"AccountAchievements": [ 1, 2, 3 ]
+		"AchievementIds": [ 1, 2, 3 ],
+		"DyeIds": [ 1634, 1640, 1649 ],
+		"FinisherIds":  [ 1, 2, 62 ]
 	  }
 	}
 	```
 	- `ApiKey`: The Api Key to use in the tests (should have all permissions)
 	- `AccountConfig`
 		- `Name`: Your account's name
-		- `AccountAchievements`: A list of some ids of the achievements your account has
+		- `AchievementIds`: A list of some ids of the achievements your account has
+		- `DyeIds`: A list of some ids of the dyes your account has
+		- `FinisherIds`: A list of some ids of the finishers your account has
 3. Run the authenticated tests in visual studio
