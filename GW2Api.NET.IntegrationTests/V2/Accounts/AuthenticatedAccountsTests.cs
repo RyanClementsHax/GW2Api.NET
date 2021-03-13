@@ -90,5 +90,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             CollectionAssert.AllItemsAreNotNull(result.ToList());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountDyesAsync_ValidApiKey_ReturnsTheAccountsDungeons(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAccountDyesAsync(apiKey, cts?.Token ?? default);
+
+            Assert.IsTrue(result.Any());
+        }
     }
 }
