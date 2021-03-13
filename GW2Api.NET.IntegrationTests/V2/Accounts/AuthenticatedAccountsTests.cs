@@ -70,33 +70,33 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetAccountDailyCraftingAsync_ValidApiKey_ReturnsTheAccountsDailyCrafting(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAccountDailyCraftingIdsAsync_ValidApiKey_ReturnsTheAccountsDailyCrafting(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountDailyCraftingAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountDailyCraftingIdsAsync(apiKey, cts?.Token ?? default);
 
             CollectionAssert.AllItemsAreNotNull(result.ToList());
         }
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetAccountDungeonsAsync_ValidApiKey_ReturnsTheAccountsDungeons(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAccountDungeonIdsAsync_ValidApiKey_ReturnsTheAccountsDungeons(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountDungeonsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountDungeonIdsAsync(apiKey, cts?.Token ?? default);
 
             CollectionAssert.AllItemsAreNotNull(result.ToList());
         }
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetAccountDyesAsync_ValidApiKey_ReturnsTheAccountsDyes(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAccountDyeIdsAsync_ValidApiKey_ReturnsTheAccountsDyes(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountDyesAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountDyeIdsAsync(apiKey, cts?.Token ?? default);
 
             Assert.IsTrue(result.Any());
             CollectionAssert.IsSubsetOf(_accountConfig.DyeIds.ToList(), result.ToList());
@@ -116,11 +116,11 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetAccountGlidersAsync_ValidApiKey_ReturnsTheAccountsGliders(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAccountGliderIdsAsync_ValidApiKey_ReturnsTheAccountsGliders(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountGlidersAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountGliderIdsAsync(apiKey, cts?.Token ?? default);
 
             Assert.IsTrue(result.Any());
             CollectionAssert.IsSubsetOf(_accountConfig.GliderIds.ToList(), result.ToList());

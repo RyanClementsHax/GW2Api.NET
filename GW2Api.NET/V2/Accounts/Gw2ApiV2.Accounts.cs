@@ -54,19 +54,19 @@ namespace GW2Api.NET.V2
         public Task<IEnumerable<BankSlot>> GetAccountBankAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IEnumerable<BankSlot>>(_accountBankResource, accessToken, token);
 
-        public Task<IEnumerable<string>> GetAccountDailyCraftingAsync(string accessToken = null, CancellationToken token = default)
+        public Task<IEnumerable<string>> GetAccountDailyCraftingIdsAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IEnumerable<string>>(_accountDailyCraftingResource, accessToken, token);
 
-        public Task<IEnumerable<string>> GetAccountDungeonsAsync(string accessToken = null, CancellationToken token = default)
+        public Task<IEnumerable<string>> GetAccountDungeonIdsAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IEnumerable<string>>(_accountDungeonsResource, accessToken, token);
         
-        public Task<IEnumerable<int>> GetAccountDyesAsync(string accessToken = null, CancellationToken token = default)
+        public Task<IEnumerable<int>> GetAccountDyeIdsAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IEnumerable<int>>(_accountDyesResource, accessToken, token);
 
         public Task<IEnumerable<AccountFinisher>> GetAccountFinishersAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IEnumerable<AccountFinisher>>(_accountFinishersResource, accessToken, token);
 
-        public Task<IEnumerable<int>> GetAccountGlidersAsync(string accessToken = null, CancellationToken token = default)
+        public Task<IEnumerable<int>> GetAccountGliderIdsAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IEnumerable<int>>(_accountGlidersResource, accessToken, token);
     }
 }
