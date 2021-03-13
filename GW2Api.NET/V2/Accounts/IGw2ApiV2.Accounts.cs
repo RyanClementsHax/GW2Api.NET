@@ -12,5 +12,6 @@ namespace GW2Api.NET.V2
         Task<AccountAchievement> GetAccountAchievementAsync(int id, string accessToken = null, CancellationToken token = default);
         Task<IEnumerable<AccountAchievement>> GetAccountAchievementsAsync(IEnumerable<int> ids, string accessToken = null, CancellationToken token = default);
         Task<IEnumerable<BankSlot>> GetAccountBankAsync(string accessToken = null, CancellationToken token = default);
+        Task<IEnumerable<string>> GetAccountDailyCraftingAsync(string accessToken = null, CancellationToken token = default);
     }
 }
