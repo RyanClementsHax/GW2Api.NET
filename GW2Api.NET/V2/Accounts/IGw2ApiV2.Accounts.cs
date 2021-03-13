@@ -15,5 +15,6 @@ namespace GW2Api.NET.V2
         Task<IEnumerable<string>> GetAccountDailyCraftingAsync(string accessToken = null, CancellationToken token = default);
         Task<IEnumerable<string>> GetAccountDungeonsAsync(string accessToken = null, CancellationToken token = default);
         Task<IEnumerable<int>> GetAccountDyesAsync(string accessToken = null, CancellationToken token = default);
+        Task<IEnumerable<AccountFinisher>> GetAccountFinishersAsync(string accessToken = null, CancellationToken token = default);
     }
 }

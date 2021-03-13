@@ -15,6 +15,7 @@ namespace GW2Api.NET.V2
         private static readonly string _accountDailyCraftingResource = "account/dailycrafting";
         private static readonly string _accountDungeonsResource = "account/dungeons";
         private static readonly string _accountDyesResource = "account/dyes";
+        private static readonly string _accountFinishersResource = "account/finishers";
 
         public Task<Account> GetAccountAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<Account>(_accountResource, accessToken, token);
@@ -60,5 +61,8 @@ namespace GW2Api.NET.V2
         
         public Task<IEnumerable<int>> GetAccountDyesAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IEnumerable<int>>(_accountDyesResource, accessToken, token);
+
+        public Task<IEnumerable<AccountFinisher>> GetAccountFinishersAsync(string accessToken = null, CancellationToken token = default)
+            => GetAuthenticatedAsync<IEnumerable<AccountFinisher>>(_accountFinishersResource, accessToken, token);
     }
 }

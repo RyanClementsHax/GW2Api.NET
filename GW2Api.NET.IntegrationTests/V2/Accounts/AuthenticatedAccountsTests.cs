@@ -93,11 +93,22 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetAccountDyesAsync_ValidApiKey_ReturnsTheAccountsDungeons(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAccountDyesAsync_ValidApiKey_ReturnsTheAccountsDyes(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
             var result = await _api.GetAccountDyesAsync(apiKey, cts?.Token ?? default);
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountFinishersAsync_ValidApiKey_ReturnsTheAccountsFinishers(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAccountFinishersAsync(apiKey, cts?.Token ?? default);
 
             Assert.IsTrue(result.Any());
         }
