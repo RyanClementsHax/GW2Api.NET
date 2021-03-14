@@ -77,7 +77,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountDailyCraftingIdsAsync(apiKey, cts?.Token ?? default);
 
-            CollectionAssert.IsSubsetOf((_accountConfig.DailyCraftingIds ?? new List<int>()).ToList(), result.ToList());
+            CollectionAssert.IsSubsetOf(_accountConfig.DailyCraftingIds.ToList(), result.ToList());
         }
 
         [DataTestMethod]
@@ -88,7 +88,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountDungeonIdsAsync(apiKey, cts?.Token ?? default);
 
-            CollectionAssert.IsSubsetOf((_accountConfig.DungeonIds ?? new List<int>()).ToList(), result.ToList());
+            CollectionAssert.IsSubsetOf(_accountConfig.DungeonIds.ToList(), result.ToList());
         }
 
         [DataTestMethod]
@@ -99,7 +99,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountDyeIdsAsync(apiKey, cts?.Token ?? default);
 
-            CollectionAssert.IsSubsetOf((_accountConfig.DyeIds ?? new List<int>()).ToList(), result.ToList());
+            CollectionAssert.IsSubsetOf(_accountConfig.DyeIds.ToList(), result.ToList());
         }
 
         [DataTestMethod]
@@ -110,7 +110,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountFinishersAsync(apiKey, cts?.Token ?? default);
 
-            CollectionAssert.IsSubsetOf((_accountConfig.FinisherIds ?? new List<int>()).ToList(), result.Select(x => x.Id).ToList());
+            CollectionAssert.IsSubsetOf(_accountConfig.FinisherIds.ToList(), result.Select(x => x.Id).ToList());
         }
 
         [DataTestMethod]
@@ -121,7 +121,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountGliderIdsAsync(apiKey, cts?.Token ?? default);
 
-            CollectionAssert.IsSubsetOf((_accountConfig.GliderIds ?? new List<int>()).ToList(), result.ToList());
+            CollectionAssert.IsSubsetOf(_accountConfig.GliderIds.ToList(), result.ToList());
         }
 
         [DataTestMethod]
@@ -132,7 +132,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountHomeCatIdsAsync(apiKey, cts?.Token ?? default);
 
-            CollectionAssert.IsSubsetOf((_accountConfig.HomeCatIds ?? new List<int>()).ToList(), result.ToList());
+            CollectionAssert.IsSubsetOf(_accountConfig.HomeCatIds.ToList(), result.ToList());
         }
 
         [DataTestMethod]
@@ -143,7 +143,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountHomeNodeIdsAsync(apiKey, cts?.Token ?? default);
 
-            CollectionAssert.IsSubsetOf((_accountConfig.HomeNodeIds ?? new List<string>()).ToList(), result.ToList());
+            CollectionAssert.IsSubsetOf(_accountConfig.HomeNodeIds.ToList(), result.ToList());
         }
 
         [DataTestMethod]
@@ -154,7 +154,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountSharedInventorySlotsAsync(apiKey, cts?.Token ?? default);
 
-            CollectionAssert.IsSubsetOf((_accountConfig.SharedInventoryItemIds ?? new List<int>()).ToList(), result.Select(x => x.Id).ToList());
+            CollectionAssert.IsSubsetOf(_accountConfig.SharedInventoryItemIds.ToList(), result.Select(x => x.Id).ToList());
         }
 
         [DataTestMethod]
@@ -166,6 +166,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
             var result = await _api.GetAccountLuckAsync(apiKey, cts?.Token ?? default);
 
             Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountMailCarrierIds_ValidApiKey_ReturnsTheAccountsLuck(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAccountMailCarrierIds(apiKey, cts?.Token ?? default);
+
+            CollectionAssert.IsSubsetOf(_accountConfig.MailCarrierIds.ToList(), result.ToList());
         }
     }
 }

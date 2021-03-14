@@ -14,5 +14,6 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         public IEnumerable<int> HomeCatIds { get; set; }
         public IEnumerable<string> HomeNodeIds { get; set; }
         public IEnumerable<int> SharedInventoryItemIds { get; set; }
+        public IEnumerable<int> MailCarrierIds { get; set; }
     }
 }
