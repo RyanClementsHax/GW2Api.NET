@@ -170,13 +170,24 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetAccountMailCarrierIds_ValidApiKey_ReturnsTheAccountsLuck(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAccountMailCarrierIds_ValidApiKey_ReturnsTheMailCarriers(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
             var result = await _api.GetAccountMailCarrierIds(apiKey, cts?.Token ?? default);
 
             CollectionAssert.IsSubsetOf(_accountConfig.MailCarrierIds.ToList(), result.ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountMapChestIds_ValidApiKey_ReturnsTheAccountsMapChests(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAccountMapChestIds(apiKey, cts?.Token ?? default);
+
+            CollectionAssert.IsSubsetOf(_accountConfig.MapChestIds.ToList(), result.ToList());
         }
     }
 }

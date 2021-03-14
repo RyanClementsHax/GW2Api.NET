@@ -22,6 +22,7 @@ namespace GW2Api.NET.V2
         private static readonly string _accountInventoryResource = "account/inventory";
         private static readonly string _accountLuckResource = "account/luck";
         private static readonly string _accountMailCarriersResource = "account/mailcarriers";
+        private static readonly string _accountMapChestsResource = "account/mapchests";
 
         public Task<Account> GetAccountAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<Account>(_accountResource, accessToken, token);
@@ -88,5 +89,8 @@ namespace GW2Api.NET.V2
 
         public Task<IList<int>> GetAccountMailCarrierIds(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<int>>(_accountMailCarriersResource, accessToken, token);
+
+        public Task<IList<string>> GetAccountMapChestIds(string accessToken = null, CancellationToken token = default)
+            => GetAuthenticatedAsync<IList<string>>(_accountMapChestsResource, accessToken, token);
     }
 }

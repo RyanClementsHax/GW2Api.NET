@@ -2,7 +2,7 @@
 
 namespace GW2Api.NET.IntegrationTests.V2.Config
 {
-    public class TestConfig
+    public record TestConfig
     {
         public string ApiKey { get; set; }
         public AccountConfig AccountConfig { get; set; }
