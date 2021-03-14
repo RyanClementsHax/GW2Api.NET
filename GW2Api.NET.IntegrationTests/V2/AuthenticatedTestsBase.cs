@@ -18,7 +18,8 @@ namespace GW2Api.NET.IntegrationTests.V2
             => _config = new ConfigurationBuilder()
                 .AddJsonFile("v2.config.json", optional: true)
                 .Build()
-                .Get<TestConfig>();
+                .Get<TestConfig>()
+                .InitNullIEnumerables();
 
         public static IEnumerable<object[]> DefaultAuthenticatedTestData()
             => new List<object[]>
@@ -34,8 +35,6 @@ namespace GW2Api.NET.IntegrationTests.V2
         {
             if (_config is null)
                 Assert.Fail("You must create a v2.config.json file to run authenticated tests. See the README for instructions on how to run these tests.");
-
-            _config.AccountConfig.InitNullArrays();
 
             _api = new Gw2ApiV2(new HttpClient())
             {

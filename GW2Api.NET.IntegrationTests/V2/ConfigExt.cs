@@ -7,14 +7,35 @@ namespace GW2Api.NET.IntegrationTests.V2
 {
     public static class ConfigExt
     {
-        public static T InitNullArrays<T>(this T source)
+        public static T InitNullIEnumerables<T>(this T source)
         {
+            if (source is null)
+                return source;
+
             foreach (var prop in typeof(T).GetProperties())
             {
                 if (prop.IsIEnumerableType() && source.IsPropertyNull(prop.Name))
                 {
                     var typeArg = prop.PropertyType.GenericTypeArguments.First();
-                    typeof(T).GetProperty(prop.Name).SetValue(source, Array.CreateInstance(typeArg, 0), index: null);
+                    typeof(T)
+                        .GetProperty(prop.Name)
+                        .SetValue(
+                            obj: source,
+                            value: Array.CreateInstance(typeArg, 0),
+                            index: null
+                        );
+                }
+                else if (prop.PropertyType.IsClass && prop.PropertyType != typeof(string))
+                {
+                    typeof(ConfigExt)
+                        .GetMethod(nameof(InitNullIEnumerables))
+                        .MakeGenericMethod(prop.PropertyType)
+                        .Invoke(
+                            obj: null,
+                            parameters: new object[] {
+                                source.GetPropertyValue(prop.Name)
+                            }
+                        );
                 }
             }
 
@@ -25,7 +46,13 @@ namespace GW2Api.NET.IntegrationTests.V2
             => source.PropertyType.IsGenericType
                 && source.PropertyType.GetGenericTypeDefinition() == typeof(IEnumerable<>);
 
-        private static bool IsPropertyNull<T>(this T source, string propName)
-            => typeof(T).GetProperty(propName).GetValue(source, index: null) == null;
+        private static bool IsPropertyNull(this object source, string propName)
+            => source.GetPropertyValue(propName) is null;
+
+        private static object GetPropertyValue(this object source, string propName)
+            => source
+                .GetType()
+                .GetProperty(propName)
+                .GetValue(source, index: null);
     }
 }
