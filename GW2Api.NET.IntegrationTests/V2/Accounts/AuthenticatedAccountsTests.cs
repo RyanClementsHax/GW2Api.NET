@@ -156,5 +156,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             CollectionAssert.IsSubsetOf((_accountConfig.SharedInventoryItemIds ?? new List<int>()).ToList(), result.Select(x => x.Id).ToList());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountLuckAsync_ValidApiKey_ReturnsTheAccountsLuck(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAccountLuckAsync(apiKey, cts?.Token ?? default);
+
+            Assert.IsTrue(result.Any());
+        }
     }
 }

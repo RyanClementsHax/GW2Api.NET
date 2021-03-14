@@ -20,6 +20,7 @@ namespace GW2Api.NET.V2
         private static readonly string _accountHomeCatsResource = "account/home/cats";
         private static readonly string _accountHomeNodesResource = "account/home/nodes";
         private static readonly string _accountInventoryResource = "account/inventory";
+        private static readonly string _accountLuckResource = "account/luck";
 
         public Task<Account> GetAccountAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<Account>(_accountResource, accessToken, token);
@@ -80,5 +81,8 @@ namespace GW2Api.NET.V2
 
         public Task<IList<SharedInventorySlot>> GetAccountSharedInventorySlotsAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<SharedInventorySlot>>(_accountInventoryResource, accessToken, token);
+
+        public Task<IList<ConsumedLuck>> GetAccountLuckAsync(string accessToken = null, CancellationToken token = default)
+            => GetAuthenticatedAsync<IList<ConsumedLuck>>(_accountLuckResource, accessToken, token);
     }
 }
