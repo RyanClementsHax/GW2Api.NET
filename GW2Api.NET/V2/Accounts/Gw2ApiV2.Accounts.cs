@@ -17,6 +17,7 @@ namespace GW2Api.NET.V2
         private static readonly string _accountDyesResource = "account/dyes";
         private static readonly string _accountFinishersResource = "account/finishers";
         private static readonly string _accountGlidersResource = "account/gliders";
+        private static readonly string _accountHomeCatsResource = "account/home/cats";
 
         public Task<Account> GetAccountAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<Account>(_accountResource, accessToken, token);
@@ -68,5 +69,8 @@ namespace GW2Api.NET.V2
 
         public Task<IEnumerable<int>> GetAccountGliderIdsAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IEnumerable<int>>(_accountGlidersResource, accessToken, token);
+
+        public Task<IEnumerable<int>> GetAccountHomeCatIdsAsync(string accessToken = null, CancellationToken token = default)
+            => GetAuthenticatedAsync<IEnumerable<int>>(_accountHomeCatsResource, accessToken, token);
     }
 }
