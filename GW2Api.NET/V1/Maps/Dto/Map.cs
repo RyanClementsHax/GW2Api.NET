@@ -10,12 +10,12 @@ namespace GW2Api.NET.V1.Maps.Dto
         int MaxLevel,
         int DefaultFloor,
         string Type,
-        IReadOnlyCollection<int> Floors,
+        IList<int> Floors,
         int RegionId,
         string RegionName,
         int ContinentId,
         string ContinentName,
-        IReadOnlyCollection<Vector2> MapRect,
-        IReadOnlyCollection<Vector2> ContinentRect
+        IList<Vector2> MapRect,
+        IList<Vector2> ContinentRect
     );
 }

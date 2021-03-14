@@ -9,6 +9,6 @@ namespace GW2Api.NET.V1.Maps.Dto
         Vector2 ContinentDims,
         int MinZoom,
         int MaxZoom,
-        IReadOnlyCollection<int> Floors
+        IList<int> Floors
     );
 }

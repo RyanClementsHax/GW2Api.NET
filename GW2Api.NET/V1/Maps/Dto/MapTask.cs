@@ -8,6 +8,6 @@ namespace GW2Api.NET.V1.Maps.Dto
         string Objective,
         int Level,
         Vector2 Coord,
-        IReadOnlyCollection<Vector2> Bounds
+        IList<Vector2> Bounds
     );
 }

@@ -7,7 +7,7 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Trinket
 {
     [JsonConverter(typeof(AbstractClassConverter<TrinketSubDetail>))]
     public record TrinketSubDetail(
-        IReadOnlyCollection<InfusionSlot> InfusionSlots,
+        IList<InfusionSlot> InfusionSlots,
         double AttributeAdjustment,
         InfixUpgrade InfixUpgrade,
         [property: JsonConverter(typeof(StringToNullableIntConverter))] int? SuffixItemId,

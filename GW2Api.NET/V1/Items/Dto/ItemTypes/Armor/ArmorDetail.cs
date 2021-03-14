@@ -15,9 +15,9 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Armor
         int VendorValue,
         int IconFileId,
         string IconFileSignature,
-        IReadOnlyCollection<GameType> GameTypes,
-        IReadOnlyCollection<ItemFlag> Flags,
-        IReadOnlyCollection<Restriction> Restrictions,
+        IList<GameType> GameTypes,
+        IList<ItemFlag> Flags,
+        IList<Restriction> Restrictions,
 
         ArmorSubDetail Armor,
         [property: JsonConverter(typeof(StringToIntConverter))] int DefaultSkin

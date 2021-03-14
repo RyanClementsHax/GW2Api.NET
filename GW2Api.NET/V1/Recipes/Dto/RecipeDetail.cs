@@ -12,8 +12,8 @@ namespace GW2Api.NET.V1.Recipes.Dto
         string MinRating,
         string TimeToCraftMs,
         string VendorValue,
-        IReadOnlyCollection<Discipline> Disciplines,
-        IReadOnlyCollection<RecipeFlag> Flags,
-        IReadOnlyCollection<Ingredient> Ingredients
+        IList<Discipline> Disciplines,
+        IList<RecipeFlag> Flags,
+        IList<Ingredient> Ingredients
     );
 }

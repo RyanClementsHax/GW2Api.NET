@@ -4,7 +4,7 @@ namespace GW2Api.NET.V2.Accounts.Dto
 {
     public record AccountAchievement(
         int Id,
-        IReadOnlyCollection<int> Bits,
+        IList<int> Bits,
         int? Current,
         int? Max,
         int? Repeated,

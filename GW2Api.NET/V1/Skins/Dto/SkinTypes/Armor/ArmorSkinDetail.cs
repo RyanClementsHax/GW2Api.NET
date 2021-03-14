@@ -7,8 +7,8 @@ namespace GW2Api.NET.V1.Skins.Dto.SkinTypes.Armor
     public record ArmorSkinDetail(
         int SkinId,
         string Name,
-        IReadOnlyCollection<SkinFlags> Flags,
-        IReadOnlyCollection<string> Restrictions,
+        IList<SkinFlags> Flags,
+        IList<string> Restrictions,
         string IconFileId,
         string IconFileSignature,
         string Description,

@@ -4,6 +4,6 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Common
 {
     public record InfusionSlot(
         int ItemId,
-        IReadOnlyCollection<InfusionType> Flags
+        IList<InfusionType> Flags
     );
 }

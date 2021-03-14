@@ -3,7 +3,6 @@ using GW2Api.NET.V2.Achievements.Dto;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,8 +16,8 @@ namespace GW2Api.NET.V2
         private static readonly string _achievementsGroupsResource = "achievements/groups";
         private static readonly string _achievementsCategoriesResource = "achievements/categories";
 
-        public Task<IReadOnlyCollection<int>> GetAllAchievementIdsAsync(CancellationToken token = default)
-            => GetAsync<IReadOnlyCollection<int>>(_achievementsResource, token);
+        public Task<IList<int>> GetAllAchievementIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>(_achievementsResource, token);
 
         public Task<Achievement> GetAchievementAsync(int id, CultureInfo lang = null, CancellationToken token = default)
             => GetAsync<Achievement>(
@@ -31,12 +30,12 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<IEnumerable<Achievement>> GetAchievementsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        public Task<IList<Achievement>> GetAchievementsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
         {
             if (ids is null)
                 throw new ArgumentNullException(nameof(ids));
 
-            return GetAsync<IEnumerable<Achievement>>(
+            return GetAsync<IList<Achievement>>(
                 _achievementsResource,
                 new Dictionary<string, string>
                 {
@@ -53,8 +52,8 @@ namespace GW2Api.NET.V2
         public Task<DailyAchievements> GetTomorrowsDailyAchievementsAsync(CancellationToken token = default)
             => GetAsync<DailyAchievements>(_achievementsDailyTomorrowResource, token);
 
-        public Task<IReadOnlyCollection<Guid>> GetAllAchievementGroupIdsAsync(CancellationToken token = default)
-            => GetAsync<IReadOnlyCollection<Guid>>(_achievementsGroupsResource, token);
+        public Task<IList<Guid>> GetAllAchievementGroupIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<Guid>>(_achievementsGroupsResource, token);
 
         public Task<AchievementGroup> GetAchievementGroupAsync(Guid id, CultureInfo lang = null, CancellationToken token = default)
             => GetAsync<AchievementGroup>(
@@ -65,12 +64,12 @@ namespace GW2Api.NET.V2
                 },
                 token
             );
-        public Task<IEnumerable<AchievementGroup>> GetAchievementGroupsAsync(IEnumerable<Guid> ids, CultureInfo lang = null, CancellationToken token = default)
+        public Task<IList<AchievementGroup>> GetAchievementGroupsAsync(IEnumerable<Guid> ids, CultureInfo lang = null, CancellationToken token = default)
         {
             if (ids is null)
                 throw new ArgumentNullException(nameof(ids));
 
-            return GetAsync<IEnumerable<AchievementGroup>>(
+            return GetAsync<IList<AchievementGroup>>(
                 _achievementsGroupsResource,
                 new Dictionary<string, string>
                 {
@@ -81,8 +80,8 @@ namespace GW2Api.NET.V2
             );
         }
 
-        public Task<IReadOnlyCollection<int>> GetAllAchievementCategoryIdsAsync(CancellationToken token = default)
-            => GetAsync<IReadOnlyCollection<int>>(_achievementsCategoriesResource, token);
+        public Task<IList<int>> GetAllAchievementCategoryIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>(_achievementsCategoriesResource, token);
 
         public Task<AchievementCategory> GetAchievementCategoryAsync(int id, CultureInfo lang = null, CancellationToken token = default)
             => GetAsync<AchievementCategory>(
@@ -94,12 +93,12 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<IEnumerable<AchievementCategory>> GetAchievementCategoriesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        public Task<IList<AchievementCategory>> GetAchievementCategoriesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
         {
             if (ids is null)
                 throw new ArgumentNullException(nameof(ids));
 
-            return GetAsync<IEnumerable<AchievementCategory>>(
+            return GetAsync<IList<AchievementCategory>>(
                 _achievementsCategoriesResource,
                 new Dictionary<string, string>
                 {

@@ -11,7 +11,7 @@ namespace GW2Api.NET.V1
         private static readonly string _recipesResource = "recipes.json";
         private static readonly string _recipeDetailsResource = "recipe_details.json";
 
-        public async Task<IReadOnlyCollection<int>> GetAllRecipeIdsAsync(CancellationToken token = default)
+        public async Task<IList<int>> GetAllRecipeIdsAsync(CancellationToken token = default)
             => (await GetAsync<GetAllRecipeIdsResponse>(
                 _recipesResource,
                 token

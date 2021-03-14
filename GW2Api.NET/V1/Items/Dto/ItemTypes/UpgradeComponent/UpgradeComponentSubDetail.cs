@@ -7,9 +7,9 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.UpgradeComponent
 {
     [JsonConverter(typeof(AbstractClassConverter<UpgradeComponentSubDetail>))]
     public abstract record UpgradeComponentSubDetail(
-        IReadOnlyCollection<UpgradeComponentFlag> Flags,
+        IList<UpgradeComponentFlag> Flags,
         double AttributeAdjustment,
-        IReadOnlyCollection<InfusionType> InfusionUpgradeFlags,
+        IList<InfusionType> InfusionUpgradeFlags,
         InfixUpgrade InfixUpgrade,
         string Suffix
     );

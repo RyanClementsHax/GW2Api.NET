@@ -9,7 +9,7 @@ namespace GW2Api.NET.V1.Events.Dto
         string Name,
         int Level,
         int MapId,
-        IReadOnlyCollection<EventFlag> Flags,
+        IList<EventFlag> Flags,
         Location Location
     );
 }

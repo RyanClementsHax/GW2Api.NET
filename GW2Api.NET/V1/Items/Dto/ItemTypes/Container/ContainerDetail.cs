@@ -13,9 +13,9 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Container
         int VendorValue,
         int IconFileId,
         string IconFileSignature,
-        IReadOnlyCollection<GameType> GameTypes,
-        IReadOnlyCollection<ItemFlag> Flags,
-        IReadOnlyCollection<Restriction> Restrictions,
+        IList<GameType> GameTypes,
+        IList<ItemFlag> Flags,
+        IList<Restriction> Restrictions,
 
         ContainerSubDetail Container
     ) : ItemDetail(

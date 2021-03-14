@@ -11,7 +11,7 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Weapon
         [property: JsonConverter(typeof(StringToIntConverter))] int MinPower,
         [property: JsonConverter(typeof(StringToIntConverter))] int MaxPower,
         [property: JsonConverter(typeof(StringToIntConverter))] int Defense,
-        IReadOnlyCollection<InfusionType> InfusionSlots,
+        IList<InfusionType> InfusionSlots,
         double AttributeAdjustment,
         InfixUpgrade InfixUpgrade,
         [property: JsonConverter(typeof(StringToNullableIntConverter))] int? SuffixItemId,

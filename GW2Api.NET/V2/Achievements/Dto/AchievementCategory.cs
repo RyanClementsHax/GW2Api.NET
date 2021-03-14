@@ -8,6 +8,6 @@ namespace GW2Api.NET.V2.Achievements.Dto
         string Description,
         int Order,
         string Icon,
-        IReadOnlyCollection<int> Achievements
+        IList<int> Achievements
     );
 }

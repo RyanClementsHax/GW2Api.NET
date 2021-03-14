@@ -3,10 +3,10 @@
 namespace GW2Api.NET.V2.Achievements.Dto
 {
     public record DailyAchievements(
-        IReadOnlyCollection<DailyAchievementDetail> Pve,
-        IReadOnlyCollection<DailyAchievementDetail> Pvp,
-        IReadOnlyCollection<DailyAchievementDetail> Wvw,
-        IReadOnlyCollection<DailyAchievementDetail> Fractals,
-        IReadOnlyCollection<DailyAchievementDetail> Special
+        IList<DailyAchievementDetail> Pve,
+        IList<DailyAchievementDetail> Pvp,
+        IList<DailyAchievementDetail> Wvw,
+        IList<DailyAchievementDetail> Fractals,
+        IList<DailyAchievementDetail> Special
     );
 }

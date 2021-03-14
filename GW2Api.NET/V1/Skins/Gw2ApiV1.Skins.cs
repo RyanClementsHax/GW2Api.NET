@@ -11,7 +11,7 @@ namespace GW2Api.NET.V1
         private static readonly string _skinsResource = "skins.json";
         private static readonly string _skinDetailsResource = "skin_details.json";
 
-        public async Task<IReadOnlyCollection<int>> GetAllSkinIdsAsync(CancellationToken token = default)
+        public async Task<IList<int>> GetAllSkinIdsAsync(CancellationToken token = default)
             => (await GetAsync<GetAllSkinIdsResponse>(
                 _skinsResource,
                 token

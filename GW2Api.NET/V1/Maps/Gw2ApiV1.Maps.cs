@@ -14,8 +14,8 @@ namespace GW2Api.NET.V1
         private static readonly string _continentsResource = "continents.json";
         private static readonly string _mapFloorResource = "map_floor.json";
 
-        public Task<IReadOnlyCollection<MapName>> GetAllMapNamesAsync(CultureInfo lang = null, CancellationToken token = default)
-            => GetAsync<IReadOnlyCollection<MapName>>(
+        public Task<IList<MapName>> GetAllMapNamesAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<MapName>>(
                 _mapNamesResource,
                 new Dictionary<string, string>
                 {
@@ -24,7 +24,7 @@ namespace GW2Api.NET.V1
                 token
             );
 
-        public async Task<IReadOnlyDictionary<string, Continent>> GetAllContinentsAsync(CultureInfo lang = null, CancellationToken token = default)
+        public async Task<IDictionary<string, Continent>> GetAllContinentsAsync(CultureInfo lang = null, CancellationToken token = default)
             => (await GetAsync<GetAllContinentsResponse>(
                     _continentsResource,
                     new Dictionary<string, string>
@@ -40,7 +40,7 @@ namespace GW2Api.NET.V1
                     }
                 );
 
-        public async Task<IReadOnlyDictionary<string, Map>> GetAllMapsAsync(CultureInfo lang = null, CancellationToken token = default)
+        public async Task<IDictionary<string, Map>> GetAllMapsAsync(CultureInfo lang = null, CancellationToken token = default)
             => (await GetAsync<GetAllMapsResponse>(
                 _mapsResource,
                 new Dictionary<string, string>

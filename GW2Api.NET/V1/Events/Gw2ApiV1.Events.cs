@@ -12,7 +12,7 @@ namespace GW2Api.NET.V1
     {
         private static readonly string _eventsResource = "event_details.json";
 
-        public async Task<IReadOnlyDictionary<Guid, EventDetail>> GetAllAvailableEventsDetailsAsync(CultureInfo lang = null, CancellationToken token = default)
+        public async Task<IDictionary<Guid, EventDetail>> GetAllAvailableEventsDetailsAsync(CultureInfo lang = null, CancellationToken token = default)
             => (await GetAsync<GetAllAvailableEventsDetailsResponse>(
                     _eventsResource,
                     new Dictionary<string, string>

@@ -10,12 +10,12 @@ namespace GW2Api.NET.V1.Maps.Dto
         int MaxLevel,
         int DefaultFloor,
         Vector2 LabelCoord,
-        IReadOnlyCollection<Vector2> MapRect,
-        IReadOnlyCollection<Vector2> ContinentRect,
-        IReadOnlyCollection<PointOfInterest> PointsOfInterest,
-        IReadOnlyCollection<GodShrine> GodShrines,
-        IReadOnlyCollection<MapTask> Tasks,
-        IReadOnlyCollection<SkillChallenge> SkillChallenges,
-        IReadOnlyCollection<Sector> Sectors
+        IList<Vector2> MapRect,
+        IList<Vector2> ContinentRect,
+        IList<PointOfInterest> PointsOfInterest,
+        IList<GodShrine> GodShrines,
+        IList<MapTask> Tasks,
+        IList<SkillChallenge> SkillChallenges,
+        IList<Sector> Sectors
     );
 }

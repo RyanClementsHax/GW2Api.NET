@@ -7,7 +7,7 @@ namespace GW2Api.NET.V1.Maps.Dto
         string RegionId,
         string Name,
         Vector2 LabelCoord,
-        IReadOnlyCollection<Vector2> ContinentRect,
-        IReadOnlyDictionary<string, FloorMap> Maps
+        IList<Vector2> ContinentRect,
+        IDictionary<string, FloorMap> Maps
     );
 }

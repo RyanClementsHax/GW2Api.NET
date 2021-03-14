@@ -11,7 +11,7 @@ namespace GW2Api.NET.V1
         private static readonly string _itemsResource = "items.json";
         private static readonly string _itemDetailsResource = "item_details.json";
 
-        public async Task<IReadOnlyCollection<int>> GetAllItemIdsAsync(CancellationToken token = default)
+        public async Task<IList<int>> GetAllItemIdsAsync(CancellationToken token = default)
             => (await GetAsync<GetAllItemIdsResponse>(_itemsResource, token)).Items;
 
         public Task<ItemDetail> GetItemDetailAsync(int itemId, CultureInfo lang = null, CancellationToken token = default)

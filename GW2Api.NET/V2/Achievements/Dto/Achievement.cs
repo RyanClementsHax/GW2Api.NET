@@ -10,11 +10,11 @@ namespace GW2Api.NET.V2.Achievements.Dto
         string Requirement,
         string LockedText,
         AchievementType Type,
-        IReadOnlyCollection<AchievementFlag> Flags,
-        IReadOnlyCollection<AchievementTier> Tiers,
-        IReadOnlyCollection<int> Prerequisites,
-        IReadOnlyCollection<AchievementReward> Rewards,
-        IReadOnlyCollection<AchievementBit> Bits,
+        IList<AchievementFlag> Flags,
+        IList<AchievementTier> Tiers,
+        IList<int> Prerequisites,
+        IList<AchievementReward> Rewards,
+        IList<AchievementBit> Bits,
         int? PointCap
     );
 }

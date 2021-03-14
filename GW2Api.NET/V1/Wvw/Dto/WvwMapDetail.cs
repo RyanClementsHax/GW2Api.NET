@@ -4,8 +4,8 @@ namespace GW2Api.NET.V1.Wvw.Dto
 {
     public record WvwMapDetail(
         WvwMapDetailType Type,
-        IReadOnlyCollection<int> Scores,
-        IReadOnlyCollection<Objective> Objectives,
-        IReadOnlyCollection<WvwBonus> Bonuses
+        IList<int> Scores,
+        IList<Objective> Objectives,
+        IList<WvwBonus> Bonuses
     );
 }

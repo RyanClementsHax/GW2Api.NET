@@ -4,7 +4,7 @@ namespace GW2Api.NET.V1.Wvw.Dto
 {
     public record WvwMatchDetail(
         string MatchId,
-        IReadOnlyCollection<int> Scores,
-        IReadOnlyCollection<WvwMapDetail> Maps
+        IList<int> Scores,
+        IList<WvwMapDetail> Maps
     );
 }

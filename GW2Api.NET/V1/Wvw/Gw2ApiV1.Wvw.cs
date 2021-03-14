@@ -12,7 +12,7 @@ namespace GW2Api.NET.V1
         private static readonly string _wvwMatchDetailsResource = "wvw/match_details.json";
         private static readonly string _wvwObjectiveNamesResource = "wvw/objective_names.json";
 
-        public async Task<IReadOnlyCollection<WvwMatch>> GetAllWvwMatchesAsync(CancellationToken token = default)
+        public async Task<IList<WvwMatch>> GetAllWvwMatchesAsync(CancellationToken token = default)
             => (await GetAsync<GetAllWvwMatchesResponse>(
                 _wvwMatchResource,
                 token
@@ -28,8 +28,8 @@ namespace GW2Api.NET.V1
                 token
             );
 
-        public Task<IReadOnlyCollection<ObjectiveName>> GetWvwObjectiveNamesAsync(CultureInfo lang = null, CancellationToken token = default)
-            => GetAsync<IReadOnlyCollection<ObjectiveName>>(
+        public Task<IList<ObjectiveName>> GetWvwObjectiveNamesAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<ObjectiveName>>(
                 _wvwObjectiveNamesResource,
                 new Dictionary<string, string>
                 {

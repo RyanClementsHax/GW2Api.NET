@@ -6,9 +6,9 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.UpgradeComponent.UpgradeTypes
 {
     [JsonDiscriminator("Gem")]
     public record Gem(
-        IReadOnlyCollection<UpgradeComponentFlag> Flags,
+        IList<UpgradeComponentFlag> Flags,
         double AttributeAdjustment,
-        IReadOnlyCollection<InfusionType> InfusionUpgradeFlags,
+        IList<InfusionType> InfusionUpgradeFlags,
         InfixUpgrade InfixUpgrade,
         string Suffix
     ) : UpgradeComponentSubDetail(

@@ -9,7 +9,7 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Armor
         ArmorType Type,
         WeightClass WeightClass,
         [property: JsonConverter(typeof(StringToIntConverter))] int Defense,
-        IReadOnlyCollection<InfusionType> InfusionSlots,
+        IList<InfusionType> InfusionSlots,
         double AttributeAdjustment,
         InfixUpgrade InfixUpgrade,
         [property: JsonConverter(typeof(StringToNullableIntConverter))] int? SuffixItemId,

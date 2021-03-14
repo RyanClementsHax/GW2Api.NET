@@ -8,7 +8,7 @@ namespace GW2Api.NET.V1
 {
     public partial interface IGw2ApiV1
     {
-        Task<IReadOnlyCollection<int>> GetAllRecipeIdsAsync(CancellationToken token = default);
+        Task<IList<int>> GetAllRecipeIdsAsync(CancellationToken token = default);
         Task<RecipeDetail> GetRecipeDetailAsync(int recipeId, CultureInfo lang = null, CancellationToken token = default);
     }
 }

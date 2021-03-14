@@ -6,7 +6,7 @@ namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Trinket.TrinketTypes
 {
     [JsonDiscriminator("Ring")]
     public record Ring(
-        IReadOnlyCollection<InfusionSlot> InfusionSlots,
+        IList<InfusionSlot> InfusionSlots,
         double AttributeAdjustment,
         InfixUpgrade InfixUpgrade,
         int? SuffixItemId,

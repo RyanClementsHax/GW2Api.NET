@@ -8,6 +8,6 @@ namespace GW2Api.NET.V1.Events.Dto.Locations
     public record PolygonLocation(
         Vector3 Center,
         Vector2 ZRange,
-        IReadOnlyCollection<Vector2> Points
+        IList<Vector2> Points
     ) : Location(Center);
 }

@@ -11,7 +11,7 @@ namespace GW2Api.NET.V1
     {
         private static readonly string _colorsResource = "colors.json";
 
-        public async Task<IReadOnlyDictionary<string, Color>> GetAllColorsAsync(CultureInfo lang = null, CancellationToken token = default)
+        public async Task<IDictionary<string, Color>> GetAllColorsAsync(CultureInfo lang = null, CancellationToken token = default)
             => (await GetAsync<GetAllColorsResponse>(
                 _colorsResource,
                 new Dictionary<string, string>

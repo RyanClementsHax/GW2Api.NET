@@ -14,8 +14,8 @@ namespace GW2Api.NET.V1.Items.Dto
         [property: JsonConverter(typeof(StringToIntConverter))] int VendorValue,
         [property: JsonConverter(typeof(StringToIntConverter))] int IconFileId,
         string IconFileSignature,
-        IReadOnlyCollection<GameType> GameTypes,
-        IReadOnlyCollection<ItemFlag> Flags,
-        IReadOnlyCollection<Restriction> Restrictions
+        IList<GameType> GameTypes,
+        IList<ItemFlag> Flags,
+        IList<Restriction> Restrictions
     );
 }
