@@ -12,5 +12,6 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         public IReadOnlyCollection<int> DyeIds { get; set; } = new List<int>();
         public IReadOnlyCollection<int> GliderIds { get; set; } = new List<int>();
         public IReadOnlyCollection<int> HomeCatIds { get; set; } = new List<int>();
+        public IReadOnlyCollection<string> HomeNodeIds { get; set; } = new List<string>();
     }
 }

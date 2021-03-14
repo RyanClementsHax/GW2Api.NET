@@ -125,13 +125,24 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetAccountHomeCatIdsAsync_ValidApiKey_ReturnsTheAccountsGliders(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAccountHomeCatIdsAsync_ValidApiKey_ReturnsTheAccountsHomeCats(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
             var result = await _api.GetAccountHomeCatIdsAsync(apiKey, cts?.Token ?? default);
 
             CollectionAssert.IsSubsetOf(_accountConfig.HomeCatIds.ToList(), result.ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountHomeNodeIdsAsync_ValidApiKey_ReturnsTheAccountsHomeNodes(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAccountHomeNodeIdsAsync(apiKey, cts?.Token ?? default);
+
+            CollectionAssert.IsSubsetOf(_accountConfig.HomeNodeIds.ToList(), result.ToList());
         }
     }
 }

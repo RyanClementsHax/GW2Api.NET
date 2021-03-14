@@ -18,5 +18,6 @@ namespace GW2Api.NET.V2
         Task<IEnumerable<AccountFinisher>> GetAccountFinishersAsync(string accessToken = null, CancellationToken token = default);
         Task<IEnumerable<int>> GetAccountGliderIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<IEnumerable<int>> GetAccountHomeCatIdsAsync(string accessToken = null, CancellationToken token = default);
+        Task<IEnumerable<string>> GetAccountHomeNodeIdsAsync(string accessToken = null, CancellationToken token = default);
     }
 }
