@@ -40,9 +40,12 @@ Note that if no Api Keys are given, calling functions that need authentication w
 	  "AccountConfig": {
 	    "Name": "<your account name>",
 		"AchievementIds": [ 1, 2, 3 ],
+		"DailyCraftingIds": [],
+		"DungeonIds": [],
 		"DyeIds": [ 1634, 1640, 1649 ],
-		"FinisherIds":  [ 1, 2, 62 ],
-		"GliderIds": [ 78 ]
+		"FinisherIds": [ 1, 2, 62 ],
+		"GliderIds": [ 78 ],
+		"HomeCatIds": []
 	  }
 	}
 	```
@@ -50,9 +53,12 @@ Note that if no Api Keys are given, calling functions that need authentication w
 	- `AccountConfig`
 		- `Name`: Your account's name
 		- `AchievementIds`: A list of some ids of the achievements your account has
+		- `DailyCraftingIds`: A list of some ids of the time gated crafting ids your account has completed today
+		- `DungeonIds`: A list of some ids of the dungeons account has completed today
 		- `DyeIds`: A list of some ids of the dyes your account has
 		- `FinisherIds`: A list of some ids of the finishers your account has
 		- `GliderIds`: A list of some ids of the gliders your account has
+		- `HomeCatIds`: A list of some ids of the cats in your home instance your account has unlocked
 	- Note that in the authenticated tests, we use partial matching of data to avoid brittle tests because account data is changing if the acccount is being used or played on
 		- For example, we dont want to assert that the ids we get back from fetching all account achievement ids is exactly equal to some fixed set of numbers because that account could complete another achievement later down the road thus breaking the assertion even though the function works as it should
 3. Run the authenticated tests in visual studio

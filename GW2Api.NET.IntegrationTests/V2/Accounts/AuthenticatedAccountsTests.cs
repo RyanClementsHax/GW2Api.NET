@@ -76,7 +76,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountDailyCraftingIdsAsync(apiKey, cts?.Token ?? default);
 
-            CollectionAssert.AllItemsAreNotNull(result.ToList());
+            CollectionAssert.IsSubsetOf(_accountConfig.DailyCraftingIds.ToList(), result.ToList());
         }
 
         [DataTestMethod]
@@ -87,7 +87,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountDungeonIdsAsync(apiKey, cts?.Token ?? default);
 
-            CollectionAssert.AllItemsAreNotNull(result.ToList());
+            CollectionAssert.IsSubsetOf(_accountConfig.DungeonIds.ToList(), result.ToList());
         }
 
         [DataTestMethod]
@@ -98,7 +98,6 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountDyeIdsAsync(apiKey, cts?.Token ?? default);
 
-            Assert.IsTrue(result.Any());
             CollectionAssert.IsSubsetOf(_accountConfig.DyeIds.ToList(), result.ToList());
         }
 
@@ -110,7 +109,6 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountFinishersAsync(apiKey, cts?.Token ?? default);
 
-            Assert.IsTrue(result.Any());
             CollectionAssert.IsSubsetOf(_accountConfig.FinisherIds.ToList(), result.Select(x => x.Id).ToList());
         }
 
@@ -122,7 +120,6 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountGliderIdsAsync(apiKey, cts?.Token ?? default);
 
-            Assert.IsTrue(result.Any());
             CollectionAssert.IsSubsetOf(_accountConfig.GliderIds.ToList(), result.ToList());
         }
 
@@ -134,7 +131,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountHomeCatIdsAsync(apiKey, cts?.Token ?? default);
 
-            CollectionAssert.AllItemsAreNotNull(result.ToList());
+            CollectionAssert.IsSubsetOf(_accountConfig.HomeCatIds.ToList(), result.ToList());
         }
     }
 }
