@@ -28,5 +28,6 @@ namespace GW2Api.NET.V2
         Task<IList<MaterialSummary>> GetAccountMaterialSummariesAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<int>> GetAccountMinisIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<int>> GetAccountMountSkinIdsAsync(string accessToken = null, CancellationToken token = default);
+        Task<IList<string>> GetAccountMountTypesAsync(string accessToken = null, CancellationToken token = default);
     }
 }

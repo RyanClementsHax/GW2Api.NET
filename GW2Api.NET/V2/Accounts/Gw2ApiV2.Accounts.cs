@@ -9,28 +9,10 @@ namespace GW2Api.NET.V2
 {
     public partial class Gw2ApiV2
     {
-        private static readonly string _accountResource = "account";
-        private static readonly string _accountAchievementsResource = "account/achievements";
-        private static readonly string _accountBankResource = "account/bank";
-        private static readonly string _accountDailyCraftingResource = "account/dailycrafting";
-        private static readonly string _accountDungeonsResource = "account/dungeons";
-        private static readonly string _accountDyesResource = "account/dyes";
-        private static readonly string _accountFinishersResource = "account/finishers";
-        private static readonly string _accountGlidersResource = "account/gliders";
-        private static readonly string _accountHomeCatsResource = "account/home/cats";
-        private static readonly string _accountHomeNodesResource = "account/home/nodes";
-        private static readonly string _accountInventoryResource = "account/inventory";
-        private static readonly string _accountLuckResource = "account/luck";
-        private static readonly string _accountMailCarriersResource = "account/mailcarriers";
-        private static readonly string _accountMapChestsResource = "account/mapchests";
-        private static readonly string _accountMasteriesResource = "account/masteries";
-        private static readonly string _accountMasteryPointsResource = "account/mastery/points";
-        private static readonly string _accountMaterialsResource = "account/materials";
-        private static readonly string _accountMinisResource = "account/minis";
-        private static readonly string _accountMountsSkinsResource = "account/mounts/skins";
-
         public Task<Account> GetAccountAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<Account>(_accountResource, accessToken, token);
+            => GetAuthenticatedAsync<Account>("account", accessToken, token);
+
+        private static readonly string _accountAchievementsResource = "account/achievements";
 
         public Task<IList<AccountAchievement>> GetAllAccountAchievementsAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<AccountAchievement>>(_accountAchievementsResource, accessToken, token);
@@ -63,54 +45,57 @@ namespace GW2Api.NET.V2
         }
 
         public Task<IList<BankSlot>> GetAccountBankAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<BankSlot>>(_accountBankResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<BankSlot>>("account/bank", accessToken, token);
 
         public Task<IList<string>> GetAccountDailyCraftingIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<string>>(_accountDailyCraftingResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<string>>("account/dailycrafting", accessToken, token);
 
         public Task<IList<string>> GetAccountDungeonIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<string>>(_accountDungeonsResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<string>>("account/dungeons", accessToken, token);
         
         public Task<IList<int>> GetAccountDyeIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>(_accountDyesResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<int>>("account/dyes", accessToken, token);
 
         public Task<IList<AccountFinisher>> GetAccountFinishersAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<AccountFinisher>>(_accountFinishersResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<AccountFinisher>>("account/finishers", accessToken, token);
 
         public Task<IList<int>> GetAccountGliderIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>(_accountGlidersResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<int>>("account/gliders", accessToken, token);
 
         public Task<IList<int>> GetAccountHomeCatIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>(_accountHomeCatsResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<int>>("account/home/cats", accessToken, token);
 
         public Task<IList<string>> GetAccountHomeNodeIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<string>>(_accountHomeNodesResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<string>>("account/home/nodes", accessToken, token);
 
         public Task<IList<SharedInventorySlot>> GetAccountSharedInventorySlotsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<SharedInventorySlot>>(_accountInventoryResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<SharedInventorySlot>>("account/inventory", accessToken, token);
 
         public Task<IList<ConsumedLuck>> GetAccountLuckAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<ConsumedLuck>>(_accountLuckResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<ConsumedLuck>>("account/luck", accessToken, token);
 
         public Task<IList<int>> GetAccountMailCarrierIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>(_accountMailCarriersResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<int>>("account/mailcarriers", accessToken, token);
 
         public Task<IList<string>> GetAccountMapChestIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<string>>(_accountMapChestsResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<string>>("account/mapchests", accessToken, token);
 
         public Task<IList<AccountMastery>> GetAccountMasteriesAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<AccountMastery>>(_accountMasteriesResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<AccountMastery>>("account/masteries", accessToken, token);
 
         public Task<AccountMasteryPointSummary> GetAccountMasteryPointSummaryAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<AccountMasteryPointSummary>(_accountMasteryPointsResource, accessToken, token);
+            => GetAuthenticatedAsync<AccountMasteryPointSummary>("account/mastery/points", accessToken, token);
 
         public Task<IList<MaterialSummary>> GetAccountMaterialSummariesAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<MaterialSummary>>(_accountMaterialsResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<MaterialSummary>>("account/materials", accessToken, token);
 
         public Task<IList<int>> GetAccountMinisIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>(_accountMinisResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<int>>("account/minis", accessToken, token);
 
         public Task<IList<int>> GetAccountMountSkinIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>(_accountMountsSkinsResource, accessToken, token);
+            => GetAuthenticatedAsync<IList<int>>("account/mounts/skins", accessToken, token);
+
+        public Task<IList<string>> GetAccountMountTypesAsync(string accessToken = null, CancellationToken token = default)
+            => GetAuthenticatedAsync<IList<string>>("account/mounts/types", accessToken, token);
     }
 }
