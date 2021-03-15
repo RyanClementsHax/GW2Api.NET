@@ -212,5 +212,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
             CollectionAssert.IsSubsetOf(_accountConfig.MasteryPointSummaryData.Regions.ToList(), result.Totals.Select(x => x.Region).ToList());
             CollectionAssert.IsSubsetOf(_accountConfig.MasteryPointSummaryData.MasteryIds.ToList(), result.Unlocked.ToList());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountMaterialSummariesAsync_ValidApiKey_ReturnsTheAccountsMaterialSummaries(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAccountMaterialSummariesAsync(apiKey, cts?.Token ?? default);
+
+            Assert.IsTrue(result.Any());
+        }
     }
 }
