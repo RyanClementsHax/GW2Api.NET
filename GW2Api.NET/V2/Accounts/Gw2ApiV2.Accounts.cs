@@ -103,5 +103,8 @@ namespace GW2Api.NET.V2
 
         public Task<IList<int>> GetAccountOutfitIdsAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<int>>("account/outfits", accessToken, token);
+
+        public Task<IList<int>> GetAccountPvpHeroIdsAsync(string accessToken = null, CancellationToken token = default)
+            => GetAuthenticatedAsync<IList<int>>("account/pvp/heroes", accessToken, token);
     }
 }
