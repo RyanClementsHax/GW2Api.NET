@@ -26,6 +26,7 @@ namespace GW2Api.NET.V2
         private static readonly string _accountMasteriesResource = "account/masteries";
         private static readonly string _accountMasteryPointsResource = "account/mastery/points";
         private static readonly string _accountMaterialsResource = "account/materials";
+        private static readonly string _accountMinisResource = "account/minis";
 
         public Task<Account> GetAccountAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<Account>(_accountResource, accessToken, token);
@@ -104,5 +105,8 @@ namespace GW2Api.NET.V2
 
         public Task<IList<MaterialSummary>> GetAccountMaterialSummariesAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<MaterialSummary>>(_accountMaterialsResource, accessToken, token);
+
+        public Task<IList<int>> GetAccountMinisIdsAsync(string accessToken = null, CancellationToken token = default)
+            => GetAuthenticatedAsync<IList<int>>(_accountMinisResource, accessToken, token);
     }
 }

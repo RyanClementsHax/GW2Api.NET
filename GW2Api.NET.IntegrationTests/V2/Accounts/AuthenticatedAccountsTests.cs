@@ -223,5 +223,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             Assert.IsTrue(result.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountMinisIdsAsync_ValidApiKey_ReturnsTheAccountsMinisIds(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAccountMinisIdsAsync(apiKey, cts?.Token ?? default);
+
+            CollectionAssert.IsSubsetOf(_accountConfig.MinisIds.ToList(), result.ToList());
+        }
     }
 }

@@ -26,5 +26,6 @@ namespace GW2Api.NET.V2
         Task<IList<AccountMastery>> GetAccountMasteriesAsync(string accessToken = null, CancellationToken token = default);
         Task<AccountMasteryPointSummary> GetAccountMasteryPointSummaryAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<MaterialSummary>> GetAccountMaterialSummariesAsync(string accessToken = null, CancellationToken token = default);
+        Task<IList<int>> GetAccountMinisIdsAsync(string accessToken = null, CancellationToken token = default);
     }
 }
