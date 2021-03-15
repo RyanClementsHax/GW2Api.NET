@@ -2,7 +2,7 @@
 
 namespace GW2Api.NET.IntegrationTests.V2.Accounts
 {
-    public record AccountConfig
+    public record AccountTestConfig
     {
         public string Name { get; set; }
         public IEnumerable<int> AchievementIds { get; set; }
@@ -16,5 +16,6 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         public IEnumerable<int> SharedInventoryItemIds { get; set; }
         public IEnumerable<int> MailCarrierIds { get; set; }
         public IEnumerable<string> MapChestIds { get; set; }
+        public IEnumerable<int> MasteryIds { get; set; }
     }
 }

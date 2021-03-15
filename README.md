@@ -37,7 +37,7 @@ Note that if no Api Keys are given, calling functions that need authentication w
 	```json
 	{
 	  "ApiKey": "<your api key>",
-	  "AccountConfig": {
+	  "AccountTestConfig": {
 		"Name": "<your account name>",
 		"AchievementIds": [ 1, 2, 3 ],
 		"DailyCraftingIds": [ ],

@@ -23,6 +23,7 @@ namespace GW2Api.NET.V2
         private static readonly string _accountLuckResource = "account/luck";
         private static readonly string _accountMailCarriersResource = "account/mailcarriers";
         private static readonly string _accountMapChestsResource = "account/mapchests";
+        private static readonly string _accountMasteriesResource = "account/masteries";
 
         public Task<Account> GetAccountAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<Account>(_accountResource, accessToken, token);
@@ -87,10 +88,13 @@ namespace GW2Api.NET.V2
         public Task<IList<ConsumedLuck>> GetAccountLuckAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<ConsumedLuck>>(_accountLuckResource, accessToken, token);
 
-        public Task<IList<int>> GetAccountMailCarrierIds(string accessToken = null, CancellationToken token = default)
+        public Task<IList<int>> GetAccountMailCarrierIdsAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<int>>(_accountMailCarriersResource, accessToken, token);
 
-        public Task<IList<string>> GetAccountMapChestIds(string accessToken = null, CancellationToken token = default)
+        public Task<IList<string>> GetAccountMapChestIdsAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<string>>(_accountMapChestsResource, accessToken, token);
+
+        public Task<IList<AccountMastery>> GetAccountMasteriesAsync(string accessToken = null, CancellationToken token = default)
+            => GetAuthenticatedAsync<IList<AccountMastery>>(_accountMasteriesResource, accessToken, token);
     }
 }

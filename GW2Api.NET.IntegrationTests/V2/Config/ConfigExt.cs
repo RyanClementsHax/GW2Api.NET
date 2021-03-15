@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace GW2Api.NET.IntegrationTests.V2
+namespace GW2Api.NET.IntegrationTests.V2.Config
 {
     public static class ConfigExt
     {
