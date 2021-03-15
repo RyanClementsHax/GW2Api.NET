@@ -32,5 +32,6 @@ namespace GW2Api.NET.V2
         Task<IList<int>> GetAccountNoveltyIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<int>> GetAccountOutfitIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<int>> GetAccountPvpHeroIdsAsync(string accessToken = null, CancellationToken token = default);
+        Task<IList<string>> GetAccountRaidIdsAsync(string accessToken = null, CancellationToken token = default);
     }
 }

@@ -24,6 +24,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         public IEnumerable<int> NoveltyIds { get; set; }
         public IEnumerable<int> OutfitIds { get; set; }
         public IEnumerable<int> PvpHeroIds { get; set; }
+        public IEnumerable<int> RaidIds { get; set; }
 
 
         public record MasteryPointSummary
