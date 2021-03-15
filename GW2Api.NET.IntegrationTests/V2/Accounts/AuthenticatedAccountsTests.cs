@@ -259,13 +259,24 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetAccountNoveltyIdsAsync_ValidApiKey_ReturnsTheAccountsMountTypes(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAccountNoveltyIdsAsync_ValidApiKey_ReturnsTheAccountsNovelties(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
             var result = await _api.GetAccountNoveltyIdsAsync(apiKey, cts?.Token ?? default);
 
             CollectionAssert.IsSubsetOf(_accountConfig.NoveltyIds.ToList(), result.ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountOutfitIdsAsync_ValidApiKey_ReturnsTheAccountsMountTypes(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAccountOutfitIdsAsync(apiKey, cts?.Token ?? default);
+
+            CollectionAssert.IsSubsetOf(_accountConfig.OutfitIds.ToList(), result.ToList());
         }
     }
 }

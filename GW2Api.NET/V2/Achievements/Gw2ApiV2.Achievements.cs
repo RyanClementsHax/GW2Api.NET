@@ -11,10 +11,6 @@ namespace GW2Api.NET.V2
     public partial class Gw2ApiV2
     {
         private static readonly string _achievementsResource = "achievements";
-        private static readonly string _achievementsDailyResource = "achievements/daily";
-        private static readonly string _achievementsDailyTomorrowResource = "achievements/daily/tomorrow";
-        private static readonly string _achievementsGroupsResource = "achievements/groups";
-        private static readonly string _achievementsCategoriesResource = "achievements/categories";
 
         public Task<IList<int>> GetAllAchievementIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>(_achievementsResource, token);
@@ -47,10 +43,12 @@ namespace GW2Api.NET.V2
         }
 
         public Task<DailyAchievements> GetTodaysDailyAchievementsAsync(CancellationToken token = default)
-            => GetAsync<DailyAchievements>(_achievementsDailyResource, token);
+            => GetAsync<DailyAchievements>("achievements/daily", token);
 
         public Task<DailyAchievements> GetTomorrowsDailyAchievementsAsync(CancellationToken token = default)
-            => GetAsync<DailyAchievements>(_achievementsDailyTomorrowResource, token);
+            => GetAsync<DailyAchievements>("achievements/daily/tomorrow", token);
+
+        private static readonly string _achievementsGroupsResource = "achievements/groups";
 
         public Task<IList<Guid>> GetAllAchievementGroupIdsAsync(CancellationToken token = default)
             => GetAsync<IList<Guid>>(_achievementsGroupsResource, token);
@@ -79,6 +77,8 @@ namespace GW2Api.NET.V2
                 token
             );
         }
+
+        private static readonly string _achievementsCategoriesResource = "achievements/categories";
 
         public Task<IList<int>> GetAllAchievementCategoryIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>(_achievementsCategoriesResource, token);
