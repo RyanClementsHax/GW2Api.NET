@@ -311,5 +311,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             CollectionAssert.IsSubsetOf(_accountConfig.RecipeIds.ToList(), result.ToList());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountSkinIdsAsync_ValidApiKey_ReturnsTheAccountsSkins(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAccountSkinIdsAsync(apiKey, cts?.Token ?? default);
+
+            CollectionAssert.IsSubsetOf(_accountConfig.SkinIds.ToList(), result.ToList());
+        }
     }
 }

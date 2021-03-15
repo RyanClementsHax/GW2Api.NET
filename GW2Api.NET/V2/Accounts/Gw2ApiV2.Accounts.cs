@@ -112,5 +112,8 @@ namespace GW2Api.NET.V2
 
         public Task<IList<int>> GetAccountRecipeIdsAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<int>>("account/recipes", accessToken, token);
+
+        public Task<IList<int>> GetAccountSkinIdsAsync(string accessToken = null, CancellationToken token = default)
+            => GetAuthenticatedAsync<IList<int>>("account/skins", accessToken, token);
     }
 }
