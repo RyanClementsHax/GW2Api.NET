@@ -17,5 +17,13 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         public IEnumerable<int> MailCarrierIds { get; set; }
         public IEnumerable<string> MapChestIds { get; set; }
         public IEnumerable<int> MasteryIds { get; set; }
+        public MasteryPointSummary MasteryPointSummaryData { get; set; }
+
+
+        public record MasteryPointSummary
+        {
+            public IEnumerable<string> Regions { get; set; }
+            public IEnumerable<int> MasteryIds { get; set; }
+        };
     }
 }

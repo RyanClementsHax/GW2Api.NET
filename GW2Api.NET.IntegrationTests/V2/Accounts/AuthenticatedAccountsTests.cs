@@ -192,13 +192,25 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetAccountMasteriesAsync_ValidApiKey_ReturnsTheAccountsMapChests(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAccountMasteriesAsync_ValidApiKey_ReturnsTheAccountsMasteries(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
             var result = await _api.GetAccountMasteriesAsync(apiKey, cts?.Token ?? default);
 
             CollectionAssert.IsSubsetOf(_accountConfig.MasteryIds.ToList(), result.Select(x => x.Id).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountMasteryPointSummaryAsync_ValidApiKey_ReturnsTheAccountsMasteryPointSummary(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAccountMasteryPointSummaryAsync(apiKey, cts?.Token ?? default);
+
+            CollectionAssert.IsSubsetOf(_accountConfig.MasteryPointSummaryData.Regions.ToList(), result.Totals.Select(x => x.Region).ToList());
+            CollectionAssert.IsSubsetOf(_accountConfig.MasteryPointSummaryData.MasteryIds.ToList(), result.Unlocked.ToList());
         }
     }
 }

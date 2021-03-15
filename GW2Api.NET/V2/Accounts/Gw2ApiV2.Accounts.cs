@@ -24,6 +24,7 @@ namespace GW2Api.NET.V2
         private static readonly string _accountMailCarriersResource = "account/mailcarriers";
         private static readonly string _accountMapChestsResource = "account/mapchests";
         private static readonly string _accountMasteriesResource = "account/masteries";
+        private static readonly string _accountMasteryPointsResource = "account/mastery/points";
 
         public Task<Account> GetAccountAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<Account>(_accountResource, accessToken, token);
@@ -96,5 +97,8 @@ namespace GW2Api.NET.V2
 
         public Task<IList<AccountMastery>> GetAccountMasteriesAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<AccountMastery>>(_accountMasteriesResource, accessToken, token);
+
+        public Task<AccountMasteryPointSummary> GetAccountMasteryPointSummaryAsync(string accessToken = null, CancellationToken token = default)
+            => GetAuthenticatedAsync<AccountMasteryPointSummary>(_accountMasteryPointsResource, accessToken, token);
     }
 }
