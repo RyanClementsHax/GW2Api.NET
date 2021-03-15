@@ -19,6 +19,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         public IEnumerable<int> MasteryIds { get; set; }
         public MasteryPointSummary MasteryPointSummaryData { get; set; }
         public IEnumerable<int> MinisIds { get; set; }
+        public IEnumerable<int> MountSkinIds { get; set; }
 
 
         public record MasteryPointSummary
