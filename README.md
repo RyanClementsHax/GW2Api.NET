@@ -61,7 +61,8 @@ Note that if no Api Keys are given, calling functions that need authentication w
         "NoveltyIds": [ ],
         "OutfitIds": [ 27, 52 ],
         "PvpHeroIds": [ 3 ],
-        "RaidIds": [ ]
+        "RaidIds": [ ],
+        "RecipeIds": [ 104, 105, 106 ]
       }
     }
     ```
@@ -77,19 +78,20 @@ Note that if no Api Keys are given, calling functions that need authentication w
         - `HomeCatIds`: A list of ids of some of the cats in the home instance the account has unlocked
         - `HomeNodeIds`: A list of ids of some of the nodes home instance the account has unlocked
         - `SharedInventoryItemIds`: A list of ids of some of the items in the shared inventory slots
-        - `MailCarrierIds`: A list some ids of some of the mail carriers the account has unlocked
-        - `MapChestIds`: A list some ids of some of the map chests the account has unlocked today
-        - `MasteryIds`: A list some ids of some of the masteries account has unlocked
+        - `MailCarrierIds`: A list ids of some of the mail carriers the account has unlocked
+        - `MapChestIds`: A list ids of some of the map chests the account has unlocked today
+        - `MasteryIds`: A list ids of some of the masteries account has unlocked
         - `MasteryPointSummaryData`
           - `Regions`: A list of some regions you have mastery points in
-          - `MasteryIds`: A list of some unlocked mastery points the account has unlocked
-        - `MinisIds`: A list of some mini pet ids MinisIds account has unlocked
-        - `MountSkinIds`: A list of some of the mount skin ids the account has unlocked
-        - `MountTypes`: A list of some of the mount types the account has unlocked
-        - `NoveltyIds`: A list of some of the novelties the account has unlocked
-        - `OutfitIds`: A list of some of the outfits the account has unlocked
-        - `PvpHeroIds`: A list of some of the pvp heros the account has unlocked
+          - `MasteryIds`: A list of ids of some unlocked mastery points the account has unlocked
+        - `MinisIds`: A list of ids of some mini pets the account has unlocked
+        - `MountSkinIds`: A list of ids of some of the mount skins the account has unlocked
+        - `MountTypes`: A list of ids of some of the mount types the account has unlocked
+        - `NoveltyIds`: A list of ids of some of the novelties the account has unlocked
+        - `OutfitIds`: A list of ids of some of the outfits the account has unlocked
+        - `PvpHeroIds`: A list of ids of some of the pvp heros the account has unlocked
         - `RaidIds`: A list of some of the raids the account has completed since the last weekly raid reset
+        - `RecipeIds`: A list of ids of some of the recipes the account has unlocked
     - You can acquire the data to populate this json by manually hitting the endpoints with the api key
     - Note that in the authenticated tests, we use partial matching of data to avoid brittle tests because account data is changing if the acccount is being used or played on
         - For example, we dont want to assert that the ids we get back from fetching all account achievement ids is exactly equal to some fixed set of numbers because that account could complete another achievement later down the road thus breaking the assertion even though the function works as it should
