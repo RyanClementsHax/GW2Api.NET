@@ -63,7 +63,8 @@ Note that if no Api Keys are given, calling functions that need authentication w
         "PvpHeroIds": [ 3 ],
         "RaidIds": [],
         "RecipeIds": [ 104, 105, 106 ],
-        "SkinIds": [ 1, 2, 3 ]
+        "SkinIds": [ 1, 2, 3 ],
+        "TitleIds": [ 11, 12, 13 ]
       }
     }
     ```
@@ -94,6 +95,7 @@ Note that if no Api Keys are given, calling functions that need authentication w
         - `RaidIds`: A list of some of the raids the account has completed since the last weekly raid reset
         - `RecipeIds`: A list of ids of some of the recipes the account has unlocked
         - `SkinIds`: A list of ids of some of the skins the account has unlocked
+        - `TitleIds`: A list of ids of some of the titles the account has unlocked
     - You can acquire the data to populate this json by manually hitting the endpoints with the api key
     - Note that in the authenticated tests, we use partial matching of data to avoid brittle tests because account data is changing if the acccount is being used or played on
         - For example, we dont want to assert that the ids we get back from fetching all account achievement ids is exactly equal to some fixed set of numbers because that account could complete another achievement later down the road thus breaking the assertion even though the function works as it should
