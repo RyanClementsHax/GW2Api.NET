@@ -97,5 +97,8 @@ namespace GW2Api.NET.V2
 
         public Task<IList<string>> GetAccountMountTypesAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<string>>("account/mounts/types", accessToken, token);
+
+        public Task<IList<int>> GetAccountNoveltyIdsAsync(string accessToken = null, CancellationToken token = default)
+            => GetAuthenticatedAsync<IList<int>>("account/novelties", accessToken, token);
     }
 }

@@ -57,7 +57,8 @@ Note that if no Api Keys are given, calling functions that need authentication w
 		},
 		"MinisIds": [ 76, 118, 129 ],
 		"MountSkinIds": [ 1 ],
-		"MountTypes":  [ "raptor" ]
+		"MountTypes":  [ "raptor" ],
+		"NoveltyIds": [ ]
 	  }
 	}
 	```
@@ -82,6 +83,7 @@ Note that if no Api Keys are given, calling functions that need authentication w
         - `MinisIds`: A list of some mini pet ids MinisIds account has unlocked
         - `MountSkinIds`: A list of some of the mount skin ids the account has unlocked
         - `MountTypes`: A list of some of the mount types the account has unlocked
+        - `NoveltyIds`: A list of some of the novelties the account has unlocked
     - You can acquire the data to populate this json by manually hitting the endpoints with the api key
 	- Note that in the authenticated tests, we use partial matching of data to avoid brittle tests because account data is changing if the acccount is being used or played on
 		- For example, we dont want to assert that the ids we get back from fetching all account achievement ids is exactly equal to some fixed set of numbers because that account could complete another achievement later down the road thus breaking the assertion even though the function works as it should
