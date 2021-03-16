@@ -15,7 +15,7 @@ namespace GW2Api.NET.V2
         Task<IList<string>> GetAccountDailyCraftingIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<string>> GetAccountDungeonIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<int>> GetAccountDyeIdsAsync(string accessToken = null, CancellationToken token = default);
-        Task<IList<FinisherSummary>> GetAccountFinishersAsync(string accessToken = null, CancellationToken token = default);
+        Task<IList<FinisherSummary>> GetAccountFinisherSummariesAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<int>> GetAccountGliderIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<int>> GetAccountHomeCatIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<string>> GetAccountHomeNodeIdsAsync(string accessToken = null, CancellationToken token = default);
@@ -23,12 +23,12 @@ namespace GW2Api.NET.V2
         Task<IList<ConsumedLuck>> GetAccountLuckAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<int>> GetAccountMailCarrierIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<string>> GetAccountMapChestIdsAsync(string accessToken = null, CancellationToken token = default);
-        Task<IList<MasterySummary>> GetAccountMasteriesAsync(string accessToken = null, CancellationToken token = default);
+        Task<IList<MasterySummary>> GetAccountMasterySummariesAsync(string accessToken = null, CancellationToken token = default);
         Task<MasteryPointSummary> GetAccountMasteryPointSummaryAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<MaterialSummary>> GetAccountMaterialSummariesAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<int>> GetAccountMinisIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<int>> GetAccountMountSkinIdsAsync(string accessToken = null, CancellationToken token = default);
-        Task<IList<string>> GetAccountMountTypesAsync(string accessToken = null, CancellationToken token = default);
+        Task<IList<string>> GetAccountMountTypeIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<int>> GetAccountNoveltyIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<int>> GetAccountOutfitIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<int>> GetAccountPvpHeroIdsAsync(string accessToken = null, CancellationToken token = default);
@@ -37,5 +37,6 @@ namespace GW2Api.NET.V2
         Task<IList<int>> GetAccountSkinIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<int>> GetAccountTitleIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<IList<CurrencySummary>> GetAccountWalletAsync(string accessToken = null, CancellationToken token = default);
+        Task<IList<string>> GetAccountWorldBossIdsAsync(string accessToken = null, CancellationToken token = default);
     }
 }

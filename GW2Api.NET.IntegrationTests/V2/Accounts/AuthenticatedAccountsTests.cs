@@ -104,11 +104,11 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetAccountFinishersAsync_ValidApiKey_ReturnsTheAccountsFinishers(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAccountFinisherSummariesAsync_ValidApiKey_ReturnsTheAccountsFinishers(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountFinishersAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountFinisherSummariesAsync(apiKey, cts?.Token ?? default);
 
             CollectionAssert.IsSubsetOf(_accountConfig.FinisherIds.ToList(), result.Select(x => x.Id).ToList());
         }
@@ -192,11 +192,11 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetAccountMasteriesAsync_ValidApiKey_ReturnsTheAccountsMasteries(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAccountMasterySummariesAsync_ValidApiKey_ReturnsTheAccountsMasteries(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountMasteriesAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountMasterySummariesAsync(apiKey, cts?.Token ?? default);
 
             CollectionAssert.IsSubsetOf(_accountConfig.MasteryIds.ToList(), result.Select(x => x.Id).ToList());
         }
@@ -248,11 +248,11 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetAccountMountTypesAsync_ValidApiKey_ReturnsTheAccountsMountTypes(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAccountMountTypeIdsAsync_ValidApiKey_ReturnsTheAccountsMountTypes(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountMountTypesAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountMountTypeIdsAsync(apiKey, cts?.Token ?? default);
 
             CollectionAssert.IsSubsetOf(_accountConfig.MountTypes.ToList(), result.ToList());
         }
@@ -343,6 +343,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
             var result = await _api.GetAccountWalletAsync(apiKey, cts?.Token ?? default);
 
             CollectionAssert.IsSubsetOf(_accountConfig.CurrencyIds.ToList(), result.Select(x => x.Id).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountWorldBossIdsAsync_ValidApiKey_ReturnsTheAccountsWorldBosses(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAccountWorldBossIdsAsync(apiKey, cts?.Token ?? default);
+
+            CollectionAssert.IsSubsetOf(_accountConfig.WorldBossIds.ToList(), result.ToList());
         }
     }
 }

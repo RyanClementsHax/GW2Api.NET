@@ -56,7 +56,7 @@ namespace GW2Api.NET.V2
         public Task<IList<int>> GetAccountDyeIdsAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<int>>("account/dyes", accessToken, token);
 
-        public Task<IList<FinisherSummary>> GetAccountFinishersAsync(string accessToken = null, CancellationToken token = default)
+        public Task<IList<FinisherSummary>> GetAccountFinisherSummariesAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<FinisherSummary>>("account/finishers", accessToken, token);
 
         public Task<IList<int>> GetAccountGliderIdsAsync(string accessToken = null, CancellationToken token = default)
@@ -80,7 +80,7 @@ namespace GW2Api.NET.V2
         public Task<IList<string>> GetAccountMapChestIdsAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<string>>("account/mapchests", accessToken, token);
 
-        public Task<IList<MasterySummary>> GetAccountMasteriesAsync(string accessToken = null, CancellationToken token = default)
+        public Task<IList<MasterySummary>> GetAccountMasterySummariesAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<MasterySummary>>("account/masteries", accessToken, token);
 
         public Task<MasteryPointSummary> GetAccountMasteryPointSummaryAsync(string accessToken = null, CancellationToken token = default)
@@ -95,7 +95,7 @@ namespace GW2Api.NET.V2
         public Task<IList<int>> GetAccountMountSkinIdsAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<int>>("account/mounts/skins", accessToken, token);
 
-        public Task<IList<string>> GetAccountMountTypesAsync(string accessToken = null, CancellationToken token = default)
+        public Task<IList<string>> GetAccountMountTypeIdsAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<string>>("account/mounts/types", accessToken, token);
 
         public Task<IList<int>> GetAccountNoveltyIdsAsync(string accessToken = null, CancellationToken token = default)
@@ -121,5 +121,8 @@ namespace GW2Api.NET.V2
 
         public Task<IList<CurrencySummary>> GetAccountWalletAsync(string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<CurrencySummary>>("account/wallet", accessToken, token);
+        
+        public Task<IList<string>> GetAccountWorldBossIdsAsync(string accessToken = null, CancellationToken token = default)
+            => GetAuthenticatedAsync<IList<string>>("account/worldbosses", accessToken, token);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GW2Api.NET.V2.Accounts.Dto;
+using System.Collections.Generic;
 
 namespace GW2Api.NET.IntegrationTests.V2.Accounts
 {
@@ -29,11 +30,12 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         public IEnumerable<int> SkinIds { get; set; }
         public IEnumerable<int> TitleIds { get; set; }
         public IEnumerable<int> CurrencyIds { get; set; }
+        public IEnumerable<string> WorldBossIds { get; set; }
 
 
         public record MasteryPointSummary
         {
-            public IEnumerable<string> Regions { get; set; }
+            public IEnumerable<Region> Regions { get; set; }
             public IEnumerable<int> MasteryIds { get; set; }
         };
     }
