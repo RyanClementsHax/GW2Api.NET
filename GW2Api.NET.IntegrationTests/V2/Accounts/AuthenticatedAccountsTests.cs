@@ -333,5 +333,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             CollectionAssert.IsSubsetOf(_accountConfig.TitleIds.ToList(), result.ToList());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAccountWalletAsync_ValidApiKey_ReturnsTheAccountsWallet(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAccountWalletAsync(apiKey, cts?.Token ?? default);
+
+            CollectionAssert.IsSubsetOf(_accountConfig.CurrencyIds.ToList(), result.Select(x => x.Id).ToList());
+        }
     }
 }
