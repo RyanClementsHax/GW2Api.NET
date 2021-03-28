@@ -33,7 +33,7 @@ Note that if no Api Keys are given, calling functions that need authentication w
 
 ### Running authenticated integration tests
 1. Create an [Api Key](https://wiki.guildwars2.com/wiki/API:API_key) with Arena Net and give it all permissions
-2. Create a `v2.config.json` in the `GW2Api.NET.IntegrationTests` folder and fill it with data from an account for the tests to assert on
+2. Create a `v2.config.json` like the one below in the `GW2Api.NET.IntegrationTests` folder and fill it with data from an account for the tests to assert on
     ```json
     {
       "ApiKey": "<the api key>",
@@ -67,11 +67,25 @@ Note that if no Api Keys are given, calling functions that need authentication w
         "TitleIds": [ 11, 12, 13 ],
         "CurrencyIds": [ 1, 2, 3 ],
         "WorldBossIds": []
+      },
+      "CharactersTestConfig": {
+        "CharacterNames": [
+          "Creed The Noob",
+          "Creeden",
+          "Diocletio",
+          "Creednub",
+          "Dynic",
+          "Alegren",
+          "Ishmakale",
+          "Gavlock",
+          "Creed The Engie",
+          "Sage Of Cherry"
+        ]
       }
     }
     ```
     - `ApiKey`: The Api Key to use in the tests (should have all permissions)
-    - `AccountConfig`
+    - `AccountTestConfig`
         - `Name`: The account's name
         - `AchievementIds`: A list of ids of some of the achievements the account has
         - `DailyCraftingIds`: A list of ids of some of the time gated crafting ids the account has completed today
@@ -100,6 +114,8 @@ Note that if no Api Keys are given, calling functions that need authentication w
         - `TitleIds`: A list of ids of some of the titles the account has unlocked
         - `CurrencyIds`: A list of ids of some of the currencies the account has
         - `WorldBossIds`: A list of ids of some of the world bosses killed by the account today
+    - `CharactersTestConfig`
+      - `CharacterNames`: A list of names of some of the characters the account has
     - You can acquire the data to populate this json by manually hitting the endpoints with the api key
     - Note that in the authenticated tests, we use partial matching of data to avoid brittle tests because account data is changing if the acccount is being used or played on
         - For example, we dont want to assert that the ids we get back from fetching all account achievement ids is exactly equal to some fixed set of numbers because that account could complete another achievement later down the road thus breaking the assertion even though the function works as it should
