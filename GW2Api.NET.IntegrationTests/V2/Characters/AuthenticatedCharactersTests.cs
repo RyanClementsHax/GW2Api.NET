@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,6 +34,29 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             var result = await _api.GetCharacterAsync(id, apiKey, cts?.Token ?? default);
 
             Assert.AreEqual(id, result.Name);
+        }
+
+        [DataTestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetCharactersAsync_NullIds_ThrowsArgumentNullException(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            List<string> ids = null;
+            using var cts = ctsFactory();
+
+            await _api.GetCharactersAsync(ids, apiKey, cts?.Token ?? default);
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetCharactersAsync_ValidIds_ReturnsTheCharacters(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            var ids = _charactersConfig.Ids;
+            using var cts = ctsFactory();
+
+            var result = await _api.GetCharactersAsync(ids, apiKey, cts?.Token ?? default);
+
+            CollectionAssert.AreEquivalent(ids.ToList(), result.Select(x => x.Name).ToList());
         }
     }
 }

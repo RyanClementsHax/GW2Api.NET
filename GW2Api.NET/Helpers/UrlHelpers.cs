@@ -26,6 +26,9 @@ namespace GW2Api.NET.Helpers
                 : url;
         }
 
+        public static string ToUrlParam(this IEnumerable<string> source)
+            => string.Join(",", source);
+
         public static string ToUrlParam(this IEnumerable<int> source)
             => string.Join(",", source.Select(x => x.ToString()));
 

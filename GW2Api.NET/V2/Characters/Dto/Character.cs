@@ -10,7 +10,7 @@ namespace GW2Api.NET.V2.Characters.Dto
         IList<string> Flags,
         Profession Profession,
         int Level,
-        Guid Guild,
+        Guid? Guild,
         int Age,
         DateTimeOffset Created,
         int Deaths,
