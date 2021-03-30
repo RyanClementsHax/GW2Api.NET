@@ -30,5 +30,16 @@ namespace GW2Api.NET.V2
                 token
             );
         }
+
+        public Task<IList<Character>> GetAllCharactersAsync(string accessToken = null, CancellationToken token = default)
+            => GetAuthenticatedAsync<IList<Character>>(
+                "characters",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                },
+                accessToken,
+                token
+            );
     }
 }

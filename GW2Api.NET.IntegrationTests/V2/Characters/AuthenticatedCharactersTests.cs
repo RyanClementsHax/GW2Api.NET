@@ -58,5 +58,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
 
             CollectionAssert.AreEquivalent(ids.ToList(), result.Select(x => x.Name).ToList());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetAllCharactersAsync_ValidIds_ReturnsAllCharacters(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllCharactersAsync(apiKey, cts?.Token ?? default);
+
+            Assert.AreEqual(_charactersConfig.TotalCharacters, result.Count);
+        }
     }
 }
