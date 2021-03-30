@@ -28,8 +28,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
         public async Task GetCharacterAsync_ValidApiKey_ReturnsTheCharacter(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
-            var id = _charactersConfig.Ids.FirstOrDefault();
-            if (id is null) Assert.Fail("You must configure at least one character id in v2.config.json to run this test");
+            var id = _charactersConfig.Id;
 
             var result = await _api.GetCharacterAsync(id, apiKey, cts?.Token ?? default);
 
@@ -68,6 +67,18 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             var result = await _api.GetAllCharactersAsync(apiKey, cts?.Token ?? default);
 
             Assert.AreEqual(_charactersConfig.TotalCharacters, result.Count);
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetCharacterBackstoryAsync_ValidId_ReturnsCharacterBackstory(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var id = _charactersConfig.Id;
+
+            var result = await _api.GetCharacterBackstoryAsync(id, apiKey, cts?.Token ?? default);
+
+            Assert.IsTrue(result.Any());
         }
     }
 }

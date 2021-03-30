@@ -41,5 +41,8 @@ namespace GW2Api.NET.V2
                 accessToken,
                 token
             );
+
+        public async Task<IList<string>> GetCharacterBackstoryAsync(string id, string accessToken = null, CancellationToken token = default)
+            => (await GetAuthenticatedAsync<CharacterBackstoryResponse>($"characters/{id}", accessToken, token)).Backstory;
     }
 }
