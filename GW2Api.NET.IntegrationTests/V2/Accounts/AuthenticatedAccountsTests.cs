@@ -38,10 +38,8 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
         public async Task GetAccountAchievementAsync_ValidId_ReturnsThatAchievement(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
-            var id = _accountConfig.AchievementIds.FirstOrDefault();
-            if (id == 0)
-                Assert.Fail("You must configure at least achievement id in v2.config.json to run this test");
             using var cts = ctsFactory();
+            var id = _accountConfig.AchievementId;
 
             var result = await _api.GetAccountAchievementAsync(id, apiKey, cts?.Token ?? default);
 
