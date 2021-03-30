@@ -19,7 +19,20 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
 
             var result = await _api.GetCharacterIdsAsync(apiKey, cts?.Token ?? default);
 
-            CollectionAssert.AreEquivalent(_charactersConfig.CharacterIds.ToList(), result.ToList());
+            CollectionAssert.AreEquivalent(_charactersConfig.Ids.ToList(), result.ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetCharacterAsync_ValidApiKey_ReturnsTheCharacter(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var id = _charactersConfig.Ids.FirstOrDefault();
+            if (id is null) Assert.Fail("You must configure at least one character id in v2.config.json to run this test");
+
+            var result = await _api.GetCharacterAsync(id, apiKey, cts?.Token ?? default);
+
+            Assert.AreEqual(id, result.Name);
         }
     }
 }
