@@ -47,5 +47,8 @@ namespace GW2Api.NET.V2
 
         public Task<CharacterCore> GetCharacterCoreAsync(string id, string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<CharacterCore>($"characters/{id}/core", accessToken, token);
+
+        public async Task<IList<CraftingDiscipline>> GetCharacterCraftingAsync(string id, string accessToken = null, CancellationToken token = default)
+            => (await GetAuthenticatedAsync<CharacterCraftingResponse>($"characters/{id}/crafting", accessToken, token)).Crafting;
     }
 }

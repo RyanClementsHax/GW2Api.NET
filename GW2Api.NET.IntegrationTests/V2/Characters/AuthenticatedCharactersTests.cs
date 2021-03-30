@@ -92,5 +92,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
 
             Assert.AreEqual(id, result.Name);
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetCharacterCraftingAsync_ValidId_ReturnsCharacterCrafting(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var id = _charactersConfig.Id;
+
+            var result = await _api.GetCharacterCraftingAsync(id, apiKey, cts?.Token ?? default);
+
+            Assert.IsTrue(result.Any());
+        }
     }
 }
