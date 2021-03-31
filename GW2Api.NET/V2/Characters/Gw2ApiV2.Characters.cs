@@ -43,21 +43,24 @@ namespace GW2Api.NET.V2
             );
 
         public async Task<IList<string>> GetCharacterBackstoryAsync(string id, string accessToken = null, CancellationToken token = default)
-            => (await GetAuthenticatedAsync<CharacterBackstoryResponse>($"characters/{id}/backstory", accessToken, token)).Backstory;
+            => (await GetAuthenticatedAsync<GetCharacterBackstoryResponse>($"characters/{id}/backstory", accessToken, token)).Backstory;
 
         public Task<CharacterCore> GetCharacterCoreAsync(string id, string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<CharacterCore>($"characters/{id}/core", accessToken, token);
 
         public async Task<IList<CraftingDiscipline>> GetCharacterCraftingAsync(string id, string accessToken = null, CancellationToken token = default)
-            => (await GetAuthenticatedAsync<CharacterCraftingResponse>($"characters/{id}/crafting", accessToken, token)).Crafting;
+            => (await GetAuthenticatedAsync<GetCharacterCraftingResponse>($"characters/{id}/crafting", accessToken, token)).Crafting;
 
         public async Task<IList<Equipment>> GetCharacterEquipmentAsync(string id, string accessToken = null, CancellationToken token = default)
-            => (await GetAuthenticatedAsync<CharacterEqipmentResponse>($"characters/{id}/equipment", accessToken, token)).Equipment;
+            => (await GetAuthenticatedAsync<GetCharacterEquipmentResponse>($"characters/{id}/equipment", accessToken, token)).Equipment;
 
         public Task<IList<string>> GetCharacterHeroPointsAsync(string id, string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<IList<string>>($"characters/{id}/heropoints", accessToken, token);
 
         public async Task<IList<Bag>> GetCharacterInventoryAsync(string id, string accessToken = null, CancellationToken token = default)
-            => (await GetAuthenticatedAsync<CharacterInventoryResponse>($"characters/{id}/inventory", accessToken, token)).Bags;
+            => (await GetAuthenticatedAsync<GetCharacterInventoryResponse>($"characters/{id}/inventory", accessToken, token)).Bags;
+
+        public async Task<IList<int>> GetCharacterRecipesAsync(string id, string accessToken = null, CancellationToken token = default)
+            => (await GetAuthenticatedAsync<GetCharacterRecipesResponse>($"characters/{id}/recipes", accessToken, token)).Recipes;
     }
 }
