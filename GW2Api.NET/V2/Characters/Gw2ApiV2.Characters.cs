@@ -65,5 +65,8 @@ namespace GW2Api.NET.V2
 
         public Task<Sab> GetCharacterSabAsync(string id, string accessToken = null, CancellationToken token = default)
             => GetAuthenticatedAsync<Sab>($"characters/{id}/sab", accessToken, token);
+
+        public async Task<Skills> GetCharacterSkillsAsync(string id, string accessToken = null, CancellationToken token = default)
+            => (await GetAuthenticatedAsync<GetCharacterSkillsResponse>($"characters/{id}/skills", accessToken, token)).Skills;
     }
 }

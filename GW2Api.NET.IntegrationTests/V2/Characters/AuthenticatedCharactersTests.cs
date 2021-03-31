@@ -166,5 +166,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             CollectionAssert.IsSubsetOf(_charactersConfig.SabConfig.UnlockIds.ToList(), result.Unlocks.Select(x => x.Id).ToList());
             CollectionAssert.IsSubsetOf(_charactersConfig.SabConfig.SongIds.ToList(), result.Songs.Select(x => x.Id).ToList());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetCharacterSkillsAsync_ValidId_ReturnsCharacterSkills(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var id = _charactersConfig.Id;
+
+            var result = await _api.GetCharacterSkillsAsync(id, apiKey, cts?.Token ?? default);
+
+            Assert.IsNotNull(result);
+        }
     }
 }
