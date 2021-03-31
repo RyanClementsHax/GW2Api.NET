@@ -21,5 +21,6 @@ namespace GW2Api.NET.V2
         Task<Sab> GetCharacterSabAsync(string id, string accessToken = null, CancellationToken token = default);
         Task<Skills> GetCharacterSkillsAsync(string id, string accessToken = null, CancellationToken token = default);
         Task<Specializations> GetCharacterSpecializationsAsync(string id, string accessToken = null, CancellationToken token = default);
+        Task<IList<Training>> GetCharacterTrainingAsync(string id, string accessToken = null, CancellationToken token = default);
     }
 }
