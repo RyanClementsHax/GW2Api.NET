@@ -68,5 +68,8 @@ namespace GW2Api.NET.V2
 
         public async Task<Skills> GetCharacterSkillsAsync(string id, string accessToken = null, CancellationToken token = default)
             => (await GetAuthenticatedAsync<GetCharacterSkillsResponse>($"characters/{id}/skills", accessToken, token)).Skills;
+
+        public async Task<Specializations> GetCharacterSpecializationsAsync(string id, string accessToken = null, CancellationToken token = default)
+            => (await GetAuthenticatedAsync<GetCharacterSpecializationsResponse>($"characters/{id}/specializations", accessToken, token)).Specializations;
     }
 }
