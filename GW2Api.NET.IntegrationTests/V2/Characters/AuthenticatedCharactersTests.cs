@@ -20,7 +20,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
 
             var result = await _api.GetCharacterIdsAsync(apiKey, cts?.Token ?? default);
 
-            CollectionAssert.AreEquivalent(_charactersConfig.Ids.ToList(), result.ToList());
+            CollectionAssert.IsSubsetOf(_charactersConfig.Ids.ToList(), result.ToList());
         }
 
         [DataTestMethod]
@@ -55,7 +55,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
 
             var result = await _api.GetCharactersAsync(ids, apiKey, cts?.Token ?? default);
 
-            CollectionAssert.AreEquivalent(ids.ToList(), result.Select(x => x.Name).ToList());
+            CollectionAssert.IsSubsetOf(ids.ToList(), result.Select(x => x.Name).ToList());
         }
 
         [DataTestMethod]
@@ -151,6 +151,20 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             var result = await _api.GetCharacterRecipesAsync(id, apiKey, cts?.Token ?? default);
 
             Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetCharacterSabAsync_ValidId_ReturnsCharacterSab(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var id = _charactersConfig.SabConfig.Id;
+
+            var result = await _api.GetCharacterSabAsync(id, apiKey, cts?.Token ?? default);
+
+            CollectionAssert.IsSubsetOf(_charactersConfig.SabConfig.ZoneIds.ToList(), result.Zones.Select(x => x.Id).ToList());
+            CollectionAssert.IsSubsetOf(_charactersConfig.SabConfig.UnlockIds.ToList(), result.Unlocks.Select(x => x.Id).ToList());
+            CollectionAssert.IsSubsetOf(_charactersConfig.SabConfig.SongIds.ToList(), result.Songs.Select(x => x.Id).ToList());
         }
     }
 }

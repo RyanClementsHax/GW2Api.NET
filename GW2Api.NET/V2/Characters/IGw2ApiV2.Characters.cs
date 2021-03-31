@@ -18,5 +18,6 @@ namespace GW2Api.NET.V2
         Task<IList<string>> GetCharacterHeroPointsAsync(string id, string accessToken = null, CancellationToken token = default);
         Task<IList<Bag>> GetCharacterInventoryAsync(string id, string accessToken = null, CancellationToken token = default);
         Task<IList<int>> GetCharacterRecipesAsync(string id, string accessToken = null, CancellationToken token = default);
+        Task<Sab> GetCharacterSabAsync(string id, string accessToken = null, CancellationToken token = default);
     }
 }

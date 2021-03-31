@@ -18,5 +18,14 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             }
         }
         public int TotalCharacters { get; set; }
+        public Sab SabConfig { get; set; }
+
+        public class Sab
+        {
+            public string Id { get; set; }
+            public IEnumerable<int> ZoneIds { get; set; }
+            public IEnumerable<int> UnlockIds { get; set; }
+            public IEnumerable<int> SongIds { get; set; }
+        }
     }
 }

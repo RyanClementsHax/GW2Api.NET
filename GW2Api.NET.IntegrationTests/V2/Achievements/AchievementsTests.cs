@@ -75,7 +75,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
             var result = await _api.GetAchievementsAsync(ids, lang, cts?.Token ?? default);
 
-            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+            CollectionAssert.IsSubsetOf(names.ToList(), result.Select(x => x.Name).ToList());
         }
 
         [DataTestMethod]
@@ -168,7 +168,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
             var result = await _api.GetAchievementGroupsAsync(ids, lang, cts?.Token ?? default);
 
-            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+            CollectionAssert.IsSubsetOf(names.ToList(), result.Select(x => x.Name).ToList());
         }
 
         [DataTestMethod]
@@ -227,7 +227,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
             var result = await _api.GetAchievementCategoriesAsync(ids, lang, cts?.Token ?? default);
 
-            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+            CollectionAssert.IsSubsetOf(names.ToList(), result.Select(x => x.Name).ToList());
         }
     }
 }

@@ -66,7 +66,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountAchievementsAsync(ids, apiKey, cts?.Token ?? default);
 
-            CollectionAssert.AreEquivalent(ids.ToList(), result.Select(x => x.Id).ToList());
+            CollectionAssert.IsSubsetOf(ids.ToList(), result.Select(x => x.Id).ToList());
         }
 
         [DataTestMethod]

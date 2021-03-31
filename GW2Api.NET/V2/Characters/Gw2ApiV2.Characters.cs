@@ -62,5 +62,8 @@ namespace GW2Api.NET.V2
 
         public async Task<IList<int>> GetCharacterRecipesAsync(string id, string accessToken = null, CancellationToken token = default)
             => (await GetAuthenticatedAsync<GetCharacterRecipesResponse>($"characters/{id}/recipes", accessToken, token)).Recipes;
+
+        public Task<Sab> GetCharacterSabAsync(string id, string accessToken = null, CancellationToken token = default)
+            => GetAuthenticatedAsync<Sab>($"characters/{id}/sab", accessToken, token);
     }
 }

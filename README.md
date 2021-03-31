@@ -80,7 +80,14 @@ Note that if no Api Keys are given, calling functions that need authentication w
           "Gavlock",
           "Creed The Engie",
           "Sage Of Cherry"
-        ]
+        ],
+        "TotalCharacters": 10,
+        "SabConfig": {
+          "Id": "Diocletio",
+          "ZoneIds": [ 1, 2, 3, 4, 13, 14, 15, 16 ],
+          "UnlockIds": [ 3, 6, 9, 12, 18, 31 ],
+          "SongIds": []
+        }
       }
     }
     ```
@@ -117,6 +124,11 @@ Note that if no Api Keys are given, calling functions that need authentication w
     - `CharactersTestConfig`
       - `Ids`: A list of names of some of the characters the account has
       - `TotalCharacters`: The total number of characters the account has
+      - `SabConfig`
+        - `Id`: A character of this account that you want to assert against for testing the SAB endpoint
+        - `ZoneIds`: A list of ids of some of the SAB zones that character has cleared
+        - `UnlockIds`: A list of ids of some SAB unlocks that the character has completed
+        - `SongIds`: A list of ids of some of the SAB songs that the character has unlocked
     - You can acquire the data to populate this json by manually hitting the endpoints with the api key
     - Note that in the authenticated tests, we use partial matching of data to avoid brittle tests because account data is changing if the acccount is being used or played on
         - For example, we dont want to assert that the ids we get back from fetching all account achievement ids is exactly equal to some fixed set of numbers because that account could complete another achievement later down the road thus breaking the assertion even though the function works as it should
