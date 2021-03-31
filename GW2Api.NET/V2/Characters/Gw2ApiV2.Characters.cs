@@ -53,5 +53,8 @@ namespace GW2Api.NET.V2
 
         public async Task<IList<Equipment>> GetCharacterEquipmentAsync(string id, string accessToken = null, CancellationToken token = default)
             => (await GetAuthenticatedAsync<CharacterEqipmentResponse>($"characters/{id}/equipment", accessToken, token)).Equipment;
+
+        public Task<IList<string>> GetCharacterHeroPointsAsync(string id, string accessToken = null, CancellationToken token = default)
+            => GetAuthenticatedAsync<IList<string>>($"characters/{id}/heropoints", accessToken, token);
     }
 }
