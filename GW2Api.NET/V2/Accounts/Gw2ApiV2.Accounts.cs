@@ -12,14 +12,12 @@ namespace GW2Api.NET.V2
         public Task<Account> GetAccountAsync(string accessToken = null, CancellationToken token = default)
             => GetWithAuthAsync<Account>("account", accessToken, token);
 
-        private static readonly string _accountAchievementsResource = "account/achievements";
-
         public Task<IList<AccountAchievement>> GetAllAccountAchievementsAsync(string accessToken = null, CancellationToken token = default)
-            => GetWithAuthAsync<IList<AccountAchievement>>(_accountAchievementsResource, accessToken, token);
+            => GetWithAuthAsync<IList<AccountAchievement>>("account/achievements", accessToken, token);
 
         public Task<AccountAchievement> GetAccountAchievementAsync(int id, string accessToken = null, CancellationToken token = default)
             => GetWithAuthAsync<AccountAchievement>(
-                _accountAchievementsResource,
+                "account/achievements",
                 new Dictionary<string, string>
                 {
                     { "id", id.ToString() }
@@ -34,7 +32,7 @@ namespace GW2Api.NET.V2
                 throw new ArgumentNullException(nameof(ids));
 
             return GetWithAuthAsync<IList<AccountAchievement>>(
-                _accountAchievementsResource,
+                "account/achievements",
                 new Dictionary<string, string>
                 {
                     { "ids", ids.ToUrlParam() },

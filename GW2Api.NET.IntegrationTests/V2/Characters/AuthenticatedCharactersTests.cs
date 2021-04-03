@@ -40,10 +40,9 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
         public async Task GetCharactersAsync_NullIds_ThrowsArgumentNullException(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
-            List<string> ids = null;
             using var cts = ctsFactory();
 
-            await _api.GetCharactersAsync(ids, apiKey, cts?.Token ?? default);
+            await _api.GetCharactersAsync(ids: null, apiKey, cts?.Token ?? default);
         }
 
         [DataTestMethod]
@@ -55,7 +54,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
 
             var result = await _api.GetCharactersAsync(ids, apiKey, cts?.Token ?? default);
 
-            CollectionAssert.IsSubsetOf(ids.ToList(), result.Select(x => x.Name).ToList());
+            CollectionAssert.AreEquivalent(ids.ToList(), result.Select(x => x.Name).ToList());
         }
 
         [DataTestMethod]

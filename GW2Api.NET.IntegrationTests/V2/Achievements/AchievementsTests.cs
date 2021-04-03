@@ -52,8 +52,13 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public async Task GetAchievementsAsync_NullIds_ThrowsArgumentNullException()
-            => await _api.GetAchievementsAsync(ids: null);
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAchievementsAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetAchievementsAsync(ids: null, token: cts?.Token ?? default);
+        }
 
         public static IEnumerable<object[]> GetAchievementsAsync_TestData()
             => new List<object[]>
@@ -75,7 +80,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
             var result = await _api.GetAchievementsAsync(ids, lang, cts?.Token ?? default);
 
-            CollectionAssert.IsSubsetOf(names.ToList(), result.Select(x => x.Name).ToList());
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
         }
 
         [DataTestMethod]
@@ -139,8 +144,13 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public async Task GetAchievementGroupsAsync_NullIds_ThrowsArgumentNullException()
-            => await _api.GetAchievementGroupsAsync(ids: null);
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAchievementGroupsAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetAchievementGroupsAsync(ids: null, token: cts?.Token ?? default);
+        }
 
         public static IEnumerable<object[]> GetAchievementGroupsAsync_TestData()
             => new List<object[]>
@@ -168,7 +178,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
             var result = await _api.GetAchievementGroupsAsync(ids, lang, cts?.Token ?? default);
 
-            CollectionAssert.IsSubsetOf(names.ToList(), result.Select(x => x.Name).ToList());
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
         }
 
         [DataTestMethod]
@@ -204,8 +214,13 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public async Task GetAchievementCategoriesAsync_NullIds_ThrowsArgumentNullException()
-            => await _api.GetAchievementCategoriesAsync(ids: null);
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAchievementCategoriesAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetAchievementCategoriesAsync(ids: null, token: cts?.Token ?? default);
+        }
 
         public static IEnumerable<object[]> GetAchievementCategoriesAsync_TestData()
             => new List<object[]>
@@ -227,7 +242,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
             var result = await _api.GetAchievementCategoriesAsync(ids, lang, cts?.Token ?? default);
 
-            CollectionAssert.IsSubsetOf(names.ToList(), result.Select(x => x.Name).ToList());
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
         }
     }
 }

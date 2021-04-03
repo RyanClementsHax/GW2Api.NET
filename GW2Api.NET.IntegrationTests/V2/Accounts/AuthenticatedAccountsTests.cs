@@ -51,10 +51,9 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
         public async Task GetAccountAchievementsAsync_NullIds_ThrowsArgumentNullException(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
-            List<int> ids = null;
             using var cts = ctsFactory();
 
-            await _api.GetAccountAchievementsAsync(ids, apiKey, cts?.Token ?? default);
+            await _api.GetAccountAchievementsAsync(ids: null, apiKey, cts?.Token ?? default);
         }
 
         [DataTestMethod]
@@ -66,7 +65,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
 
             var result = await _api.GetAccountAchievementsAsync(ids, apiKey, cts?.Token ?? default);
 
-            CollectionAssert.IsSubsetOf(ids.ToList(), result.Select(x => x.Id).ToList());
+            CollectionAssert.AreEquivalent(ids.ToList(), result.Select(x => x.Id).ToList());
         }
 
         [DataTestMethod]
