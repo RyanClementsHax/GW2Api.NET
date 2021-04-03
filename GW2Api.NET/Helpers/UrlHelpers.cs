@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GW2Api.NET.V2.Tokens;
+using GW2Api.NET.V2.Tokens.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -8,7 +10,7 @@ namespace GW2Api.NET.Helpers
 {
     internal static class UrlHelpers
     {
-        public static string AddParams(this string url, IDictionary<string, string> paramMap)
+        internal static string AddParams(this string url, IDictionary<string, string> paramMap)
         {
             var queryStr = HttpUtility.ParseQueryString(string.Empty);
             queryStr.Add(paramMap.Aggregate(new NameValueCollection(),
@@ -26,13 +28,16 @@ namespace GW2Api.NET.Helpers
                 : url;
         }
 
-        public static string ToUrlParam(this IEnumerable<string> source)
+        internal static string ToUrlParam(this IEnumerable<string> source)
             => string.Join(",", source);
 
-        public static string ToUrlParam(this IEnumerable<int> source)
+        internal static string ToUrlParam(this IEnumerable<int> source)
             => string.Join(",", source.Select(x => x.ToString()));
 
-        public static string ToUrlParam(this IEnumerable<Guid> source)
+        internal static string ToUrlParam(this IEnumerable<Guid> source)
             => string.Join(",", source.Select(x => x.ToString().ToUpper()));
+
+        internal static string ToUrlParam(this Permissions permissions)
+            => permissions.ToList().ToUrlParam();
     }
 }

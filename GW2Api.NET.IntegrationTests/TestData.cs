@@ -17,5 +17,7 @@ namespace GW2Api.NET.IntegrationTests
 
         public static Func<CancellationTokenSource>[] DefaultCtsFactories { get; } =
                 new Func<CancellationTokenSource>[] { () => null, () => CreateDefaultTokenSource() };
+
+        public static DateTimeOffset DefaultExpire => DateTimeOffset.Now.AddMinutes(1);
     }
 }

@@ -5,9 +5,9 @@ using System.Net.Http.Headers;
 
 namespace GW2Api.NET.Helpers
 {
-    public static class HttpResponseHeadersExt
+    internal static class HttpResponseHeadersExt
     {
-        public static int GetAsInt(this HttpResponseHeaders headers, string name)
+        internal static int GetAsInt(this HttpResponseHeaders headers, string name)
         {
             string header;
             try

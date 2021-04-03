@@ -53,8 +53,7 @@ namespace GW2Api.NET.V2
             if (resource is null) throw new ArgumentNullException(nameof(resource));
             if (paramMap is null) throw new ArgumentNullException(nameof(paramMap));
 
-            if (!paramMap.TryAdd("v", _schemaVersion))
-                throw new InvalidOperationException($"This library only supports schema version: {_schemaVersion}");
+            paramMap.TryAddSchemaVersion(_schemaVersion);
 
             var url = resource.AddParams(paramMap);
 
@@ -95,8 +94,7 @@ namespace GW2Api.NET.V2
             if (resource is null) throw new ArgumentNullException(nameof(resource));
             if (paramMap is null) throw new ArgumentNullException(nameof(paramMap));
 
-            if (!paramMap.TryAdd("v", _schemaVersion))
-                throw new InvalidOperationException($"This library only supports schema version: {_schemaVersion}");
+            paramMap.TryAddSchemaVersion(_schemaVersion);
 
             var url = resource.AddParams(paramMap);
             return _httpClient.GetFromJsonAsync<T>(url, _serializerOptions, token);
