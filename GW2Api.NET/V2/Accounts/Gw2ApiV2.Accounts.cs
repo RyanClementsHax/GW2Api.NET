@@ -10,15 +10,15 @@ namespace GW2Api.NET.V2
     public partial class Gw2ApiV2
     {
         public Task<Account> GetAccountAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<Account>("account", accessToken, token);
+            => GetWithAuthAsync<Account>("account", accessToken, token);
 
         private static readonly string _accountAchievementsResource = "account/achievements";
 
         public Task<IList<AccountAchievement>> GetAllAccountAchievementsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<AccountAchievement>>(_accountAchievementsResource, accessToken, token);
+            => GetWithAuthAsync<IList<AccountAchievement>>(_accountAchievementsResource, accessToken, token);
 
         public Task<AccountAchievement> GetAccountAchievementAsync(int id, string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<AccountAchievement>(
+            => GetWithAuthAsync<AccountAchievement>(
                 _accountAchievementsResource,
                 new Dictionary<string, string>
                 {
@@ -33,7 +33,7 @@ namespace GW2Api.NET.V2
             if (ids is null)
                 throw new ArgumentNullException(nameof(ids));
 
-            return GetAuthenticatedAsync<IList<AccountAchievement>>(
+            return GetWithAuthAsync<IList<AccountAchievement>>(
                 _accountAchievementsResource,
                 new Dictionary<string, string>
                 {
@@ -45,84 +45,84 @@ namespace GW2Api.NET.V2
         }
 
         public Task<IList<BankSlot>> GetAccountBankAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<BankSlot>>("account/bank", accessToken, token);
+            => GetWithAuthAsync<IList<BankSlot>>("account/bank", accessToken, token);
 
         public Task<IList<string>> GetAccountDailyCraftingIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<string>>("account/dailycrafting", accessToken, token);
+            => GetWithAuthAsync<IList<string>>("account/dailycrafting", accessToken, token);
 
         public Task<IList<string>> GetAccountDungeonIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<string>>("account/dungeons", accessToken, token);
+            => GetWithAuthAsync<IList<string>>("account/dungeons", accessToken, token);
         
         public Task<IList<int>> GetAccountDyeIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>("account/dyes", accessToken, token);
+            => GetWithAuthAsync<IList<int>>("account/dyes", accessToken, token);
 
         public Task<IList<FinisherSummary>> GetAccountFinisherSummariesAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<FinisherSummary>>("account/finishers", accessToken, token);
+            => GetWithAuthAsync<IList<FinisherSummary>>("account/finishers", accessToken, token);
 
         public Task<IList<int>> GetAccountGliderIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>("account/gliders", accessToken, token);
+            => GetWithAuthAsync<IList<int>>("account/gliders", accessToken, token);
 
         public Task<IList<int>> GetAccountHomeCatIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>("account/home/cats", accessToken, token);
+            => GetWithAuthAsync<IList<int>>("account/home/cats", accessToken, token);
 
         public Task<IList<string>> GetAccountHomeNodeIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<string>>("account/home/nodes", accessToken, token);
+            => GetWithAuthAsync<IList<string>>("account/home/nodes", accessToken, token);
 
         public Task<IList<SharedInventorySlot>> GetAccountSharedInventorySlotsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<SharedInventorySlot>>("account/inventory", accessToken, token);
+            => GetWithAuthAsync<IList<SharedInventorySlot>>("account/inventory", accessToken, token);
 
         public Task<IList<ConsumedLuck>> GetAccountLuckAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<ConsumedLuck>>("account/luck", accessToken, token);
+            => GetWithAuthAsync<IList<ConsumedLuck>>("account/luck", accessToken, token);
 
         public Task<IList<int>> GetAccountMailCarrierIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>("account/mailcarriers", accessToken, token);
+            => GetWithAuthAsync<IList<int>>("account/mailcarriers", accessToken, token);
 
         public Task<IList<string>> GetAccountMapChestIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<string>>("account/mapchests", accessToken, token);
+            => GetWithAuthAsync<IList<string>>("account/mapchests", accessToken, token);
 
         public Task<IList<MasterySummary>> GetAccountMasterySummariesAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<MasterySummary>>("account/masteries", accessToken, token);
+            => GetWithAuthAsync<IList<MasterySummary>>("account/masteries", accessToken, token);
 
         public Task<MasteryPointSummary> GetAccountMasteryPointSummaryAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<MasteryPointSummary>("account/mastery/points", accessToken, token);
+            => GetWithAuthAsync<MasteryPointSummary>("account/mastery/points", accessToken, token);
 
         public Task<IList<MaterialSummary>> GetAccountMaterialSummariesAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<MaterialSummary>>("account/materials", accessToken, token);
+            => GetWithAuthAsync<IList<MaterialSummary>>("account/materials", accessToken, token);
 
         public Task<IList<int>> GetAccountMinisIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>("account/minis", accessToken, token);
+            => GetWithAuthAsync<IList<int>>("account/minis", accessToken, token);
 
         public Task<IList<int>> GetAccountMountSkinIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>("account/mounts/skins", accessToken, token);
+            => GetWithAuthAsync<IList<int>>("account/mounts/skins", accessToken, token);
 
         public Task<IList<string>> GetAccountMountTypeIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<string>>("account/mounts/types", accessToken, token);
+            => GetWithAuthAsync<IList<string>>("account/mounts/types", accessToken, token);
 
         public Task<IList<int>> GetAccountNoveltyIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>("account/novelties", accessToken, token);
+            => GetWithAuthAsync<IList<int>>("account/novelties", accessToken, token);
 
         public Task<IList<int>> GetAccountOutfitIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>("account/outfits", accessToken, token);
+            => GetWithAuthAsync<IList<int>>("account/outfits", accessToken, token);
 
         public Task<IList<int>> GetAccountPvpHeroIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>("account/pvp/heroes", accessToken, token);
+            => GetWithAuthAsync<IList<int>>("account/pvp/heroes", accessToken, token);
 
         public Task<IList<string>> GetAccountRaidIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<string>>("account/raids", accessToken, token);
+            => GetWithAuthAsync<IList<string>>("account/raids", accessToken, token);
 
         public Task<IList<int>> GetAccountRecipeIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>("account/recipes", accessToken, token);
+            => GetWithAuthAsync<IList<int>>("account/recipes", accessToken, token);
 
         public Task<IList<int>> GetAccountSkinIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>("account/skins", accessToken, token);
+            => GetWithAuthAsync<IList<int>>("account/skins", accessToken, token);
 
         public Task<IList<int>> GetAccountTitleIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<int>>("account/titles", accessToken, token);
+            => GetWithAuthAsync<IList<int>>("account/titles", accessToken, token);
 
         public Task<IList<CurrencySummary>> GetAccountWalletAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<CurrencySummary>>("account/wallet", accessToken, token);
+            => GetWithAuthAsync<IList<CurrencySummary>>("account/wallet", accessToken, token);
         
         public Task<IList<string>> GetAccountWorldBossIdsAsync(string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<IList<string>>("account/worldbosses", accessToken, token);
+            => GetWithAuthAsync<IList<string>>("account/worldbosses", accessToken, token);
     }
 }

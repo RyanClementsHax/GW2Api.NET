@@ -8,10 +8,10 @@ namespace GW2Api.NET.Helpers
 {
     internal static class UrlHelpers
     {
-        public static string AddParams(this string url, IDictionary<string, string> paramsMap)
+        public static string AddParams(this string url, IDictionary<string, string> paramMap)
         {
             var queryStr = HttpUtility.ParseQueryString(string.Empty);
-            queryStr.Add(paramsMap.Aggregate(new NameValueCollection(),
+            queryStr.Add(paramMap.Aggregate(new NameValueCollection(),
                 (seed, current) =>
                 {
                     if (current.Value is not null)

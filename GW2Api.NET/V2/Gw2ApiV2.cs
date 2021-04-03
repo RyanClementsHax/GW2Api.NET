@@ -2,6 +2,7 @@
 using GW2Api.NET.Json.Converters;
 using GW2Api.NET.Json.NamingPolicies;
 using GW2Api.NET.V1.Events.Dto;
+using GW2Api.NET.V2.Common;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -40,15 +41,46 @@ namespace GW2Api.NET.V2
             _httpClient.BaseAddress ??= _baseAddress;
         }
 
-        internal Task<T> GetAuthenticatedAsync<T>(string resource, string accessToken = null, CancellationToken token = default)
-            => GetAuthenticatedAsync<T>(
+        internal Task<Page<T>> GetPageWithAuthAsync<T>(string resource, IDictionary<string, string> paramMap, string accessToken = null, CancellationToken token = default)
+        {
+            paramMap["access_token"] = accessToken ?? ApiKey;
+
+            return GetPageAsync<T>(resource, paramMap, token);
+        }
+
+        internal async Task<Page<T>> GetPageAsync<T>(string resource, IDictionary<string, string> paramMap, CancellationToken token = default)
+        {
+            if (resource is null) throw new ArgumentNullException(nameof(resource));
+            if (paramMap is null) throw new ArgumentNullException(nameof(paramMap));
+
+            if (!paramMap.TryAdd("v", _schemaVersion))
+                throw new InvalidOperationException($"This library only supports schema version: {_schemaVersion}");
+
+            var url = resource.AddParams(paramMap);
+
+            var response = await _httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, token);
+            response.EnsureSuccessStatusCode();
+
+            var data = await response.Content!.ReadFromJsonAsync<T>(_serializerOptions, token);
+
+            return new Page<T>(
+                data,
+                PageSize: response.Headers.GetAsInt("x-page-size"),
+                PageTotal: response.Headers.GetAsInt("x-page-total"),
+                ResultCount: response.Headers.GetAsInt("x-result-count"),
+                ResultTotal: response.Headers.GetAsInt("x-result-total")
+            );
+        }
+
+        internal Task<T> GetWithAuthAsync<T>(string resource, string accessToken = null, CancellationToken token = default)
+            => GetWithAuthAsync<T>(
                 resource,
                 new Dictionary<string, string>(),
                 accessToken,
                 token
             );
 
-        internal Task<T> GetAuthenticatedAsync<T>(string resource, IDictionary<string, string> paramMap, string accessToken = null, CancellationToken token = default)
+        internal Task<T> GetWithAuthAsync<T>(string resource, IDictionary<string, string> paramMap, string accessToken = null, CancellationToken token = default)
         {
             paramMap["access_token"] = accessToken ?? ApiKey;
 
