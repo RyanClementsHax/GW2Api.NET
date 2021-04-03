@@ -16,5 +16,12 @@ namespace GW2Api.NET.V2
                 accessToken,
                 token
             );
+        public Task<Page<IList<Transaction>>> GetCurrentSellTransactionsAsync(string accessToken = null, int page = -1, int pageSize = -1, CancellationToken token = default)
+            => GetPageWithAuthAsync<IList<Transaction>>(
+                "commerce/transactions/current/sells",
+                new Dictionary<string, string>().ConfigurePage(page, pageSize),
+                accessToken,
+                token
+            );
     }
 }
