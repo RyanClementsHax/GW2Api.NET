@@ -8,9 +8,9 @@ namespace GW2Api.NET.V2
 {
     public partial interface IGw2ApiV2
     {
-        Task<Page<IList<Transaction>>> GetCurrentBuyTransactionsAsync(string accessToken = null, int page = -1, int pageSize = -1, CancellationToken token = default);
-        Task<Page<IList<Transaction>>> GetCurrentSellTransactionsAsync(string accessToken = null, int page = -1, int pageSize = -1, CancellationToken token = default);
-        Task<Page<IList<Transaction>>> GetHistoricalBuyTransactionsAsync(string accessToken = null, int page = -1, int pageSize = -1, CancellationToken token = default);
-        Task<Page<IList<Transaction>>> GetHistoricalSellTransactionsAsync(string accessToken = null, int page = -1, int pageSize = -1, CancellationToken token = default);
+        Task<Page<IList<Transaction>>> GetCurrentBuyTransactionsAsync(int page = -1, int pageSize = -1, string accessToken = null, CancellationToken token = default);
+        Task<Page<IList<Transaction>>> GetCurrentSellTransactionsAsync(int page = -1, int pageSize = -1, string accessToken = null, CancellationToken token = default);
+        Task<Page<IList<Transaction>>> GetHistoricalBuyTransactionsAsync(int page = -1, int pageSize = -1, string accessToken = null, CancellationToken token = default);
+        Task<Page<IList<Transaction>>> GetHistoricalSellTransactionsAsync(int page = -1, int pageSize = -1, string accessToken = null, CancellationToken token = default);
     }
 }

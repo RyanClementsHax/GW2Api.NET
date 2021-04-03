@@ -52,12 +52,12 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetAchievementsAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAchievementsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            await _api.GetAchievementsAsync(ids: null, token: cts?.Token ?? default);
+            await _api.GetAchievementsAsync(ids: null, lang, cts?.Token ?? default);
         }
 
         public static IEnumerable<object[]> GetAchievementsAsync_TestData()
@@ -144,12 +144,12 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetAchievementGroupsAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAchievementGroupsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            await _api.GetAchievementGroupsAsync(ids: null, token: cts?.Token ?? default);
+            await _api.GetAchievementGroupsAsync(ids: null, lang, cts?.Token ?? default);
         }
 
         public static IEnumerable<object[]> GetAchievementGroupsAsync_TestData()
@@ -214,12 +214,12 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetAchievementCategoriesAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAchievementCategoriesAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            await _api.GetAchievementCategoriesAsync(ids: null, token: cts?.Token ?? default);
+            await _api.GetAchievementCategoriesAsync(ids: null, lang, cts?.Token ?? default);
         }
 
         public static IEnumerable<object[]> GetAchievementCategoriesAsync_TestData()

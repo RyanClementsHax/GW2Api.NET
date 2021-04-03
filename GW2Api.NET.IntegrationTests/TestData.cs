@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Threading;
 
 namespace GW2Api.NET.IntegrationTests
@@ -12,6 +14,13 @@ namespace GW2Api.NET.IntegrationTests
         public static IEnumerable<object[]> DefaultTestData()
             => new List<object[]>
             {
+                DefaultCtsFactories,
+            }.Permute();
+
+        public static IEnumerable<object[]> DefaultLangTestData()
+            => new List<object[]>
+            {
+                new [] { null, "es" }.Select(x => x is null ? null : new CultureInfo(x)).ToObjectArray(),
                 DefaultCtsFactories,
             }.Permute();
 
