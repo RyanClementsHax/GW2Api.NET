@@ -55,7 +55,7 @@ namespace GW2Api.NET.V2
 
         public Task<AchievementGroup> GetAchievementGroupAsync(Guid id, CultureInfo lang = null, CancellationToken token = default)
             => GetAsync<AchievementGroup>(
-                $"{_achievementsGroupsResource}/{id.ToString().ToUpper()}",
+                $"{_achievementsGroupsResource}/{id.ToUrlParam()}",
                 new Dictionary<string, string>
                 {
                     { "lang", lang?.TwoLetterISOLanguageName }

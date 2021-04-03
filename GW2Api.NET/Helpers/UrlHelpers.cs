@@ -33,8 +33,11 @@ namespace GW2Api.NET.Helpers
         internal static string ToUrlParam(this IEnumerable<int> source)
             => string.Join(",", source.Select(x => x.ToString()));
 
+        internal static string ToUrlParam(this Guid source)
+            => source.ToString().ToUpper();
+
         internal static string ToUrlParam(this IEnumerable<Guid> source)
-            => string.Join(",", source.Select(x => x.ToString().ToUpper()));
+            => string.Join(",", source.Select(x => x.ToUrlParam()));
 
         internal static string ToUrlParam(this Permissions permissions)
             => permissions.ToList().Select(x => x.ToString().ToLower()).ToUrlParam();

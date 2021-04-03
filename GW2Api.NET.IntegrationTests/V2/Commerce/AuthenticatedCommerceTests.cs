@@ -10,7 +10,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Commerce
     {
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetCurrentBuyTransactionsAsync_ValidApiKey_ReturnsTheTransactions(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetCurrentBuyTransactionsAsync_ValidApiKey_ReturnsTheCurrentBuyTransactions(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
@@ -21,7 +21,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Commerce
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetCurrentSellTransactionsAsync_ValidApiKey_ReturnsTheTransactions(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetCurrentSellTransactionsAsync_ValidApiKey_ReturnsTheCurrentSellTransactions(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
@@ -32,7 +32,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Commerce
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetHistoricalBuyTransactionsAsync_ValidApiKey_ReturnsTheTransactions(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetHistoricalBuyTransactionsAsync_ValidApiKey_ReturnsTheHistoricalBuyTransactions(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
@@ -43,7 +43,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Commerce
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetHistoricalSellTransactionsAsync_ValidApiKey_ReturnsTheTransactions(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetHistoricalSellTransactionsAsync_ValidApiKey_ReturnsTheHistoricalSellTransactions(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 

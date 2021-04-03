@@ -21,7 +21,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Tokens
 
         [DataTestMethod]
         [DynamicData(nameof(CreateSubTokenAsync_TestData), DynamicDataSourceType.Method)]
-        public async Task CreateSubTokenAsync_ValidApiKey_ReturnsTheTransactions(Permissions permissions, IEnumerable<string> urls, string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task CreateSubTokenAsync_ValidApiKey_ReturnsTheNewToken(Permissions permissions, IEnumerable<string> urls, string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
@@ -32,7 +32,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Tokens
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetTokenInfoAsync_ValidApiKey_ReturnsTheTransactions(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetTokenInfoAsync_ValidApiKey_ReturnsTheTokenInfo(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 

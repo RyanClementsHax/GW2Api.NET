@@ -88,6 +88,20 @@ Note that if no Api Keys are given, calling functions that need authentication w
           "UnlockIds": [ 3, 6, 9, 12, 18, 31 ],
           "SongIds": []
         }
+      },
+      "PvpTestConfig": {
+        "Ids": [
+          "430A4455-03E8-41A9-95DC-30847000C629",
+          "8648D3DB-AE7C-4BA7-98F5-2572E955F56C",
+          "8A2CBE72-BE64-4B91-9B0A-A82734E03755",
+          "B0457632-0068-4D28-BAB2-D97408D91CE4",
+          "B3CBF945-A7B1-4E6A-B00C-179C52D024E8",
+          "C1ED2924-8404-48B4-92B6-CDEFF1B6D93A",
+          "C635113B-5719-4AC9-9DB0-C39ED07E7BE8",
+          "CEC0A86C-9D8F-49DE-9B03-3D53143A56BD",
+          "ECECBA13-4A96-4344-A03C-D4224F64A3B2",
+          "FDD2E7B5-8D29-4576-AE0E-8642B1952535"
+        ]
       }
     }
     ```
@@ -129,6 +143,8 @@ Note that if no Api Keys are given, calling functions that need authentication w
         - `ZoneIds`: A list of ids of some of the SAB zones that character has cleared
         - `UnlockIds`: A list of ids of some SAB unlocks that the character has completed
         - `SongIds`: A list of ids of some of the SAB songs that the character has unlocked
+    - `PvpTestConfig`
+      - `Ids`: A list of ids of some of the pvp games the account has played
     - You can acquire the data to populate this json by manually hitting the endpoints with the api key
     - Note that in the authenticated tests, we use partial matching of data to avoid brittle tests because account data is changing if the acccount is being used or played on
         - For example, we dont want to assert that the ids we get back from fetching all account achievement ids is exactly equal to some fixed set of numbers because that account could complete another achievement later down the road thus breaking the assertion even though the function works as it should
