@@ -1,8 +1,8 @@
 ﻿using GW2Api.NET.Helpers;
 using GW2Api.NET.Json.Converters;
 using GW2Api.NET.Json.NamingPolicies;
-using GW2Api.NET.V1.Events.Dto;
 using GW2Api.NET.V2.Common;
+using GW2Api.NET.V2.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -24,10 +24,8 @@ namespace GW2Api.NET.V2
             PropertyNamingPolicy = new SnakeCaseNamingPolicy(),
             Converters =
             {
-                new SnakeCaseEnumConverter<EventFlag>(),
-                new JsonStringEnumMemberConverter(),
-                new Vector3JsonConverter(),
-                new Vector2JsonConverter()
+                new EnumFlagsConverter<Permissions>(),
+                new JsonStringEnumMemberConverter()
             },
         };
 

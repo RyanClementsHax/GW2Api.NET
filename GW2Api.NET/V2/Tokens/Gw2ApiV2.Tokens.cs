@@ -19,5 +19,8 @@ namespace GW2Api.NET.V2
                 accessToken,
                 token
             )).Subtoken;
+
+        public Task<TokenInfo> GetTokenInfoAsync(string accessToken = null, CancellationToken token = default)
+            => GetWithAuthAsync<TokenInfo>("tokeninfo", accessToken, token);
     }
 }

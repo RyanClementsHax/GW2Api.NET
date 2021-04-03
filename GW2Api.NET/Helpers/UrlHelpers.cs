@@ -1,5 +1,4 @@
 ﻿using GW2Api.NET.V2.Tokens;
-using GW2Api.NET.V2.Tokens.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -38,6 +37,6 @@ namespace GW2Api.NET.Helpers
             => string.Join(",", source.Select(x => x.ToString().ToUpper()));
 
         internal static string ToUrlParam(this Permissions permissions)
-            => permissions.ToList().ToUrlParam();
+            => permissions.ToList().Select(x => x.ToString().ToLower()).ToUrlParam();
     }
 }

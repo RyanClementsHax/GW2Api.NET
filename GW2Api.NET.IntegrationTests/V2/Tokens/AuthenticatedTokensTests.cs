@@ -29,5 +29,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Tokens
 
             Assert.IsFalse(string.IsNullOrWhiteSpace(result));
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetTokenInfoAsync_ValidApiKey_ReturnsTheTransactions(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetTokenInfoAsync(apiKey, token: cts?.Token ?? default);
+
+            Assert.IsNotNull(result);
+        }
     }
 }
