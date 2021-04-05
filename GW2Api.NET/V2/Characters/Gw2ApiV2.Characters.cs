@@ -9,7 +9,7 @@ namespace GW2Api.NET.V2
 {
     public partial class Gw2ApiV2
     {
-        public Task<IList<string>> GetCharacterIdsAsync(string accessToken = null, CancellationToken token = default)
+        public Task<IList<string>> GetAllCharacterIdsAsync(string accessToken = null, CancellationToken token = default)
             => GetWithAuthAsync<IList<string>>("characters", accessToken, token);
 
         public Task<Character> GetCharacterAsync(string id, string accessToken = null, CancellationToken token = default)

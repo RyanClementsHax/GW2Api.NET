@@ -13,11 +13,11 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetCharacterIdsAsync_ValidApiKey_ReturnsTheCharactersIds(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAllCharacterIdsAsync_ValidApiKey_ReturnsTheCharactersIds(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetCharacterIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAllCharacterIdsAsync(apiKey, cts?.Token ?? default);
 
             CollectionAssert.IsSubsetOf(_charactersConfig.Ids.ToList(), result.ToList());
         }

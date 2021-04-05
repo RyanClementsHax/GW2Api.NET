@@ -24,11 +24,11 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
-        public async Task GetPvpGameIdsAsync_ValidApiKey_ReturnsAllIds(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAllPvpGameIdsAsync_ValidApiKey_ReturnsAllIds(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetPvpGameIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAllPvpGameIdsAsync(apiKey, cts?.Token ?? default);
 
             Assert.IsTrue(result.Any());
         }
