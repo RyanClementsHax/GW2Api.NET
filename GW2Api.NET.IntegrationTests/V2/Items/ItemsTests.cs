@@ -25,7 +25,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetFinisherIdsAsync(cts?.Token ?? default);
+            var result = await _api.GetFinisherIdsAsync(cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -45,7 +45,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
             using var cts = ctsFactory();
             var (lang, name) = langNameTuple;
 
-            var result = await _api.GetFinisherAsync(id, lang, cts?.Token ?? default);
+            var result = await _api.GetFinisherAsync(id, lang, cts.GetTokenOrDefault());
 
             Assert.AreEqual(name, result.Name);
         }
@@ -57,7 +57,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
         {
             using var cts = ctsFactory();
 
-            await _api.GetFinishersAsync(ids: null, lang, cts?.Token ?? default);
+            await _api.GetFinishersAsync(ids: null, lang, cts.GetTokenOrDefault());
         }
 
         public static IEnumerable<object[]> GetFinishersAsync_TestData()
@@ -78,7 +78,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
             using var cts = ctsFactory();
             var (lang, names) = langNamesTuple;
 
-            var result = await _api.GetFinishersAsync(ids, lang, cts?.Token ?? default);
+            var result = await _api.GetFinishersAsync(ids, lang, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
         }
@@ -89,9 +89,20 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetFinishersAsync(lang: lang, token: cts?.Token ?? default);
+            var result = await _api.GetFinishersAsync(lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllItemIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllItemIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
         }
     }
 }

@@ -9,7 +9,7 @@ namespace GW2Api.NET.IntegrationTests
     public static class TestData
     {
         public static CancellationTokenSource CreateDefaultTokenSource()
-            => new(TimeSpan.FromMinutes(1));
+            => new(TimeSpan.FromMinutes(5));
 
         public static IEnumerable<object[]> DefaultTestData()
             => new List<object[]>
@@ -28,5 +28,8 @@ namespace GW2Api.NET.IntegrationTests
                 new Func<CancellationTokenSource>[] { () => null, () => CreateDefaultTokenSource() };
 
         public static DateTimeOffset DefaultExpire => DateTimeOffset.Now.AddMinutes(1);
+
+        public static CancellationToken GetTokenOrDefault(this CancellationTokenSource cts)
+            => cts?.Token ?? default;
     }
 }

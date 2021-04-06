@@ -17,7 +17,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountAsync(apiKey, cts.GetTokenOrDefault());
 
             Assert.AreEqual(_accountConfig.Name, result.Name);
         }
@@ -28,7 +28,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAllAccountAchievementsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAllAccountAchievementsAsync(apiKey, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -40,7 +40,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
             using var cts = ctsFactory();
             var id = _accountConfig.AchievementId;
 
-            var result = await _api.GetAccountAchievementAsync(id, apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountAchievementAsync(id, apiKey, cts.GetTokenOrDefault());
 
             Assert.AreEqual(id, result.Id);
         }
@@ -52,7 +52,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            await _api.GetAccountAchievementsAsync(ids: null, apiKey, cts?.Token ?? default);
+            await _api.GetAccountAchievementsAsync(ids: null, apiKey, cts.GetTokenOrDefault());
         }
 
         [DataTestMethod]
@@ -62,7 +62,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
             var ids = _accountConfig.AchievementIds;
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountAchievementsAsync(ids, apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountAchievementsAsync(ids, apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(ids.ToList(), result.Select(x => x.Id).ToList());
         }
@@ -73,7 +73,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountBankAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountBankAsync(apiKey, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -84,7 +84,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountDailyCraftingIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountDailyCraftingIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.DailyCraftingIds.ToList(), result.ToList());
         }
@@ -95,7 +95,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountDungeonIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountDungeonIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.DungeonIds.ToList(), result.ToList());
         }
@@ -106,7 +106,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountDyeIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountDyeIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.DyeIds.ToList(), result.ToList());
         }
@@ -117,7 +117,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountFinisherSummariesAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountFinisherSummariesAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.FinisherIds.ToList(), result.Select(x => x.Id).ToList());
         }
@@ -128,7 +128,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountGliderIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountGliderIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.GliderIds.ToList(), result.ToList());
         }
@@ -139,7 +139,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountHomeCatIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountHomeCatIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.HomeCatIds.ToList(), result.ToList());
         }
@@ -150,7 +150,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountHomeNodeIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountHomeNodeIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.HomeNodeIds.ToList(), result.ToList());
         }
@@ -161,7 +161,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountSharedInventorySlotsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountSharedInventorySlotsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.SharedInventoryItemIds.ToList(), result.Select(x => x.Id).ToList());
         }
@@ -172,7 +172,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountLuckAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountLuckAsync(apiKey, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -183,7 +183,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountMailCarrierIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountMailCarrierIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.MailCarrierIds.ToList(), result.ToList());
         }
@@ -194,7 +194,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountMapChestIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountMapChestIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.MapChestIds.ToList(), result.ToList());
         }
@@ -205,7 +205,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountMasterySummariesAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountMasterySummariesAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.MasteryIds.ToList(), result.Select(x => x.Id).ToList());
         }
@@ -216,7 +216,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountMasteryPointSummaryAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountMasteryPointSummaryAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.MasteryPointSummaryData.Regions.ToList(), result.Totals.Select(x => x.Region).ToList());
             CollectionAssert.IsSubsetOf(_accountConfig.MasteryPointSummaryData.MasteryIds.ToList(), result.Unlocked.ToList());
@@ -228,7 +228,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountMaterialSummariesAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountMaterialSummariesAsync(apiKey, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -239,7 +239,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountMinisIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountMinisIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.MinisIds.ToList(), result.ToList());
         }
@@ -250,7 +250,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountMountSkinIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountMountSkinIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.MountSkinIds.ToList(), result.ToList());
         }
@@ -261,7 +261,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountMountTypeIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountMountTypeIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.MountTypes.ToList(), result.ToList());
         }
@@ -272,7 +272,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountNoveltyIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountNoveltyIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.NoveltyIds.ToList(), result.ToList());
         }
@@ -283,7 +283,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountOutfitIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountOutfitIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.OutfitIds.ToList(), result.ToList());
         }
@@ -294,7 +294,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountPvpHeroIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountPvpHeroIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.PvpHeroIds.ToList(), result.ToList());
         }
@@ -305,7 +305,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountRaidIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountRaidIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.RaidIds.ToList(), result.ToList());
         }
@@ -316,7 +316,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountRecipeIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountRecipeIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.RecipeIds.ToList(), result.ToList());
         }
@@ -327,7 +327,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountSkinIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountSkinIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.SkinIds.ToList(), result.ToList());
         }
@@ -338,7 +338,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountTitleIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountTitleIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.TitleIds.ToList(), result.ToList());
         }
@@ -349,7 +349,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountWalletAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountWalletAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.CurrencyIds.ToList(), result.Select(x => x.Id).ToList());
         }
@@ -360,7 +360,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Accounts
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAccountWorldBossIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAccountWorldBossIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_accountConfig.WorldBossIds.ToList(), result.ToList());
         }

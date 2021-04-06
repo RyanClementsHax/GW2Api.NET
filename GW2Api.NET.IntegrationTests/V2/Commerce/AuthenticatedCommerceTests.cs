@@ -14,7 +14,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Commerce
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetCurrentBuyTransactionsAsync(accessToken: apiKey, token: cts?.Token ?? default);
+            var result = await _api.GetCurrentBuyTransactionsAsync(accessToken: apiKey, token: cts.GetTokenOrDefault());
 
             Assert.IsNotNull(result.Data);
         }
@@ -25,7 +25,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Commerce
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetCurrentSellTransactionsAsync(accessToken: apiKey, token: cts?.Token ?? default);
+            var result = await _api.GetCurrentSellTransactionsAsync(accessToken: apiKey, token: cts.GetTokenOrDefault());
 
             Assert.IsNotNull(result.Data);
         }
@@ -36,7 +36,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Commerce
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetHistoricalBuyTransactionsAsync(accessToken: apiKey, token: cts?.Token ?? default);
+            var result = await _api.GetHistoricalBuyTransactionsAsync(accessToken: apiKey, token: cts.GetTokenOrDefault());
 
             Assert.IsNotNull(result.Data);
         }
@@ -47,7 +47,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Commerce
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetHistoricalSellTransactionsAsync(accessToken: apiKey, token: cts?.Token ?? default);
+            var result = await _api.GetHistoricalSellTransactionsAsync(accessToken: apiKey, token: cts.GetTokenOrDefault());
 
             Assert.IsNotNull(result.Data);
         }

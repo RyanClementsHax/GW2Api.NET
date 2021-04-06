@@ -25,7 +25,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Tokens
         {
             using var cts = ctsFactory();
 
-            var result = await _api.CreateSubTokenAsync(TestData.DefaultExpire, permissions, urls, apiKey, cts?.Token ?? default);
+            var result = await _api.CreateSubTokenAsync(TestData.DefaultExpire, permissions, urls, apiKey, cts.GetTokenOrDefault());
 
             Assert.IsFalse(string.IsNullOrWhiteSpace(result));
         }
@@ -36,7 +36,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Tokens
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetTokenInfoAsync(apiKey, token: cts?.Token ?? default);
+            var result = await _api.GetTokenInfoAsync(apiKey, token: cts.GetTokenOrDefault());
 
             Assert.IsNotNull(result);
         }

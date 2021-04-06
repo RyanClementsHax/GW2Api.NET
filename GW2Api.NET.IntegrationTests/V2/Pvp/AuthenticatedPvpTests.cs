@@ -17,7 +17,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetPvpStatsAsync(apiKey, token: cts?.Token ?? default);
+            var result = await _api.GetPvpStatsAsync(apiKey, token: cts.GetTokenOrDefault());
 
             Assert.IsNotNull(result);
         }
@@ -28,7 +28,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAllPvpGameIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAllPvpGameIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -40,7 +40,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
             var id = _pvpConfig.Id;
             using var cts = ctsFactory();
 
-            var result = await _api.GetPvpGameAsync(id, apiKey, cts?.Token ?? default);
+            var result = await _api.GetPvpGameAsync(id, apiKey, cts.GetTokenOrDefault());
 
             Assert.AreEqual(id, result.Id);
         }
@@ -52,7 +52,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
         {
             using var cts = ctsFactory();
 
-            await _api.GetPvpGamesAsync(ids: null, apiKey, cts?.Token ?? default);
+            await _api.GetPvpGamesAsync(ids: null, apiKey, cts.GetTokenOrDefault());
         }
 
         [DataTestMethod]
@@ -62,7 +62,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
             using var cts = ctsFactory();
             var ids = _pvpConfig.Ids;
 
-            var result = await _api.GetPvpGamesAsync(ids, apiKey, cts?.Token ?? default);
+            var result = await _api.GetPvpGamesAsync(ids, apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(ids.ToList(), result.Select(x => x.Id).ToList());
         }

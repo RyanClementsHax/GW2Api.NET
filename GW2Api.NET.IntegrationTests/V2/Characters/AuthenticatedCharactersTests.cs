@@ -17,7 +17,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAllCharacterIdsAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAllCharacterIdsAsync(apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_charactersConfig.Ids.ToList(), result.ToList());
         }
@@ -29,7 +29,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             using var cts = ctsFactory();
             var id = _charactersConfig.Id;
 
-            var result = await _api.GetCharacterAsync(id, apiKey, cts?.Token ?? default);
+            var result = await _api.GetCharacterAsync(id, apiKey, cts.GetTokenOrDefault());
 
             Assert.AreEqual(id, result.Name);
         }
@@ -41,7 +41,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
         {
             using var cts = ctsFactory();
 
-            await _api.GetCharactersAsync(ids: null, apiKey, cts?.Token ?? default);
+            await _api.GetCharactersAsync(ids: null, apiKey, cts.GetTokenOrDefault());
         }
 
         [DataTestMethod]
@@ -51,7 +51,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             var ids = _charactersConfig.Ids;
             using var cts = ctsFactory();
 
-            var result = await _api.GetCharactersAsync(ids, apiKey, cts?.Token ?? default);
+            var result = await _api.GetCharactersAsync(ids, apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(ids.ToList(), result.Select(x => x.Name).ToList());
         }
@@ -62,7 +62,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAllCharactersAsync(apiKey, cts?.Token ?? default);
+            var result = await _api.GetAllCharactersAsync(apiKey, cts.GetTokenOrDefault());
 
             Assert.AreEqual(_charactersConfig.TotalCharacters, result.Count);
         }
@@ -74,7 +74,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             using var cts = ctsFactory();
             var id = _charactersConfig.Id;
 
-            var result = await _api.GetCharacterBackstoryAsync(id, apiKey, cts?.Token ?? default);
+            var result = await _api.GetCharacterBackstoryAsync(id, apiKey, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -86,7 +86,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             using var cts = ctsFactory();
             var id = _charactersConfig.Id;
 
-            var result = await _api.GetCharacterCoreAsync(id, apiKey, cts?.Token ?? default);
+            var result = await _api.GetCharacterCoreAsync(id, apiKey, cts.GetTokenOrDefault());
 
             Assert.AreEqual(id, result.Name);
         }
@@ -98,7 +98,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             using var cts = ctsFactory();
             var id = _charactersConfig.Id;
 
-            var result = await _api.GetCharacterCraftingAsync(id, apiKey, cts?.Token ?? default);
+            var result = await _api.GetCharacterCraftingAsync(id, apiKey, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -110,7 +110,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             using var cts = ctsFactory();
             var id = _charactersConfig.Id;
 
-            var result = await _api.GetCharacterEquipmentAsync(id, apiKey, cts?.Token ?? default);
+            var result = await _api.GetCharacterEquipmentAsync(id, apiKey, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -122,7 +122,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             using var cts = ctsFactory();
             var id = _charactersConfig.Id;
 
-            var result = await _api.GetCharacterHeroPointsAsync(id, apiKey, cts?.Token ?? default);
+            var result = await _api.GetCharacterHeroPointsAsync(id, apiKey, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -134,7 +134,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             using var cts = ctsFactory();
             var id = _charactersConfig.Id;
 
-            var result = await _api.GetCharacterInventoryAsync(id, apiKey, cts?.Token ?? default);
+            var result = await _api.GetCharacterInventoryAsync(id, apiKey, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -146,7 +146,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             using var cts = ctsFactory();
             var id = _charactersConfig.Id;
 
-            var result = await _api.GetCharacterRecipesAsync(id, apiKey, cts?.Token ?? default);
+            var result = await _api.GetCharacterRecipesAsync(id, apiKey, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -158,7 +158,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             using var cts = ctsFactory();
             var id = _charactersConfig.SabConfig.Id;
 
-            var result = await _api.GetCharacterSabAsync(id, apiKey, cts?.Token ?? default);
+            var result = await _api.GetCharacterSabAsync(id, apiKey, cts.GetTokenOrDefault());
 
             CollectionAssert.IsSubsetOf(_charactersConfig.SabConfig.ZoneIds.ToList(), result.Zones.Select(x => x.Id).ToList());
             CollectionAssert.IsSubsetOf(_charactersConfig.SabConfig.UnlockIds.ToList(), result.Unlocks.Select(x => x.Id).ToList());
@@ -172,7 +172,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             using var cts = ctsFactory();
             var id = _charactersConfig.Id;
 
-            var result = await _api.GetCharacterSkillsAsync(id, apiKey, cts?.Token ?? default);
+            var result = await _api.GetCharacterSkillsAsync(id, apiKey, cts.GetTokenOrDefault());
 
             Assert.IsNotNull(result);
         }
@@ -184,7 +184,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             using var cts = ctsFactory();
             var id = _charactersConfig.Id;
 
-            var result = await _api.GetCharacterSpecializationsAsync(id, apiKey, cts?.Token ?? default);
+            var result = await _api.GetCharacterSpecializationsAsync(id, apiKey, cts.GetTokenOrDefault());
 
             Assert.IsNotNull(result);
         }
@@ -196,7 +196,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
             using var cts = ctsFactory();
             var id = _charactersConfig.Id;
 
-            var result = await _api.GetCharacterTrainingAsync(id, apiKey, cts?.Token ?? default);
+            var result = await _api.GetCharacterTrainingAsync(id, apiKey, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }

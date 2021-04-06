@@ -49,5 +49,8 @@ namespace GW2Api.NET.V2
                 }.ConfigurePage(page, pageSize),
                 token
             );
+
+        public Task<IList<int>> GetAllItemIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("items", token);
     }
 }

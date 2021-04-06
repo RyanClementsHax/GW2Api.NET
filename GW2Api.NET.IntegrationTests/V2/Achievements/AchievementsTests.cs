@@ -25,7 +25,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAllAchievementIdsAsync(cts?.Token ?? default);
+            var result = await _api.GetAllAchievementIdsAsync(cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -45,7 +45,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             using var cts = ctsFactory();
             var (lang, name) = langNameTuple;
 
-            var result = await _api.GetAchievementAsync(id, lang, cts?.Token ?? default);
+            var result = await _api.GetAchievementAsync(id, lang, cts.GetTokenOrDefault());
 
             Assert.AreEqual(name, result.Name);
         }
@@ -57,7 +57,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         {
             using var cts = ctsFactory();
 
-            await _api.GetAchievementsAsync(ids: null, lang, cts?.Token ?? default);
+            await _api.GetAchievementsAsync(ids: null, lang, cts.GetTokenOrDefault());
         }
 
         public static IEnumerable<object[]> GetAchievementsAsync_TestData()
@@ -78,7 +78,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             using var cts = ctsFactory();
             var (lang, names) = langNamesTuple;
 
-            var result = await _api.GetAchievementsAsync(ids, lang, cts?.Token ?? default);
+            var result = await _api.GetAchievementsAsync(ids, lang, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
         }
@@ -89,7 +89,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetTodaysDailyAchievementsAsync(cts?.Token ?? default);
+            var result = await _api.GetTodaysDailyAchievementsAsync(cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Pve.Any());
             Assert.IsTrue(result.Pvp.Any());
@@ -103,7 +103,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetTomorrowsDailyAchievementsAsync(cts?.Token ?? default);
+            var result = await _api.GetTomorrowsDailyAchievementsAsync(cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Pve.Any());
             Assert.IsTrue(result.Pvp.Any());
@@ -117,7 +117,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAllAchievementGroupIdsAsync(cts?.Token ?? default);
+            var result = await _api.GetAllAchievementGroupIdsAsync(cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -137,7 +137,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             using var cts = ctsFactory();
             var (lang, name) = langNameTuple;
 
-            var result = await _api.GetAchievementGroupAsync(id, lang, cts?.Token ?? default);
+            var result = await _api.GetAchievementGroupAsync(id, lang, cts.GetTokenOrDefault());
 
             Assert.AreEqual(name, result.Name);
         }
@@ -149,7 +149,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         {
             using var cts = ctsFactory();
 
-            await _api.GetAchievementGroupsAsync(ids: null, lang, cts?.Token ?? default);
+            await _api.GetAchievementGroupsAsync(ids: null, lang, cts.GetTokenOrDefault());
         }
 
         public static IEnumerable<object[]> GetAchievementGroupsAsync_TestData()
@@ -176,7 +176,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             using var cts = ctsFactory();
             var (lang, names) = langNamesTuple;
 
-            var result = await _api.GetAchievementGroupsAsync(ids, lang, cts?.Token ?? default);
+            var result = await _api.GetAchievementGroupsAsync(ids, lang, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
         }
@@ -187,7 +187,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAllAchievementCategoryIdsAsync(cts?.Token ?? default);
+            var result = await _api.GetAllAchievementCategoryIdsAsync(cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -207,7 +207,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             using var cts = ctsFactory();
             var (lang, name) = langNameTuple;
 
-            var result = await _api.GetAchievementCategoryAsync(id, lang, cts?.Token ?? default);
+            var result = await _api.GetAchievementCategoryAsync(id, lang, cts.GetTokenOrDefault());
 
             Assert.AreEqual(name, result.Name);
         }
@@ -219,7 +219,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         {
             using var cts = ctsFactory();
 
-            await _api.GetAchievementCategoriesAsync(ids: null, lang, cts?.Token ?? default);
+            await _api.GetAchievementCategoriesAsync(ids: null, lang, cts.GetTokenOrDefault());
         }
 
         public static IEnumerable<object[]> GetAchievementCategoriesAsync_TestData()
@@ -240,7 +240,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             using var cts = ctsFactory();
             var (lang, names) = langNamesTuple;
 
-            var result = await _api.GetAchievementCategoriesAsync(ids, lang, cts?.Token ?? default);
+            var result = await _api.GetAchievementCategoriesAsync(ids, lang, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
         }
