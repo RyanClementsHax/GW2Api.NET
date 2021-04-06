@@ -2,6 +2,7 @@ using GW2Api.NET.V2;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Armor;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Back;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Bag;
+using GW2Api.NET.V2.Items.Dto.ItemTypes.Container;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -116,6 +117,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
                     new(100, "Rampager's Seer Coat of Divinity", typeof(Armor)),
                     new(56, "Strong Back Brace", typeof(Back)),
                     new(9480, "8 Slot Invisible Bag", typeof(Bag)),
+                    new(36520, "Bag of Coins", typeof(Container)),
                 },
                 TestData.DefaultCtsFactories
             }.Permute();

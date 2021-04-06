@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace GW2Api.NET.V2.Items.Dto.ItemTypes.Bag
+namespace GW2Api.NET.V2.Items.Dto.ItemTypes.Container
 {
-    public record Bag(
+    public record Container(
         int Id,
         string ChatLink,
         string Name,
@@ -18,7 +18,7 @@ namespace GW2Api.NET.V2.Items.Dto.ItemTypes.Bag
         IList<UpgradeInfo> UpgradesInto,
         IList<UpgradeInfo> UpgradesFrom,
 
-        BagDetails Details
+        ContainerDetails Details
     ) : Item(
         Id,
         ChatLink,
