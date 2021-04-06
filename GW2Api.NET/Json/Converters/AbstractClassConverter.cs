@@ -22,14 +22,15 @@ namespace GW2Api.NET.Json.Converters
                 .Where(x =>
                     x.IsClass
                     && x.IsSubclassOf(typeof(T))
-                    && x.GetCustomAttributes(typeof(JsonDiscriminatorAttribute)).Any()
                 );
 
             foreach (var type in types)
             {
-                var discriminator = ((JsonDiscriminatorAttribute)type.GetCustomAttribute(typeof(JsonDiscriminatorAttribute)))
-                    .Discriminator
-                    .ToLower();
+                var discriminator = type.GetCustomAttributes(typeof(JsonDiscriminatorAttribute)).Any()
+                    ? ((JsonDiscriminatorAttribute)type.GetCustomAttribute(typeof(JsonDiscriminatorAttribute)))
+                        .Discriminator
+                        .ToLower()
+                    : type.Name.ToLower();
                 if (!_discriminatorToTypeMap.TryAdd(discriminator, type))
                 {
                     _discriminatorToTypeMap.TryGetValue(discriminator, out var existingType);

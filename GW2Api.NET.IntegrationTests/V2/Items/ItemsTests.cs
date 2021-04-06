@@ -1,4 +1,5 @@
 using GW2Api.NET.V2;
+using GW2Api.NET.V2.Items.Dto.ItemTypes.Armor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -103,6 +104,31 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
             var result = await _api.GetAllItemIdsAsync(cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetItemAync_TestData()
+            => new List<object[]>
+            {
+                new object[]
+                {
+                    new TestItem(100, new [] { (null, "Rampager's Seer Coat of Divinity"), ("es", "Abrigo de vidente de divinidad de violento") }, typeof(Armor))
+                },
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetItemAync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetItemAync_ValidItemId_ReturnsThatItem(TestItem item, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            foreach (var (lang, name) in item.LangToNameMap)
+            {
+                var result = await _api.GetItemAync(item.Id, lang, cts.GetTokenOrDefault());
+
+                Assert.AreEqual(name, result.Name);
+                Assert.AreEqual(item.Type, result.GetType());
+            }
         }
     }
 }

@@ -1,7 +1,10 @@
-﻿namespace GW2Api.NET.V2.Characters.Dto
+﻿using GW2Api.NET.V2.Items.Dto.ItemTypes.Common;
+using System.Collections.Generic;
+
+namespace GW2Api.NET.V2.Characters.Dto
 {
     public record EquipmentStats(
         int Id,
-        EquipmentAttributes Attributes
+        IDictionary<AttributeType, int> Attributes
     );
 }

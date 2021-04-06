@@ -52,5 +52,15 @@ namespace GW2Api.NET.V2
 
         public Task<IList<int>> GetAllItemIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>("items", token);
+
+        public Task<Item> GetItemAync(int id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<Item>(
+                $"items/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
     }
 }
