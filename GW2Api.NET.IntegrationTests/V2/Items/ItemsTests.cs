@@ -1,5 +1,6 @@
 using GW2Api.NET.V2;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Armor;
+using GW2Api.NET.V2.Items.Dto.ItemTypes.Back;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -109,9 +110,10 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
         public static IEnumerable<object[]> GetItemAync_TestData()
             => new List<object[]>
             {
-                new object[]
+                new TestItem[]
                 {
-                    new TestItem(100, new [] { (null, "Rampager's Seer Coat of Divinity"), ("es", "Abrigo de vidente de divinidad de violento") }, typeof(Armor))
+                    new(100, "Rampager's Seer Coat of Divinity", typeof(Armor)),
+                    new(56, "Strong Back Brace", typeof(Back))
                 },
                 TestData.DefaultCtsFactories
             }.Permute();
@@ -122,13 +124,32 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
         {
             using var cts = ctsFactory();
 
-            foreach (var (lang, name) in item.LangToNameMap)
-            {
-                var result = await _api.GetItemAync(item.Id, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetItemAync(item.Id, item.Lang, cts.GetTokenOrDefault());
 
-                Assert.AreEqual(name, result.Name);
-                Assert.AreEqual(item.Type, result.GetType());
-            }
+            Assert.AreEqual(item.Name, result.Name);
+            Assert.AreEqual(item.Type, result.GetType());
+        }
+
+        public static IEnumerable<object[]> GetItemAyncWithLang_TestData()
+            => new List<object[]>
+            {
+                new object[]
+                {
+                    new TestItem(100, "Abrigo de vidente de divinidad de violento", typeof(Armor), "es")
+                },
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetItemAyncWithLang_TestData), DynamicDataSourceType.Method)]
+        public async Task GetItemAync_ValidItemIdAndNonNullLang_ReturnsThatItemInThatLang(TestItem item, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetItemAync(item.Id, item.Lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(item.Name, result.Name);
+            Assert.AreEqual(item.Type, result.GetType());
         }
     }
 }
