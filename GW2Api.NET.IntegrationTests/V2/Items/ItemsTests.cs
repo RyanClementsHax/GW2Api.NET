@@ -1,8 +1,10 @@
 using GW2Api.NET.V2;
+using GW2Api.NET.V2.Items.Dto;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Armor;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Back;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Bag;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Container;
+using GW2Api.NET.V2.Items.Dto.ItemTypes.Gathering;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -106,6 +108,26 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
 
             var result = await _api.GetAllItemIdsAsync(cts.GetTokenOrDefault());
 
+            //var channel = result.Randomize().Select(x => _api.GetItemAync(x)).Interleaved();
+            //var results = new Dictionary<Type, Item>();
+
+            //await foreach(var itemTask in channel)
+            //{
+            //    try
+            //    {
+            //        var itemDetail = await itemTask;
+            //        if (itemDetail is Gathering)
+            //        {
+            //             break;
+            //        }
+            //        results.TryAdd(itemDetail.GetType(), itemDetail);
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        var i = 1;
+            //    }
+            //}
+
             Assert.IsTrue(result.Any());
         }
 
@@ -118,6 +140,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
                     new(56, "Strong Back Brace", typeof(Back)),
                     new(9480, "8 Slot Invisible Bag", typeof(Bag)),
                     new(36520, "Bag of Coins", typeof(Container)),
+                    new(87472, "Harvesting Sickle of Bounty", typeof(Gathering)),
                 },
                 TestData.DefaultCtsFactories
             }.Permute();

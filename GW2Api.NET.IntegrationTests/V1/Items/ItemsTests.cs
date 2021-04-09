@@ -7,6 +7,7 @@ using GW2Api.NET.V1.Items.Dto.ItemTypes.Consumable.ConsumableTypes;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.Consumable.ConsumableTypes.UnlockTypes;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.Container;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.CraftingMaterial;
+using GW2Api.NET.V1.Items.Dto.ItemTypes.Gathering;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.Gizmo;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.Minipet;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.UpgradeComponent;
@@ -67,6 +68,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
         [DataRow(13000, "Bronze Trident Head", typeof(CraftingMaterialDetail))]
         [DataRow(6, "((208738))", typeof(WeaponDetail))]
         [DataRow(22335, "Commander's Compendium", typeof(GizmoDetail))]
+        [DataRow(87472, "Harvesting Sickle of Bounty", typeof(GatheringDetail)),]
         [DataRow(20211, "Mini Black Moa", typeof(MinipetDetail))]
         [DataRow(49424, "+1 Agony Infusion", typeof(UpgradeComponentDetail))]
         public async Task GetItemDetailAsync_ValidItemId_ReturnsThatItemDetail(int itemId, string itemName, Type type)
