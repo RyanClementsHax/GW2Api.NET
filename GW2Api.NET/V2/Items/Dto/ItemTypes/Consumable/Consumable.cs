@@ -16,7 +16,9 @@ namespace GW2Api.NET.V2.Items.Dto.ItemTypes.Consumable
         IList<GameType> GameTypes,
         IList<Restriction> Restrictions,
         IList<UpgradeInfo> UpgradesInto,
-        IList<UpgradeInfo> UpgradesFrom
+        IList<UpgradeInfo> UpgradesFrom,
+
+        ConsumableDetails Details
     ) : Item(
         Id,
         ChatLink,

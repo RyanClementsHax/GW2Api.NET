@@ -3,6 +3,7 @@ using GW2Api.NET.V2.Items.Dto;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Armor;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Back;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Bag;
+using GW2Api.NET.V2.Items.Dto.ItemTypes.Consumable;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Container;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Gathering;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Gizmo;
@@ -139,7 +140,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
             {
                 new TestItem[]
                 {
-                    new(19986, "Black Lion Salvage Kit", typeof(Tool)),
+                    new(89682, "Recipe: Diviner's Short Bow", typeof(Consumable)),
                     new(100, "Rampager's Seer Coat of Divinity", typeof(Armor)),
                     new(56, "Strong Back Brace", typeof(Back)),
                     new(9480, "8 Slot Invisible Bag", typeof(Bag)),
@@ -147,10 +148,10 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
                     new(87472, "Harvesting Sickle of Bounty", typeof(Gathering)),
                     new(22335, "Commander's Compendium", typeof(Gizmo)),
                     new(20211, "Mini Black Moa", typeof(MiniPet)),
+                    new(19986, "Black Lion Salvage Kit", typeof(Tool)),
                     // tool: 19986
                     // container: 44222
                     // weapon: 15496
-                    // consumable: 89682
                     // crafting material: 12528
                     // trophy: 91072
                     // upgrade component: 91453
