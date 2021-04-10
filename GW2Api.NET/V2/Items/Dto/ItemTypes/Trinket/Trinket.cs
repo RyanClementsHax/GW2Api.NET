@@ -16,7 +16,9 @@ namespace GW2Api.NET.V2.Items.Dto.ItemTypes.Trinket
         IList<GameType> GameTypes,
         IList<Restriction> Restrictions,
         IList<UpgradeInfo> UpgradesInto,
-        IList<UpgradeInfo> UpgradesFrom
+        IList<UpgradeInfo> UpgradesFrom,
+
+        TrinketDetails Details
     ) : Item(
         Id,
         ChatLink,

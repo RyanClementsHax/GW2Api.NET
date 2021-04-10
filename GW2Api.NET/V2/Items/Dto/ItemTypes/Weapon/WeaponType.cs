@@ -1,0 +1,29 @@
+﻿namespace GW2Api.NET.V2.Items.Dto.ItemTypes.Weapon
+{
+    public enum WeaponType
+    {
+        Axe,
+        Dagger,
+        Focus,
+        Greatsword,
+        Hammer,
+        Harpoon,
+        LargeBundle,
+        LongBow,
+        Mace,
+        Pistol,
+        Rifle,
+        Scepter,
+        Shield,
+        ShortBow,
+        SmallBundle,
+        Speargun,
+        Staff,
+        Sword,
+        Torch,
+        Toy,
+        Trident,
+        TwoHanded,
+        Warhorn
+    }
+}

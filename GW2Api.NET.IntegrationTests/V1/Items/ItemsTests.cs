@@ -10,6 +10,9 @@ using GW2Api.NET.V1.Items.Dto.ItemTypes.CraftingMaterial;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.Gathering;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.Gizmo;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.Minipet;
+using GW2Api.NET.V1.Items.Dto.ItemTypes.Tool;
+using GW2Api.NET.V1.Items.Dto.ItemTypes.Trinket;
+using GW2Api.NET.V1.Items.Dto.ItemTypes.Trophy;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.UpgradeComponent;
 using GW2Api.NET.V1.Items.Dto.ItemTypes.Weapon;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -58,19 +61,21 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
             Assert.IsTrue(itemIds.Any());
         }
 
-        // missing some types due to difficulty of procuring examples
-        // missing tool, trait, trinket types
+        // missing trait type due to difficulty of procuring examples
         [TestMethod]
         [DataRow(100, "Rampager's Seer Coat of Divinity", typeof(ArmorDetail))]
         [DataRow(56, "Strong Back Brace", typeof(BackDetail))]
         [DataRow(9480, "8 Slot Invisible Bag", typeof(BagDetail))]
         [DataRow(36520, "Bag of Coins", typeof(ContainerDetail))]
         [DataRow(13000, "Bronze Trident Head", typeof(CraftingMaterialDetail))]
-        [DataRow(6, "((208738))", typeof(WeaponDetail))]
-        [DataRow(22335, "Commander's Compendium", typeof(GizmoDetail))]
         [DataRow(87472, "Harvesting Sickle of Bounty", typeof(GatheringDetail))]
+        [DataRow(22335, "Commander's Compendium", typeof(GizmoDetail))]
         [DataRow(20211, "Mini Black Moa", typeof(MinipetDetail))]
         [DataRow(49424, "+1 Agony Infusion", typeof(UpgradeComponentDetail))]
+        [DataRow(19986, "Black Lion Salvage Kit", typeof(ToolDetail))]
+        [DataRow(23190, "Carrion Amulet", typeof(TrinketDetail))]
+        [DataRow(91072, "Vision of Action: Sandswept Isles", typeof(TrophyDetail))]
+        [DataRow(6, "((208738))", typeof(WeaponDetail))]
         public async Task GetItemDetailAsync_ValidItemId_ReturnsThatItemDetail(int itemId, string itemName, Type type)
         {
             var itemDetail = await _api.GetItemDetailAsync(itemId);

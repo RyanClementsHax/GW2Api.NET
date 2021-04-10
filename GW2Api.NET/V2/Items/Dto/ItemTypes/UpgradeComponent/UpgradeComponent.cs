@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace GW2Api.NET.V2.Items.Dto.ItemTypes.UpgradeComponent
 {
@@ -20,7 +16,9 @@ namespace GW2Api.NET.V2.Items.Dto.ItemTypes.UpgradeComponent
         IList<GameType> GameTypes,
         IList<Restriction> Restrictions,
         IList<UpgradeInfo> UpgradesInto,
-        IList<UpgradeInfo> UpgradesFrom
+        IList<UpgradeInfo> UpgradesFrom,
+
+        UpgradeComponentDetails Details
     ) : Item(
         Id,
         ChatLink,

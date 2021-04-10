@@ -3,5 +3,9 @@
 namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Tool.ToolTypes
 {
     [JsonDiscriminator("Salvage")]
-    public record Salvage() : ToolSubDetail();
+    public record Salvage(
+        int Charges
+    ) : ToolSubDetail(
+        Charges
+    );
 }

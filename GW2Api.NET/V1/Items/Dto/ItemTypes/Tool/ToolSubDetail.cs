@@ -4,5 +4,7 @@ using System.Text.Json.Serialization;
 namespace GW2Api.NET.V1.Items.Dto.ItemTypes.Tool
 {
     [JsonConverter(typeof(AbstractClassConverter<ToolSubDetail>))]
-    public abstract record ToolSubDetail();
+    public abstract record ToolSubDetail(
+        [property: JsonConverter(typeof(StringToIntConverter))] int Charges
+    );
 }

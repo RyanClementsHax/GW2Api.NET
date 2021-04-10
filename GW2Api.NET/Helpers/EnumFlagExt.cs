@@ -6,7 +6,7 @@ namespace GW2Api.NET.Helpers
 {
     public static class EnumFlagExt
     {
-        internal static IList<T> ToList<T>(this T flags) where T : struct, IConvertible
+        public static IList<T> ToList<T>(this T flags) where T : struct, IConvertible
         {
             var flagsAsInt = (int)(object)flags;
             var list = new List<T>();
@@ -19,7 +19,7 @@ namespace GW2Api.NET.Helpers
             return list;
         }
 
-        internal static T Combine<T>(this IEnumerable<T> permissions) where T : struct, IConvertible
+        public static T Combine<T>(this IEnumerable<T> permissions) where T : struct, IConvertible
             => (T)(object)permissions.Aggregate(0, (acc, curr) => (int)(object)acc | (int)(object)curr);
     }
 }

@@ -1,14 +1,18 @@
 using GW2Api.NET.V2;
-using GW2Api.NET.V2.Items.Dto;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Armor;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Back;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Bag;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Consumable;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Container;
+using GW2Api.NET.V2.Items.Dto.ItemTypes.CraftingMaterial;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Gathering;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Gizmo;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.MiniPet;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Tool;
+using GW2Api.NET.V2.Items.Dto.ItemTypes.Trinket;
+using GW2Api.NET.V2.Items.Dto.ItemTypes.Trophy;
+using GW2Api.NET.V2.Items.Dto.ItemTypes.UpgradeComponent;
+using GW2Api.NET.V2.Items.Dto.ItemTypes.Weapon;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -112,19 +116,18 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
 
             var result = await _api.GetAllItemIdsAsync(cts.GetTokenOrDefault());
 
-            //var channel = result.Randomize().Select(x => _api.GetItemAync(x)).Interleaved();
+            //var items = result.Randomize().Select(x => _api.GetItemAync(x)).Race();
             //var results = new Dictionary<Type, Item>();
 
-            //await foreach (var itemTask in channel)
+            //await foreach (var item in items)
             //{
             //    try
             //    {
-            //        var itemDetail = await itemTask;
-            //        if (itemDetail is Tool)
+            //        if (item is Key)
             //        {
             //            break;
             //        }
-            //        results.TryAdd(itemDetail.GetType(), itemDetail);
+            //        results.TryAdd(item.GetType(), item);
             //    }
             //    catch (Exception e)
             //    {
@@ -140,28 +143,20 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
             {
                 new TestItem[]
                 {
-                    new(89682, "Recipe: Diviner's Short Bow", typeof(Consumable)),
                     new(100, "Rampager's Seer Coat of Divinity", typeof(Armor)),
                     new(56, "Strong Back Brace", typeof(Back)),
                     new(9480, "8 Slot Invisible Bag", typeof(Bag)),
+                    new(12528, "Bowl of Fancy Tangy Sautee Mix", typeof(CraftingMaterial)),
+                    new(89682, "Recipe: Diviner's Short Bow", typeof(Consumable)),
                     new(36520, "Bag of Coins", typeof(Container)),
                     new(87472, "Harvesting Sickle of Bounty", typeof(Gathering)),
                     new(22335, "Commander's Compendium", typeof(Gizmo)),
                     new(20211, "Mini Black Moa", typeof(MiniPet)),
                     new(19986, "Black Lion Salvage Kit", typeof(Tool)),
-                    // tool: 19986
-                    // container: 44222
-                    // weapon: 15496
-                    // crafting material: 12528
-                    // trophy: 91072
-                    // upgrade component: 91453
-                    // armor: 38177
-                    // gizmo: 86549
-                    // gathering: 87443
-                    // trinket: 23190
-                    // minipet: 64221
-                    // bag: 84557
-                    // back: 42399
+                    new(23190, "Carrion Amulet", typeof(Trinket)),
+                    new(91072, "Vision of Action: Sandswept Isles", typeof(Trophy)),
+                    new(91453, "Superior Sigil of Mad Scientists", typeof(UpgradeComponent)),
+                    new(6, "((208738))", typeof(Weapon)),
                 },
                 TestData.DefaultCtsFactories
             }.Permute();
