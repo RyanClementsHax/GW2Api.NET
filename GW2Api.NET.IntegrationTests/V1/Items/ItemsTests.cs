@@ -59,7 +59,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
         }
 
         // missing some types due to difficulty of procuring examples
-        // missing gathering, tool, trait, trinket types
+        // missing tool, trait, trinket types
         [TestMethod]
         [DataRow(100, "Rampager's Seer Coat of Divinity", typeof(ArmorDetail))]
         [DataRow(56, "Strong Back Brace", typeof(BackDetail))]
@@ -68,7 +68,7 @@ namespace GW2Api.NET.IntegrationTests.V1.Items
         [DataRow(13000, "Bronze Trident Head", typeof(CraftingMaterialDetail))]
         [DataRow(6, "((208738))", typeof(WeaponDetail))]
         [DataRow(22335, "Commander's Compendium", typeof(GizmoDetail))]
-        [DataRow(87472, "Harvesting Sickle of Bounty", typeof(GatheringDetail)),]
+        [DataRow(87472, "Harvesting Sickle of Bounty", typeof(GatheringDetail))]
         [DataRow(20211, "Mini Black Moa", typeof(MinipetDetail))]
         [DataRow(49424, "+1 Agony Infusion", typeof(UpgradeComponentDetail))]
         public async Task GetItemDetailAsync_ValidItemId_ReturnsThatItemDetail(int itemId, string itemName, Type type)

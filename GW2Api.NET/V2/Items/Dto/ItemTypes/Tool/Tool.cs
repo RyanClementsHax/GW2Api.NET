@@ -16,7 +16,9 @@ namespace GW2Api.NET.V2.Items.Dto.ItemTypes.Tool
         IList<GameType> GameTypes,
         IList<Restriction> Restrictions,
         IList<UpgradeInfo> UpgradesInto,
-        IList<UpgradeInfo> UpgradesFrom
+        IList<UpgradeInfo> UpgradesFrom,
+
+        ToolDetails Details
     ) : Item(
         Id,
         ChatLink,
