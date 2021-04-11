@@ -194,5 +194,28 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
             Assert.AreEqual(item.Name, result.Name);
             Assert.AreEqual(item.Type, result.GetType());
         }
+
+        public static IEnumerable<object[]> GetItemsAsync_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<int> { 100, 56, 9480 } },
+                new [] {
+                    (null, new List<string> { "Rampager's Seer Coat of Divinity", "Strong Back Brace", "8 Slot Invisible Bag" }.AsEnumerable()),
+                    ("es", new List<string> { "Abrigo de vidente de divinidad de violento", "Corsé lumbar fuerte", "Saco invisible de 8 casillas" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetItemsAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetItemsAsync_ValidIds_ReturnsThoseItems(IEnumerable<int> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, names) = langNamesTuple;
+
+            var result = await _api.GetItemsAsync(ids, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
     }
 }
