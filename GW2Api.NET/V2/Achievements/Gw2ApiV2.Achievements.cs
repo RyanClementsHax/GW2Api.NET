@@ -74,6 +74,16 @@ namespace GW2Api.NET.V2
                 token
             );
         }
+        public Task<IList<AchievementGroup>> GetAllAchievementGroupsAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<AchievementGroup>>(
+                "achievements/groups",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
 
         public Task<IList<int>> GetAllAchievementCategoryIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>("achievements/categories", token);
@@ -103,5 +113,16 @@ namespace GW2Api.NET.V2
                 token
             );
         }
+
+        public Task<IList<AchievementCategory>> GetAllAchievementCategoriesAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<AchievementCategory>>(
+                "achievements/categories",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
     }
 }

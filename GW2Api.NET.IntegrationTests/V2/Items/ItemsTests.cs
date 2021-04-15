@@ -99,6 +99,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllFinishersAsyncc_AnyParams_ReturnsAllFinishers(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllFinishersAsync(lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetFinishersAsync_ValidId_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();

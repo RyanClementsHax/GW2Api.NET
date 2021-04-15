@@ -37,5 +37,16 @@ namespace GW2Api.NET.V2
                 token
             );
         }
+
+        public Task<IList<PvpGame>> Get10MostRecentPvpGamesAsync(string accessToken = null, CancellationToken token = default)
+            => GetWithAuthAsync<IList<PvpGame>>(
+                "pvp/games",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" }
+                },
+                accessToken,
+                token
+            );
     }
 }

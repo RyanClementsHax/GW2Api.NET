@@ -39,6 +39,16 @@ namespace GW2Api.NET.V2
                 token
             );
         }
+        public Task<IList<Finisher>> GetAllFinishersAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<Finisher>>(
+                "finishers",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
 
         public Task<Page<IList<Finisher>>> GetFinishersAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Finisher>>(

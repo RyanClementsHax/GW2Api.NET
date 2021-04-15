@@ -12,5 +12,6 @@ namespace GW2Api.NET.V2
         Task<IList<Guid>> GetAllPvpGameIdsAsync(string accessToken = null, CancellationToken token = default);
         Task<PvpGame> GetPvpGameAsync(Guid id, string accessToken = null, CancellationToken token = default);
         Task<IList<PvpGame>> GetPvpGamesAsync(IEnumerable<Guid> ids, string accessToken = null, CancellationToken token = default);
+        Task<IList<PvpGame>> Get10MostRecentPvpGamesAsync(string accessToken = null, CancellationToken token = default);
     }
 }

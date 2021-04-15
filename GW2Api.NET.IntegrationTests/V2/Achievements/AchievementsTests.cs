@@ -182,6 +182,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         }
 
         [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllAchievementGroupsAsync_AnyParams_ReturnsAllAchievementGroups(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllAchievementGroupsAsync(lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetAllAchievementCategoryIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
@@ -243,6 +254,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             var result = await _api.GetAchievementCategoriesAsync(ids, lang, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllAchievementCategoriesAsync_AnyParams_ReturnsAllAchievements(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllAchievementCategoriesAsync(lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
         }
     }
 }

@@ -66,5 +66,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
 
             CollectionAssert.AreEquivalent(ids.ToList(), result.Select(x => x.Id).ToList());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task Get10MostRecentPvpGamesAsync_ValidApiKey_Returns10MostRecentGames(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.Get10MostRecentPvpGamesAsync(apiKey, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
     }
 }
