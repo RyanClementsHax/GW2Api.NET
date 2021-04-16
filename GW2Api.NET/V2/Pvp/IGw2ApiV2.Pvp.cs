@@ -1,6 +1,7 @@
 ﻿using GW2Api.NET.V2.Pvp.Dto;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,5 +14,9 @@ namespace GW2Api.NET.V2
         Task<PvpGame> GetPvpGameAsync(Guid id, string accessToken = null, CancellationToken token = default);
         Task<IList<PvpGame>> GetPvpGamesAsync(IEnumerable<Guid> ids, string accessToken = null, CancellationToken token = default);
         Task<IList<PvpGame>> Get10MostRecentPvpGamesAsync(string accessToken = null, CancellationToken token = default);
+        Task<IList<int>> GetAllPvpAmuletIdsAsync(CancellationToken token = default);
+        Task<PvpAmulet> GetPvpAmuletAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<PvpAmulet>> GetPvpAmuletsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<PvpAmulet>> GetAllPvpAmuletsAsync(CultureInfo lang = null, CancellationToken token = default);
     }
 }

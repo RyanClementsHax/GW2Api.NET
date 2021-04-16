@@ -2,6 +2,7 @@
 using GW2Api.NET.V2.Pvp.Dto;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -46,6 +47,46 @@ namespace GW2Api.NET.V2
                     { "ids", "all" }
                 },
                 accessToken,
+                token
+            );
+
+        public Task<IList<int>> GetAllPvpAmuletIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("pvp/amulets", token);
+
+        public Task<PvpAmulet> GetPvpAmuletAsync(int id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<PvpAmulet>(
+                $"pvp/amulets/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+
+        public Task<IList<PvpAmulet>> GetPvpAmuletsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<PvpAmulet>>(
+                "pvp/amulets",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+        }
+
+        public Task<IList<PvpAmulet>> GetAllPvpAmuletsAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<PvpAmulet>>(
+                "pvp/amulets",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
                 token
             );
     }
