@@ -124,5 +124,45 @@ namespace GW2Api.NET.V2
                 },
                 token
             );
+
+        public Task<IList<int>> GetAllMaterialIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("materials", token);
+
+        public Task<Material> GetMaterialAsync(int id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<Material>(
+                $"materials/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+
+        public Task<IList<Material>> GetMaterialsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<Material>>(
+                "materials",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+        }
+
+        public Task<IList<Material>> GetAllMaterialsAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<Material>>(
+                "materials",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
     }
 }

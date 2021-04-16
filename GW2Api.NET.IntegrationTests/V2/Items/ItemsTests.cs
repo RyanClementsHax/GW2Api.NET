@@ -305,5 +305,80 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
 
             Assert.IsTrue(result.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllMaterialIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllMaterialIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetMaterialAsync_TestData()
+            => new List<object[]>
+            {
+                new object[] { 5 },
+                new [] { (null, "Cooking Materials"), ("es", "Materiales de cocina") }.ToLangStrObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetMaterialAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetMaterialAsync_ValidId_ReturnsThatMaterial(int id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, name) = langNameTuple;
+
+            var result = await _api.GetMaterialAsync(id, lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(name, result.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMaterialsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetMaterialsAsync(ids: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetMaterialsAsync_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<int> { 5, 6, 29 } },
+                new [] {
+                    (null, new List<string> { "Cooking Materials", "Basic Crafting Materials", "Intermediate Crafting Materials" }.AsEnumerable()),
+                    ("es", new List<string> { "Materiales de cocina", "Materiales de artesanía básicos", "Materiales de artesanía intermedios" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetMaterialsAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetMaterialsAsync_ValidIds_ReturnsThoseMaterials(IEnumerable<int> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, names) = langNamesTuple;
+
+            var result = await _api.GetMaterialsAsync(ids, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllMaterialsAsync_AnyParams_ReturnsAllFinishers(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllMaterialsAsync(lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
     }
 }
