@@ -11,7 +11,7 @@ namespace GW2Api.NET.V2
 {
     public partial class Gw2ApiV2
     {
-        public Task<IList<int>> GetFinisherIdsAsync(CancellationToken token = default)
+        public Task<IList<int>> GetAllFinisherIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>("finishers", token);
 
         public Task<Finisher> GetFinisherAsync(int id, CultureInfo lang = null, CancellationToken token = default)
@@ -39,6 +39,7 @@ namespace GW2Api.NET.V2
                 token
             );
         }
+
         public Task<IList<Finisher>> GetAllFinishersAsync(CultureInfo lang = null, CancellationToken token = default)
             => GetAsync<IList<Finisher>>(
                 "finishers",
@@ -79,6 +80,46 @@ namespace GW2Api.NET.V2
                 new Dictionary<string, string>
                 {
                     { "ids", ids.ToUrlParam() },
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+
+        public Task<IList<int>> GetAllItemStatsIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("itemstats", token);
+
+        public Task<ItemStats> GetItemStatsAsync(int id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<ItemStats>(
+                $"itemstats/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+
+        public Task<IEnumerable<ItemStats>> GetItemStatsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IEnumerable<ItemStats>>(
+                "itemstats",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+        }
+
+        public Task<IEnumerable<ItemStats>> GetAllItemStatsAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IEnumerable<ItemStats>>(
+                "itemstats",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
                     { "lang", lang?.TwoLetterISOLanguageName }
                 },
                 token

@@ -9,7 +9,7 @@ namespace GW2Api.NET.V2
 {
     public partial interface IGw2ApiV2
     {
-        Task<IList<int>> GetFinisherIdsAsync(CancellationToken token = default);
+        Task<IList<int>> GetAllFinisherIdsAsync(CancellationToken token = default);
         Task<Finisher> GetFinisherAsync(int id, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Finisher>> GetFinishersAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Finisher>> GetAllFinishersAsync(CultureInfo lang = null, CancellationToken token = default);
@@ -17,5 +17,9 @@ namespace GW2Api.NET.V2
         Task<IList<int>> GetAllItemIdsAsync(CancellationToken token = default);
         Task<Item> GetItemAync(int id, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Item>> GetItemsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<int>> GetAllItemStatsIdsAsync(CancellationToken token = default);
+        Task<ItemStats> GetItemStatsAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IEnumerable<ItemStats>> GetItemStatsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IEnumerable<ItemStats>> GetAllItemStatsAsync(CultureInfo lang = null, CancellationToken token = default);
     }
 }

@@ -35,11 +35,11 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetFinisherIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAllFinisherIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetFinisherIdsAsync(cts.GetTokenOrDefault());
+            var result = await _api.GetAllFinisherIdsAsync(cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -99,7 +99,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetAllFinishersAsyncc_AnyParams_ReturnsAllFinishers(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAllFinishersAsync_AnyParams_ReturnsAllFinishers(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
@@ -126,6 +126,8 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
             using var cts = ctsFactory();
 
             var result = await _api.GetAllItemIdsAsync(cts.GetTokenOrDefault());
+
+            // The following is helpful for finding an item of a specific type efficiently
 
             //var items = result.Randomize().Select(x => _api.GetItemAync(x)).Race();
             //var results = new Dictionary<Type, Item>();
@@ -227,6 +229,81 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
             var result = await _api.GetItemsAsync(ids, lang, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllItemStatsIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllItemStatsIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetItemStatsAsync_TestData()
+            => new List<object[]>
+            {
+                new object[] { 1230 },
+                new [] { (null, "Seraph"), ("es", "Serafín") }.ToLangStrObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetItemStatsAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetItemStatsAsync_ValidId_ReturnsThatItemStats(int id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, name) = langNameTuple;
+
+            var result = await _api.GetItemStatsAsync(id, lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(name, result.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetItemStatsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetItemStatsAsync(ids: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetItemStatsAsync_MultipleIds_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<int> { 1230, 1231, 1232 } },
+                new [] {
+                    (null, new List<string> { "Seraph", "Marauder", "Crusader" }.AsEnumerable()),
+                    ("es", new List<string> { "Serafín", "de salteador", "de cruzado" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetItemStatsAsync_MultipleIds_TestData), DynamicDataSourceType.Method)]
+        public async Task GetItemStatsAsync_ValidIds_ReturnsThoseItemStats(IEnumerable<int> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, names) = langNamesTuple;
+
+            var result = await _api.GetItemStatsAsync(ids, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllItemStatsAsync_AnyParams_ReturnsAllItemStats(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllItemStatsAsync(lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
         }
     }
 }
