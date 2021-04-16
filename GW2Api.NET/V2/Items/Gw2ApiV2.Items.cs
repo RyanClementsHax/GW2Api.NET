@@ -164,5 +164,26 @@ namespace GW2Api.NET.V2
                 },
                 token
             );
+
+        public Task<IList<int>> GetAllRecipeIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("recipes", token);
+
+        public Task<Recipe> GetRecipeAsync(int id, CancellationToken token = default)
+            => GetAsync<Recipe>($"recipes/{id}", token);
+
+        public Task<IList<Recipe>> GetRecipesAsync(IEnumerable<int> ids, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<Recipe>>(
+                "recipes",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() }
+                },
+                token
+            );
+        }
     }
 }

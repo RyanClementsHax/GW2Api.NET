@@ -25,5 +25,8 @@ namespace GW2Api.NET.V2
         Task<Material> GetMaterialAsync(int id, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Material>> GetMaterialsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Material>> GetAllMaterialsAsync(CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<int>> GetAllRecipeIdsAsync(CancellationToken token = default);
+        Task<Recipe> GetRecipeAsync(int id, CancellationToken token = default);
+        Task<IList<Recipe>> GetRecipesAsync(IEnumerable<int> ids, CancellationToken token = default);
     }
 }

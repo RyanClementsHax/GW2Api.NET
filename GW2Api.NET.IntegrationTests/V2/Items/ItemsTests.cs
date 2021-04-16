@@ -372,13 +372,58 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetAllMaterialsAsync_AnyParams_ReturnsAllFinishers(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAllMaterialsAsync_AnyParams_ReturnsAllMaterials(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
             var result = await _api.GetAllMaterialsAsync(lang, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllRecipeIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllRecipeIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetRecipeAsync_ValidId_ReturnsThatRecipe(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var id = 1;
+
+            var result = await _api.GetRecipeAsync(id, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(id, result.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetRecipesAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetRecipesAsync(ids: null, cts.GetTokenOrDefault());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetRecipesAsync_ValidId_ReturnsThoseRecipes(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var ids = new List<int> { 1, 2, 3 };
+
+            var result = await _api.GetRecipesAsync(ids, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(ids, result.Select(x => x.Id).ToList());
         }
     }
 }
