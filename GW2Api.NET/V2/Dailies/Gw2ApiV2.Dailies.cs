@@ -39,5 +39,35 @@ namespace GW2Api.NET.V2
                 },
                 token
             );
+        public Task<IList<string>> GetAllAvailableMapChestIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<string>>("mapchests", token);
+
+        public Task<MapChest> GetMapChestAsync(string id, CancellationToken token = default)
+            => GetAsync<MapChest>($"mapchests/{id}", token);
+
+        public Task<IList<MapChest>> GetMapChestsAsync(IEnumerable<string> ids, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<MapChest>>(
+                "mapchests",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<MapChest>> GetAllMapChestsAsync(CancellationToken token = default)
+            => GetAsync<IList<MapChest>>(
+                "mapchests",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" }
+                },
+                token
+            );
     }
 }

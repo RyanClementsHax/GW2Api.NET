@@ -11,5 +11,9 @@ namespace GW2Api.NET.V2
         Task<TimeGatedRecipe> GetTimeGatedRecipeAsync(string id, CancellationToken token = default);
         Task<IList<TimeGatedRecipe>> GetTimeGatedRecipesAsync(IEnumerable<string> ids, CancellationToken token = default);
         Task<IList<TimeGatedRecipe>> GetAllTimeGatedRecipesAsync(CancellationToken token = default);
+        Task<IList<string>> GetAllAvailableMapChestIdsAsync(CancellationToken token = default);
+        Task<MapChest> GetMapChestAsync(string id, CancellationToken token = default);
+        Task<IList<MapChest>> GetMapChestsAsync(IEnumerable<string> ids, CancellationToken token = default);
+        Task<IList<MapChest>> GetAllMapChestsAsync(CancellationToken token = default);
     }
 }

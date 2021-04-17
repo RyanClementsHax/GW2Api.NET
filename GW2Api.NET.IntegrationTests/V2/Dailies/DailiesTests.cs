@@ -78,5 +78,66 @@ namespace GW2Api.NET.IntegrationTests.V2.Dailies
 
             Assert.IsTrue(result.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllAvailableMapChestIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllAvailableMapChestIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMapChestAsync_ValidId_ReturnsThatMapChest(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var id = "auric_basin_heros_choice_chest";
+
+            var result = await _api.GetMapChestAsync(id, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(id, result.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMapChestsAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetMapChestsAsync(ids: null, cts.GetTokenOrDefault());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMapChestsAsync_ValidIds_ReturnsThoseMapChests(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var ids = new List<string>
+            {
+                "auric_basin_heros_choice_chest",
+                "crystal_oasis_heros_choice_chest",
+                "domain_of_vabbi_heros_choice_chest"
+            };
+
+            var result = await _api.GetMapChestsAsync(ids, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(ids, result.Select(x => x.Id).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllMapChestsAsync_AnyParams_ReturnsAllTimeGatedRecipes(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllMapChestsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
     }
 }
