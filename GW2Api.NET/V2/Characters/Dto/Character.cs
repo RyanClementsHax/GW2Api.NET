@@ -23,7 +23,7 @@ namespace GW2Api.NET.V2.Characters.Dto
         IList<Equipment> Equipment,
         IList<int> Recipes,
         EquipmentPvp EquipmentPvp,
-        IList<Training> Training,
+        IList<CharacterTraining> Training,
         IList<Bag> Bags,
         Specializations Specializations,
         Skills Skills

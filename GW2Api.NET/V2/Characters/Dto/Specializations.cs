@@ -3,8 +3,8 @@
 namespace GW2Api.NET.V2.Characters.Dto
 {
     public record Specializations(
-        IList<Specialization> Pve,
-        IList<Specialization> Pvp,
-        IList<Specialization> Wvw
+        IList<CharacterSpecialization> Pve,
+        IList<CharacterSpecialization> Pvp,
+        IList<CharacterSpecialization> Wvw
     );
 }
