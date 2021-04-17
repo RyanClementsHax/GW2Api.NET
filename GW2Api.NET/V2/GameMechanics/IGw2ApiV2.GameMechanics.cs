@@ -1,5 +1,9 @@
 ﻿using GW2Api.NET.V2.Common;
-using GW2Api.NET.V2.GameMechanics.Dto;
+using GW2Api.NET.V2.GameMechanics.Dto.Masteries;
+using GW2Api.NET.V2.GameMechanics.Dto.Mounts;
+using GW2Api.NET.V2.GameMechanics.Dto.Outfits;
+using GW2Api.NET.V2.GameMechanics.Dto.Pets;
+using GW2Api.NET.V2.GameMechanics.Dto.Professions;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
@@ -33,5 +37,10 @@ namespace GW2Api.NET.V2
         Task<IList<Pet>> GetPetsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Pet>> GetAllPetsAsync(CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<Pet>>> GetPetsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<string>> GetAllProfessionIdsAsync(CancellationToken token = default);
+        Task<ProfessionDetails> GetProfessionAsync(string id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<ProfessionDetails>> GetProfessionsAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<ProfessionDetails>> GetAllProfessionsAsync(CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<ProfessionDetails>>> GetProfessionsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }

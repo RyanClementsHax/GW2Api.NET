@@ -1,7 +1,7 @@
 ﻿using GW2Api.NET.V2.Items.Dto.Common;
 using System.Collections.Generic;
 
-namespace GW2Api.NET.V2.GameMechanics.Dto
+namespace GW2Api.NET.V2.GameMechanics.Dto.Mounts
 {
     public record MountSkin(
         int Id,

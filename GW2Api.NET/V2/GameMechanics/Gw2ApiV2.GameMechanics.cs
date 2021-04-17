@@ -1,6 +1,10 @@
 ﻿using GW2Api.NET.Helpers;
 using GW2Api.NET.V2.Common;
-using GW2Api.NET.V2.GameMechanics.Dto;
+using GW2Api.NET.V2.GameMechanics.Dto.Masteries;
+using GW2Api.NET.V2.GameMechanics.Dto.Mounts;
+using GW2Api.NET.V2.GameMechanics.Dto.Outfits;
+using GW2Api.NET.V2.GameMechanics.Dto.Pets;
+using GW2Api.NET.V2.GameMechanics.Dto.Professions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -244,6 +248,56 @@ namespace GW2Api.NET.V2
         public Task<Page<IList<Pet>>> GetPetsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Pet>>(
                 "pets",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
+
+        public Task<IList<string>> GetAllProfessionIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<string>>("professions", token);
+
+        public Task<ProfessionDetails> GetProfessionAsync(string id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<ProfessionDetails>(
+                $"professions/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<ProfessionDetails>> GetProfessionsAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<ProfessionDetails>>(
+                "professions",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<ProfessionDetails>> GetAllProfessionsAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<ProfessionDetails>>(
+                "professions",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<ProfessionDetails>>> GetProfessionsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<ProfessionDetails>>(
+                "professions",
                 new Dictionary<string, string>
                 {
                     { "lang", lang.ToUrlParam() }

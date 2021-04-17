@@ -1,4 +1,4 @@
-﻿using GW2Api.NET.V2.Characters.Dto;
+﻿using GW2Api.NET.V2.GameMechanics.Dto.Professions;
 using System;
 using System.Collections.Generic;
 

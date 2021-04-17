@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GW2Api.NET.V2.GameMechanics.Dto.Professions;
+using System;
 
 namespace GW2Api.NET.V2.Characters.Dto
 {

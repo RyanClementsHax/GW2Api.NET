@@ -6,6 +6,8 @@
         Downed_2,
         Downed_3,
         Downed_4,
+        Elite,
+        Heal,
         Pet,
         Profession_1,
         Profession_2,

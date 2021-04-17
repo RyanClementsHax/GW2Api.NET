@@ -2,6 +2,7 @@
 {
     public enum WeaponType
     {
+        Nothing,
         Axe,
         Dagger,
         Focus,
