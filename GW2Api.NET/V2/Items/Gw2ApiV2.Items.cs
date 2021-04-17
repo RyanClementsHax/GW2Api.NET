@@ -188,6 +188,26 @@ namespace GW2Api.NET.V2
             );
         }
 
+        public Task<IList<int>> SearchRecipesByInput(int inputId, CancellationToken token = default)
+            => GetAsync<IList<int>>(
+                $"recipes/search",
+                new Dictionary<string, string>
+                {
+                    { "input", inputId.ToString() }
+                },
+                token
+            );
+
+        public Task<IList<int>> SearchRecipesByOutput(int outputId, CancellationToken token = default)
+            => GetAsync<IList<int>>(
+                $"recipes/search",
+                new Dictionary<string, string>
+                {
+                    { "output", outputId.ToString() }
+                },
+                token
+            );
+
         public Task<IList<int>> GetAllSkinIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>("skins", token);
 

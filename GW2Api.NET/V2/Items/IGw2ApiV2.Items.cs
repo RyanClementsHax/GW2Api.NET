@@ -30,6 +30,8 @@ namespace GW2Api.NET.V2
         Task<IList<int>> GetAllRecipeIdsAsync(CancellationToken token = default);
         Task<Recipe> GetRecipeAsync(int id, CancellationToken token = default);
         Task<IList<Recipe>> GetRecipesAsync(IEnumerable<int> ids, CancellationToken token = default);
+        Task<IList<int>> SearchRecipesByInput(int inputId, CancellationToken token = default);
+        Task<IList<int>> SearchRecipesByOutput(int outputId, CancellationToken token = default);
         Task<IList<int>> GetAllSkinIdsAsync(CancellationToken token = default);
         Task<Skin> GetSkinAsync(int id, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Skin>> GetSkinsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);

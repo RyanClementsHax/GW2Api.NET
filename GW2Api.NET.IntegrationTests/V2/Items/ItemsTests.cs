@@ -427,6 +427,55 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task SearchRecipesByInput_ValidId_ReturnsThoseRecipes(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var id = 46731;
+            var ids = new List<int>
+            {
+                7314,
+                7841,
+                7846,
+                7847,
+                7848,
+                7849,
+                7850,
+                10296,
+                10310,
+                10718,
+                11234,
+                11236,
+                12045,
+                12510,
+                13168,
+                13254
+            };
+
+            var result = await _api.SearchRecipesByInput(id, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(ids, result.ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task SearchRecipesByOutput_ValidId_ReturnsThoseRecipes(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var id = 50065;
+            var ids = new List<int>
+            {
+                8455,
+                8459,
+                8460
+            };
+
+            var result = await _api.SearchRecipesByOutput(id, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(ids, result.ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetRecipesAsync_ValidId_ReturnsThoseRecipes(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
