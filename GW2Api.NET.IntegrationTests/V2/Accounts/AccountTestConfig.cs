@@ -1,4 +1,4 @@
-﻿using GW2Api.NET.V2.Accounts.Dto;
+﻿using GW2Api.NET.V2.GameMechanics.Dto;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;

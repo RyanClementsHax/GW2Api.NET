@@ -24,7 +24,7 @@ namespace GW2Api.NET.Helpers
 
             if (pageSize != -1)
             {
-                paramMap["pageSize"] = pageSize.ToString();
+                paramMap["page_size"] = pageSize.ToString();
             }
 
             return paramMap;

@@ -50,6 +50,7 @@ namespace GW2Api.NET.V2
                 },
                 token
             );
+
         public Task<IList<int>> GetAllMountSkinIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>("mounts/skins", token);
 
@@ -93,6 +94,56 @@ namespace GW2Api.NET.V2
         public Task<Page<IList<MountSkin>>> GetMountSkinsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<MountSkin>>(
                 "mounts/skins",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
+
+        public Task<IList<string>> GetAllMountTypeIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<string>>("mounts/types", token);
+
+        public Task<MountType> GetMountTypeAsync(string id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<MountType>(
+                $"mounts/types/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+
+        public Task<IList<MountType>> GetMountTypesAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<MountType>>(
+                "mounts/types",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+        }
+
+        public Task<IList<MountType>> GetAllMountTypesAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<MountType>>(
+                "mounts/types",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+
+        public Task<Page<IList<MountType>>> GetMountTypesAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<MountType>>(
+                "mounts/types",
                 new Dictionary<string, string>
                 {
                     { "lang", lang?.TwoLetterISOLanguageName }

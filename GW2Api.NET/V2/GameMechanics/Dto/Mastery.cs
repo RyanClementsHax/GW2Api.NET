@@ -8,7 +8,7 @@ namespace GW2Api.NET.V2.GameMechanics.Dto
         string Requirement,
         int Order,
         string Background,
-        string Region,
+        Region Region,
         IList<MasteryLevel> Levels
     );
 }

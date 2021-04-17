@@ -1,4 +1,5 @@
 ﻿using GW2Api.NET.Json.Attributes;
+using GW2Api.NET.V2.GameMechanics.Dto;
 
 namespace GW2Api.NET.V2.Achievements.Dto.AchievementRewardTypes
 {
