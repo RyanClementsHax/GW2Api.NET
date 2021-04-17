@@ -9,7 +9,7 @@ namespace GW2Api.NET.V2
 {
     public partial class Gw2ApiV2
     {
-        public Task<IList<string>> GetAllAvailableTimeGatedRecipeIdsAsync(CancellationToken token = default)
+        public Task<IList<string>> GetAllTimeGatedRecipeIdsAsync(CancellationToken token = default)
             => GetAsync<IList<string>>("dailycrafting", token);
 
         public Task<TimeGatedRecipe> GetTimeGatedRecipeAsync(string id, CancellationToken token = default)
@@ -39,7 +39,7 @@ namespace GW2Api.NET.V2
                 },
                 token
             );
-        public Task<IList<string>> GetAllAvailableMapChestIdsAsync(CancellationToken token = default)
+        public Task<IList<string>> GetAllMapChestIdsAsync(CancellationToken token = default)
             => GetAsync<IList<string>>("mapchests", token);
 
         public Task<MapChest> GetMapChestAsync(string id, CancellationToken token = default)
@@ -63,6 +63,37 @@ namespace GW2Api.NET.V2
         public Task<IList<MapChest>> GetAllMapChestsAsync(CancellationToken token = default)
             => GetAsync<IList<MapChest>>(
                 "mapchests",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" }
+                },
+                token
+            );
+
+        public Task<IList<string>> GetAllWorldBossIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<string>>("worldbosses", token);
+
+        public Task<WorldBoss> GetWorldBossAsync(string id, CancellationToken token = default)
+            => GetAsync<WorldBoss>($"worldbosses/{id}", token);
+
+        public Task<IList<WorldBoss>> GetWorldBossesAsync(IEnumerable<string> ids, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<WorldBoss>>(
+                "worldbosses",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<WorldBoss>> GetAllWorldBossesAsync(CancellationToken token = default)
+            => GetAsync<IList<WorldBoss>>(
+                "worldbosses",
                 new Dictionary<string, string>
                 {
                     { "ids", "all" }

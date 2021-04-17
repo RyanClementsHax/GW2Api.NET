@@ -24,7 +24,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Dailies
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAllAvailableTimeGatedRecipeIdsAsync(cts.GetTokenOrDefault());
+            var result = await _api.GetAllTimeGatedRecipeIdsAsync(cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -60,7 +60,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Dailies
             {
                 "charged_quartz_crystal",
                 "glob_of_elder_spirit_residue",
-                "lump_of_mithrilium",
+                "lump_of_mithrilium"
             };
 
             var result = await _api.GetTimeGatedRecipesAsync(ids, cts.GetTokenOrDefault());
@@ -85,7 +85,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Dailies
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAllAvailableMapChestIdsAsync(cts.GetTokenOrDefault());
+            var result = await _api.GetAllMapChestIdsAsync(cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
@@ -136,6 +136,67 @@ namespace GW2Api.NET.IntegrationTests.V2.Dailies
             using var cts = ctsFactory();
 
             var result = await _api.GetAllMapChestsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllWorldBossIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllWorldBossIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetWorldBossAsync_ValidId_ReturnsThatWorldBoss(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var id = "admiral_taidha_covington";
+
+            var result = await _api.GetWorldBossAsync(id, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(id, result.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetWorldBossesAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetWorldBossesAsync(ids: null, cts.GetTokenOrDefault());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetWorldBossesAsync_ValidIds_ReturnsThoseWorldBosses(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var ids = new List<string>
+            {
+                "admiral_taidha_covington",
+                "claw_of_jormag",
+                "drakkar"
+            };
+
+            var result = await _api.GetWorldBossesAsync(ids, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(ids, result.Select(x => x.Id).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllWorldBossesAsync_AnyParams_ReturnsAllWorldBosses(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllWorldBossesAsync(cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
