@@ -1,4 +1,5 @@
 ﻿using GW2Api.NET.Helpers;
+using GW2Api.NET.V2.Common;
 using GW2Api.NET.V2.GameMechanics.Dto;
 using System;
 using System.Collections.Generic;
@@ -47,6 +48,55 @@ namespace GW2Api.NET.V2
                     { "ids", "all" },
                     { "lang", lang?.TwoLetterISOLanguageName }
                 },
+                token
+            );
+        public Task<IList<int>> GetAllMountSkinIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("mounts/skins", token);
+
+        public Task<MountSkin> GetMountSkinAsync(int id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<MountSkin>(
+                $"mounts/skins/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+
+        public Task<IList<MountSkin>> GetMountSkinsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<MountSkin>>(
+                "mounts/skins",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+        }
+
+        public Task<IList<MountSkin>> GetAllMountSkinsAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<MountSkin>>(
+                "mounts/skins",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+
+        public Task<Page<IList<MountSkin>>> GetMountSkinsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<MountSkin>>(
+                "mounts/skins",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                }.ConfigurePage(page, pageSize),
                 token
             );
     }

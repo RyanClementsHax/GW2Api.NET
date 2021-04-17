@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GW2Api.NET.V2.Items.Dto.Common;
+using System.Collections.Generic;
 
 namespace GW2Api.NET.V2.Items.Dto.Skins.SkinTypes.Armor
 {
