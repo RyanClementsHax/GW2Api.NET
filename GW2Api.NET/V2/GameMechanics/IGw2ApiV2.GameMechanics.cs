@@ -28,5 +28,10 @@ namespace GW2Api.NET.V2
         Task<IList<Outfit>> GetOutfitsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Outfit>> GetAllOutfitsAsync(CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<Outfit>>> GetOutfitsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<int>> GetAllPetIdsAsync(CancellationToken token = default);
+        Task<Pet> GetPetAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Pet>> GetPetsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Pet>> GetAllPetsAsync(CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<Pet>>> GetPetsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }
