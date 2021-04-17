@@ -13,6 +13,7 @@ using GW2Api.NET.V2.Items.Dto.ItemTypes.Trinket;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Trophy;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.UpgradeComponent;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Weapon;
+using GW2Api.NET.V2.Items.Dto.Skins;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -154,7 +155,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
         public static IEnumerable<object[]> GetItemAync_TestData()
             => new List<object[]>
             {
-                new TestItem[]
+                new TestObject[]
                 {
                     new(100, "Rampager's Seer Coat of Divinity", typeof(Armor)),
                     new(56, "Strong Back Brace", typeof(Back)),
@@ -176,7 +177,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
 
         [DataTestMethod]
         [DynamicData(nameof(GetItemAync_TestData), DynamicDataSourceType.Method)]
-        public async Task GetItemAync_ValidItemId_ReturnsThatItem(TestItem item, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetItemAync_ValidItemId_ReturnsThatItem(TestObject item, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
@@ -191,14 +192,14 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
             {
                 new object[]
                 {
-                    new TestItem(100, "Abrigo de vidente de divinidad de violento", typeof(Armor), "es")
+                    new TestObject(100, "Abrigo de vidente de divinidad de violento", typeof(Armor), "es")
                 },
                 TestData.DefaultCtsFactories
             }.Permute();
 
         [DataTestMethod]
         [DynamicData(nameof(GetItemAyncWithLang_TestData), DynamicDataSourceType.Method)]
-        public async Task GetItemAync_ValidItemIdAndNonNullLang_ReturnsThatItemInThatLang(TestItem item, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetItemAync_ValidItemIdAndNonNullLang_ReturnsThatItemInThatLang(TestObject item, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
@@ -206,6 +207,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
 
             Assert.AreEqual(item.Name, result.Name);
             Assert.AreEqual(item.Type, result.GetType());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetItemsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetItemsAsync(ids: null, lang, cts.GetTokenOrDefault());
         }
 
         public static IEnumerable<object[]> GetItemsAsync_TestData()
@@ -424,6 +435,118 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
             var result = await _api.GetRecipesAsync(ids, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(ids, result.Select(x => x.Id).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllSkinIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllSkinIdsAsync(cts.GetTokenOrDefault());
+
+            // The following is helpful for finding an item of a specific type efficiently
+
+            //var skins = result.Randomize().Select(x => _api.GetSkinAsync(x)).Race();
+            //var results = new Dictionary<Type, Skin>();
+
+            //await foreach (var skin in skins)
+            //{
+            //    try
+            //    {
+            //        if (skin is NET.V2.Items.Dto.Skins.SkinTypes.Gathering.Gathering)
+            //        {
+            //            break;
+            //        }
+            //        results.TryAdd(skin.GetType(), skin);
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        var i = 1;
+            //    }
+            //}
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetSkinAsync_TestData()
+            => new List<object[]>
+            {
+                new TestObject[]
+                {
+                    new(362, "Wrangler Boots", typeof(NET.V2.Items.Dto.Skins.SkinTypes.Armor.Armor)),
+                    new(7692, "Banners of the Sunspear Order", typeof(NET.V2.Items.Dto.Skins.SkinTypes.Back.Back)),
+                    new(8083, "Super Adventure Logging Bear", typeof(NET.V2.Items.Dto.Skins.SkinTypes.Gathering.Gathering)),
+                    new(4483, "Golden Wing Harpoon", typeof(NET.V2.Items.Dto.Skins.SkinTypes.Weapon.Weapon)),
+                },
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetSkinAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetSkinAsync_ValidId_ReturnsThatSkin(TestObject skin, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetSkinAsync(skin.Id, skin.Lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(skin.Name, result.Name);
+            Assert.AreEqual(skin.Type, result.GetType());
+        }
+
+        public static IEnumerable<object[]> GetSkinAyncWithLang_TestData()
+            => new List<object[]>
+            {
+                new TestObject[]
+                {
+                    new(362, "Botas de mayoral", typeof(NET.V2.Items.Dto.Skins.SkinTypes.Armor.Armor), "es"),
+                },
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetSkinAyncWithLang_TestData), DynamicDataSourceType.Method)]
+        public async Task GetSkinAsync_ValidIdAndNonNullLang_ReturnsThatSkinInThatLang(TestObject skin, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetSkinAsync(skin.Id, skin.Lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(skin.Name, result.Name);
+            Assert.AreEqual(skin.Type, result.GetType());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetSkinsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetSkinsAsync(ids: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetSkinsAsync_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<int> { 362, 7692, 8083 } },
+                new [] {
+                    (null, new List<string> { "Wrangler Boots", "Banners of the Sunspear Order", "Super Adventure Logging Bear" }.AsEnumerable()),
+                    ("es", new List<string> { "Botas de mayoral", "Estandartes de la Orden de los Lanceros del Sol", "Oso leñador superaventurero" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetSkinsAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetSkinsAsync_ValidIds_ReturnsThoseSkins(IEnumerable<int> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, names) = langNamesTuple;
+
+            var result = await _api.GetSkinsAsync(ids, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
         }
     }
 }

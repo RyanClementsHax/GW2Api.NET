@@ -1,5 +1,7 @@
 ﻿using GW2Api.NET.V2.Common;
 using GW2Api.NET.V2.Items.Dto;
+using GW2Api.NET.V2.Items.Dto.Recipes;
+using GW2Api.NET.V2.Items.Dto.Skins;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
@@ -28,5 +30,8 @@ namespace GW2Api.NET.V2
         Task<IList<int>> GetAllRecipeIdsAsync(CancellationToken token = default);
         Task<Recipe> GetRecipeAsync(int id, CancellationToken token = default);
         Task<IList<Recipe>> GetRecipesAsync(IEnumerable<int> ids, CancellationToken token = default);
+        Task<IList<int>> GetAllSkinIdsAsync(CancellationToken token = default);
+        Task<Skin> GetSkinAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Skin>> GetSkinsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
     }
 }

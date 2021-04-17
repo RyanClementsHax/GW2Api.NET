@@ -1,4 +1,4 @@
-﻿using GW2Api.NET.V2.Items.Dto;
+﻿using GW2Api.NET.V2.Items.Dto.Recipes;
 
 namespace GW2Api.NET.V2.Characters.Dto
 {

@@ -17,6 +17,7 @@
         Shield,
         ShortBow,
         SmallBundle,
+        Spear,
         Speargun,
         Staff,
         Sword,

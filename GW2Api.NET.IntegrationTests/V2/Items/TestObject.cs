@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace GW2Api.NET.IntegrationTests.V2.Items
 {
-    public record TestItem(
+    public record TestObject(
         int Id,
         string Name,
         Type Type,

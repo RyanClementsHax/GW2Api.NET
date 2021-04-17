@@ -1,6 +1,8 @@
 ﻿using GW2Api.NET.Helpers;
 using GW2Api.NET.V2.Common;
 using GW2Api.NET.V2.Items.Dto;
+using GW2Api.NET.V2.Items.Dto.Recipes;
+using GW2Api.NET.V2.Items.Dto.Skins;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -181,6 +183,35 @@ namespace GW2Api.NET.V2
                 new Dictionary<string, string>
                 {
                     { "ids", ids.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<int>> GetAllSkinIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("skins", token);
+
+        public Task<Skin> GetSkinAsync(int id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<Skin>(
+                $"skins/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang?.TwoLetterISOLanguageName }
+                },
+                token
+            );
+
+        public Task<IList<Skin>> GetSkinsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<Skin>>(
+                "skins",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang?.TwoLetterISOLanguageName }
                 },
                 token
             );
