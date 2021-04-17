@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -41,5 +42,8 @@ namespace GW2Api.NET.Helpers
 
         internal static string ToUrlParam(this Permissions permissions)
             => permissions.ToList().Select(x => x.ToString().ToLower()).ToUrlParam();
+
+        internal static string ToUrlParam(this CultureInfo lang)
+            => lang?.TwoLetterISOLanguageName;
     }
 }

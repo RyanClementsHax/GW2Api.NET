@@ -19,7 +19,7 @@ namespace GW2Api.NET.V2
                 $"masteries/{id}",
                 new Dictionary<string, string>
                 {
-                    { "lang", lang?.TwoLetterISOLanguageName }
+                    { "lang", lang.ToUrlParam() }
                 },
                 token
             );
@@ -34,7 +34,7 @@ namespace GW2Api.NET.V2
                 new Dictionary<string, string>
                 {
                     { "ids", ids.ToUrlParam() },
-                    { "lang", lang?.TwoLetterISOLanguageName }
+                    { "lang", lang.ToUrlParam() }
                 },
                 token
             );
@@ -46,7 +46,7 @@ namespace GW2Api.NET.V2
                 new Dictionary<string, string>
                 {
                     { "ids", "all" },
-                    { "lang", lang?.TwoLetterISOLanguageName }
+                    { "lang", lang.ToUrlParam() }
                 },
                 token
             );
@@ -59,7 +59,7 @@ namespace GW2Api.NET.V2
                 $"mounts/skins/{id}",
                 new Dictionary<string, string>
                 {
-                    { "lang", lang?.TwoLetterISOLanguageName }
+                    { "lang", lang.ToUrlParam() }
                 },
                 token
             );
@@ -74,7 +74,7 @@ namespace GW2Api.NET.V2
                 new Dictionary<string, string>
                 {
                     { "ids", ids.ToUrlParam() },
-                    { "lang", lang?.TwoLetterISOLanguageName }
+                    { "lang", lang.ToUrlParam() }
                 },
                 token
             );
@@ -86,7 +86,7 @@ namespace GW2Api.NET.V2
                 new Dictionary<string, string>
                 {
                     { "ids", "all" },
-                    { "lang", lang?.TwoLetterISOLanguageName }
+                    { "lang", lang.ToUrlParam() }
                 },
                 token
             );
@@ -96,7 +96,7 @@ namespace GW2Api.NET.V2
                 "mounts/skins",
                 new Dictionary<string, string>
                 {
-                    { "lang", lang?.TwoLetterISOLanguageName }
+                    { "lang", lang.ToUrlParam() }
                 }.ConfigurePage(page, pageSize),
                 token
             );
@@ -109,7 +109,7 @@ namespace GW2Api.NET.V2
                 $"mounts/types/{id}",
                 new Dictionary<string, string>
                 {
-                    { "lang", lang?.TwoLetterISOLanguageName }
+                    { "lang", lang.ToUrlParam() }
                 },
                 token
             );
@@ -124,7 +124,7 @@ namespace GW2Api.NET.V2
                 new Dictionary<string, string>
                 {
                     { "ids", ids.ToUrlParam() },
-                    { "lang", lang?.TwoLetterISOLanguageName }
+                    { "lang", lang.ToUrlParam() }
                 },
                 token
             );
@@ -136,7 +136,7 @@ namespace GW2Api.NET.V2
                 new Dictionary<string, string>
                 {
                     { "ids", "all" },
-                    { "lang", lang?.TwoLetterISOLanguageName }
+                    { "lang", lang.ToUrlParam() }
                 },
                 token
             );
@@ -146,7 +146,7 @@ namespace GW2Api.NET.V2
                 "mounts/types",
                 new Dictionary<string, string>
                 {
-                    { "lang", lang?.TwoLetterISOLanguageName }
+                    { "lang", lang.ToUrlParam() }
                 }.ConfigurePage(page, pageSize),
                 token
             );
