@@ -867,5 +867,91 @@ namespace GW2Api.NET.IntegrationTests.V2.GameMechanics
 
             Assert.IsTrue(result.Data.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllLegendIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllLegendIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetLegendAsync_TestData()
+            => new List<object[]>
+            {
+                new object[] { "Legend1" },
+                new [] { (null, "Legend1"), ("es", "Legend1") }.ToLangStrObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetLegendAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetLegendAsync_ValidId_ReturnsThatLegend(string id, (CultureInfo, string) langIdTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, expectedId) = langIdTuple;
+
+            var result = await _api.GetLegendAsync(id, lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(expectedId, result.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetLegendsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetLegendsAsync(ids: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetLegendsAsync_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<string> { "Legend1", "Legend2", "Legend3" } },
+                new [] {
+                    (null, new List<string> { "Legend1", "Legend2", "Legend3" }.AsEnumerable()),
+                    ("es", new List<string> { "Legend1", "Legend2", "Legend3" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetLegendsAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetLegendsAsync_ValidIds_ReturnsThoseLegends(IEnumerable<string> ids, (CultureInfo, IEnumerable<string>) langIdsTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, expectedIds) = langIdsTuple;
+
+            var result = await _api.GetLegendsAsync(ids, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(expectedIds.ToList(), result.Select(x => x.Id).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllLegendsAsync_AnyParams_ReturnsAllLegends(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllLegendsAsync(lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetLegendsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetLegendsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GW2Api.NET.V2.Common;
+using GW2Api.NET.V2.GameMechanics.Dto.Legends;
 using GW2Api.NET.V2.GameMechanics.Dto.Masteries;
 using GW2Api.NET.V2.GameMechanics.Dto.Mounts;
 using GW2Api.NET.V2.GameMechanics.Dto.Outfits;
@@ -66,5 +67,10 @@ namespace GW2Api.NET.V2
         Task<IList<Trait>> GetTraitsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Trait>> GetAllTraitsAsync(CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<Trait>>> GetTraitsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<string>> GetAllLegendIdsAsync(CancellationToken token = default);
+        Task<Legend> GetLegendAsync(string id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Legend>> GetLegendsAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Legend>> GetAllLegendsAsync(CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<Legend>>> GetLegendsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }
