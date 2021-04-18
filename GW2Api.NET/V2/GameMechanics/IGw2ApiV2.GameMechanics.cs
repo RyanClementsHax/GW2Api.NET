@@ -5,6 +5,7 @@ using GW2Api.NET.V2.GameMechanics.Dto.Outfits;
 using GW2Api.NET.V2.GameMechanics.Dto.Pets;
 using GW2Api.NET.V2.GameMechanics.Dto.Professions;
 using GW2Api.NET.V2.GameMechanics.Dto.Races;
+using GW2Api.NET.V2.GameMechanics.Dto.Skills;
 using GW2Api.NET.V2.GameMechanics.Dto.Specializations;
 using System.Collections.Generic;
 using System.Globalization;
@@ -54,5 +55,10 @@ namespace GW2Api.NET.V2
         Task<IList<Specialization>> GetSpecializationsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Specialization>> GetAllSpecializationsAsync(CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<Specialization>>> GetSpecializationsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<int>> GetAllSkillIdsAsync(CancellationToken token = default);
+        Task<Skill> GetSkillAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Skill>> GetSkillsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Skill>> GetAllSkillsAsync(CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<Skill>>> GetSkillsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }

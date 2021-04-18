@@ -10,8 +10,9 @@ namespace GW2Api.NET.Json.Converters
 {
     internal class AbstractClassConverter<T> : JsonConverter<T> where T : class
     {
-        private readonly IDictionary<string, Type> _discriminatorToTypeMap = new Dictionary<string, Type>();
         private readonly string _discriminatorFieldName;
+        private readonly IDictionary<string, Type> _discriminatorToTypeMap = new Dictionary<string, Type>();
+        private readonly Type _defaultType;
 
         public AbstractClassConverter()
         {
@@ -26,6 +27,18 @@ namespace GW2Api.NET.Json.Converters
 
             foreach (var type in types)
             {
+                if (type.GetCustomAttributes(typeof(AbstractClassDefaultTypeAttribute)).Any())
+                {
+                    if (_defaultType is null)
+                    {
+                        _defaultType = type;
+                    }
+                    else
+                    {
+                        throw new JsonException($"Multiple types declared as the default type for the same {nameof(AbstractClassConverter<T>)}: {type.FullName} and {_defaultType.FullName}");
+                    }
+                }
+
                 var discriminator = type.GetCustomAttributes(typeof(JsonDiscriminatorAttribute)).Any()
                     ? ((JsonDiscriminatorAttribute)type.GetCustomAttribute(typeof(JsonDiscriminatorAttribute)))
                         .Discriminator
@@ -53,6 +66,10 @@ namespace GW2Api.NET.Json.Converters
                     return _discriminatorToTypeMap.TryGetValue(typeValue.ToLower(), out var type)
                         ? JsonSerializer.Deserialize(doc.RootElement.GetRawText(), type, options) as T
                         : throw new JsonException($"{typeValue} has not been mapped to a custom type yet!");
+                }
+                else if (_defaultType is not null)
+                {
+                    return JsonSerializer.Deserialize(doc.RootElement.GetRawText(), _defaultType, options) as T;
                 }
 
                 throw new JsonException("Failed to extract type property, it might be missing?");

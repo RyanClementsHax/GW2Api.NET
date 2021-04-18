@@ -1,4 +1,4 @@
-﻿namespace GW2Api.NET.V2.GameMechanics.Dto
+﻿namespace GW2Api.NET.V2.GameMechanics.Dto.Skills
 {
     public enum SkillSlotType
     {

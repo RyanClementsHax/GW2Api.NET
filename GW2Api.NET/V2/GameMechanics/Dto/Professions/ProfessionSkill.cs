@@ -1,4 +1,5 @@
-﻿using GW2Api.NET.V2.Items.Dto.ItemTypes.Weapon;
+﻿using GW2Api.NET.V2.GameMechanics.Dto.Skills;
+using GW2Api.NET.V2.Items.Dto.ItemTypes.Weapon;
 
 namespace GW2Api.NET.V2.GameMechanics.Dto.Professions
 {

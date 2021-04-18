@@ -1,4 +1,4 @@
-﻿namespace GW2Api.NET.V2.GameMechanics.Dto
+﻿namespace GW2Api.NET.V2.GameMechanics.Dto.Skills
 {
     public enum SkillSlot
     {
@@ -14,6 +14,8 @@
         Profession_3,
         Profession_4,
         Profession_5,
+        Toolbelt,
+        Transform_1,
         Utility,
         Weapon_1,
         Weapon_2,
