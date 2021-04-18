@@ -781,5 +781,91 @@ namespace GW2Api.NET.IntegrationTests.V2.GameMechanics
 
             Assert.IsTrue(result.Data.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllTraitIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllTraitIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetTraitAsync_TestData()
+            => new List<object[]>
+            {
+                new object[] { 265 },
+                new [] { (null, "Arcane Resurrection"), ("es", "Resurrección arcana") }.ToLangStrObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetTraitAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetTraitAsync_ValidId_ReturnsThatTrait(int id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, name) = langNameTuple;
+
+            var result = await _api.GetTraitAsync(id, lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(name, result.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetTraitsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetTraitsAsync(ids: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetTraitsAsync_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<int> { 214, 265, 277 } },
+                new [] {
+                    (null, new List<string> { "Raging Storm", "Arcane Resurrection", "Earthen Blessing" }.AsEnumerable()),
+                    ("es", new List<string> { "Tormenta arrasadora", "Resurrección arcana", "Bendición de la tierra" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetTraitsAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetTraitsAsync_ValidIds_ReturnsThoseTraits(IEnumerable<int> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, names) = langNamesTuple;
+
+            var result = await _api.GetTraitsAsync(ids, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllTraitsAsync_AnyParams_ReturnsAllTraits(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllTraitsAsync(lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetTraitsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetTraitsAsync(lang: lang, token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
     }
 }

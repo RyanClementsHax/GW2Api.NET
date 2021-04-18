@@ -2,6 +2,7 @@
 {
     public enum AttributeType
     {
+        None,
         AgonyResistance,
         BoonDuration,
         ConditionDamage,

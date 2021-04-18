@@ -1,4 +1,4 @@
-﻿namespace GW2Api.NET.V2.GameMechanics.Dto.Skills.SkillFactTypes
+﻿namespace GW2Api.NET.V2.GameMechanics.Dto.Common.Combos
 {
     public enum FieldType
     {

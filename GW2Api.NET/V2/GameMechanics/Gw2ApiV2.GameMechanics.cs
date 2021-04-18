@@ -8,6 +8,7 @@ using GW2Api.NET.V2.GameMechanics.Dto.Professions;
 using GW2Api.NET.V2.GameMechanics.Dto.Races;
 using GW2Api.NET.V2.GameMechanics.Dto.Skills;
 using GW2Api.NET.V2.GameMechanics.Dto.Specializations;
+using GW2Api.NET.V2.GameMechanics.Dto.Traits;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -451,6 +452,56 @@ namespace GW2Api.NET.V2
         public Task<Page<IList<Skill>>> GetSkillsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Skill>>(
                 "skills",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
+
+        public Task<IList<int>> GetAllTraitIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("traits", token);
+
+        public Task<Trait> GetTraitAsync(int id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<Trait>(
+                $"traits/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<Trait>> GetTraitsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<Trait>>(
+                "traits",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<Trait>> GetAllTraitsAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<Trait>>(
+                "traits",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<Trait>>> GetTraitsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<Trait>>(
+                "traits",
                 new Dictionary<string, string>
                 {
                     { "lang", lang.ToUrlParam() }

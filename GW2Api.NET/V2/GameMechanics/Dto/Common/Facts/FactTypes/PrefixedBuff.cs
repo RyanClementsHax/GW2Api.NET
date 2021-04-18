@@ -1,16 +1,20 @@
-﻿namespace GW2Api.NET.V2.GameMechanics.Dto.Skills.SkillFactTypes
+﻿namespace GW2Api.NET.V2.GameMechanics.Dto.Common.Facts.FactTypes
 {
     public record PrefixedBuff(
         string Text,
         string Icon,
+        int? RequiresTrait,
+        int? Overrides,
 
         string Status,
         string Description,
         int? ApplyCount,
         int? Duration,
         FactPrefix Prefix
-    ) : SkillFact(
+    ) : Fact(
         Text,
-        Icon
+        Icon,
+        RequiresTrait,
+        Overrides
     );
 }

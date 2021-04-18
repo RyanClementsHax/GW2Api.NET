@@ -1,4 +1,5 @@
-﻿using GW2Api.NET.V2.GameMechanics.Dto.Professions;
+﻿using GW2Api.NET.V2.GameMechanics.Dto.Common.Facts;
+using GW2Api.NET.V2.GameMechanics.Dto.Professions;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Weapon;
 using System.Collections.Generic;
 
@@ -15,8 +16,8 @@ namespace GW2Api.NET.V2.GameMechanics.Dto.Skills
         IList<Profession> Profession,
         IList<SkillFlag> Flags,
         SkillSlot? Slot,
-        IList<SkillFact> Facts,
-        IList<object> TraitedFacts,
+        IList<Fact> Facts,
+        IList<Fact> TraitedFacts,
         IList<SkillCategory> Categories,
         Attunement? Attunement,
         int? Cost,
@@ -25,8 +26,8 @@ namespace GW2Api.NET.V2.GameMechanics.Dto.Skills
         int? Initiative,
         int? NextChain,
         int? PrevChain,
-        IList<object> TransformSkills,
-        IList<object> BundleSkills,
+        IList<int> TransformSkills,
+        IList<int> BundleSkills,
         int? ToolbeltSkill
     );
 }
