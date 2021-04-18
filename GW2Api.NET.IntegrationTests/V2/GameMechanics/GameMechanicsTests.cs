@@ -740,10 +740,10 @@ namespace GW2Api.NET.IntegrationTests.V2.GameMechanics
         public static IEnumerable<object[]> GetSkillsAsync_TestData()
             => new List<object[]>
             {
-                new [] { new List<int> { 1110, 1115, 1118 } },
+                new [] { new List<int> { 1110, 30800, 5492, 31869 } },
                 new [] {
-                    (null, new List<string> { "Throw Gunk", "Branch Leap", "Throw Chain" }.AsEnumerable()),
-                    ("es", new List<string> { "Lanzar mugre", "Salto de rama", "Lanzar cadena" }.AsEnumerable())
+                    (null, new List<string> { "Throw Gunk", "Elite Mortar Kit", "Fire Attunement", "Celestial Avatar" }.AsEnumerable()),
+                    ("es", new List<string> { "Lanzar mugre", "Kit de mortero de élite", "Sintonía con el fuego", "Avatar celestial" }.AsEnumerable())
                 }.ToLangStrsObjectArray(),
                 TestData.DefaultCtsFactories
             }.Permute();
