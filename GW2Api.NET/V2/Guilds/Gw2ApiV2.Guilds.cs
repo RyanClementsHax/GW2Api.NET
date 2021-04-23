@@ -149,5 +149,55 @@ namespace GW2Api.NET.V2
                 },
                 token
             );
+
+        public Task<IList<int>> GetAllGuildUpgradeIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("guild/upgrades", token);
+
+        public Task<GuildUpgrade> GetGuildUpgradeAsync(int id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<GuildUpgrade>(
+                $"guild/upgrades/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<GuildUpgrade>> GetGuildUpgradesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<GuildUpgrade>>(
+                "guild/upgrades",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<GuildUpgrade>> GetAllGuildUpgradesAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<GuildUpgrade>>(
+                "guild/upgrades",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<GuildUpgrade>>> GetGuildUpgradesAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<GuildUpgrade>>(
+                "guild/upgrades",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
     }
 }
