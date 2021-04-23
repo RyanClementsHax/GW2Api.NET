@@ -2,6 +2,7 @@ using GW2Api.NET.V2;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
@@ -161,6 +162,92 @@ namespace GW2Api.NET.IntegrationTests.V2.Guilds
             using var cts = ctsFactory();
 
             var result = await _api.GetEmblemForegroundsAsync(page: 1, pageSize: 1, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllGuildPermissionIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllGuildPermissionIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetGuildPermissionAsync_TestData()
+            => new List<object[]>
+            {
+                new object[] { "ClaimableEditOptions" },
+                new [] { (null, "Edit Claimable Options"), ("es", "Editar opciones de objetivos reclamados") }.ToLangStrObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetGuildPermissionAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetGuildPermissionAsync_ValidId_ReturnsThatGuildPermission(string id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, name) = langNameTuple;
+
+            var result = await _api.GetGuildPermissionAsync(id, lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(name, result.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMountTypesAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetMountSkinsAsync(ids: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetMountTypesAsync_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<string> { "ClaimableEditOptions", "Admin", "EditAnthem" } },
+                new [] {
+                    (null, new List<string> { "Edit Claimable Options", "Admin Lower Ranks.", "Change Guild Anthem" }.AsEnumerable()),
+                    ("es", new List<string> { "Editar opciones de objetivos reclamados", "Gestionar rangos inferiores", "Cambiar el himno del clan" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetMountTypesAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetGuildPermissionsAsync_ValidIds_ReturnsThoseGuildPermissions(IEnumerable<string> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, names) = langNamesTuple;
+
+            var result = await _api.GetGuildPermissionsAsync(ids, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllGuildPermissionsAsync_AnyParams_ReturnsAllGuildPermissions(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllGuildPermissionsAsync(lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetGuildPermissionsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetGuildPermissionsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
