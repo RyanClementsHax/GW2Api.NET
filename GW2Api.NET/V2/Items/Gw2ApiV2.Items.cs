@@ -188,7 +188,7 @@ namespace GW2Api.NET.V2
             );
         }
 
-        public Task<IList<int>> SearchRecipesByInput(int inputId, CancellationToken token = default)
+        public Task<IList<int>> SearchRecipesByInputAsync(int inputId, CancellationToken token = default)
             => GetAsync<IList<int>>(
                 $"recipes/search",
                 new Dictionary<string, string>
@@ -198,7 +198,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<IList<int>> SearchRecipesByOutput(int outputId, CancellationToken token = default)
+        public Task<IList<int>> SearchRecipesByOutputAsync(int outputId, CancellationToken token = default)
             => GetAsync<IList<int>>(
                 $"recipes/search",
                 new Dictionary<string, string>

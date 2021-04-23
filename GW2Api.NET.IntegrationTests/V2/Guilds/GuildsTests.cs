@@ -251,5 +251,18 @@ namespace GW2Api.NET.IntegrationTests.V2.Guilds
 
             Assert.IsTrue(result.Data.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task SearchGuildsByNameAsync_ValidName_ReturnsThatGuildsId(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var id = Guid.Parse("7FDC213A-9488-E811-81A9-CEE44FED0C20");
+            var name = "Snowcrows";
+
+            var result = await _api.SearchGuildsByNameAsync(name, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(id, result.Single());
+        }
     }
 }

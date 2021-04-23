@@ -26,5 +26,6 @@ namespace GW2Api.NET.V2
         Task<IList<GuildPermission>> GetGuildPermissionsAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<GuildPermission>> GetAllGuildPermissionsAsync(CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<GuildPermission>>> GetGuildPermissionsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Guid>> SearchGuildsByNameAsync(string name, CancellationToken token);
     }
 }

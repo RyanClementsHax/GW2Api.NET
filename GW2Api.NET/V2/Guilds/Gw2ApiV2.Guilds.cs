@@ -139,5 +139,15 @@ namespace GW2Api.NET.V2
                 }.ConfigurePage(page, pageSize),
                 token
             );
+
+        public Task<IList<Guid>> SearchGuildsByNameAsync(string name, CancellationToken token)
+            => GetAsync<IList<Guid>>(
+                $"guild/search",
+                new Dictionary<string, string>
+                {
+                    { "name", name.ToString() }
+                },
+                token
+            );
     }
 }

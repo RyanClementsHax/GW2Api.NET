@@ -427,7 +427,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task SearchRecipesByInput_ValidId_ReturnsThoseRecipes(Func<CancellationTokenSource> ctsFactory)
+        public async Task SearchRecipesByInputAsync_ValidId_ReturnsThoseRecipes(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var id = 46731;
@@ -451,14 +451,14 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
                 13254
             };
 
-            var result = await _api.SearchRecipesByInput(id, cts.GetTokenOrDefault());
+            var result = await _api.SearchRecipesByInputAsync(id, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(ids, result.ToList());
         }
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task SearchRecipesByOutput_ValidId_ReturnsThoseRecipes(Func<CancellationTokenSource> ctsFactory)
+        public async Task SearchRecipesByOutputAsync_ValidId_ReturnsThoseRecipes(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var id = 50065;
@@ -469,7 +469,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
                 8460
             };
 
-            var result = await _api.SearchRecipesByOutput(id, cts.GetTokenOrDefault());
+            var result = await _api.SearchRecipesByOutputAsync(id, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(ids, result.ToList());
         }
