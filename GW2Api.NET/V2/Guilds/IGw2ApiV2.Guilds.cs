@@ -15,5 +15,10 @@ namespace GW2Api.NET.V2
         Task<IList<EmblemLayer>> GetEmblemBackgroundsAsync(IEnumerable<int> ids, CancellationToken token = default);
         Task<IList<EmblemLayer>> GetAllEmblemBackgroundsAsync(CancellationToken token = default);
         Task<Page<IList<EmblemLayer>>> GetEmblemBackgroundsAsync(int page = 1, int pageSize = -1, CancellationToken token = default);
+        Task<IList<int>> GetAllEmblemForegroundIdsAsync(CancellationToken token = default);
+        Task<EmblemLayer> GetEmblemForegroundAsync(int id, CancellationToken token = default);
+        Task<IList<EmblemLayer>> GetEmblemForegroundsAsync(IEnumerable<int> ids, CancellationToken token = default);
+        Task<IList<EmblemLayer>> GetAllEmblemForegroundsAsync(CancellationToken token = default);
+        Task<Page<IList<EmblemLayer>>> GetEmblemForegroundsAsync(int page = 1, int pageSize = -1, CancellationToken token = default);
     }
 }

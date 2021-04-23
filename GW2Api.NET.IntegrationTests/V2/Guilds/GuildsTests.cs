@@ -97,5 +97,72 @@ namespace GW2Api.NET.IntegrationTests.V2.Guilds
 
             Assert.IsTrue(result.Data.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllEmblemForegroundIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllEmblemForegroundIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetEmblemForegroundAsync_ValidId_ReturnsThatEmblemForeground(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var id = 1;
+
+            var result = await _api.GetEmblemForegroundAsync(id, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(id, result.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetEmblemForegroundsAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetEmblemForegroundsAsync(ids: null, cts.GetTokenOrDefault());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetEmblemForegroundsAsync_ValidIds_ReturnsThoseEmblemForegrounds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var ids = new List<int> { 1, 2, 3 };
+
+            var result = await _api.GetEmblemForegroundsAsync(ids, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(ids, result.Select(x => x.Id).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllEmblemForegroundsAsync_AnyParams_ReturnsAllEmblemForegrounds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllEmblemForegroundsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetEmblemForegroundsAsync_NoIds_ReturnsAPage(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetEmblemForegroundsAsync(page: 1, pageSize: 1, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
     }
 }

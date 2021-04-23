@@ -47,7 +47,45 @@ namespace GW2Api.NET.V2
         public Task<Page<IList<EmblemLayer>>> GetEmblemBackgroundsAsync(int page = 1, int pageSize = -1, CancellationToken token = default)
             => GetPageAsync<IList<EmblemLayer>>(
                 "emblem/backgrounds",
-                new Dictionary<string, string> {}.ConfigurePage(page, pageSize),
+                new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
+                token
+            );
+
+        public Task<IList<int>> GetAllEmblemForegroundIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("emblem/foregrounds", token);
+
+        public Task<EmblemLayer> GetEmblemForegroundAsync(int id, CancellationToken token = default)
+            => GetAsync<EmblemLayer>($"emblem/foregrounds/{id}", token);
+
+        public Task<IList<EmblemLayer>> GetEmblemForegroundsAsync(IEnumerable<int> ids, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<EmblemLayer>>(
+                "emblem/foregrounds",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<EmblemLayer>> GetAllEmblemForegroundsAsync(CancellationToken token = default)
+            => GetAsync<IList<EmblemLayer>>(
+                "emblem/foregrounds",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" }
+                },
+                token
+            );
+
+        public Task<Page<IList<EmblemLayer>>> GetEmblemForegroundsAsync(int page = 1, int pageSize = -1, CancellationToken token = default)
+            => GetPageAsync<IList<EmblemLayer>>(
+                "emblem/foregrounds",
+                new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
                 token
             );
     }
