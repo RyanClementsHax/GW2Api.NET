@@ -2,8 +2,8 @@
 
 namespace GW2Api.NET.V2.Guilds.Dto
 {
-    public record EmblemLayer(
+    public record EmblemLayerConfig(
         int Id,
-        IList<string> Layers
+        IList<int> Colors
     );
 }
