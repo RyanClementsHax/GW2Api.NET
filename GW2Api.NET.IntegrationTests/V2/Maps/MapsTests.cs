@@ -626,5 +626,115 @@ namespace GW2Api.NET.IntegrationTests.V2.Maps
 
             Assert.IsTrue(result.Data.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllMapTaskIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+
+            var result = await _api.GetAllMapTaskIdsAsync(continentId, floorId, regionId, mapId, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetMapTaskAsync_TestData()
+            => new List<object[]>
+            {
+                new object[] { 1 },
+                new [] { (null, "Assist Daphne in halting the encroaching corruption."), ("es", "Ayuda a Daphne a detener la corrupción invasora.") }.ToLangStrObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetMapTaskAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetMapTaskAsync_ValidId_ReturnsThatMapTask(int mapTaskId, (CultureInfo, string) langObjectiveTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+            var (lang, objective) = langObjectiveTuple;
+
+            var result = await _api.GetMapTaskAsync(continentId, floorId, regionId, mapId, mapTaskId, lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(objective, result.Objective);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMapTasksAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+
+            await _api.GetMapTasksAsync(continentId, floorId, regionId, mapId, mapTaskIds: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetMapTasksAsync_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<int> { 1, 2, 3 } },
+                new [] {
+                    (null, new List<string> { "Assist Daphne in halting the encroaching corruption.", "Assist the skritt of Ratatosk.", "Help Antal the Patient impress the skritt in Kolkorensburg." }.AsEnumerable()),
+                    ("es", new List<string> { "Ayuda a Daphne a detener la corrupción invasora.", "Ayuda a los skritt de Ratatosk.", "Ayuda a Antal el paciente a impresionar a los skritt de Kolkorensburg." }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetMapTasksAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetMapTasksAsync_ValidIds_ReturnsThoseMapTasks(IEnumerable<int> mapTaskIds, (CultureInfo, IEnumerable<string>) langObjectivesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+            var (lang, objectives) = langObjectivesTuple;
+
+            var result = await _api.GetMapTasksAsync(continentId, floorId, regionId, mapId, mapTaskIds, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(objectives.ToList(), result.Select(x => x.Objective).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllMapTasksAsync_AnyParams_ReturnsAllMapTasks(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+
+            var result = await _api.GetAllMapTasksAsync(continentId, floorId, regionId, mapId, lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMapTasksAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+
+            var result = await _api.GetMapTasksAsync(continentId, floorId, regionId, mapId, page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
     }
 }

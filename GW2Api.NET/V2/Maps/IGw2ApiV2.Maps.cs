@@ -39,5 +39,10 @@ namespace GW2Api.NET.V2
         Task<IList<PointOfInterest>> GetPointsOfInterestAsync(int continentId, int floorId, int regionId, int mapId, IEnumerable<int> pointOfInterestIds, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<PointOfInterest>> GetAllPointsOfInterestAsync(int continentId, int floorId, int regionId, int mapId, CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<PointOfInterest>>> GetPointsOfInterestAsync(int continentId, int floorId, int regionId, int mapId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<int>> GetAllMapTaskIdsAsync(int continentId, int floorId, int regionId, int mapId, CancellationToken token = default);
+        Task<MapTask> GetMapTaskAsync(int continentId, int floorId, int regionId, int mapId, int mapTaskId, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<MapTask>> GetMapTasksAsync(int continentId, int floorId, int regionId, int mapId, IEnumerable<int> mapTaskIds, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<MapTask>> GetAllMapTasksAsync(int continentId, int floorId, int regionId, int mapId, CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<MapTask>>> GetMapTasksAsync(int continentId, int floorId, int regionId, int mapId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }

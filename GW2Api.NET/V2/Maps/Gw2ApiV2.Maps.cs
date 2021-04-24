@@ -311,5 +311,55 @@ namespace GW2Api.NET.V2
                 }.ConfigurePage(page, pageSize),
                 token
             );
+
+        public Task<IList<int>> GetAllMapTaskIdsAsync(int continentId, int floorId, int regionId, int mapId, CancellationToken token = default)
+            => GetAsync<IList<int>>($"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks", token);
+
+        public Task<MapTask> GetMapTaskAsync(int continentId, int floorId, int regionId, int mapId, int mapTaskId, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<MapTask>(
+                $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks/{mapTaskId}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<MapTask>> GetMapTasksAsync(int continentId, int floorId, int regionId, int mapId, IEnumerable<int> mapTaskIds, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (mapTaskIds is null)
+                throw new ArgumentNullException(nameof(mapTaskIds));
+
+            return GetAsync<IList<MapTask>>(
+                $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks",
+                new Dictionary<string, string>
+                {
+                    { "ids", mapTaskIds.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<MapTask>> GetAllMapTasksAsync(int continentId, int floorId, int regionId, int mapId, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<MapTask>>(
+                $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<MapTask>>> GetMapTasksAsync(int continentId, int floorId, int regionId, int mapId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<MapTask>>(
+                $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
     }
 }
