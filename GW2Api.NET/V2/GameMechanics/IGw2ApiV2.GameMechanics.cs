@@ -10,6 +10,7 @@ using GW2Api.NET.V2.GameMechanics.Dto.Races;
 using GW2Api.NET.V2.GameMechanics.Dto.Raids;
 using GW2Api.NET.V2.GameMechanics.Dto.Skills;
 using GW2Api.NET.V2.GameMechanics.Dto.Specializations;
+using GW2Api.NET.V2.GameMechanics.Dto.Titles;
 using GW2Api.NET.V2.GameMechanics.Dto.Traits;
 using System.Collections.Generic;
 using System.Globalization;
@@ -84,5 +85,10 @@ namespace GW2Api.NET.V2
         Task<IList<Raid>> GetRaidsAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Raid>> GetAllRaidsAsync(CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<Raid>>> GetRaidsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<int>> GetAllTitleIdsAsync(CancellationToken token = default);
+        Task<Title> GetTitleAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Title>> GetTitlesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Title>> GetAllTitlesAsync(CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<Title>>> GetTitlesAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }

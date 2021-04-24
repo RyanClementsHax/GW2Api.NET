@@ -11,6 +11,7 @@ using GW2Api.NET.V2.GameMechanics.Dto.Races;
 using GW2Api.NET.V2.GameMechanics.Dto.Raids;
 using GW2Api.NET.V2.GameMechanics.Dto.Skills;
 using GW2Api.NET.V2.GameMechanics.Dto.Specializations;
+using GW2Api.NET.V2.GameMechanics.Dto.Titles;
 using GW2Api.NET.V2.GameMechanics.Dto.Traits;
 using System;
 using System.Collections.Generic;
@@ -655,6 +656,56 @@ namespace GW2Api.NET.V2
         public Task<Page<IList<Raid>>> GetRaidsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Raid>>(
                 "raids",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
+
+        public Task<IList<int>> GetAllTitleIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("titles", token);
+
+        public Task<Title> GetTitleAsync(int id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<Title>(
+                $"titles/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<Title>> GetTitlesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<Title>>(
+                "titles",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<Title>> GetAllTitlesAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<Title>>(
+                "titles",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<Title>>> GetTitlesAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<Title>>(
+                "titles",
                 new Dictionary<string, string>
                 {
                     { "lang", lang.ToUrlParam() }
