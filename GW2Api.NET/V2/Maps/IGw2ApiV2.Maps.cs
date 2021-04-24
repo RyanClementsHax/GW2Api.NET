@@ -44,5 +44,10 @@ namespace GW2Api.NET.V2
         Task<IList<MapTask>> GetMapTasksAsync(int continentId, int floorId, int regionId, int mapId, IEnumerable<int> mapTaskIds, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<MapTask>> GetAllMapTasksAsync(int continentId, int floorId, int regionId, int mapId, CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<MapTask>>> GetMapTasksAsync(int continentId, int floorId, int regionId, int mapId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<int>> GetAllMapIdsAsync(CancellationToken token = default);
+        Task<Map> GetMapAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Map>> GetMapsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Map>> GetAllMapsAsync(CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<Map>>> GetMapsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }

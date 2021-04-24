@@ -11,7 +11,6 @@ namespace GW2Api.NET.V2
 {
     public partial class Gw2ApiV2
     {
-
         public Task<IList<int>> GetAllContinentIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>("continents", token);
 
@@ -355,6 +354,55 @@ namespace GW2Api.NET.V2
         public Task<Page<IList<MapTask>>> GetMapTasksAsync(int continentId, int floorId, int regionId, int mapId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<MapTask>>(
                 $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
+        public Task<IList<int>> GetAllMapIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("maps", token);
+
+        public Task<Map> GetMapAsync(int id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<Map>(
+                $"maps/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<Map>> GetMapsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<Map>>(
+                "maps",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<Map>> GetAllMapsAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<Map>>(
+                "maps",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<Map>>> GetMapsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<Map>>(
+                "maps",
                 new Dictionary<string, string>
                 {
                     { "lang", lang.ToUrlParam() }
