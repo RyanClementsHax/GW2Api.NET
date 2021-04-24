@@ -61,5 +61,55 @@ namespace GW2Api.NET.V2
                 }.ConfigurePage(page, pageSize),
                 token
             );
+
+        public Task<IList<int>> GetAllFloorIdsAsync(int continentId, CancellationToken token = default)
+            => GetAsync<IList<int>>($"continents/{continentId}/floors", token);
+
+        public Task<Floor> GetFloorAsync(int continentId, int floorId, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<Floor>(
+                $"continents/{continentId}/floors/{floorId}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<Floor>> GetFloorsAsync(int continentId, IEnumerable<int> floorIds, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (floorIds is null)
+                throw new ArgumentNullException(nameof(floorIds));
+
+            return GetAsync<IList<Floor>>(
+                $"continents/{continentId}/floors",
+                new Dictionary<string, string>
+                {
+                    { "ids", floorIds.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<Floor>> GetAllFloorsAsync(int continentId, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<Floor>>(
+                $"continents/{continentId}/floors",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<Floor>>> GetFloorsAsync(int continentId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<Floor>>(
+                $"continents/{continentId}/floors",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
     }
 }
