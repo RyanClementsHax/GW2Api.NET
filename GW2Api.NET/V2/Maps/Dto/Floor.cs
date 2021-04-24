@@ -7,6 +7,6 @@ namespace GW2Api.NET.V2.Maps.Dto
         int Id,
         Vector2 TextureDims,
         IList<Vector2> ClampedView,
-        IDictionary<int, MapRegion> Regions
+        IDictionary<int, FloorRegion> Regions
     );
 }

@@ -19,10 +19,15 @@ namespace GW2Api.NET.V2
         Task<IList<Floor>> GetFloorsAsync(int continentId, IEnumerable<int> floorIds, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Floor>> GetAllFloorsAsync(int continentId, CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<Floor>>> GetFloorsAsync(int continentId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
-        Task<IList<int>> GetAllMapRegionIdsAsync(int continentId, int floorId, CancellationToken token = default);
-        Task<MapRegion> GetMapRegionAsync(int continentId, int floorId, int regionId, CultureInfo lang = null, CancellationToken token = default);
-        Task<IList<MapRegion>> GetMapRegionsAsync(int continentId, int floorId, IEnumerable<int> regionIds, CultureInfo lang = null, CancellationToken token = default);
-        Task<IList<MapRegion>> GetAllMapRegionsAsync(int continentId, int floorId, CultureInfo lang = null, CancellationToken token = default);
-        Task<Page<IList<MapRegion>>> GetMapRegionsAsync(int continentId, int floorId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<int>> GetAllFloorRegionIdsAsync(int continentId, int floorId, CancellationToken token = default);
+        Task<FloorRegion> GetFloorRegionAsync(int continentId, int floorId, int regionId, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<FloorRegion>> GetFloorRegionsAsync(int continentId, int floorId, IEnumerable<int> regionIds, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<FloorRegion>> GetAllFloorRegionsAsync(int continentId, int floorId, CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<FloorRegion>>> GetFloorRegionsAsync(int continentId, int floorId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<int>> GetAllMapIdsAsync(int continentId, int floorId, int regionId, CancellationToken token = default);
+        Task<Map> GetMapAsync(int continentId, int floorId, int regionId, int mapId, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Map>> GetMapsAsync(int continentId, int floorId, int regionId, IEnumerable<int> mapIds, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Map>> GetAllMapsAsync(int continentId, int floorId, int regionId, CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<Map>>> GetMapsAsync(int continentId, int floorId, int regionId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }

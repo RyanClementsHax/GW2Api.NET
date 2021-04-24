@@ -207,18 +207,18 @@ namespace GW2Api.NET.IntegrationTests.V2.Maps
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetAllMapRegionIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAllFloorRegionIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var continentId = 1;
             var floorId = 0;
 
-            var result = await _api.GetAllMapRegionIdsAsync(continentId, floorId, cts.GetTokenOrDefault());
+            var result = await _api.GetAllFloorRegionIdsAsync(continentId, floorId, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
 
-        public static IEnumerable<object[]> GetMapRegionAsync_TestData()
+        public static IEnumerable<object[]> GetFloorRegionAsync_TestData()
             => new List<object[]>
             {
                 new object[] { 1 },
@@ -227,15 +227,15 @@ namespace GW2Api.NET.IntegrationTests.V2.Maps
             }.Permute();
 
         [DataTestMethod]
-        [DynamicData(nameof(GetMapRegionAsync_TestData), DynamicDataSourceType.Method)]
-        public async Task GetMapRegionAsync_ValidId_ReturnsThatMapRegion(int regionId, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        [DynamicData(nameof(GetFloorRegionAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetFloorRegionAsync_ValidId_ReturnsThatFloorRegion(int regionId, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var continentId = 1;
             var floorId = 0;
             var (lang, name) = langNameTuple;
 
-            var result = await _api.GetMapRegionAsync(continentId, floorId, regionId, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetFloorRegionAsync(continentId, floorId, regionId, lang, cts.GetTokenOrDefault());
 
             Assert.AreEqual(name, result.Name);
         }
@@ -243,16 +243,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Maps
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetMapRegionsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetFloorRegionsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var continentId = 1;
             var floorId = 0;
 
-            await _api.GetMapRegionsAsync(continentId, floorId, regionIds: null, lang, cts.GetTokenOrDefault());
+            await _api.GetFloorRegionsAsync(continentId, floorId, regionIds: null, lang, cts.GetTokenOrDefault());
         }
 
-        public static IEnumerable<object[]> GetMapRegionsAsync_TestData()
+        public static IEnumerable<object[]> GetFloorRegionsAsync_TestData()
             => new List<object[]>
             {
                 new [] { new List<int> { 1, 3 } },
@@ -264,41 +264,145 @@ namespace GW2Api.NET.IntegrationTests.V2.Maps
             }.Permute();
 
         [DataTestMethod]
-        [DynamicData(nameof(GetMapRegionsAsync_TestData), DynamicDataSourceType.Method)]
-        public async Task GetMapRegionsAsync_ValidIds_ReturnsThoseMapRegions(IEnumerable<int> regionIds, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        [DynamicData(nameof(GetFloorRegionsAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetFloorRegionsAsync_ValidIds_ReturnsThoseFloorRegions(IEnumerable<int> regionIds, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var continentId = 1;
             var floorId = 0;
             var (lang, names) = langNamesTuple;
 
-            var result = await _api.GetMapRegionsAsync(continentId, floorId, regionIds, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetFloorRegionsAsync(continentId, floorId, regionIds, lang, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
         }
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetAllMapRegionsAsync_AnyParams_ReturnsAllMapRegions(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAllFloorRegionsAsync_AnyParams_ReturnsAllFloorRegions(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var continentId = 1;
             var floorId = 0;
 
-            var result = await _api.GetAllMapRegionsAsync(continentId, floorId, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetAllFloorRegionsAsync(continentId, floorId, lang, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetMapRegionsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetFloorRegionsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var continentId = 1;
             var floorId = 0;
 
-            var result = await _api.GetMapRegionsAsync(continentId, floorId, page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetFloorRegionsAsync(continentId, floorId, page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllMapIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+
+            var result = await _api.GetAllMapIdsAsync(continentId, floorId, regionId, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetMapAsync_TestData()
+            => new List<object[]>
+            {
+                new object[] { 26 },
+                new [] { (null, "Dredgehaunt Cliffs"), ("es", "Acantilados de Guaridadraga") }.ToLangStrObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetMapAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetMapAsync_ValidId_ReturnsThatMap(int mapId, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var (lang, name) = langNameTuple;
+
+            var result = await _api.GetMapAsync(continentId, floorId, regionId, mapId, lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(name, result.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMapsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+
+            await _api.GetMapsAsync(continentId, floorId, regionId, mapIds: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetMapsAsync_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<int> { 26, 27, 28 } },
+                new [] {
+                    (null, new List<string> { "Dredgehaunt Cliffs", "Lornar's Pass", "Wayfarer Foothills" }.AsEnumerable()),
+                    ("es", new List<string> { "Acantilados de Guaridadraga", "Paso de Lornar", "Colinas del Caminante" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetMapsAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetMapsAsync_ValidIds_ReturnsThoseMaps(IEnumerable<int> mapIds, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var (lang, names) = langNamesTuple;
+
+            var result = await _api.GetMapsAsync(continentId, floorId, regionId, mapIds, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllMapsAsync_AnyParams_ReturnsAllMaps(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+
+            var result = await _api.GetAllMapsAsync(continentId, floorId, regionId, lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMapsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+
+            var result = await _api.GetMapsAsync(continentId, floorId, regionId, page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
