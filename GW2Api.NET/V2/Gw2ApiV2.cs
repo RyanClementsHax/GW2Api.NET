@@ -26,6 +26,7 @@ namespace GW2Api.NET.V2
             {
                 new EnumFlagsConverter<Permissions>(),
                 new JsonStringEnumMemberConverter(),
+                new Vector3JsonConverter(),
                 new Vector2JsonConverter()
             },
         };
