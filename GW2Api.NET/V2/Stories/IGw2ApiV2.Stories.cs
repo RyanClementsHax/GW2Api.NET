@@ -30,5 +30,10 @@ namespace GW2Api.NET.V2
         Task<IList<StorySeason>> GetStorySeasonsAsync(IEnumerable<Guid> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<StorySeason>> GetAllStorySeasonsAsync(CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<StorySeason>>> GetStorySeasonsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<int>> GetAllQuestIdsAsync(CancellationToken token = default);
+        Task<Quest> GetQuestAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Quest>> GetQuestsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Quest>> GetAllQuestsAsync(CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<Quest>>> GetQuestsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }

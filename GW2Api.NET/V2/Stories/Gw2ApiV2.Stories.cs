@@ -210,5 +210,55 @@ namespace GW2Api.NET.V2
                 }.ConfigurePage(page, pageSize),
                 token
             );
+
+        public Task<IList<int>> GetAllQuestIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("quests", token);
+
+        public Task<Quest> GetQuestAsync(int id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<Quest>(
+                $"quests/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<Quest>> GetQuestsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<Quest>>(
+                "quests",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<Quest>> GetAllQuestsAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<Quest>>(
+                "quests",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<Quest>>> GetQuestsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<Quest>>(
+                "quests",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
     }
 }
