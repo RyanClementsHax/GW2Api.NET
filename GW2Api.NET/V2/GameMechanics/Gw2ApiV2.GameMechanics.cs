@@ -1,5 +1,6 @@
 ﻿using GW2Api.NET.Helpers;
 using GW2Api.NET.V2.Common;
+using GW2Api.NET.V2.GameMechanics.Dto.Dungeons;
 using GW2Api.NET.V2.GameMechanics.Dto.Legends;
 using GW2Api.NET.V2.GameMechanics.Dto.Masteries;
 using GW2Api.NET.V2.GameMechanics.Dto.Mounts;
@@ -553,6 +554,56 @@ namespace GW2Api.NET.V2
         public Task<Page<IList<Legend>>> GetLegendsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Legend>>(
                 "legends",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
+
+        public Task<IList<string>> GetAllDungeonIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<string>>("dungeons", token);
+
+        public Task<Dungeon> GetDungeonAsync(string id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<Dungeon>(
+                $"dungeons/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<Dungeon>> GetDungeonsAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<Dungeon>>(
+                "dungeons",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<Dungeon>> GetAllDungeonsAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<Dungeon>>(
+                "dungeons",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<Dungeon>>> GetDungeonsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<Dungeon>>(
+                "dungeons",
                 new Dictionary<string, string>
                 {
                     { "lang", lang.ToUrlParam() }

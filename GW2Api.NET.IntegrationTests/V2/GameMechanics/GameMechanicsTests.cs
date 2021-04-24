@@ -953,5 +953,91 @@ namespace GW2Api.NET.IntegrationTests.V2.GameMechanics
 
             Assert.IsTrue(result.Data.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllDungeonIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllDungeonIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetDungeonAsync_TestData()
+            => new List<object[]>
+            {
+                new object[] { "ascalonian_catacombs" },
+                new [] { (null, "ascalonian_catacombs"), ("es", "ascalonian_catacombs") }.ToLangStrObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetDungeonAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetDungeonAsync_ValidId_ReturnsThatDungeon(string id, (CultureInfo, string) langIdTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, expectedId) = langIdTuple;
+
+            var result = await _api.GetDungeonAsync(id, lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(expectedId, result.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetDungeonsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetMountSkinsAsync(ids: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetDungeonsAsync_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<string> { "ascalonian_catacombs", "caudecus_manor", "twilight_arbor" } },
+                new [] {
+                    (null, new List<string> { "ascalonian_catacombs", "caudecus_manor", "twilight_arbor" }.AsEnumerable()),
+                    ("es", new List<string> { "ascalonian_catacombs", "caudecus_manor", "twilight_arbor" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetDungeonsAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetDungeonsAsync_ValidIds_ReturnsThoseDungeons(IEnumerable<string> ids, (CultureInfo, IEnumerable<string>) langIdsTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, expectedIds) = langIdsTuple;
+
+            var result = await _api.GetDungeonsAsync(ids, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(expectedIds.ToList(), result.Select(x => x.Id).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllDungeonsAsync_AnyParams_ReturnsAllDungeons(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllDungeonsAsync(lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetDungeonsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetDungeonsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GW2Api.NET.V2.Common;
+using GW2Api.NET.V2.GameMechanics.Dto.Dungeons;
 using GW2Api.NET.V2.GameMechanics.Dto.Legends;
 using GW2Api.NET.V2.GameMechanics.Dto.Masteries;
 using GW2Api.NET.V2.GameMechanics.Dto.Mounts;
@@ -72,5 +73,10 @@ namespace GW2Api.NET.V2
         Task<IList<Legend>> GetLegendsAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Legend>> GetAllLegendsAsync(CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<Legend>>> GetLegendsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<string>> GetAllDungeonIdsAsync(CancellationToken token = default);
+        Task<Dungeon> GetDungeonAsync(string id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Dungeon>> GetDungeonsAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Dungeon>> GetAllDungeonsAsync(CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<Dungeon>>> GetDungeonsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }
