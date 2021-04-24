@@ -597,5 +597,91 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
 
             CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllMiniIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllMiniIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetMiniAsync_TestData()
+            => new List<object[]>
+            {
+                new object[] { 1 },
+                new [] { (null, "Mini Rytlock"), ("es", "Miniatura de Rytlock") }.ToLangStrObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetMiniAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetMiniAsync_ValidId_ReturnsThatMini(int id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, name) = langNameTuple;
+
+            var result = await _api.GetMiniAsync(id, lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(name, result.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMinisAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetMinisAsync(ids: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetMinisAsync_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<int> { 1, 2, 228 } },
+                new [] {
+                    (null, new List<string> { "Mini Rytlock", "Mini Servitor Golem", "Mini Llama" }.AsEnumerable()),
+                    ("es", new List<string> { "Miniatura de Rytlock", "Minigólem ordenanza", "Minillama" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetMinisAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetMinisAsync_ValidIds_ReturnsThoseMinis(IEnumerable<int> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, names) = langNamesTuple;
+
+            var result = await _api.GetMinisAsync(ids, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllMinisAsync_AnyParams_ReturnsAllMinis(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllMinisAsync(lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMinisAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetMinisAsync(lang: lang, token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
     }
 }

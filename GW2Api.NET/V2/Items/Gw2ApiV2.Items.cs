@@ -236,5 +236,54 @@ namespace GW2Api.NET.V2
                 token
             );
         }
+        public Task<IList<int>> GetAllMiniIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("minis", token);
+
+        public Task<Mini> GetMiniAsync(int id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<Mini>(
+                $"minis/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<Mini>> GetMinisAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<Mini>>(
+                "minis",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<Mini>> GetAllMinisAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<Mini>>(
+                "minis",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<Mini>>> GetMinisAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<Mini>>(
+                "minis",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
     }
 }
