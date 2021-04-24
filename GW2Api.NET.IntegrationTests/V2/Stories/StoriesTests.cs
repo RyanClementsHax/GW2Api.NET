@@ -190,5 +190,91 @@ namespace GW2Api.NET.IntegrationTests.V2.Stories
 
             Assert.IsTrue(result.Data.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllStoryIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllStoryIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetStoryAsync_TestData()
+            => new List<object[]>
+            {
+                new object[] { 3 },
+                new [] { (null, "My Story"), ("es", "Mi historia") }.ToLangStrObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetStoryAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetStoryAsync_ValidId_ReturnsThatStory(int id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, name) = langNameTuple;
+
+            var result = await _api.GetStoryAsync(id, lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(name, result.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetStoriesAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetStoriesAsync(ids: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetStoriesAsync_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<int> { 3, 10, 11} },
+                new [] {
+                    (null, new List<string> { "My Story", "The Elder Dragon Zhaitan", "1. Gates of Maguuma" }.AsEnumerable()),
+                    ("es", new List<string> { "Mi historia", "El dragón anciano Zhaitan", "1. A las puertas de Maguuma" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetStoriesAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetStoriesAsync_ValidIds_ReturnsThoseStories(IEnumerable<int> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, names) = langNamesTuple;
+
+            var result = await _api.GetStoriesAsync(ids, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllStoriesAsync_AnyParams_ReturnsAllStories(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllStoriesAsync(lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetStoriesAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetStoriesAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
     }
 }
