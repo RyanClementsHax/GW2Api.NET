@@ -261,5 +261,55 @@ namespace GW2Api.NET.V2
                 }.ConfigurePage(page, pageSize),
                 token
             );
+
+        public Task<IList<int>> GetAllPointOfInterestIdsAsync(int continentId, int floorId, int regionId, int mapId, CancellationToken token = default)
+            => GetAsync<IList<int>>($"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois", token);
+
+        public Task<PointOfInterest> GetPointOfInterestAsync(int continentId, int floorId, int regionId, int mapId, int pointOfInterestId, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<PointOfInterest>(
+                $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois/{pointOfInterestId}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<PointOfInterest>> GetPointsOfInterestAsync(int continentId, int floorId, int regionId, int mapId, IEnumerable<int> pointOfInterestIds, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (pointOfInterestIds is null)
+                throw new ArgumentNullException(nameof(pointOfInterestIds));
+
+            return GetAsync<IList<PointOfInterest>>(
+                $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois",
+                new Dictionary<string, string>
+                {
+                    { "ids", pointOfInterestIds.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<PointOfInterest>> GetAllPointsOfInterestAsync(int continentId, int floorId, int regionId, int mapId, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<PointOfInterest>>(
+                $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<PointOfInterest>>> GetPointsOfInterestAsync(int continentId, int floorId, int regionId, int mapId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<PointOfInterest>>(
+                $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
     }
 }

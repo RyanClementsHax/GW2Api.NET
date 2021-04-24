@@ -516,5 +516,115 @@ namespace GW2Api.NET.IntegrationTests.V2.Maps
 
             Assert.IsTrue(result.Data.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllPointOfInterestIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+
+            var result = await _api.GetAllPointOfInterestIdsAsync(continentId, floorId, regionId, mapId, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetPointOfInterestAsync_TestData()
+            => new List<object[]>
+            {
+                new object[] { 554 },
+                new [] { (null, "Leaning Grade"), ("es", "Lenin Grada") }.ToLangStrObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetPointOfInterestAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetPointOfInterestAsync_ValidId_ReturnsThatPointOfInterest(int pointOfInterestId, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+            var (lang, name) = langNameTuple;
+
+            var result = await _api.GetPointOfInterestAsync(continentId, floorId, regionId, mapId, pointOfInterestId, lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(name, result.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetPointsOfInterestAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+
+            await _api.GetPointsOfInterestAsync(continentId, floorId, regionId, mapId, pointOfInterestIds: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetPointsOfInterestAsync_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<int> { 554, 555, 556 } },
+                new [] {
+                    (null, new List<string> { "Leaning Grade", "Fridgardr Lodge", "Mantelet Refuge" }.AsEnumerable()),
+                    ("es", new List<string> { "Lenin Grada", "Albergue de Fridgardr", "Refugio Mantelet" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetPointsOfInterestAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetPointsOfInterestAsync_ValidIds_ReturnsThosePointsOfInterest(IEnumerable<int> pointOfInterestIds, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+            var (lang, names) = langNamesTuple;
+
+            var result = await _api.GetPointsOfInterestAsync(continentId, floorId, regionId, mapId, pointOfInterestIds, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllPointsOfInterestAsync_AnyParams_ReturnsAllPointsOfInterest(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+
+            var result = await _api.GetAllPointsOfInterestAsync(continentId, floorId, regionId, mapId, lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetPointsOfInterestAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+
+            var result = await _api.GetPointsOfInterestAsync(continentId, floorId, regionId, mapId, page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
     }
 }
