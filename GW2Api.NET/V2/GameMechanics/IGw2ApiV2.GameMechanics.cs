@@ -7,6 +7,7 @@ using GW2Api.NET.V2.GameMechanics.Dto.Outfits;
 using GW2Api.NET.V2.GameMechanics.Dto.Pets;
 using GW2Api.NET.V2.GameMechanics.Dto.Professions;
 using GW2Api.NET.V2.GameMechanics.Dto.Races;
+using GW2Api.NET.V2.GameMechanics.Dto.Raids;
 using GW2Api.NET.V2.GameMechanics.Dto.Skills;
 using GW2Api.NET.V2.GameMechanics.Dto.Specializations;
 using GW2Api.NET.V2.GameMechanics.Dto.Traits;
@@ -78,5 +79,10 @@ namespace GW2Api.NET.V2
         Task<IList<Dungeon>> GetDungeonsAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Dungeon>> GetAllDungeonsAsync(CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<Dungeon>>> GetDungeonsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<string>> GetAllRaidIdsAsync(CancellationToken token = default);
+        Task<Raid> GetRaidAsync(string id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Raid>> GetRaidsAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Raid>> GetAllRaidsAsync(CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<Raid>>> GetRaidsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }

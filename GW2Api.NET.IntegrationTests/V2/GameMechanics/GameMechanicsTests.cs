@@ -1039,5 +1039,91 @@ namespace GW2Api.NET.IntegrationTests.V2.GameMechanics
 
             Assert.IsTrue(result.Data.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllRaidIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllRaidIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetRaidAsync_TestData()
+            => new List<object[]>
+            {
+                new object[] { "forsaken_thicket" },
+                new [] { (null, "forsaken_thicket"), ("es", "forsaken_thicket") }.ToLangStrObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetRaidAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetRaidAsync_ValidId_ReturnsThatRaid(string id, (CultureInfo, string) langIdTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, expectedId) = langIdTuple;
+
+            var result = await _api.GetRaidAsync(id, lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(expectedId, result.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetRaidsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetMountSkinsAsync(ids: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetRaidsAsync_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<string> { "forsaken_thicket", "bastion_of_the_penitent", "hall_of_chains" } },
+                new [] {
+                    (null, new List<string> { "forsaken_thicket", "bastion_of_the_penitent", "hall_of_chains" }.AsEnumerable()),
+                    ("es", new List<string> { "forsaken_thicket", "bastion_of_the_penitent", "hall_of_chains" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetRaidsAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetRaidsAsync_ValidIds_ReturnsThoseRaids(IEnumerable<string> ids, (CultureInfo, IEnumerable<string>) langIdsTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, expectedIds) = langIdsTuple;
+
+            var result = await _api.GetRaidsAsync(ids, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(expectedIds.ToList(), result.Select(x => x.Id).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllRaidsAsync_AnyParams_ReturnsAllRaids(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllRaidsAsync(lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetRaidsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetRaidsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
     }
 }
