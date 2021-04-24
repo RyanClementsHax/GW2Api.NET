@@ -8,6 +8,6 @@ namespace GW2Api.NET.V2.Maps.Dto
         string Name,
         Vector2 LabelCoord,
         IList<Vector2> ContinentRect,
-        IDictionary<int, Map> Maps
+        IDictionary<int, RegionMap> Maps
     );
 }

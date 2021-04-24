@@ -162,11 +162,11 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<IList<int>> GetAllMapIdsAsync(int continentId, int floorId, int regionId, CancellationToken token = default)
+        public Task<IList<int>> GetAllRegionMapIdsAsync(int continentId, int floorId, int regionId, CancellationToken token = default)
             => GetAsync<IList<int>>($"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps", token);
 
-        public Task<Map> GetMapAsync(int continentId, int floorId, int regionId, int mapId, CultureInfo lang = null, CancellationToken token = default)
-            => GetAsync<Map>(
+        public Task<RegionMap> GetRegionMapAsync(int continentId, int floorId, int regionId, int mapId, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<RegionMap>(
                 $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}",
                 new Dictionary<string, string>
                 {
@@ -175,12 +175,12 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<IList<Map>> GetMapsAsync(int continentId, int floorId, int regionId, IEnumerable<int> regionIds, CultureInfo lang = null, CancellationToken token = default)
+        public Task<IList<RegionMap>> GetRegionMapsAsync(int continentId, int floorId, int regionId, IEnumerable<int> regionIds, CultureInfo lang = null, CancellationToken token = default)
         {
             if (regionIds is null)
                 throw new ArgumentNullException(nameof(regionIds));
 
-            return GetAsync<IList<Map>>(
+            return GetAsync<IList<RegionMap>>(
                 $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps",
                 new Dictionary<string, string>
                 {
@@ -191,8 +191,8 @@ namespace GW2Api.NET.V2
             );
         }
 
-        public Task<IList<Map>> GetAllMapsAsync(int continentId, int floorId, int regionId, CultureInfo lang = null, CancellationToken token = default)
-            => GetAsync<IList<Map>>(
+        public Task<IList<RegionMap>> GetAllRegionMapsAsync(int continentId, int floorId, int regionId, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<RegionMap>>(
                 $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps",
                 new Dictionary<string, string>
                 {
@@ -202,8 +202,8 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Map>>> GetMapsAsync(int continentId, int floorId, int regionId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
-            => GetPageAsync<IList<Map>>(
+        public Task<Page<IList<RegionMap>>> GetRegionMapsAsync(int continentId, int floorId, int regionId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<RegionMap>>(
                 $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps",
                 new Dictionary<string, string>
                 {

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GW2Api.NET.V2.Maps.Dto
 {
-    public record Map(
+    public record RegionMap(
         int Id,
         string Name,
         int MinLevel,

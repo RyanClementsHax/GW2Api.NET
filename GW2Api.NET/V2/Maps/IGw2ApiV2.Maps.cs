@@ -24,10 +24,10 @@ namespace GW2Api.NET.V2
         Task<IList<FloorRegion>> GetFloorRegionsAsync(int continentId, int floorId, IEnumerable<int> regionIds, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<FloorRegion>> GetAllFloorRegionsAsync(int continentId, int floorId, CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<FloorRegion>>> GetFloorRegionsAsync(int continentId, int floorId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
-        Task<IList<int>> GetAllMapIdsAsync(int continentId, int floorId, int regionId, CancellationToken token = default);
-        Task<Map> GetMapAsync(int continentId, int floorId, int regionId, int mapId, CultureInfo lang = null, CancellationToken token = default);
-        Task<IList<Map>> GetMapsAsync(int continentId, int floorId, int regionId, IEnumerable<int> mapIds, CultureInfo lang = null, CancellationToken token = default);
-        Task<IList<Map>> GetAllMapsAsync(int continentId, int floorId, int regionId, CultureInfo lang = null, CancellationToken token = default);
-        Task<Page<IList<Map>>> GetMapsAsync(int continentId, int floorId, int regionId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<int>> GetAllRegionMapIdsAsync(int continentId, int floorId, int regionId, CancellationToken token = default);
+        Task<RegionMap> GetRegionMapAsync(int continentId, int floorId, int regionId, int mapId, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<RegionMap>> GetRegionMapsAsync(int continentId, int floorId, int regionId, IEnumerable<int> mapIds, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<RegionMap>> GetAllRegionMapsAsync(int continentId, int floorId, int regionId, CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<RegionMap>>> GetRegionMapsAsync(int continentId, int floorId, int regionId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }
