@@ -13,5 +13,10 @@ namespace GW2Api.NET.V2
         Task<IList<HomeCat>> GetHomeCatsAsync(IEnumerable<int> ids, CancellationToken token = default);
         Task<IList<HomeCat>> GetAllHomeCatsAsync(CancellationToken token = default);
         Task<Page<IList<HomeCat>>> GetHomeCatsAsync(int page = 1, int pageSize = -1, CancellationToken token = default);
+        Task<IList<string>> GetAllHomeNodeIdsAsync(CancellationToken token = default);
+        Task<HomeNode> GetHomeNodeAsync(string id, CancellationToken token = default);
+        Task<IList<HomeNode>> GetHomeNodesAsync(IEnumerable<string> ids, CancellationToken token = default);
+        Task<IList<HomeNode>> GetAllHomeNodesAsync(CancellationToken token = default);
+        Task<Page<IList<HomeNode>>> GetHomeNodesAsync(int page = 1, int pageSize = -1, CancellationToken token = default);
     }
 }
