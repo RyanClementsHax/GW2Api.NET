@@ -276,5 +276,97 @@ namespace GW2Api.NET.IntegrationTests.V2.Stories
 
             Assert.IsTrue(result.Data.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllSeasonIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllSeasonIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetSeasonAsync_TestData()
+            => new List<object[]>
+            {
+                new object[] { Guid.Parse("09766A86-D88D-4DF2-9385-259E9A8CA583") },
+                new [] { (null, "Living World Season 3"), ("es", "Mundo viviente, 3.ª temporada") }.ToLangStrObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetSeasonAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetSeasonAsync_ValidId_ReturnsThatSeason(Guid id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, name) = langNameTuple;
+
+            var result = await _api.GetSeasonAsync(id, lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(name, result.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetSeasonsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetSeasonsAsync(ids: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetSeasonsAsync_TestData()
+            => new List<object[]>
+            {
+                new [] {
+                    new List<Guid> {
+                        Guid.Parse("09766A86-D88D-4DF2-9385-259E9A8CA583"),
+                        Guid.Parse("EDCAE800-302A-4D9B-8331-3CC769ADA0B3"),
+                        Guid.Parse("002C2D90-69B5-41A2-A422-8DB6F2EFC53E"),
+                    }
+                },
+                new [] {
+                    (null, new List<string> { "Living World Season 3", "The Icebrood Saga", "Scarlet's War" }.AsEnumerable()),
+                    ("es", new List<string> { "Mundo viviente, 3.ª temporada", "Sangre y Hielo", "La guerra de Scarlet" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetSeasonsAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetSeasonsAsync_ValidIds_ReturnsThoseSeasons(IEnumerable<Guid> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, names) = langNamesTuple;
+
+            var result = await _api.GetSeasonsAsync(ids, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllSeasonsAsync_AnyParams_ReturnsAllSeasons(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllSeasonsAsync(lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetSeasonsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetSeasonsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
     }
 }
