@@ -19,5 +19,10 @@ namespace GW2Api.NET.V2
         Task<IList<Floor>> GetFloorsAsync(int continentId, IEnumerable<int> floorIds, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Floor>> GetAllFloorsAsync(int continentId, CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<Floor>>> GetFloorsAsync(int continentId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<int>> GetAllMapRegionIdsAsync(int continentId, int floorId, CancellationToken token = default);
+        Task<MapRegion> GetMapRegionAsync(int continentId, int floorId, int regionId, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<MapRegion>> GetMapRegionsAsync(int continentId, int floorId, IEnumerable<int> regionIds, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<MapRegion>> GetAllMapRegionsAsync(int continentId, int floorId, CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<MapRegion>>> GetMapRegionsAsync(int continentId, int floorId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }
