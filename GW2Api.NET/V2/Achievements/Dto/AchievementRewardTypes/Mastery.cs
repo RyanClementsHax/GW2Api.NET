@@ -1,5 +1,5 @@
 ﻿using GW2Api.NET.Json.Attributes;
-using GW2Api.NET.V2.GameMechanics.Dto;
+using GW2Api.NET.V2.Maps.Dto;
 
 namespace GW2Api.NET.V2.Achievements.Dto.AchievementRewardTypes
 {
