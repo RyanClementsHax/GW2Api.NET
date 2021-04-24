@@ -279,16 +279,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Stories
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetAllSeasonIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAllStorySeasonIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAllSeasonIdsAsync(cts.GetTokenOrDefault());
+            var result = await _api.GetAllStorySeasonIdsAsync(cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
 
-        public static IEnumerable<object[]> GetSeasonAsync_TestData()
+        public static IEnumerable<object[]> GetStorySeasonAsync_TestData()
             => new List<object[]>
             {
                 new object[] { Guid.Parse("09766A86-D88D-4DF2-9385-259E9A8CA583") },
@@ -297,13 +297,13 @@ namespace GW2Api.NET.IntegrationTests.V2.Stories
             }.Permute();
 
         [DataTestMethod]
-        [DynamicData(nameof(GetSeasonAsync_TestData), DynamicDataSourceType.Method)]
-        public async Task GetSeasonAsync_ValidId_ReturnsThatSeason(Guid id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        [DynamicData(nameof(GetStorySeasonAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetStorySeasonAsync_ValidId_ReturnsThatStorySeason(Guid id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var (lang, name) = langNameTuple;
 
-            var result = await _api.GetSeasonAsync(id, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetStorySeasonAsync(id, lang, cts.GetTokenOrDefault());
 
             Assert.AreEqual(name, result.Name);
         }
@@ -311,14 +311,14 @@ namespace GW2Api.NET.IntegrationTests.V2.Stories
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetSeasonsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetStorySeasonsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            await _api.GetSeasonsAsync(ids: null, lang, cts.GetTokenOrDefault());
+            await _api.GetStorySeasonsAsync(ids: null, lang, cts.GetTokenOrDefault());
         }
 
-        public static IEnumerable<object[]> GetSeasonsAsync_TestData()
+        public static IEnumerable<object[]> GetStorySeasonsAsync_TestData()
             => new List<object[]>
             {
                 new [] {
@@ -336,35 +336,35 @@ namespace GW2Api.NET.IntegrationTests.V2.Stories
             }.Permute();
 
         [DataTestMethod]
-        [DynamicData(nameof(GetSeasonsAsync_TestData), DynamicDataSourceType.Method)]
-        public async Task GetSeasonsAsync_ValidIds_ReturnsThoseSeasons(IEnumerable<Guid> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        [DynamicData(nameof(GetStorySeasonsAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetStorySeasonsAsync_ValidIds_ReturnsThoseStorySeasons(IEnumerable<Guid> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var (lang, names) = langNamesTuple;
 
-            var result = await _api.GetSeasonsAsync(ids, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetStorySeasonsAsync(ids, lang, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
         }
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetAllSeasonsAsync_AnyParams_ReturnsAllSeasons(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAllStorySeasonsAsync_AnyParams_ReturnsAllStorySeasons(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAllSeasonsAsync(lang, cts.GetTokenOrDefault());
+            var result = await _api.GetAllStorySeasonsAsync(lang, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetSeasonsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetStorySeasonsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetSeasonsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetStorySeasonsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }

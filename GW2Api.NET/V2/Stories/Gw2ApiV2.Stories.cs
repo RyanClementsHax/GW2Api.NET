@@ -161,11 +161,11 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<IList<Guid>> GetAllSeasonIdsAsync(CancellationToken token = default)
+        public Task<IList<Guid>> GetAllStorySeasonIdsAsync(CancellationToken token = default)
             => GetAsync<IList<Guid>>("stories/seasons", token);
 
-        public Task<Season> GetSeasonAsync(Guid id, CultureInfo lang = null, CancellationToken token = default)
-            => GetAsync<Season>(
+        public Task<StorySeason> GetStorySeasonAsync(Guid id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<StorySeason>(
                 $"stories/seasons/{id.ToUrlParam()}",
                 new Dictionary<string, string>
                 {
@@ -174,12 +174,12 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<IList<Season>> GetSeasonsAsync(IEnumerable<Guid> ids, CultureInfo lang = null, CancellationToken token = default)
+        public Task<IList<StorySeason>> GetStorySeasonsAsync(IEnumerable<Guid> ids, CultureInfo lang = null, CancellationToken token = default)
         {
             if (ids is null)
                 throw new ArgumentNullException(nameof(ids));
 
-            return GetAsync<IList<Season>>(
+            return GetAsync<IList<StorySeason>>(
                 "stories/seasons",
                 new Dictionary<string, string>
                 {
@@ -190,8 +190,8 @@ namespace GW2Api.NET.V2
             );
         }
 
-        public Task<IList<Season>> GetAllSeasonsAsync(CultureInfo lang = null, CancellationToken token = default)
-            => GetAsync<IList<Season>>(
+        public Task<IList<StorySeason>> GetAllStorySeasonsAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<StorySeason>>(
                 "stories/seasons",
                 new Dictionary<string, string>
                 {
@@ -201,8 +201,8 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Season>>> GetSeasonsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
-            => GetPageAsync<IList<Season>>(
+        public Task<Page<IList<StorySeason>>> GetStorySeasonsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<StorySeason>>(
                 "stories/seasons",
                 new Dictionary<string, string>
                 {

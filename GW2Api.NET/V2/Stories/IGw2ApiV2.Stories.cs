@@ -25,10 +25,10 @@ namespace GW2Api.NET.V2
         Task<IList<Story>> GetStoriesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Story>> GetAllStoriesAsync(CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<Story>>> GetStoriesAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
-        Task<IList<Guid>> GetAllSeasonIdsAsync(CancellationToken token = default);
-        Task<Season> GetSeasonAsync(Guid id, CultureInfo lang = null, CancellationToken token = default);
-        Task<IList<Season>> GetSeasonsAsync(IEnumerable<Guid> ids, CultureInfo lang = null, CancellationToken token = default);
-        Task<IList<Season>> GetAllSeasonsAsync(CultureInfo lang = null, CancellationToken token = default);
-        Task<Page<IList<Season>>> GetSeasonsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Guid>> GetAllStorySeasonIdsAsync(CancellationToken token = default);
+        Task<StorySeason> GetStorySeasonAsync(Guid id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<StorySeason>> GetStorySeasonsAsync(IEnumerable<Guid> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<StorySeason>> GetAllStorySeasonsAsync(CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<StorySeason>>> GetStorySeasonsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }
