@@ -175,16 +175,16 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<IList<RegionMap>> GetRegionMapsAsync(int continentId, int floorId, int regionId, IEnumerable<int> regionIds, CultureInfo lang = null, CancellationToken token = default)
+        public Task<IList<RegionMap>> GetRegionMapsAsync(int continentId, int floorId, int regionId, IEnumerable<int> mapIds, CultureInfo lang = null, CancellationToken token = default)
         {
-            if (regionIds is null)
-                throw new ArgumentNullException(nameof(regionIds));
+            if (mapIds is null)
+                throw new ArgumentNullException(nameof(mapIds));
 
             return GetAsync<IList<RegionMap>>(
                 $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps",
                 new Dictionary<string, string>
                 {
-                    { "ids", regionIds.ToUrlParam() },
+                    { "ids", mapIds.ToUrlParam() },
                     { "lang", lang.ToUrlParam() }
                 },
                 token
@@ -205,6 +205,56 @@ namespace GW2Api.NET.V2
         public Task<Page<IList<RegionMap>>> GetRegionMapsAsync(int continentId, int floorId, int regionId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<RegionMap>>(
                 $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
+
+        public Task<IList<int>> GetAllSectorIdsAsync(int continentId, int floorId, int regionId, int mapId, CancellationToken token = default)
+            => GetAsync<IList<int>>($"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors", token);
+
+        public Task<Sector> GetSectorAsync(int continentId, int floorId, int regionId, int mapId, int sectorId, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<Sector>(
+                $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors/{sectorId}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<Sector>> GetSectorsAsync(int continentId, int floorId, int regionId, int mapId, IEnumerable<int> sectorIds, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (sectorIds is null)
+                throw new ArgumentNullException(nameof(sectorIds));
+
+            return GetAsync<IList<Sector>>(
+                $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors",
+                new Dictionary<string, string>
+                {
+                    { "ids", sectorIds.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<Sector>> GetAllSectorsAsync(int continentId, int floorId, int regionId, int mapId, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<Sector>>(
+                $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<Sector>>> GetSectorsAsync(int continentId, int floorId, int regionId, int mapId, int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<Sector>>(
+                $"continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors",
                 new Dictionary<string, string>
                 {
                     { "lang", lang.ToUrlParam() }

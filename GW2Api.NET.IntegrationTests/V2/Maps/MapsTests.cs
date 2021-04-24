@@ -406,5 +406,115 @@ namespace GW2Api.NET.IntegrationTests.V2.Maps
 
             Assert.IsTrue(result.Data.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllSectorIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+
+            var result = await _api.GetAllSectorIdsAsync(continentId, floorId, regionId, mapId, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetSectorAsync_TestData()
+            => new List<object[]>
+            {
+                new object[] { 513 },
+                new [] { (null, "Tribulation Rift"), ("es", "Abismo de la Tribulación") }.ToLangStrObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetSectorAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetSectorAsync_ValidId_ReturnsThatSector(int sectorId, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+            var (lang, name) = langNameTuple;
+
+            var result = await _api.GetSectorAsync(continentId, floorId, regionId, mapId, sectorId, lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(name, result.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetSectorsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+
+            await _api.GetSectorsAsync(continentId, floorId, regionId, mapId, sectorIds: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetSectorsAsync_TestData()
+            => new List<object[]>
+            {
+                new [] { new List<int> { 513, 514, 515 } },
+                new [] {
+                    (null, new List<string> { "Tribulation Rift", "De Molish Post", "Dissun's Mine" }.AsEnumerable()),
+                    ("es", new List<string> { "Abismo de la Tribulación", "Puesto de Ribar", "Mina de Dissun" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetSectorsAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetSectorsAsync_ValidIds_ReturnsThoseSectors(IEnumerable<int> sectorIds, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+            var (lang, names) = langNamesTuple;
+
+            var result = await _api.GetSectorsAsync(continentId, floorId, regionId, mapId, sectorIds, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllSectorsAsync_AnyParams_ReturnsAllSectors(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+
+            var result = await _api.GetAllSectorsAsync(continentId, floorId, regionId, mapId, lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetSectorsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var continentId = 1;
+            var floorId = 0;
+            var regionId = 1;
+            var mapId = 26;
+
+            var result = await _api.GetSectorsAsync(continentId, floorId, regionId, mapId, page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
     }
 }
