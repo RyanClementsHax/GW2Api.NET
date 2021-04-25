@@ -108,5 +108,55 @@ namespace GW2Api.NET.V2
                 }.ConfigurePage(page, pageSize),
                 token
             );
+
+        public Task<IList<int>> GetAllPvpRankIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("pvp/ranks", token);
+
+        public Task<PvpRank> GetPvpRankAsync(int id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<PvpRank>(
+                $"pvp/ranks/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<PvpRank>> GetPvpRanksAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<PvpRank>>(
+                "pvp/ranks",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<PvpRank>> GetAllPvpRanksAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<PvpRank>>(
+                "pvp/ranks",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<PvpRank>>> GetPvpRanksAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<PvpRank>>(
+                "pvp/ranks",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
     }
 }
