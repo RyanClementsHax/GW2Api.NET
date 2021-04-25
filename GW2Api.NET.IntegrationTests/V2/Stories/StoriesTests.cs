@@ -186,7 +186,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Stories
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetBackstoryQuestionsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetBackstoryQuestionsAsync(lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -272,7 +272,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Stories
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetStoriesAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetStoriesAsync(lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -364,7 +364,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Stories
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetStorySeasonsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetStorySeasonsAsync(lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -450,7 +450,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Stories
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetQuestsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetQuestsAsync(lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }

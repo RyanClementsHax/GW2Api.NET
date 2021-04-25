@@ -261,7 +261,7 @@ namespace GW2Api.NET.IntegrationTests.V2.GameMechanics
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetMountTypesAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetMountTypesAsync(lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -519,7 +519,7 @@ namespace GW2Api.NET.IntegrationTests.V2.GameMechanics
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetProfessionsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetProfessionsAsync(lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -605,7 +605,7 @@ namespace GW2Api.NET.IntegrationTests.V2.GameMechanics
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetRacesAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetRacesAsync(lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -949,7 +949,7 @@ namespace GW2Api.NET.IntegrationTests.V2.GameMechanics
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetLegendsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetLegendsAsync(lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -1035,7 +1035,7 @@ namespace GW2Api.NET.IntegrationTests.V2.GameMechanics
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetDungeonsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetDungeonsAsync(lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -1121,7 +1121,7 @@ namespace GW2Api.NET.IntegrationTests.V2.GameMechanics
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetRaidsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetRaidsAsync(lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }

@@ -94,7 +94,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Guilds
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetEmblemBackgroundsAsync(page: 1, pageSize: 1, cts.GetTokenOrDefault());
+            var result = await _api.GetEmblemBackgroundsAsync(token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -161,7 +161,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Guilds
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetEmblemForegroundsAsync(page: 1, pageSize: 1, cts.GetTokenOrDefault());
+            var result = await _api.GetEmblemForegroundsAsync(token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -247,7 +247,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Guilds
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetGuildPermissionsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetGuildPermissionsAsync(lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }

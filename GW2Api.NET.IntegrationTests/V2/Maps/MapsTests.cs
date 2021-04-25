@@ -100,7 +100,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Maps
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetContinentsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetContinentsAsync(lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -200,7 +200,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Maps
             using var cts = ctsFactory();
             var continentId = 1;
 
-            var result = await _api.GetFloorsAsync(continentId, page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetFloorsAsync(continentId, lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -298,7 +298,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Maps
             var continentId = 1;
             var floorId = 0;
 
-            var result = await _api.GetFloorRegionsAsync(continentId, floorId, page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetFloorRegionsAsync(continentId, floorId, lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -402,7 +402,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Maps
             var floorId = 0;
             var regionId = 1;
 
-            var result = await _api.GetRegionMapsAsync(continentId, floorId, regionId, page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetRegionMapsAsync(continentId, floorId, regionId, lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -512,7 +512,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Maps
             var regionId = 1;
             var mapId = 26;
 
-            var result = await _api.GetSectorsAsync(continentId, floorId, regionId, mapId, page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetSectorsAsync(continentId, floorId, regionId, mapId, lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -622,7 +622,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Maps
             var regionId = 1;
             var mapId = 26;
 
-            var result = await _api.GetPointsOfInterestAsync(continentId, floorId, regionId, mapId, page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetPointsOfInterestAsync(continentId, floorId, regionId, mapId, lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -732,7 +732,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Maps
             var regionId = 1;
             var mapId = 26;
 
-            var result = await _api.GetMapTasksAsync(continentId, floorId, regionId, mapId, page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetMapTasksAsync(continentId, floorId, regionId, mapId, lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }

@@ -100,7 +100,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetPvpAmuletsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+            var result = await _api.GetPvpAmuletsAsync(lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }

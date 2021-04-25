@@ -73,7 +73,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetCharactersAsync(page: 1, pageSize: 1, apiKey, cts.GetTokenOrDefault());
+            var result = await _api.GetCharactersAsync(page: 0, accessToken: apiKey, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }

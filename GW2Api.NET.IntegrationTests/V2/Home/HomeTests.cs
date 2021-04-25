@@ -80,7 +80,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Home
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetHomeCatsAsync(page: 1, pageSize: 1, cts.GetTokenOrDefault());
+            var result = await _api.GetHomeCatsAsync(token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
@@ -147,7 +147,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Home
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetHomeNodesAsync(page: 1, pageSize: 1, cts.GetTokenOrDefault());
+            var result = await _api.GetHomeNodesAsync(token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }
