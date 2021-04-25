@@ -243,6 +243,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
         }
 
         [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetItemsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetItemsAsync(lang: lang, token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
+
+        [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetAllItemStatsIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
@@ -315,6 +326,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
             var result = await _api.GetAllItemStatsAsync(lang, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetItemStatsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetItemStatsAsync(lang: lang, token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
         }
 
         [DataTestMethod]
@@ -393,6 +415,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
         }
 
         [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMaterialsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetMaterialsAsync(lang: lang, token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
+
+        [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetAllRecipeIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
@@ -423,6 +456,29 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
             using var cts = ctsFactory();
 
             await _api.GetRecipesAsync(ids: null, cts.GetTokenOrDefault());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetRecipesAsync_ValidIds_ReturnsThoseRecipes(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var ids = new List<int> { 1, 2, 3 };
+
+            var result = await _api.GetRecipesAsync(ids, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(ids, result.Select(x => x.Id).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetRecipesAsync_NoIds_ReturnsAPage(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetRecipesAsync(token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
         }
 
         [DataTestMethod]
@@ -596,6 +652,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Items
             var result = await _api.GetSkinsAsync(ids, lang, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetSkinsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetSkinsAsync(lang: lang, token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
         }
 
         [DataTestMethod]

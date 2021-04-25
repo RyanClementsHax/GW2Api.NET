@@ -51,6 +51,14 @@ namespace GW2Api.NET.V2
                 token
             );
 
+        public Task<Page<IList<PvpGame>>> GetPvpGamesAsync(int page = 0, int pageSize = -1, string accessToken = null, CancellationToken token = default)
+            => GetPageWithAuthAsync<IList<PvpGame>>(
+                "pvp/games",
+                new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
+                accessToken,
+                token
+            );
+
         public Task<IList<int>> GetAllPvpAmuletIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>("pvp/amulets", token);
 

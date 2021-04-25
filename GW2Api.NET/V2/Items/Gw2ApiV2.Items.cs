@@ -78,12 +78,22 @@ namespace GW2Api.NET.V2
 
         public Task<IList<Item>> GetItemsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
             => GetAsync<IList<Item>>(
-                $"items",
+                "items",
                 new Dictionary<string, string>
                 {
                     { "ids", ids.ToUrlParam() },
                     { "lang", lang.ToUrlParam() }
                 },
+                token
+            );
+
+        public Task<Page<IList<Item>>> GetItemsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<Item>>(
+                "items",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
                 token
             );
 
@@ -127,6 +137,16 @@ namespace GW2Api.NET.V2
                 token
             );
 
+        public Task<Page<IList<ItemStats>>> GetItemStatsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<ItemStats>>(
+                "itemstats",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
+
         public Task<IList<int>> GetAllMaterialIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>("materials", token);
 
@@ -167,6 +187,16 @@ namespace GW2Api.NET.V2
                 token
             );
 
+        public Task<Page<IList<Material>>> GetMaterialsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<Material>>(
+                "materials",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
+
         public Task<IList<int>> GetAllRecipeIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>("recipes", token);
 
@@ -187,6 +217,13 @@ namespace GW2Api.NET.V2
                 token
             );
         }
+
+        public Task<Page<IList<Recipe>>> GetRecipesAsync(int page = 0, int pageSize = -1, CancellationToken token = default)
+            => GetPageAsync<IList<Recipe>>(
+                "recipes",
+                new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
+                token
+            );
 
         public Task<IList<int>> SearchRecipesByInputAsync(int inputId, CancellationToken token = default)
             => GetAsync<IList<int>>(
@@ -236,6 +273,17 @@ namespace GW2Api.NET.V2
                 token
             );
         }
+
+        public Task<Page<IList<Skin>>> GetSkinsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<Skin>>(
+                "skins",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
+
         public Task<IList<int>> GetAllMiniIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>("minis", token);
 

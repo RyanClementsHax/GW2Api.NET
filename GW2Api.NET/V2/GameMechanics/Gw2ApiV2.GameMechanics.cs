@@ -63,6 +63,16 @@ namespace GW2Api.NET.V2
                 token
             );
 
+        public Task<Page<IList<Mastery>>> GetMasteriesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<Mastery>>(
+                "masteries",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
+
         public Task<IList<int>> GetAllMountSkinIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>("mounts/skins", token);
 

@@ -77,5 +77,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
 
             Assert.IsTrue(result.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetPvpGamesAsync_NoIds_ReturnsAPage(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetPvpGamesAsync(accessToken: apiKey, token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
     }
 }

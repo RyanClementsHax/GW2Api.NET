@@ -1,4 +1,5 @@
 ﻿using GW2Api.NET.Helpers;
+using GW2Api.NET.V2.Common;
 using GW2Api.NET.V2.Dailies.Dto;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,14 @@ namespace GW2Api.NET.V2
                 },
                 token
             );
+
+        public Task<Page<IList<TimeGatedRecipe>>> GetTimeGatedRecipesAsync(int page = 0, int pageSize = -1, CancellationToken token = default)
+            => GetPageAsync<IList<TimeGatedRecipe>>(
+                "dailycrafting",
+                new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
+                token
+            );
+
         public Task<IList<string>> GetAllMapChestIdsAsync(CancellationToken token = default)
             => GetAsync<IList<string>>("mapchests", token);
 
@@ -70,6 +79,13 @@ namespace GW2Api.NET.V2
                 token
             );
 
+        public Task<Page<IList<MapChest>>> GetMapChestsAsync(int page = 0, int pageSize = -1, CancellationToken token = default)
+            => GetPageAsync<IList<MapChest>>(
+                "mapchests",
+                new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
+                token
+            );
+
         public Task<IList<string>> GetAllWorldBossIdsAsync(CancellationToken token = default)
             => GetAsync<IList<string>>("worldbosses", token);
 
@@ -98,6 +114,13 @@ namespace GW2Api.NET.V2
                 {
                     { "ids", "all" }
                 },
+                token
+            );
+
+        public Task<Page<IList<WorldBoss>>> GetWorldBossesAsync(int page = 0, int pageSize = -1, CancellationToken token = default)
+            => GetPageAsync<IList<WorldBoss>>(
+                "worldbosses",
+                new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
                 token
             );
     }

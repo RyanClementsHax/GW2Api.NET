@@ -81,6 +81,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Dailies
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetTimeGatedRecipesAsync_NoIds_ReturnsAPage(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetTimeGatedRecipesAsync(token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetAllAvailableMapChestIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
@@ -142,6 +153,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Dailies
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMapChestsAsync_NoIds_ReturnsAPage(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetMapChestsAsync(token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetAllWorldBossIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
@@ -199,6 +221,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Dailies
             var result = await _api.GetAllWorldBossesAsync(cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetWorldBossesAsync_NoIds_ReturnsAPage(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetWorldBossesAsync(token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
         }
     }
 }

@@ -95,6 +95,17 @@ namespace GW2Api.NET.IntegrationTests.V2.GameMechanics
         }
 
         [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMasteriesAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetMasteriesAsync(lang: lang, token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
+
+        [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetAllMountSkinIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
