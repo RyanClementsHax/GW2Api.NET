@@ -190,5 +190,97 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
 
             Assert.IsTrue(result.Data.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllPvpSeasonIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllPvpSeasonIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        public static IEnumerable<object[]> GetPvpSeasonAsync_TestData()
+            => new List<object[]>
+            {
+                new object[] { Guid.Parse("9C7BB4A2-71DF-4189-80FC-96A4A14DD46C") },
+                new [] { (null, "PvP League Season Eighteen"), ("es", "18.ª temporada de liga PvP") }.ToLangStrObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetPvpSeasonAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetPvpSeasonAsync_ValidId_ReturnsThatPvpSeason(Guid id, (CultureInfo, string) langNameTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, name) = langNameTuple;
+
+            var result = await _api.GetPvpSeasonAsync(id, lang, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(name, result.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetPvpSeasonsAsync_NullIds_ThrowsArgumentNullException(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetPvpSeasonsAsync(ids: null, lang, cts.GetTokenOrDefault());
+        }
+
+        public static IEnumerable<object[]> GetPvpSeasonsAsync_TestData()
+            => new List<object[]>
+            {
+                new [] {
+                    new List<Guid> {
+                        Guid.Parse("9C7BB4A2-71DF-4189-80FC-96A4A14DD46C"),
+                        Guid.Parse("07D11E7E-F63C-451D-84F4-D96D369DE5BF"),
+                        Guid.Parse("2B2E80D3-0A74-424F-B0EA-E221500B323C"),
+                    }
+                },
+                new [] {
+                    (null, new List<string> { "PvP League Season Eighteen", "PvP League Season Sixteen", "PvP League Season Four" }.AsEnumerable()),
+                    ("es", new List<string> { "18.ª temporada de liga PvP", "16.ª temporada de liga PvP", "4.ª temporada de liga PvP" }.AsEnumerable())
+                }.ToLangStrsObjectArray(),
+                TestData.DefaultCtsFactories
+            }.Permute();
+
+        [DataTestMethod]
+        [DynamicData(nameof(GetPvpSeasonsAsync_TestData), DynamicDataSourceType.Method)]
+        public async Task GetPvpSeasonsAsync_ValidIds_ReturnsThosePvpSeasons(IEnumerable<Guid> ids, (CultureInfo, IEnumerable<string>) langNamesTuple, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var (lang, names) = langNamesTuple;
+
+            var result = await _api.GetPvpSeasonsAsync(ids, lang, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(names.ToList(), result.Select(x => x.Name).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllPvpSeasonsAsync_AnyParams_ReturnsAllFinishers(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllPvpSeasonsAsync(lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetPvpSeasonsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetPvpSeasonsAsync(lang: lang, token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
     }
 }

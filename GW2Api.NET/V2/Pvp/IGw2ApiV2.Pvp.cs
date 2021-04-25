@@ -26,5 +26,10 @@ namespace GW2Api.NET.V2
         Task<IList<PvpRank>> GetPvpRanksAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<PvpRank>> GetAllPvpRanksAsync(CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<PvpRank>>> GetPvpRanksAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<Guid>> GetAllPvpSeasonIdsAsync(CancellationToken token = default);
+        Task<PvpSeason> GetPvpSeasonAsync(Guid id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<PvpSeason>> GetPvpSeasonsAsync(IEnumerable<Guid> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<PvpSeason>> GetAllPvpSeasonsAsync(CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<PvpSeason>>> GetPvpSeasonsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }

@@ -158,5 +158,55 @@ namespace GW2Api.NET.V2
                 }.ConfigurePage(page, pageSize),
                 token
             );
+
+        public Task<IList<Guid>> GetAllPvpSeasonIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<Guid>>("pvp/seasons", token);
+
+        public Task<PvpSeason> GetPvpSeasonAsync(Guid id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<PvpSeason>(
+                $"pvp/seasons/{id.ToUrlParam()}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<PvpSeason>> GetPvpSeasonsAsync(IEnumerable<Guid> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<PvpSeason>>(
+                "pvp/seasons",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<PvpSeason>> GetAllPvpSeasonsAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<PvpSeason>>(
+                "pvp/seasons",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<PvpSeason>>> GetPvpSeasonsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<PvpSeason>>(
+                "pvp/seasons",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
     }
 }
