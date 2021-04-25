@@ -29,6 +29,9 @@ To access authenticated endpoints, you need to create an [Api Key](https://wiki.
     ```
 Note that if no Api Keys are given, calling functions that need authentication will result in 401 Unauthenticated exceptions thrown.
 
+### Methods
+TODO
+
 ## Development
 
 ### Running authenticated integration tests

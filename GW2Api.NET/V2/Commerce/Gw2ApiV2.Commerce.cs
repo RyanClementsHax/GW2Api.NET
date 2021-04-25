@@ -1,6 +1,7 @@
 ﻿using GW2Api.NET.Helpers;
 using GW2Api.NET.V2.Commerce.Dto;
 using GW2Api.NET.V2.Common;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -64,6 +65,33 @@ namespace GW2Api.NET.V2
                 {
                     { "quantity", quantity.ToString() }
                 },
+                token
+            );
+        public Task<IList<int>> GetAllListingIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("commerce/listings", token);
+
+        public Task<ListingInfo> GetListingAsync(int id, CancellationToken token = default)
+            => GetAsync<ListingInfo>($"commerce/listings/{id}", token);
+
+        public Task<IList<ListingInfo>> GetListingsAsync(IEnumerable<int> ids, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<ListingInfo>>(
+                "commerce/listings",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<Page<IList<ListingInfo>>> GetListingsAsync(int page = 0, int pageSize = -1, CancellationToken token = default)
+            => GetPageAsync<IList<ListingInfo>>(
+                "commerce/listings",
+                new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
                 token
             );
     }

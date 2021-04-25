@@ -10,7 +10,6 @@ namespace GW2Api.NET.V2
 {
     public partial class Gw2ApiV2
     {
-
         public Task<IList<int>> GetAllHomeCatIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>("home/cats", token);
 
