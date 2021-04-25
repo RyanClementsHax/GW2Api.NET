@@ -51,5 +51,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Commerce
 
             Assert.IsNotNull(result.Data);
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetDeliveryAsync_ValidApiKey_ReturnsTheDelivery(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetDeliveryAsync(accessToken: apiKey, token: cts.GetTokenOrDefault());
+
+            Assert.IsNotNull(result);
+        }
     }
 }

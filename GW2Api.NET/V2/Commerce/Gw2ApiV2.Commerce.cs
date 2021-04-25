@@ -39,5 +39,12 @@ namespace GW2Api.NET.V2
                 accessToken,
                 token
             );
+
+        public Task<Delivery> GetDeliveryAsync(string accessToken = null, CancellationToken token = default)
+            => GetWithAuthAsync<Delivery>(
+                "commerce/delivery",
+                accessToken,
+                token
+            );
     }
 }
