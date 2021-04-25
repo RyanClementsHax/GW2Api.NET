@@ -46,5 +46,25 @@ namespace GW2Api.NET.V2
                 accessToken,
                 token
             );
+
+        public Task<ExchangeInfo> GetCoinsToGemsExchangeInfoAsync(int quantity, CancellationToken token = default)
+            => GetAsync<ExchangeInfo>(
+                "commerce/exchange/coins",
+                new Dictionary<string, string>
+                {
+                    { "quantity", quantity.ToString() }
+                },
+                token
+            );
+
+        public Task<ExchangeInfo> GetGemsToCoinsExchangeInfoAsync(int quantity, CancellationToken token = default)
+            => GetAsync<ExchangeInfo>(
+                "commerce/exchange/gems",
+                new Dictionary<string, string>
+                {
+                    { "quantity", quantity.ToString() }
+                },
+                token
+            );
     }
 }
