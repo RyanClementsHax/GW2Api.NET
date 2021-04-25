@@ -208,5 +208,15 @@ namespace GW2Api.NET.V2
                 }.ConfigurePage(page, pageSize),
                 token
             );
+
+        public Task<IList<LeaderboardResult>> GetAllPvpLeaderboardResultsAsync(Guid seasonId, LeaderboardType leaderboardType, LeagueType leagueType, CancellationToken token = default)
+            => GetAsync<IList<LeaderboardResult>>($"pvp/seasons/{seasonId.ToUrlParam()}/leaderboards/{leaderboardType.ToString().ToLower()}/{leagueType.ToString().ToLower()}", token);
+
+        public Task<Page<IList<LeaderboardResult>>> GetPvpLeaderboardResultsAsync(Guid seasonId, LeaderboardType leaderboardType, LeagueType leagueType, int page = 0, int pageSize = -1, CancellationToken token = default)
+            => GetPageAsync<IList<LeaderboardResult>>(
+                $"pvp/seasons/{seasonId.ToUrlParam()}/leaderboards/{leaderboardType.ToString().ToLower()}/{leagueType.ToString().ToLower()}",
+                new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
+                token
+            );
     }
 }

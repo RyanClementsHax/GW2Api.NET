@@ -1,4 +1,5 @@
 using GW2Api.NET.V2;
+using GW2Api.NET.V2.Pvp.Dto;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -281,6 +282,36 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
             var result = await _api.GetPvpSeasonsAsync(lang: lang, token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllPvpLeaderboardResultsAsync_AnyParams_ReturnsAllFinishers(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var seasonId = Guid.Parse("95D5B290-798A-421E-A919-1C2A75F74B72");
+            var leaderboardType = LeaderboardType.Legendary;
+            var leagueType = LeagueType.NA;
+            var firstPlaceAccountName = "Juice.3710";
+
+            var result = await _api.GetAllPvpLeaderboardResultsAsync(seasonId, leaderboardType, leagueType, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(firstPlaceAccountName, result.Single(x => x.Rank == 1).Name);
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetPvpLeaderboardResultsAsync_NoIds_ReturnsAPage(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var seasonId = Guid.Parse("2B2E80D3-0A74-424F-B0EA-E221500B323C");
+            var leaderboardType = LeaderboardType.Guild;
+            var leagueType = LeagueType.NA;
+            var firstPlaceAccountName = "Ironclad Losers";
+
+            var result = await _api.GetPvpLeaderboardResultsAsync(seasonId, leaderboardType, leagueType, token: cts.GetTokenOrDefault());
+
+            Assert.AreEqual(firstPlaceAccountName, result.Data.Single(x => x.Rank == 1).Name);
         }
     }
 }
