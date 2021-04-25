@@ -47,23 +47,23 @@ namespace GW2Api.NET.IntegrationTests.V2.Commerce
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetAllListingIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAllItemListingIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAllListingIdsAsync(cts.GetTokenOrDefault());
+            var result = await _api.GetAllItemListingIdsAsync(cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetListingAsync_ValidId_ReturnsThatListing(Func<CancellationTokenSource> ctsFactory)
+        public async Task GetItemListingAsync_ValidId_ReturnsThatListing(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var id = 24;
 
-            var result = await _api.GetListingAsync(id, cts.GetTokenOrDefault());
+            var result = await _api.GetItemListingAsync(id, cts.GetTokenOrDefault());
 
             Assert.AreEqual(id, result.Id);
         }
@@ -71,32 +71,88 @@ namespace GW2Api.NET.IntegrationTests.V2.Commerce
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetListingsAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
+        public async Task GetItemListingsAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            await _api.GetListingsAsync(ids: null, cts.GetTokenOrDefault());
+            await _api.GetItemListingsAsync(ids: null, cts.GetTokenOrDefault());
         }
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetListingsAsync_ValidIds_ReturnsThoseListings(Func<CancellationTokenSource> ctsFactory)
+        public async Task GetItemListingsAsync_ValidIds_ReturnsThoseListings(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var ids = new List<int> { 24, 68, 69 };
 
-            var result = await _api.GetListingsAsync(ids, cts.GetTokenOrDefault());
+            var result = await _api.GetItemListingsAsync(ids, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(ids, result.Select(x => x.Id).ToList());
         }
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetListingsAsync_NoIds_ReturnsAPage(Func<CancellationTokenSource> ctsFactory)
+        public async Task GetItemListingsAsync_NoIds_ReturnsAPage(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetListingsAsync(token: cts.GetTokenOrDefault());
+            var result = await _api.GetItemListingsAsync(token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllMarketPriceIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllMarketPriceIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMarketPriceAsync_ValidId_ReturnsThatListing(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var id = 24;
+
+            var result = await _api.GetMarketPriceAsync(id, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(id, result.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMarketPricesAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetMarketPricesAsync(ids: null, cts.GetTokenOrDefault());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMarketPricesAsync_ValidIds_ReturnsThoseListings(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var ids = new List<int> { 24, 68, 69 };
+
+            var result = await _api.GetMarketPricesAsync(ids, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(ids, result.Select(x => x.Id).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetMarketPricesAsync_NoIds_ReturnsAPage(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetMarketPricesAsync(token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }

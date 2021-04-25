@@ -67,18 +67,19 @@ namespace GW2Api.NET.V2
                 },
                 token
             );
-        public Task<IList<int>> GetAllListingIdsAsync(CancellationToken token = default)
+
+        public Task<IList<int>> GetAllItemListingIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>("commerce/listings", token);
 
-        public Task<ListingInfo> GetListingAsync(int id, CancellationToken token = default)
-            => GetAsync<ListingInfo>($"commerce/listings/{id}", token);
+        public Task<ItemListing> GetItemListingAsync(int id, CancellationToken token = default)
+            => GetAsync<ItemListing>($"commerce/listings/{id}", token);
 
-        public Task<IList<ListingInfo>> GetListingsAsync(IEnumerable<int> ids, CancellationToken token = default)
+        public Task<IList<ItemListing>> GetItemListingsAsync(IEnumerable<int> ids, CancellationToken token = default)
         {
             if (ids is null)
                 throw new ArgumentNullException(nameof(ids));
 
-            return GetAsync<IList<ListingInfo>>(
+            return GetAsync<IList<ItemListing>>(
                 "commerce/listings",
                 new Dictionary<string, string>
                 {
@@ -88,9 +89,37 @@ namespace GW2Api.NET.V2
             );
         }
 
-        public Task<Page<IList<ListingInfo>>> GetListingsAsync(int page = 0, int pageSize = -1, CancellationToken token = default)
-            => GetPageAsync<IList<ListingInfo>>(
+        public Task<Page<IList<ItemListing>>> GetItemListingsAsync(int page = 0, int pageSize = -1, CancellationToken token = default)
+            => GetPageAsync<IList<ItemListing>>(
                 "commerce/listings",
+                new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
+                token
+            );
+
+        public Task<IList<int>> GetAllMarketPriceIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("commerce/prices", token);
+
+        public Task<MarketPrice> GetMarketPriceAsync(int id, CancellationToken token = default)
+            => GetAsync<MarketPrice>($"commerce/prices/{id}", token);
+
+        public Task<IList<MarketPrice>> GetMarketPricesAsync(IEnumerable<int> ids, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<MarketPrice>>(
+                "commerce/prices",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<Page<IList<MarketPrice>>> GetMarketPricesAsync(int page = 0, int pageSize = -1, CancellationToken token = default)
+            => GetPageAsync<IList<MarketPrice>>(
+                "commerce/prices",
                 new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
                 token
             );

@@ -86,7 +86,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetAllPvpAmuletsAsync_AnyParams_ReturnsAllFinishers(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAllPvpAmuletsAsync_AnyParams_ReturnsAllPvpAmulets(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
@@ -172,7 +172,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetAllPvpRanksAsync_AnyParams_ReturnsAllFinishers(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAllPvpRanksAsync_AnyParams_ReturnsAllPvpRanks(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
@@ -264,7 +264,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetAllPvpSeasonsAsync_AnyParams_ReturnsAllFinishers(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAllPvpSeasonsAsync_AnyParams_ReturnsAllPvpSeasons(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
@@ -286,7 +286,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetAllPvpLeaderboardResultsAsync_AnyParams_ReturnsAllFinishers(Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAllPvpLeaderboardResultsAsync_AnyParams_ReturnsAllLeaderboards(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var seasonId = Guid.Parse("95D5B290-798A-421E-A919-1C2A75F74B72");
