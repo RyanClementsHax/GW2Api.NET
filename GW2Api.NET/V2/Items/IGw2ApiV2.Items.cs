@@ -15,7 +15,7 @@ namespace GW2Api.NET.V2
         Task<Finisher> GetFinisherAsync(int id, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Finisher>> GetFinishersAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Finisher>> GetAllFinishersAsync(CultureInfo lang = null, CancellationToken token = default);
-        Task<Page<IList<Finisher>>> GetFinishersAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<Finisher>>> GetFinishersAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<int>> GetAllItemIdsAsync(CancellationToken token = default);
         Task<Item> GetItemAync(int id, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Item>> GetItemsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
@@ -39,6 +39,6 @@ namespace GW2Api.NET.V2
         Task<Mini> GetMiniAsync(int id, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Mini>> GetMinisAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<Mini>> GetAllMinisAsync(CultureInfo lang = null, CancellationToken token = default);
-        Task<Page<IList<Mini>>> GetMinisAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<Mini>>> GetMinisAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }

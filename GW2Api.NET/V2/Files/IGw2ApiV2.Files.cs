@@ -12,11 +12,11 @@ namespace GW2Api.NET.V2
         Task<File> GetFileAsync(string id, CancellationToken token = default);
         Task<IList<File>> GetFilesAsync(IEnumerable<string> ids, CancellationToken token = default);
         Task<IList<File>> GetAllFilesAsync(CancellationToken token = default);
-        Task<Page<IList<File>>> GetFilesAsync(int page = 1, int pageSize = -1, CancellationToken token = default);
+        Task<Page<IList<File>>> GetFilesAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
         Task<IList<string>> GetAllQuagganIdsAsync(CancellationToken token = default);
         Task<Quaggan> GetQuagganAsync(string id, CancellationToken token = default);
         Task<IList<Quaggan>> GetQuaggansAsync(IEnumerable<string> ids, CancellationToken token = default);
         Task<IList<Quaggan>> GetAllQuaggansAsync(CancellationToken token = default);
-        Task<Page<IList<Quaggan>>> GetQuaggansAsync(int page = 1, int pageSize = -1, CancellationToken token = default);
+        Task<Page<IList<Quaggan>>> GetQuaggansAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
     }
 }

@@ -84,6 +84,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         }
 
         [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAchievementsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAchievementsAsync(lang: lang, token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
+
+        [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetTodaysDailyAchievementsAsync_AnyParams_ReturnsTodaysDailies(Func<CancellationTokenSource> ctsFactory)
         {
@@ -193,6 +204,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
         }
 
         [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAchievementGroupsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAchievementGroupsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
+
+        [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
         public async Task GetAllAchievementCategoryIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
         {
@@ -265,6 +287,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Achievements
             var result = await _api.GetAllAchievementCategoriesAsync(lang, cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAchievementCategorysAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAchievementCategorysAsync(lang: lang, token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
         }
     }
 }

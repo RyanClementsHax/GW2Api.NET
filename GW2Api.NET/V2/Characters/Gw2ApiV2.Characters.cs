@@ -1,5 +1,6 @@
 ﻿using GW2Api.NET.Helpers;
 using GW2Api.NET.V2.Characters.Dto;
+using GW2Api.NET.V2.Common;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -38,6 +39,14 @@ namespace GW2Api.NET.V2
                 {
                     { "ids", "all" },
                 },
+                accessToken,
+                token
+            );
+
+        public Task<Page<IList<Character>>> GetCharactersAsync(int page = 0, int pageSize = -1, string accessToken = null, CancellationToken token = default)
+            => GetPageWithAuthAsync<IList<Character>>(
+                "characters",
+                new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
                 accessToken,
                 token
             );

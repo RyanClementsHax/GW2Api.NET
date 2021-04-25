@@ -45,7 +45,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<EmblemLayer>>> GetEmblemBackgroundsAsync(int page = 1, int pageSize = -1, CancellationToken token = default)
+        public Task<Page<IList<EmblemLayer>>> GetEmblemBackgroundsAsync(int page = 0, int pageSize = -1, CancellationToken token = default)
             => GetPageAsync<IList<EmblemLayer>>(
                 "emblem/backgrounds",
                 new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
@@ -83,7 +83,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<EmblemLayer>>> GetEmblemForegroundsAsync(int page = 1, int pageSize = -1, CancellationToken token = default)
+        public Task<Page<IList<EmblemLayer>>> GetEmblemForegroundsAsync(int page = 0, int pageSize = -1, CancellationToken token = default)
             => GetPageAsync<IList<EmblemLayer>>(
                 "emblem/foregrounds",
                 new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
@@ -130,7 +130,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<GuildPermission>>> GetGuildPermissionsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<GuildPermission>>> GetGuildPermissionsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<GuildPermission>>(
                 "guild/permissions",
                 new Dictionary<string, string>
@@ -190,7 +190,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<GuildUpgrade>>> GetGuildUpgradesAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<GuildUpgrade>>> GetGuildUpgradesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<GuildUpgrade>>(
                 "guild/upgrades",
                 new Dictionary<string, string>

@@ -51,7 +51,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<BackstoryAnswer>>> GetBackstoryAnswersAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<BackstoryAnswer>>> GetBackstoryAnswersAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<BackstoryAnswer>>(
                 "backstory/answers",
                 new Dictionary<string, string>
@@ -101,7 +101,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<BackstoryQuestion>>> GetBackstoryQuestionsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<BackstoryQuestion>>> GetBackstoryQuestionsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<BackstoryQuestion>>(
                 "backstory/questions",
                 new Dictionary<string, string>
@@ -151,7 +151,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Story>>> GetStoriesAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<Story>>> GetStoriesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Story>>(
                 "stories",
                 new Dictionary<string, string>
@@ -201,7 +201,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<StorySeason>>> GetStorySeasonsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<StorySeason>>> GetStorySeasonsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<StorySeason>>(
                 "stories/seasons",
                 new Dictionary<string, string>
@@ -251,7 +251,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Quest>>> GetQuestsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<Quest>>> GetQuestsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Quest>>(
                 "quests",
                 new Dictionary<string, string>

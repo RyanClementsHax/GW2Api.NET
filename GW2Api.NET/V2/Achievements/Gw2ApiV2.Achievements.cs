@@ -1,5 +1,6 @@
 ﻿using GW2Api.NET.Helpers;
 using GW2Api.NET.V2.Achievements.Dto;
+using GW2Api.NET.V2.Common;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -39,6 +40,16 @@ namespace GW2Api.NET.V2
                 token
             );
         }
+
+        public Task<Page<IList<Achievement>>> GetAchievementsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<Achievement>>(
+                "achievements",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
 
         public Task<DailyAchievements> GetTodaysDailyAchievementsAsync(CancellationToken token = default)
             => GetAsync<DailyAchievements>("achievements/daily", token);
@@ -85,6 +96,16 @@ namespace GW2Api.NET.V2
                 token
             );
 
+        public Task<Page<IList<AchievementGroup>>> GetAchievementGroupsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<AchievementGroup>>(
+                "achievements/groups",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
+
         public Task<IList<int>> GetAllAchievementCategoryIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>("achievements/categories", token);
 
@@ -122,6 +143,16 @@ namespace GW2Api.NET.V2
                     { "ids", "all" },
                     { "lang", lang.ToUrlParam() }
                 },
+                token
+            );
+
+        public Task<Page<IList<AchievementCategory>>> GetAchievementCategorysAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<AchievementCategory>>(
+                "achievements/categories",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
                 token
             );
     }

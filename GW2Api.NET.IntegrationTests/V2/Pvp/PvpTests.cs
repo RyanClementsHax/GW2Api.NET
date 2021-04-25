@@ -93,5 +93,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Pvp
 
             Assert.IsTrue(result.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultLangTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetPvpAmuletsAsync_NoIds_ReturnsAPage(CultureInfo lang, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetPvpAmuletsAsync(page: 1, pageSize: 1, lang, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
     }
 }

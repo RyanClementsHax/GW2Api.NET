@@ -53,7 +53,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Finisher>>> GetFinishersAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<Finisher>>> GetFinishersAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Finisher>>(
                 "finishers",
                 new Dictionary<string, string>
@@ -276,7 +276,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Mini>>> GetMinisAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<Mini>>> GetMinisAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Mini>>(
                 "minis",
                 new Dictionary<string, string>

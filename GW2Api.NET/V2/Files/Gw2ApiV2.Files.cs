@@ -41,7 +41,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<File>>> GetFilesAsync(int page = 1, int pageSize = -1, CancellationToken token = default)
+        public Task<Page<IList<File>>> GetFilesAsync(int page = 0, int pageSize = -1, CancellationToken token = default)
             => GetPageAsync<IList<File>>(
                 "files",
                 new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
@@ -79,7 +79,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Quaggan>>> GetQuaggansAsync(int page = 1, int pageSize = -1, CancellationToken token = default)
+        public Task<Page<IList<Quaggan>>> GetQuaggansAsync(int page = 0, int pageSize = -1, CancellationToken token = default)
             => GetPageAsync<IList<Quaggan>>(
                 "quaggans",
                 new Dictionary<string, string> { }.ConfigurePage(page, pageSize),

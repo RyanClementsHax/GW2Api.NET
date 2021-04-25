@@ -103,7 +103,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<MountSkin>>> GetMountSkinsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<MountSkin>>> GetMountSkinsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<MountSkin>>(
                 "mounts/skins",
                 new Dictionary<string, string>
@@ -153,7 +153,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<MountType>>> GetMountTypesAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<MountType>>> GetMountTypesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<MountType>>(
                 "mounts/types",
                 new Dictionary<string, string>
@@ -203,7 +203,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Outfit>>> GetOutfitsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<Outfit>>> GetOutfitsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Outfit>>(
                 "outfits",
                 new Dictionary<string, string>
@@ -253,7 +253,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Pet>>> GetPetsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<Pet>>> GetPetsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Pet>>(
                 "pets",
                 new Dictionary<string, string>
@@ -303,7 +303,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<ProfessionDetails>>> GetProfessionsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<ProfessionDetails>>> GetProfessionsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<ProfessionDetails>>(
                 "professions",
                 new Dictionary<string, string>
@@ -353,7 +353,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<RaceDetails>>> GetRacesAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<RaceDetails>>> GetRacesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<RaceDetails>>(
                 "races",
                 new Dictionary<string, string>
@@ -403,7 +403,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Specialization>>> GetSpecializationsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<Specialization>>> GetSpecializationsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Specialization>>(
                 "specializations",
                 new Dictionary<string, string>
@@ -453,7 +453,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Skill>>> GetSkillsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<Skill>>> GetSkillsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Skill>>(
                 "skills",
                 new Dictionary<string, string>
@@ -503,7 +503,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Trait>>> GetTraitsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<Trait>>> GetTraitsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Trait>>(
                 "traits",
                 new Dictionary<string, string>
@@ -553,7 +553,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Legend>>> GetLegendsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<Legend>>> GetLegendsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Legend>>(
                 "legends",
                 new Dictionary<string, string>
@@ -603,7 +603,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Dungeon>>> GetDungeonsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<Dungeon>>> GetDungeonsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Dungeon>>(
                 "dungeons",
                 new Dictionary<string, string>
@@ -653,7 +653,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Raid>>> GetRaidsAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<Raid>>> GetRaidsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Raid>>(
                 "raids",
                 new Dictionary<string, string>
@@ -703,7 +703,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Title>>> GetTitlesAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<Title>>> GetTitlesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Title>>(
                 "titles",
                 new Dictionary<string, string>

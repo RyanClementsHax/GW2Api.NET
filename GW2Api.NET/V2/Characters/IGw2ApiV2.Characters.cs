@@ -1,4 +1,5 @@
 ﻿using GW2Api.NET.V2.Characters.Dto;
+using GW2Api.NET.V2.Common;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace GW2Api.NET.V2
         Task<Character> GetCharacterAsync(string id, string accessToken = null, CancellationToken token = default);
         Task<IList<Character>> GetCharactersAsync(IEnumerable<string> ids, string accessToken = null, CancellationToken token = default);
         Task<IList<Character>> GetAllCharactersAsync(string accessToken = null, CancellationToken token = default);
+        Task<Page<IList<Character>>> GetCharactersAsync(int page = 0, int pageSize = -1, string accesssToken = null, CancellationToken token = default);
         Task<IList<string>> GetCharacterBackstoryAsync(string id, string accessToken = null, CancellationToken token = default);
         Task<CharacterCore> GetCharacterCoreAsync(string id, string accessToken = null, CancellationToken token = default);
         Task<IList<CraftingDiscipline>> GetCharacterCraftingAsync(string id, string accessToken = null, CancellationToken token = default);

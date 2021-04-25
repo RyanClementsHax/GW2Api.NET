@@ -51,7 +51,7 @@ namespace GW2Api.NET.V2
                 token
             );
 
-        public Task<Page<IList<Currency>>> GetCurrenciesAsync(int page = 1, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+        public Task<Page<IList<Currency>>> GetCurrenciesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<Currency>>(
                 "currencies",
                 new Dictionary<string, string>

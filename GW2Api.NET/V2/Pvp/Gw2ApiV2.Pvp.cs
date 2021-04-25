@@ -1,4 +1,5 @@
 ﻿using GW2Api.NET.Helpers;
+using GW2Api.NET.V2.Common;
 using GW2Api.NET.V2.Pvp.Dto;
 using System;
 using System.Collections.Generic;
@@ -87,6 +88,16 @@ namespace GW2Api.NET.V2
                     { "ids", "all" },
                     { "lang", lang.ToUrlParam() }
                 },
+                token
+            );
+
+        public Task<Page<IList<PvpAmulet>>> GetPvpAmuletsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<PvpAmulet>>(
+                "pvp/amulets",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
                 token
             );
     }

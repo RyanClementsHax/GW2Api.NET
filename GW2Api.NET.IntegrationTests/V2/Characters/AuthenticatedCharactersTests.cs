@@ -69,6 +69,17 @@ namespace GW2Api.NET.IntegrationTests.V2.Characters
 
         [DataTestMethod]
         [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
+        public async Task GetCharactersAsync_NoIds_ReturnsAPage(string apiKey, Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetCharactersAsync(page: 1, pageSize: 1, apiKey, cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(DefaultAuthenticatedTestData), typeof(AuthenticatedTestsBase), DynamicDataSourceType.Method)]
         public async Task GetCharacterBackstoryAsync_ValidId_ReturnsCharacterBackstory(string apiKey, Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
