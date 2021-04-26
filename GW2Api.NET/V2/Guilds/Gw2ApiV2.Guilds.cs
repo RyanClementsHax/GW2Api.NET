@@ -210,5 +210,8 @@ namespace GW2Api.NET.V2
                 accessToken,
                 token
             );
+
+        public Task<IList<GuildMember>> GetGuildMembersAsync(Guid guildId, string accessToken = null, CancellationToken token = default)
+            => GetWithAuthAsync<IList<GuildMember>>($"guild/{guildId.ToUrlParam()}/members", accessToken, token);
     }
 }

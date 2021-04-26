@@ -33,5 +33,6 @@ namespace GW2Api.NET.V2
         Task<IList<GuildUpgrade>> GetAllGuildUpgradesAsync(CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<GuildUpgrade>>> GetGuildUpgradesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<GuildLog>> GetGuildLogsAsync(Guid guildId, int since = -1, string accessToken = null, CancellationToken token = default);
+        Task<IList<GuildMember>> GetGuildMembersAsync(Guid guildId, string accessToken = null, CancellationToken token = default);
     }
 }
