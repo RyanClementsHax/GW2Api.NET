@@ -219,5 +219,8 @@ namespace GW2Api.NET.V2
 
         public Task<IList<GuildVaultSection>> GetGuildStashAsync(Guid guildId, string accessToken = null, CancellationToken token = default)
             => GetWithAuthAsync<IList<GuildVaultSection>>($"guild/{guildId.ToUrlParam()}/stash", accessToken, token);
+
+        public Task<IList<GuildStorageSlot>> GetGuildStorageAsync(Guid guildId, string accessToken = null, CancellationToken token = default)
+            => GetWithAuthAsync<IList<GuildStorageSlot>>($"guild/{guildId.ToUrlParam()}/storage", accessToken, token);
     }
 }
