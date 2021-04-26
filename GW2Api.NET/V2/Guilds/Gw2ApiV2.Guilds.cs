@@ -213,5 +213,8 @@ namespace GW2Api.NET.V2
 
         public Task<IList<GuildMember>> GetGuildMembersAsync(Guid guildId, string accessToken = null, CancellationToken token = default)
             => GetWithAuthAsync<IList<GuildMember>>($"guild/{guildId.ToUrlParam()}/members", accessToken, token);
+
+        public Task<IList<GuildRank>> GetGuildRanksAsync(Guid guildId, string accessToken = null, CancellationToken token = default)
+            => GetWithAuthAsync<IList<GuildRank>>($"guild/{guildId.ToUrlParam()}/ranks", accessToken, token);
     }
 }
