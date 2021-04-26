@@ -199,5 +199,16 @@ namespace GW2Api.NET.V2
                 }.ConfigurePage(page, pageSize),
                 token
             );
+
+        public Task<IList<GuildLog>> GetGuildLogsAsync(Guid guildId, int since = -1, string accessToken = null, CancellationToken token = default)
+            => GetWithAuthAsync<IList<GuildLog>>(
+                $"guild/{guildId.ToUrlParam()}/log",
+                new Dictionary<string, string>
+                {
+                    { "since", since.ToString() }
+                },
+                accessToken,
+                token
+            );
     }
 }

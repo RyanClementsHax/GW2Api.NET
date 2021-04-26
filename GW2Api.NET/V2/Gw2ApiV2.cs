@@ -2,6 +2,7 @@
 using GW2Api.NET.Json.Converters;
 using GW2Api.NET.Json.NamingPolicies;
 using GW2Api.NET.V2.Common;
+using GW2Api.NET.V2.Guilds.Dto.GuildLogTypes.Influence;
 using GW2Api.NET.V2.Tokens;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace GW2Api.NET.V2
             Converters =
             {
                 new EnumFlagsConverter<Permissions>(),
+                new SnakeCaseEnumConverter<InfluenceActivity>(),
                 new JsonStringEnumMemberConverter(),
                 new Vector3JsonConverter(),
                 new Vector2JsonConverter()

@@ -105,6 +105,10 @@ TODO
           "ECECBA13-4A96-4344-A03C-D4224F64A3B2",
           "FDD2E7B5-8D29-4576-AE0E-8642B1952535"
         ]
+      },
+      "GuildsTestConfig": {
+        "ApiKey": "<the guild owner's api key>",
+        "Id": "8E20055E-DC2C-4353-A9D1-EBDA0E1E3201"
       }
     }
     ```
@@ -148,6 +152,9 @@ TODO
         - `SongIds`: A list of ids of some of the SAB songs that the character has unlocked
     - `PvpTestConfig`
       - `Ids`: A list of ids of some of the pvp games the account has played
+    - `GuildsTestConfig`
+      - `ApiKey`: The api key created by the guild owner with the `guilds` permission
+      - `Id`: The guild id that the api key has access to
     - You can acquire the data to populate this json by manually hitting the endpoints with the api key
     - Note that in the authenticated tests, we use partial matching of data to avoid brittle tests because account data is changing if the acccount is being used or played on
         - For example, we dont want to assert that the ids we get back from fetching all account achievement ids is exactly equal to some fixed set of numbers because that account could complete another achievement later down the road thus breaking the assertion even though the function works as it should
