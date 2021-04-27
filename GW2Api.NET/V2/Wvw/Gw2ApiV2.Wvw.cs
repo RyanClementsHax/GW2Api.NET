@@ -108,5 +108,53 @@ namespace GW2Api.NET.V2
                 new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
                 token
             );
+
+        public Task<IList<string>> GetAllWvwOverviewIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<string>>("wvw/matches", token);
+
+        public Task<WvwOverview> GetWvwOverviewAsync(int world, CancellationToken token = default)
+            => GetAsync<WvwOverview>(
+                "wvw/matches",
+                new Dictionary<string, string>
+                {
+                    { "world", world.ToString() }
+                },
+                token
+            );
+
+        public Task<WvwOverview> GetWvwOverviewAsync(string id, CancellationToken token = default)
+            => GetAsync<WvwOverview>($"wvw/matches/{id}", token);
+
+        public Task<IList<WvwOverview>> GetWvwOverviewesAsync(IEnumerable<string> ids, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<WvwOverview>>(
+                "wvw/matches",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<WvwOverview>> GetAllWvwOverviewesAsync(CancellationToken token = default)
+            => GetAsync<IList<WvwOverview>>(
+                "wvw/matches",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" }
+                },
+                token
+            );
+
+        public Task<Page<IList<WvwOverview>>> GetWvwOverviewesAsync(int page = 0, int pageSize = -1, CancellationToken token = default)
+            => GetPageAsync<IList<WvwOverview>>(
+                "wvw/matches",
+                new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
+                token
+            );
     }
 }

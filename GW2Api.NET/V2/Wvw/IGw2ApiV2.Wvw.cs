@@ -20,5 +20,11 @@ namespace GW2Api.NET.V2
         Task<IList<WvwMatch>> GetWvwMatchesAsync(IEnumerable<string> ids, CancellationToken token = default);
         Task<IList<WvwMatch>> GetAllWvwMatchesAsync(CancellationToken token = default);
         Task<Page<IList<WvwMatch>>> GetWvwMatchesAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+        Task<IList<string>> GetAllWvwOverviewIdsAsync(CancellationToken token = default);
+        Task<WvwOverview> GetWvwOverviewAsync(int world, CancellationToken token = default);
+        Task<WvwOverview> GetWvwOverviewAsync(string id, CancellationToken token = default);
+        Task<IList<WvwOverview>> GetWvwOverviewesAsync(IEnumerable<string> ids, CancellationToken token = default);
+        Task<IList<WvwOverview>> GetAllWvwOverviewesAsync(CancellationToken token = default);
+        Task<Page<IList<WvwOverview>>> GetWvwOverviewesAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
     }
 }
