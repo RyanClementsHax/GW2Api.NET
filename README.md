@@ -108,7 +108,11 @@ TODO
       },
       "GuildsTestConfig": {
         "ApiKey": "<the guild owner's api key>",
-        "Id": "8E20055E-DC2C-4353-A9D1-EBDA0E1E3201"
+        "Id": "8E20055E-DC2C-4353-A9D1-EBDA0E1E3201",
+        "MemberNames": [ "LordVexicus.8703", "TechyRiceNinja.6318", "DarkandVol.9384" ],
+        "RankIds": [ "Acolyte", "Archon", "Awakened" ],
+        "TeamNames": [ "Git Gud Gwyn", "Valar Morghulis", "Aeturnum Immortalis" ],
+        "UpgradeIds":  [ 38, 55, 58 ]
       }
     }
     ```
@@ -155,6 +159,10 @@ TODO
     - `GuildsTestConfig`
       - `ApiKey`: The api key created by the guild owner with the `guilds` permission
       - `Id`: The guild id that the api key has access to
+      - `MemberNames`: A list of names of some of the members of the guild
+      - `RankIds`: A list of ids of some of the ranks of the guild
+      - `TeamNames`: A list of names of some of the teams of the guild
+      - `UpgradeIds`: A list of ids of some of the upgrades the guild has
     - You can acquire the data to populate this json by manually hitting the endpoints with the api key
     - Note that in the authenticated tests, we use partial matching of data to avoid brittle tests because account data is changing if the acccount is being used or played on
         - For example, we dont want to assert that the ids we get back from fetching all account achievement ids is exactly equal to some fixed set of numbers because that account could complete another achievement later down the road thus breaking the assertion even though the function works as it should

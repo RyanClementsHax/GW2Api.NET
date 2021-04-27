@@ -47,7 +47,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Guilds
 
             var result = await _api.GetGuildMembersAsync(_guildsConfig.Id, accessToken: _guildsConfig.ApiKey, token: cts.GetTokenOrDefault());
 
-            Assert.IsTrue(result.Any());
+            CollectionAssert.IsSubsetOf(_guildsConfig.MemberNames.ToList(), result.Select(x => x.Name).ToList());
         }
 
         [DataTestMethod]
@@ -58,7 +58,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Guilds
 
             var result = await _api.GetGuildRanksAsync(_guildsConfig.Id, accessToken: _guildsConfig.ApiKey, token: cts.GetTokenOrDefault());
 
-            Assert.IsTrue(result.Any());
+            CollectionAssert.IsSubsetOf(_guildsConfig.RankIds.ToList(), result.Select(x => x.Id).ToList());
         }
 
         [DataTestMethod]
@@ -102,7 +102,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Guilds
 
             var result = await _api.GetGuildTeamsAsync(_guildsConfig.Id, accessToken: _guildsConfig.ApiKey, token: cts.GetTokenOrDefault());
 
-            Assert.IsTrue(result.Any());
+            CollectionAssert.IsSubsetOf(_guildsConfig.TeamNames.ToList(), result.Select(x => x.Name).ToList());
         }
 
         [DataTestMethod]
@@ -113,7 +113,7 @@ namespace GW2Api.NET.IntegrationTests.V2.Guilds
 
             var result = await _api.GetGuildUpgradesAsync(_guildsConfig.Id, accessToken: _guildsConfig.ApiKey, token: cts.GetTokenOrDefault());
 
-            Assert.IsTrue(result.Any());
+            CollectionAssert.IsSubsetOf(_guildsConfig.UpgradeIds.ToList(), result.ToList());
         }
     }
 }
