@@ -302,6 +302,7 @@ namespace GW2Api.NET.V2
                 }.ConfigurePage(page, pageSize),
                 token
             );
+
         public Task<IList<int>> GetAllWvwRankIdsAsync(CancellationToken token = default)
             => GetAsync<IList<int>>("wvw/ranks", token);
 
@@ -345,6 +346,56 @@ namespace GW2Api.NET.V2
         public Task<Page<IList<WvwRank>>> GetWvwRanksAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
             => GetPageAsync<IList<WvwRank>>(
                 "wvw/ranks",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
+
+        public Task<IList<int>> GetAllWvwUpgradeIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<int>>("wvw/upgrades", token);
+
+        public Task<WvwUpgrade> GetWvwUpgradeAsync(int id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<WvwUpgrade>(
+                $"wvw/upgrades/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<WvwUpgrade>> GetWvwUpgradesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<WvwUpgrade>>(
+                "wvw/upgrades",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<WvwUpgrade>> GetAllWvwUpgradesAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<WvwUpgrade>>(
+                "wvw/upgrades",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<WvwUpgrade>>> GetWvwUpgradesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<WvwUpgrade>>(
+                "wvw/upgrades",
                 new Dictionary<string, string>
                 {
                     { "lang", lang.ToUrlParam() }

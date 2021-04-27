@@ -48,5 +48,10 @@ namespace GW2Api.NET.V2
         Task<IList<WvwRank>> GetWvwRanksAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
         Task<IList<WvwRank>> GetAllWvwRanksAsync(CultureInfo lang = null, CancellationToken token = default);
         Task<Page<IList<WvwRank>>> GetWvwRanksAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<int>> GetAllWvwUpgradeIdsAsync(CancellationToken token = default);
+        Task<WvwUpgrade> GetWvwUpgradeAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<WvwUpgrade>> GetWvwUpgradesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<WvwUpgrade>> GetAllWvwUpgradesAsync(CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<WvwUpgrade>>> GetWvwUpgradesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }
