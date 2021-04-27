@@ -227,16 +227,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Wvw
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetWvwOverviewesAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
+        public async Task GetWvwOverviewsAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            await _api.GetWvwOverviewesAsync(ids: null, cts.GetTokenOrDefault());
+            await _api.GetWvwOverviewsAsync(ids: null, cts.GetTokenOrDefault());
         }
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetWvwOverviewesAsync_ValidIds_ReturnsThoseWvwOverviewes(Func<CancellationTokenSource> ctsFactory)
+        public async Task GetWvwOverviewsAsync_ValidIds_ReturnsThoseWvwOverviewes(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
             var ids = new List<string>
@@ -246,29 +246,113 @@ namespace GW2Api.NET.IntegrationTests.V2.Wvw
                 "2-3"
             };
 
-            var result = await _api.GetWvwOverviewesAsync(ids, cts.GetTokenOrDefault());
+            var result = await _api.GetWvwOverviewsAsync(ids, cts.GetTokenOrDefault());
 
             CollectionAssert.AreEquivalent(ids, result.Select(x => x.Id).ToList());
         }
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetAllWvwOverviewesAsync_AnyParams_ReturnsAllWvwOverviewes(Func<CancellationTokenSource> ctsFactory)
+        public async Task GetAllWvwOverviewsAsync_AnyParams_ReturnsAllWvwOverviewes(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetAllWvwOverviewesAsync(cts.GetTokenOrDefault());
+            var result = await _api.GetAllWvwOverviewsAsync(cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Any());
         }
 
         [DataTestMethod]
         [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
-        public async Task GetWvwOverviewesAsync_NoIds_ReturnsAPage(Func<CancellationTokenSource> ctsFactory)
+        public async Task GetWvwOverviewsAsync_NoIds_ReturnsAPage(Func<CancellationTokenSource> ctsFactory)
         {
             using var cts = ctsFactory();
 
-            var result = await _api.GetWvwOverviewesAsync(token: cts.GetTokenOrDefault());
+            var result = await _api.GetWvwOverviewsAsync(token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Data.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllWvwScoreIdsAsync_AnyParams_ReturnsAllIds(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllWvwScoreIdsAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetWvwScoreAsync_ValidWorldId_ReturnsThatWvwScore(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var world = 2001;
+
+            var result = await _api.GetWvwScoreAsync(world, cts.GetTokenOrDefault());
+
+            Assert.IsNotNull(result);
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetWvwScoreAsync_ValidId_ReturnsThatWvwScore(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var id = "2-1";
+
+            var result = await _api.GetWvwScoreAsync(id, cts.GetTokenOrDefault());
+
+            Assert.AreEqual(id, result.Id);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetWvwScoresAsync_NullIds_ThrowsArgumentNullException(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            await _api.GetWvwScoresAsync(ids: null, cts.GetTokenOrDefault());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetWvwScoresAsync_ValidIds_ReturnsThoseWvwScorees(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+            var ids = new List<string>
+            {
+                "2-1",
+                "2-2",
+                "2-3"
+            };
+
+            var result = await _api.GetWvwScoresAsync(ids, cts.GetTokenOrDefault());
+
+            CollectionAssert.AreEquivalent(ids, result.Select(x => x.Id).ToList());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetAllWvwScoresAsync_AnyParams_ReturnsAllWvwScorees(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetAllWvwScoresAsync(cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetWvwScoresAsync_NoIds_ReturnsAPage(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetWvwScoresAsync(token: cts.GetTokenOrDefault());
 
             Assert.IsTrue(result.Data.Any());
         }

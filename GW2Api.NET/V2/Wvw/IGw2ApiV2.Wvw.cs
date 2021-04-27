@@ -23,8 +23,14 @@ namespace GW2Api.NET.V2
         Task<IList<string>> GetAllWvwOverviewIdsAsync(CancellationToken token = default);
         Task<WvwOverview> GetWvwOverviewAsync(int world, CancellationToken token = default);
         Task<WvwOverview> GetWvwOverviewAsync(string id, CancellationToken token = default);
-        Task<IList<WvwOverview>> GetWvwOverviewesAsync(IEnumerable<string> ids, CancellationToken token = default);
-        Task<IList<WvwOverview>> GetAllWvwOverviewesAsync(CancellationToken token = default);
-        Task<Page<IList<WvwOverview>>> GetWvwOverviewesAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+        Task<IList<WvwOverview>> GetWvwOverviewsAsync(IEnumerable<string> ids, CancellationToken token = default);
+        Task<IList<WvwOverview>> GetAllWvwOverviewsAsync(CancellationToken token = default);
+        Task<Page<IList<WvwOverview>>> GetWvwOverviewsAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+        Task<IList<string>> GetAllWvwScoreIdsAsync(CancellationToken token = default);
+        Task<WvwScore> GetWvwScoreAsync(int world, CancellationToken token = default);
+        Task<WvwScore> GetWvwScoreAsync(string id, CancellationToken token = default);
+        Task<IList<WvwScore>> GetWvwScoresAsync(IEnumerable<string> ids, CancellationToken token = default);
+        Task<IList<WvwScore>> GetAllWvwScoresAsync(CancellationToken token = default);
+        Task<Page<IList<WvwScore>>> GetWvwScoresAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
     }
 }
