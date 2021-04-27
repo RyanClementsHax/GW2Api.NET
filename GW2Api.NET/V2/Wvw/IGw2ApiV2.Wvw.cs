@@ -32,5 +32,11 @@ namespace GW2Api.NET.V2
         Task<IList<WvwScore>> GetWvwScoresAsync(IEnumerable<string> ids, CancellationToken token = default);
         Task<IList<WvwScore>> GetAllWvwScoresAsync(CancellationToken token = default);
         Task<Page<IList<WvwScore>>> GetWvwScoresAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+        Task<IList<string>> GetAllWvwStatsIdsAsync(CancellationToken token = default);
+        Task<WvwStats> GetWvwStatsAsync(int world, CancellationToken token = default);
+        Task<WvwStats> GetWvwStatsAsync(string id, CancellationToken token = default);
+        Task<IList<WvwStats>> GetWvwStatsAsync(IEnumerable<string> ids, CancellationToken token = default);
+        Task<IList<WvwStats>> GetAllWvwStatsAsync(CancellationToken token = default);
+        Task<Page<IList<WvwStats>>> GetWvwStatsAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
     }
 }
