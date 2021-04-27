@@ -37,5 +37,6 @@ namespace GW2Api.NET.V2
         Task<IList<GuildRank>> GetGuildRanksAsync(Guid guildId, string accessToken = null, CancellationToken token = default);
         Task<IList<GuildVaultSection>> GetGuildStashAsync(Guid guildId, string accessToken = null, CancellationToken token = default);
         Task<IList<GuildStorageSlot>> GetGuildStorageAsync(Guid guildId, string accessToken = null, CancellationToken token = default);
+        Task<IList<GuildTreasurySlot>> GetGuildTreasuryAsync(Guid guildId, string accessToken = null, CancellationToken token = default);
     }
 }
