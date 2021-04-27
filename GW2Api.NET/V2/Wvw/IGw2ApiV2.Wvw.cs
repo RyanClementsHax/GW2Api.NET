@@ -38,5 +38,10 @@ namespace GW2Api.NET.V2
         Task<IList<WvwStats>> GetWvwStatsAsync(IEnumerable<string> ids, CancellationToken token = default);
         Task<IList<WvwStats>> GetAllWvwStatsAsync(CancellationToken token = default);
         Task<Page<IList<WvwStats>>> GetWvwStatsAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+        Task<IList<string>> GetAllWvwObjectiveIdsAsync(CancellationToken token = default);
+        Task<WvwObjective> GetWvwObjectiveAsync(string id, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<WvwObjective>> GetWvwObjectivesAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
+        Task<IList<WvwObjective>> GetAllWvwObjectivesAsync(CultureInfo lang = null, CancellationToken token = default);
+        Task<Page<IList<WvwObjective>>> GetWvwObjectivesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
     }
 }

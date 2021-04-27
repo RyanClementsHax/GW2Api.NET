@@ -8,7 +8,7 @@ namespace GW2Api.NET.V2.Wvw.Dto
         IDictionary<ServerColor, int> Scores,
         IDictionary<ServerColor, int> Deaths,
         IDictionary<ServerColor, int> Kills,
-        IList<WvwObjective> Objectives,
+        IList<WvwObjectiveInfo> Objectives,
         IList<WvwBonus> Bonuses
     );
 }

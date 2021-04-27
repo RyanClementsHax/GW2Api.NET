@@ -5,6 +5,7 @@
         Center,
         RedHome,
         BlueHome,
-        GreenHome
+        GreenHome,
+        EdgeOfTheMists
     }
 }

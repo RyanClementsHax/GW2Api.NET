@@ -2,12 +2,14 @@
 {
     public enum WvwObjectiveType
     {
+        Generic,
         Spawn,
         Camp,
         Ruins,
         Tower,
         Keep,
         Castle,
-        Mercenary
+        Mercenary,
+        Resource
     }
 }

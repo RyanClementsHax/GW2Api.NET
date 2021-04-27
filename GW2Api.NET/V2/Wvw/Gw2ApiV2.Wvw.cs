@@ -252,5 +252,55 @@ namespace GW2Api.NET.V2
                 new Dictionary<string, string> { }.ConfigurePage(page, pageSize),
                 token
             );
+
+        public Task<IList<string>> GetAllWvwObjectiveIdsAsync(CancellationToken token = default)
+            => GetAsync<IList<string>>("wvw/objectives", token);
+
+        public Task<WvwObjective> GetWvwObjectiveAsync(string id, CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<WvwObjective>(
+                $"wvw/objectives/{id}",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<IList<WvwObjective>> GetWvwObjectivesAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default)
+        {
+            if (ids is null)
+                throw new ArgumentNullException(nameof(ids));
+
+            return GetAsync<IList<WvwObjective>>(
+                "wvw/objectives",
+                new Dictionary<string, string>
+                {
+                    { "ids", ids.ToUrlParam() },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+        }
+
+        public Task<IList<WvwObjective>> GetAllWvwObjectivesAsync(CultureInfo lang = null, CancellationToken token = default)
+            => GetAsync<IList<WvwObjective>>(
+                "wvw/objectives",
+                new Dictionary<string, string>
+                {
+                    { "ids", "all" },
+                    { "lang", lang.ToUrlParam() }
+                },
+                token
+            );
+
+        public Task<Page<IList<WvwObjective>>> GetWvwObjectivesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default)
+            => GetPageAsync<IList<WvwObjective>>(
+                "wvw/objectives",
+                new Dictionary<string, string>
+                {
+                    { "lang", lang.ToUrlParam() }
+                }.ConfigurePage(page, pageSize),
+                token
+            );
     }
 }
