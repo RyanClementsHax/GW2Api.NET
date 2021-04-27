@@ -93,5 +93,16 @@ namespace GW2Api.NET.IntegrationTests.V2.Guilds
 
             Assert.IsTrue(result.Any());
         }
+
+        [DataTestMethod]
+        [DynamicData(nameof(TestData.DefaultTestData), typeof(TestData), DynamicDataSourceType.Method)]
+        public async Task GetGuildTeamsAsync_ValidApiKeyAndNoSinceId_ReturnsTheGuildTeams(Func<CancellationTokenSource> ctsFactory)
+        {
+            using var cts = ctsFactory();
+
+            var result = await _api.GetGuildTeamsAsync(_guildsConfig.Id, accessToken: _guildsConfig.ApiKey, token: cts.GetTokenOrDefault());
+
+            Assert.IsTrue(result.Any());
+        }
     }
 }

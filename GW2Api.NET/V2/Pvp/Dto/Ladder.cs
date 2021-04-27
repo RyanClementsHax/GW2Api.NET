@@ -4,6 +4,6 @@
     {
         Ranked,
         Unranked,
-        Teamarenarated
+        TeamArenaRated
     }
 }

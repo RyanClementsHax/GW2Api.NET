@@ -225,5 +225,8 @@ namespace GW2Api.NET.V2
 
         public Task<IList<GuildTreasurySlot>> GetGuildTreasuryAsync(Guid guildId, string accessToken = null, CancellationToken token = default)
             => GetWithAuthAsync<IList<GuildTreasurySlot>>($"guild/{guildId.ToUrlParam()}/treasury", accessToken, token);
+
+        public Task<IList<GuildTeam>> GetGuildTeamsAsync(Guid guildId, string accessToken = null, CancellationToken token = default)
+            => GetWithAuthAsync<IList<GuildTeam>>($"guild/{guildId.ToUrlParam()}/teams", accessToken, token);
     }
 }
