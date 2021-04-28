@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GW2Api.NET.V2.Achievements.Dto
 {
@@ -7,7 +8,7 @@ namespace GW2Api.NET.V2.Achievements.Dto
         string Name,
         string Description,
         int Order,
-        string Icon,
+        Uri Icon,
         IList<int> Achievements
     );
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GW2Api.NET.V2.Items.Dto.ItemTypes.Back
 {
@@ -6,7 +7,7 @@ namespace GW2Api.NET.V2.Items.Dto.ItemTypes.Back
         int Id,
         string ChatLink,
         string Name,
-        string Icon,
+        Uri Icon,
         string Description,
         Rarity Rarity,
         int Level,

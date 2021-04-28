@@ -1,10 +1,12 @@
-﻿namespace GW2Api.NET.V2.Currencies.Dto
+﻿using System;
+
+namespace GW2Api.NET.V2.Currencies.Dto
 {
     public record Currency(
         int Id,
         string Name,
         string Description,
-        string Icon,
+        Uri Icon,
         int Order
     );
 }

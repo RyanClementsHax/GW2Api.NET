@@ -1,4 +1,5 @@
 ﻿using GW2Api.NET.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -9,7 +10,7 @@ namespace GW2Api.NET.V2.Guilds.Dto
         int Id,
         string Name,
         string Description,
-        string Icon,
+        Uri Icon,
         int BuildTime,
         int RequiredLevel,
         int Experience,

@@ -1,4 +1,5 @@
 ﻿using GW2Api.NET.V2.GameMechanics.Dto.Professions;
+using System;
 using System.Collections.Generic;
 
 namespace GW2Api.NET.V2.GameMechanics.Dto.Specializations
@@ -8,7 +9,7 @@ namespace GW2Api.NET.V2.GameMechanics.Dto.Specializations
         string Name,
         Profession Profession,
         bool Elite,
-        string Icon,
+        Uri Icon,
         string Background,
         IList<int> MinorTraits,
         IList<int> MajorTraits

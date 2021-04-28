@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GW2Api.NET.V2.Items.Dto
 {
@@ -7,7 +8,7 @@ namespace GW2Api.NET.V2.Items.Dto
         string UnlockDetails,
         IList<int> UnlockItems,
         int Order,
-        string Icon,
+        Uri Icon,
         string Name
     );
 }

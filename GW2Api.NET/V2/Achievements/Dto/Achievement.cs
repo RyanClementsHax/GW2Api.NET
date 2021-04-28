@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GW2Api.NET.V2.Achievements.Dto
 {
     public record Achievement(
         int Id,
-        string Icon,
+        Uri Icon,
         string Name,
         string Description,
         string Requirement,

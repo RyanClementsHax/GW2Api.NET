@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GW2Api.NET.V2.Items.Dto.ItemTypes.Consumable
 {
@@ -12,7 +13,7 @@ namespace GW2Api.NET.V2.Items.Dto.ItemTypes.Consumable
         int? GuildUpgradeId,
         int? ApplyCount,
         string Name,
-        string Icon,
+        Uri Icon,
         IList<int> Skins
     );
 }

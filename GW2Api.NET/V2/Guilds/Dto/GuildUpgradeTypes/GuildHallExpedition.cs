@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GW2Api.NET.V2.Guilds.Dto.GuildUpgradeTypes
 {
@@ -6,7 +7,7 @@ namespace GW2Api.NET.V2.Guilds.Dto.GuildUpgradeTypes
         int Id,
         string Name,
         string Description,
-        string Icon,
+        Uri Icon,
         int BuildTime,
         int RequiredLevel,
         int Experience,

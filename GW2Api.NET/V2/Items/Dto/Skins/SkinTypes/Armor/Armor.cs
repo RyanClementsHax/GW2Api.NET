@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GW2Api.NET.V2.Items.Dto.Skins.SkinTypes.Armor
 {
@@ -8,7 +9,7 @@ namespace GW2Api.NET.V2.Items.Dto.Skins.SkinTypes.Armor
         SkinType Type,
         IList<SkinFlag> Flags,
         IList<Restriction> Restrictions,
-        string Icon,
+        Uri Icon,
         Rarity Rarity,
         string Description,
 

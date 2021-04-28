@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 
 namespace GW2Api.NET.V2.Maps.Dto
 {
@@ -8,7 +9,7 @@ namespace GW2Api.NET.V2.Maps.Dto
         string NameContested,
         Vector2 Coord,
         int PoiId,
-        string Icon,
+        Uri Icon,
         string IconContested
     );
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GW2Api.NET.V2.GameMechanics.Dto.Pets
 {
@@ -6,7 +7,7 @@ namespace GW2Api.NET.V2.GameMechanics.Dto.Pets
         int Id,
         string Name,
         string Description,
-        string Icon,
+        Uri Icon,
         IList<PetSkill> Skills
     );
 }

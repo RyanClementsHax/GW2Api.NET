@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GW2Api.NET.V2.Novelties.Dto
 {
@@ -6,7 +7,7 @@ namespace GW2Api.NET.V2.Novelties.Dto
         int Id,
         string Name,
         string Description,
-        string Icon,
+        Uri Icon,
         NoveltySlotType Slot,
         IList<int> UnlockItem
     );

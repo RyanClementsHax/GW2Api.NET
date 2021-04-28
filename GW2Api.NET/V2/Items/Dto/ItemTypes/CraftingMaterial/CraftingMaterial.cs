@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GW2Api.NET.V2.Items.Dto.ItemTypes.CraftingMaterial
 {
@@ -10,7 +7,7 @@ namespace GW2Api.NET.V2.Items.Dto.ItemTypes.CraftingMaterial
         int Id,
         string ChatLink,
         string Name,
-        string Icon,
+        Uri Icon,
         string Description,
         Rarity Rarity,
         int Level,

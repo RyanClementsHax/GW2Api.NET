@@ -1,4 +1,5 @@
 ﻿using GW2Api.NET.V2.GameMechanics.Dto.Common.Facts;
+using System;
 using System.Collections.Generic;
 
 namespace GW2Api.NET.V2.GameMechanics.Dto.Traits
@@ -7,7 +8,7 @@ namespace GW2Api.NET.V2.GameMechanics.Dto.Traits
         int Id,
         string Name,
         string Description,
-        string Icon,
+        Uri Icon,
         IList<Fact> Facts,
         IList<Fact> TraitedFacts
     );

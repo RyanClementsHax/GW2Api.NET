@@ -1,8 +1,10 @@
-﻿namespace GW2Api.NET.V2.GameMechanics.Dto.Common.Facts
+﻿using System;
+
+namespace GW2Api.NET.V2.GameMechanics.Dto.Common.Facts
 {
     public record FactPrefix(
         string Text,
-        string Icon,
+        Uri Icon,
         string Status,
         string Description
     );

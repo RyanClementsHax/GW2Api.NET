@@ -1,4 +1,5 @@
 ﻿using GW2Api.NET.V2.Items.Dto.ItemTypes.Weapon;
+using System;
 using System.Collections.Generic;
 
 namespace GW2Api.NET.V2.GameMechanics.Dto.Professions
@@ -6,7 +7,7 @@ namespace GW2Api.NET.V2.GameMechanics.Dto.Professions
     public record ProfessionDetails(
         string Id,
         string Name,
-        string Icon,
+        Uri Icon,
         string IconBig,
         IList<int> Specializations,
         IList<Training> Training,

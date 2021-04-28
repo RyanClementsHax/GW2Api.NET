@@ -1,6 +1,7 @@
 ﻿using GW2Api.NET.V2.GameMechanics.Dto.Common.Facts;
 using GW2Api.NET.V2.GameMechanics.Dto.Professions;
 using GW2Api.NET.V2.Items.Dto.ItemTypes.Weapon;
+using System;
 using System.Collections.Generic;
 
 namespace GW2Api.NET.V2.GameMechanics.Dto.Skills
@@ -9,7 +10,7 @@ namespace GW2Api.NET.V2.GameMechanics.Dto.Skills
         int Id,
         string Name,
         string Description,
-        string Icon,
+        Uri Icon,
         string ChatLink,
         SkillType? Type,
         WeaponType? WeaponType,
