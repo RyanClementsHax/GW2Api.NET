@@ -3,6 +3,7 @@
 This is a C# wrapper around `https://api.guildwars2.com/` written as a dotnet core library.
 
 - [GW2Api.NET](#gw2apinet)
+  - [Arenanet api documentation](#arenanet-api-documentation)
   - [V2](#v2)
     - [Usage](#usage)
     - [Methods](#methods)
@@ -13,8 +14,14 @@ This is a C# wrapper around `https://api.guildwars2.com/` written as a dotnet co
   - [Development](#development)
     - [Running authenticated integration tests](#running-authenticated-integration-tests)
 
+## [Arenanet api documentation](https://wiki.guildwars2.com/wiki/API:Main)
+- [This](https://wiki.guildwars2.com/wiki/API:Main) is the website of all of their documentation for their api
+- The V2 documentation is mostly correct
+- Don't trust the V1 documentation
+- This documentation specifies that you can provide the option of specifying a schema version with the `v` url parameter, but we hard code this value so that the api can construct static types around it
+
 ## V2
-This version of the api is much more robust, documented, faster, and easier to reason about the responses. It is _highly_ recommended that you use this version.
+This version of the api is much more robust, documented, faster, and easier to reason about the responses. It is _highly_ recommended that you use this version. The api documentation that Arenanet provides is *mostly* correct. There are a few things that they miss or leave out, but I tried to express the entire api with this client regardless.
 
 ### Usage
 All you have to do is instantiate an instance of `Gw2ApiV2` with an `HttpClient` to start using!
@@ -23,8 +30,8 @@ IGw2ApiV2 api = new Gw2ApiV2(new HttpClient());
 ```
 
 ### Methods
-- See the [V2 Client Method Documentation](./docs/v2ClientMethodDocumentation.md#v2-client-method-documentation) for details
 - This is a work in progress
+- See the [V2 Client Method Documentation](./docs/v2ClientMethodDocumentation.md#v2-client-method-documentation) for details
 
 ### Accessing authenticated endpoints
 To access authenticated endpoints, you need to create an [Api Key](https://wiki.guildwars2.com/wiki/API:API_key) with the permissions you desire. You have two ways of setting the Api Key.
@@ -46,7 +53,7 @@ To access authenticated endpoints, you need to create an [Api Key](https://wiki.
 Note that if no Api Keys are given, calling functions that need authentication will result in 401 Unauthenticated exceptions thrown.
 
 ## V1
-This is the older version of the api. This is poorly documented, slow, hard to reason about the responses, and has a small feature set. It is only included for legacy reasons. **DO NOT** use this client **unless you HAVE TO**.
+This is the older version of the api. This is poorly documented, slow, hard to reason about the responses, and has a small feature set. It is only included for legacy reasons. **DO NOT** use this client **unless you HAVE TO**. **DO NOT** trust the documentation that Arenanet provides of this version of the api.
 
 ### Usage
 All you have to do is instantiate an instance of `Gw2ApiV2` with an `HttpClient` to start using!
