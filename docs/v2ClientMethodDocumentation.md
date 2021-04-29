@@ -37,6 +37,8 @@
     - [achievements/daily/tomorrow](#achievementsdailytomorrow)
     - [achievements/groups](#achievementsgroups)
     - [achievements/categories](#achievementscategories)
+  - [Builds](#builds)
+    - [build](#build)
 
 ## Accounts
 
@@ -249,4 +251,11 @@ Task<IList<AchievementCategory>> GetAllAchievementCategoriesAsync(CultureInfo la
 ```
 ```cs
 Task<Page<IList<AchievementCategory>>> GetAchievementCategorysAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+## Builds
+
+### [build](https://wiki.guildwars2.com/wiki/API:2/build)
+```cs
+Task<int> GetBuildAsync(CancellationToken token = default);
 ```
