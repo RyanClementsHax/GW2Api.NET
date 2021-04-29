@@ -39,6 +39,19 @@
     - [achievements/categories](#achievementscategories)
   - [Builds](#builds)
     - [build](#build)
+  - [Characters](#characters)
+    - [characters](#characters-1)
+    - [characters/backstory](#charactersbackstory)
+    - [characters/core](#characterscore)
+    - [characters/crafting](#characterscrafting)
+    - [characters/equipment](#charactersequipment)
+    - [characters/heropoints](#charactersheropoints)
+    - [characters/inventory](#charactersinventory)
+    - [characters/recipes](#charactersrecipes)
+    - [characters/sab](#characterssab)
+    - [characters/skills](#charactersskills)
+    - [characters/specialization](#charactersspecialization)
+    - [characters/training](#characterstraining)
 
 ## Accounts
 
@@ -258,4 +271,78 @@ Task<Page<IList<AchievementCategory>>> GetAchievementCategorysAsync(int page = 0
 ### [build](https://wiki.guildwars2.com/wiki/API:2/build)
 ```cs
 Task<int> GetBuildAsync(CancellationToken token = default);
+```
+
+## Characters
+
+### [characters](https://wiki.guildwars2.com/wiki/API:2/characters)
+```cs
+Task<IList<string>> GetAllCharacterIdsAsync(string accessToken = null, CancellationToken token = default);
+```
+```cs
+Task<Character> GetCharacterAsync(string id, string accessToken = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Character>> GetCharactersAsync(IEnumerable<string> ids, string accessToken = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Character>> GetAllCharactersAsync(string accessToken = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Character>>> GetCharactersAsync(int page = 0, int pageSize = -1, string accessToken = null, CancellationToken token = default);
+```
+
+### [characters/backstory](https://wiki.guildwars2.com/wiki/API:2/characters/backstory)
+```cs
+Task<IList<string>> GetCharacterBackstoryAsync(string id, string accessToken = null, CancellationToken token = default);
+```
+
+### [characters/core](https://wiki.guildwars2.com/wiki/API:2/characters/core)
+```cs
+Task<CharacterCore> GetCharacterCoreAsync(string id, string accessToken = null, CancellationToken token = default);
+```
+
+### [characters/crafting](https://wiki.guildwars2.com/wiki/API:2/characters/crafting)
+```cs
+Task<IList<CraftingDiscipline>> GetCharacterCraftingAsync(string id, string accessToken = null, CancellationToken token = default);
+```
+
+### [characters/equipment](https://wiki.guildwars2.com/wiki/API:2/characters/equipment)
+```cs
+Task<IList<Equipment>> GetCharacterEquipmentAsync(string id, string accessToken = null, CancellationToken token = default);
+```
+
+### [characters/heropoints](https://wiki.guildwars2.com/wiki/API:2/characters/heropoints)
+```cs
+Task<IList<string>> GetCharacterHeroPointsAsync(string id, string accessToken = null, CancellationToken token = default);
+```
+
+### [characters/inventory](https://wiki.guildwars2.com/wiki/API:2/characters/inventory)
+```cs
+Task<IList<Bag>> GetCharacterInventoryAsync(string id, string accessToken = null, CancellationToken token = default);
+```
+
+### [characters/recipes](https://wiki.guildwars2.com/wiki/API:2/characters/recipes)
+```cs
+Task<IList<int>> GetCharacterRecipesAsync(string id, string accessToken = null, CancellationToken token = default);
+```
+
+### [characters/sab](https://wiki.guildwars2.com/wiki/API:2/characters/sab)
+```cs
+Task<Sab> GetCharacterSabAsync(string id, string accessToken = null, CancellationToken token = default);
+```
+
+### [characters/skills](https://wiki.guildwars2.com/wiki/API:2/characters/skills)
+```cs
+Task<Skills> GetCharacterSkillsAsync(string id, string accessToken = null, CancellationToken token = default);
+```
+
+### [characters/specialization](https://wiki.guildwars2.com/wiki/API:2/characters/specialization)
+```cs
+Task<Specializations> GetCharacterSpecializationsAsync(string id, string accessToken = null, CancellationToken token = default);
+```
+
+### [characters/training](https://wiki.guildwars2.com/wiki/API:2/characters/training)
+```cs
+Task<IList<CharacterTraining>> GetCharacterTrainingAsync(string id, string accessToken = null, CancellationToken token = default);
 ```
