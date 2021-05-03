@@ -52,6 +52,24 @@
     - [characters/skills](#charactersskills)
     - [characters/specialization](#charactersspecialization)
     - [characters/training](#characterstraining)
+  - [Colors](#colors)
+    - [colors](#colors-1)
+  - [Commerce](#commerce)
+    - [commerce/delivery](#commercedelivery)
+    - [commerce/exchange/coins](#commerceexchangecoins)
+    - [commerce/exchange/gems](#commerceexchangegems)
+    - [commerce/listings](#commercelistings)
+    - [commerce/prices](#commerceprices)
+    - [commerce/transactions](#commercetransactions)
+  - [Currencies](#currencies)
+    - [currencies](#currencies-1)
+  - [Dailies](#dailies)
+    - [dailycrafting](#dailycrafting)
+    - [mapchests](#mapchests)
+    - [worldbosses](#worldbosses)
+  - [Files](#files)
+    - [files](#files-1)
+    - [quaggans](#quaggans)
 
 ## Accounts
 
@@ -345,4 +363,190 @@ Task<Specializations> GetCharacterSpecializationsAsync(string id, string accessT
 ### [characters/training](https://wiki.guildwars2.com/wiki/API:2/characters/training)
 ```cs
 Task<IList<CharacterTraining>> GetCharacterTrainingAsync(string id, string accessToken = null, CancellationToken token = default);
+```
+
+## Colors
+
+### [colors](https://wiki.guildwars2.com/wiki/API:2/colors)
+```cs
+Task<IList<int>> GetAllColorIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Color> GetColorAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Color>> GetColorsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Color>> GetAllColorsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Color>>> GetColorsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+## Commerce
+
+### [commerce/delivery](https://wiki.guildwars2.com/wiki/API:2/commerce/delivery)
+```cs
+Task<Delivery> GetDeliveryAsync(string accessToken = null, CancellationToken token = default);
+```
+
+### [commerce/exchange/coins](https://wiki.guildwars2.com/wiki/API:2/commerce/exchange/coins)
+```cs
+Task<ExchangeInfo> GetCoinsToGemsExchangeInfoAsync(int quantity, CancellationToken token = default);
+```
+
+### [commerce/exchange/gems](https://wiki.guildwars2.com/wiki/API:2/commerce/exchange/gems)
+```cs
+Task<ExchangeInfo> GetGemsToCoinsExchangeInfoAsync(int quantity, CancellationToken token = default);
+```
+
+### [commerce/listings](https://wiki.guildwars2.com/wiki/API:2/commerce/listings)
+```cs
+Task<IList<int>> GetAllItemListingIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<ItemListing> GetItemListingAsync(int id, CancellationToken token = default);
+```
+```cs
+Task<IList<ItemListing>> GetItemListingsAsync(IEnumerable<int> ids, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<ItemListing>>> GetItemListingsAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+### [commerce/prices](https://wiki.guildwars2.com/wiki/API:2/commerce/prices)
+```cs
+Task<IList<int>> GetAllMarketPriceIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<MarketPrice> GetMarketPriceAsync(int id, CancellationToken token = default);
+```
+```cs
+Task<IList<MarketPrice>> GetMarketPricesAsync(IEnumerable<int> ids, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<MarketPrice>>> GetMarketPricesAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+### [commerce/transactions](https://wiki.guildwars2.com/wiki/API:2/commerce/transactions)
+```cs
+Task<Page<IList<Transaction>>> GetCurrentBuyTransactionsAsync(int page = -1, int pageSize = -1, string accessToken = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Transaction>>> GetCurrentSellTransactionsAsync(int page = -1, int pageSize = -1, string accessToken = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Transaction>>> GetHistoricalBuyTransactionsAsync(int page = -1, int pageSize = -1, string accessToken = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Transaction>>> GetHistoricalSellTransactionsAsync(int page = -1, int pageSize = -1, string accessToken = null, CancellationToken token = default);
+```
+
+## Currencies
+
+### [currencies](https://wiki.guildwars2.com/wiki/API:2/currencies)
+```cs
+Task<IList<int>> GetAllCurrencyIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Currency> GetCurrencyAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Currency>> GetCurrenciesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Currency>> GetAllCurrenciesAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Currency>>> GetCurrenciesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+## Dailies
+
+### [dailycrafting](https://wiki.guildwars2.com/wiki/API:2/dailycrafting)
+```cs
+Task<IList<string>> GetAllTimeGatedRecipeIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<TimeGatedRecipe> GetTimeGatedRecipeAsync(string id, CancellationToken token = default);
+```
+```cs
+Task<IList<TimeGatedRecipe>> GetTimeGatedRecipesAsync(IEnumerable<string> ids, CancellationToken token = default);
+```
+```cs
+Task<IList<TimeGatedRecipe>> GetAllTimeGatedRecipesAsync(CancellationToken token = default);
+```
+```cs
+Task<Page<IList<TimeGatedRecipe>>> GetTimeGatedRecipesAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+### [mapchests](https://wiki.guildwars2.com/wiki/API:2/mapchests)
+```cs
+Task<IList<string>> GetAllMapChestIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<MapChest> GetMapChestAsync(string id, CancellationToken token = default);
+```
+```cs
+Task<IList<MapChest>> GetMapChestsAsync(IEnumerable<string> ids, CancellationToken token = default);
+```
+```cs
+Task<IList<MapChest>> GetAllMapChestsAsync(CancellationToken token = default);
+```
+```cs
+Task<Page<IList<MapChest>>> GetMapChestsAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+### [worldbosses](https://wiki.guildwars2.com/wiki/API:2/worldbosses)
+```cs
+Task<IList<string>> GetAllWorldBossIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<WorldBoss> GetWorldBossAsync(string id, CancellationToken token = default);
+```
+```cs
+Task<IList<WorldBoss>> GetWorldBossesAsync(IEnumerable<string> ids, CancellationToken token = default);
+```
+```cs
+Task<IList<WorldBoss>> GetAllWorldBossesAsync(CancellationToken token = default);
+```
+```cs
+Task<Page<IList<WorldBoss>>> GetWorldBossesAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+## Files
+
+### [files](https://wiki.guildwars2.com/wiki/API:2/files)
+```cs
+Task<IList<string>> GetAllFileIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<File> GetFileAsync(string id, CancellationToken token = default);
+```
+```cs
+Task<IList<File>> GetFilesAsync(IEnumerable<string> ids, CancellationToken token = default);
+```
+```cs
+Task<IList<File>> GetAllFilesAsync(CancellationToken token = default);
+```
+```cs
+Task<Page<IList<File>>> GetFilesAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+### [quaggans](https://wiki.guildwars2.com/wiki/API:2/quaggans)
+```cs
+Task<IList<string>> GetAllQuagganIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Quaggan> GetQuagganAsync(string id, CancellationToken token = default);
+```
+```cs
+Task<IList<Quaggan>> GetQuaggansAsync(IEnumerable<string> ids, CancellationToken token = default);
+```
+```cs
+Task<IList<Quaggan>> GetAllQuaggansAsync(CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Quaggan>>> GetQuaggansAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
 ```
