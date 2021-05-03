@@ -125,6 +125,26 @@
     - [pvp/ranks](#pvpranks)
     - [pvp/seasons](#pvpseasons)
     - [pvp/seasons/:id/leaderboards](#pvpseasonsidleaderboards)
+  - [Stories](#stories)
+    - [backstory/answers](#backstoryanswers)
+    - [backstory/questions](#backstoryquestions)
+    - [stories](#stories-1)
+    - [stories/seasons](#storiesseasons)
+    - [quests](#quests)
+  - [Tokens](#tokens)
+    - [createsubtoken](#createsubtoken)
+    - [tokeninfo](#tokeninfo)
+  - [Worlds](#worlds)
+    - [worlds](#worlds-1)
+  - [Wvw](#wvw)
+    - [wvw/abilities](#wvwabilities)
+    - [wvw/matches](#wvwmatches)
+    - [wvw/matches/overview](#wvwmatchesoverview)
+    - [wvw/matches/scores](#wvwmatchesscores)
+    - [wvw/matches/stats](#wvwmatchesstats)
+    - [wvw/objectives](#wvwobjectives)
+    - [wvw/ranks](#wvwranks)
+    - [wvw/upgrades](#wvwupgrades)
 
 ## Accounts
 
@@ -1351,4 +1371,272 @@ Task<IList<LeaderboardResult>> GetAllPvpLeaderboardResultsAsync(Guid seasonId, L
 ```
 ```cs
 Task<Page<IList<LeaderboardResult>>> GetPvpLeaderboardResultsAsync(Guid seasonId, LeaderboardType leaderboardType, LeagueType leagueType, int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+## Stories
+
+### [backstory/answers](https://wiki.guildwars2.com/wiki/API:2/backstory/answers)
+```cs
+Task<IList<string>> GetAllBackstoryAnswerIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<BackstoryAnswer> GetBackstoryAnswerAsync(string id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<BackstoryAnswer>> GetBackstoryAnswersAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<BackstoryAnswer>> GetAllBackstoryAnswersAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<BackstoryAnswer>>> GetBackstoryAnswersAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [backstory/questions](https://wiki.guildwars2.com/wiki/API:2/backstory/questions)
+```cs
+Task<IList<int>> GetAllBackstoryQuestionIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<BackstoryQuestion> GetBackstoryQuestionAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<BackstoryQuestion>> GetBackstoryQuestionsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<BackstoryQuestion>> GetAllBackstoryQuestionsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<BackstoryQuestion>>> GetBackstoryQuestionsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [stories](https://wiki.guildwars2.com/wiki/API:2/stories)
+```cs
+Task<IList<int>> GetAllStoryIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Story> GetStoryAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Story>> GetStoriesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Story>> GetAllStoriesAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Story>>> GetStoriesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [stories/seasons](https://wiki.guildwars2.com/wiki/API:2/stories/seasons)
+```cs
+Task<IList<Guid>> GetAllStorySeasonIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<StorySeason> GetStorySeasonAsync(Guid id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<StorySeason>> GetStorySeasonsAsync(IEnumerable<Guid> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<StorySeason>> GetAllStorySeasonsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<StorySeason>>> GetStorySeasonsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [quests](https://wiki.guildwars2.com/wiki/API:2/quests)
+```cs
+Task<IList<int>> GetAllQuestIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Quest> GetQuestAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Quest>> GetQuestsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Quest>> GetAllQuestsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Quest>>> GetQuestsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+## Tokens
+
+### [createsubtoken](https://wiki.guildwars2.com/wiki/API:2/createsubtoken)
+```cs
+Task<string> CreateSubTokenAsync(DateTimeOffset expire, Permissions permissions, IEnumerable<string> urls = null, string accessToken = null, CancellationToken token = default);
+```
+
+### [tokeninfo](https://wiki.guildwars2.com/wiki/API:2/tokeninfo)
+```cs
+Task<TokenInfo> GetTokenInfoAsync(string accessToken = null, CancellationToken token = default);
+```
+
+## Worlds
+
+### [worlds](https://wiki.guildwars2.com/wiki/API:2/worlds)
+```cs
+Task<IList<int>> GetAllWorldIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<World> GetWorldAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<World>> GetWorldsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<World>> GetAllWorldsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<World>>> GetWorldsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+## Wvw
+
+### [wvw/abilities](https://wiki.guildwars2.com/wiki/API:2/wvw/abilities)
+```cs
+Task<IList<int>> GetAllWvwAbilityIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<WvwAbility> GetWvwAbilityAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwAbility>> GetWvwAbilitiesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwAbility>> GetAllWvwAbilitiesAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<WvwAbility>>> GetWvwAbilitiesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [wvw/matches](https://wiki.guildwars2.com/wiki/API:2/wvw/matches)
+```cs
+Task<IList<string>> GetAllWvwMatchIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<WvwMatch> GetWvwMatchAsync(int world, CancellationToken token = default);
+```
+```cs
+Task<WvwMatch> GetWvwMatchAsync(string id, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwMatch>> GetWvwMatchesAsync(IEnumerable<string> ids, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwMatch>> GetAllWvwMatchesAsync(CancellationToken token = default);
+```
+```cs
+Task<Page<IList<WvwMatch>>> GetWvwMatchesAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+### [wvw/matches/overview](https://wiki.guildwars2.com/wiki/API:2/wvw/matches)
+```cs
+Task<IList<string>> GetAllWvwOverviewIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<WvwOverview> GetWvwOverviewAsync(int world, CancellationToken token = default);
+```
+```cs
+Task<WvwOverview> GetWvwOverviewAsync(string id, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwOverview>> GetWvwOverviewsAsync(IEnumerable<string> ids, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwOverview>> GetAllWvwOverviewsAsync(CancellationToken token = default);
+```
+```cs
+Task<Page<IList<WvwOverview>>> GetWvwOverviewsAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+### [wvw/matches/scores](https://wiki.guildwars2.com/wiki/API:2/wvw/matches)
+```cs
+Task<IList<string>> GetAllWvwScoreIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<WvwScore> GetWvwScoreAsync(int world, CancellationToken token = default);
+```
+```cs
+Task<WvwScore> GetWvwScoreAsync(string id, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwScore>> GetWvwScoresAsync(IEnumerable<string> ids, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwScore>> GetAllWvwScoresAsync(CancellationToken token = default);
+```
+```cs
+Task<Page<IList<WvwScore>>> GetWvwScoresAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+### [wvw/matches/stats](https://wiki.guildwars2.com/wiki/API:2/wvw/matches)
+```cs
+Task<IList<string>> GetAllWvwStatsIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<WvwStats> GetWvwStatsAsync(int world, CancellationToken token = default);
+```
+```cs
+Task<WvwStats> GetWvwStatsAsync(string id, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwStats>> GetWvwStatsAsync(IEnumerable<string> ids, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwStats>> GetAllWvwStatsAsync(CancellationToken token = default);
+```
+```cs
+Task<Page<IList<WvwStats>>> GetWvwStatsAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+### [wvw/objectives](https://wiki.guildwars2.com/wiki/API:2/wvw/objectives)
+```cs
+Task<IList<string>> GetAllWvwObjectiveIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<WvwObjective> GetWvwObjectiveAsync(string id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwObjective>> GetWvwObjectivesAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwObjective>> GetAllWvwObjectivesAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<WvwObjective>>> GetWvwObjectivesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [wvw/ranks](https://wiki.guildwars2.com/wiki/API:2/wvw/ranks)
+```cs
+Task<IList<int>> GetAllWvwRankIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<WvwRank> GetWvwRankAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwRank>> GetWvwRanksAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwRank>> GetAllWvwRanksAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<WvwRank>>> GetWvwRanksAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [wvw/upgrades](https://wiki.guildwars2.com/wiki/API:2/wvw/upgrades)
+```cs
+Task<IList<int>> GetAllWvwUpgradeIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<WvwUpgrade> GetWvwUpgradeAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwUpgrade>> GetWvwUpgradesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<WvwUpgrade>> GetAllWvwUpgradesAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<WvwUpgrade>>> GetWvwUpgradesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
 ```
