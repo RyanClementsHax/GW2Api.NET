@@ -112,6 +112,19 @@
     - [recipes/search](#recipessearch)
     - [skins](#skins)
     - [minis](#minis)
+  - [Maps](#maps)
+    - [continents](#continents)
+    - [maps](#maps-1)
+  - [Novelties](#novelties)
+    - [novelties](#novelties-1)
+  - [Pvp](#pvp)
+    - [pvp/stats](#pvpstats)
+    - [pvp/games](#pvpgames)
+    - [pvp/standings](#pvpstandings)
+    - [pvp/amulets](#pvpamulets)
+    - [pvp/ranks](#pvpranks)
+    - [pvp/seasons](#pvpseasons)
+    - [pvp/seasons/:id/leaderboards](#pvpseasonsidleaderboards)
 
 ## Accounts
 
@@ -1107,4 +1120,235 @@ Task<IList<Mini>> GetAllMinisAsync(CultureInfo lang = null, CancellationToken to
 ```
 ```cs
 Task<Page<IList<Mini>>> GetMinisAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+## Maps
+
+### [continents](https://wiki.guildwars2.com/wiki/API:2/continents)
+```cs
+Task<IList<int>> GetAllContinentIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Continent> GetContinentAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Continent>> GetContinentsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Continent>> GetAllContinentsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Continent>>> GetContinentsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<int>> GetAllFloorIdsAsync(int continentId, CancellationToken token = default);
+```
+```cs
+Task<Floor> GetFloorAsync(int continentId, int floorId, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Floor>> GetFloorsAsync(int continentId, IEnumerable<int> floorIds, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Floor>> GetAllFloorsAsync(int continentId, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Floor>>> GetFloorsAsync(int continentId, int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<int>> GetAllFloorRegionIdsAsync(int continentId, int floorId, CancellationToken token = default);
+```
+```cs
+Task<FloorRegion> GetFloorRegionAsync(int continentId, int floorId, int regionId, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<FloorRegion>> GetFloorRegionsAsync(int continentId, int floorId, IEnumerable<int> regionIds, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<FloorRegion>> GetAllFloorRegionsAsync(int continentId, int floorId, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<FloorRegion>>> GetFloorRegionsAsync(int continentId, int floorId, int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<int>> GetAllRegionMapIdsAsync(int continentId, int floorId, int regionId, CancellationToken token = default);
+```
+```cs
+Task<RegionMap> GetRegionMapAsync(int continentId, int floorId, int regionId, int mapId, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<RegionMap>> GetRegionMapsAsync(int continentId, int floorId, int regionId, IEnumerable<int> mapIds, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<RegionMap>> GetAllRegionMapsAsync(int continentId, int floorId, int regionId, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<RegionMap>>> GetRegionMapsAsync(int continentId, int floorId, int regionId, int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<int>> GetAllSectorIdsAsync(int continentId, int floorId, int regionId, int mapId, CancellationToken token = default);
+```
+```cs
+Task<Sector> GetSectorAsync(int continentId, int floorId, int regionId, int mapId, int sectorId, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Sector>> GetSectorsAsync(int continentId, int floorId, int regionId, int mapId, IEnumerable<int> sectorIds, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Sector>> GetAllSectorsAsync(int continentId, int floorId, int regionId, int mapId, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Sector>>> GetSectorsAsync(int continentId, int floorId, int regionId, int mapId, int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<int>> GetAllPointOfInterestIdsAsync(int continentId, int floorId, int regionId, int mapId, CancellationToken token = default);
+```
+```cs
+Task<PointOfInterest> GetPointOfInterestAsync(int continentId, int floorId, int regionId, int mapId, int pointOfInterestId, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<PointOfInterest>> GetPointsOfInterestAsync(int continentId, int floorId, int regionId, int mapId, IEnumerable<int> pointOfInterestIds, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<PointOfInterest>> GetAllPointsOfInterestAsync(int continentId, int floorId, int regionId, int mapId, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<PointOfInterest>>> GetPointsOfInterestAsync(int continentId, int floorId, int regionId, int mapId, int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<int>> GetAllMapTaskIdsAsync(int continentId, int floorId, int regionId, int mapId, CancellationToken token = default);
+```
+```cs
+Task<MapTask> GetMapTaskAsync(int continentId, int floorId, int regionId, int mapId, int mapTaskId, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<MapTask>> GetMapTasksAsync(int continentId, int floorId, int regionId, int mapId, IEnumerable<int> mapTaskIds, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<MapTask>> GetAllMapTasksAsync(int continentId, int floorId, int regionId, int mapId, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<MapTask>>> GetMapTasksAsync(int continentId, int floorId, int regionId, int mapId, int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [maps](https://wiki.guildwars2.com/wiki/API:2/maps)
+```cs
+Task<IList<int>> GetAllMapIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Map> GetMapAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Map>> GetMapsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Map>> GetAllMapsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Map>>> GetMapsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+## Novelties
+
+### [novelties](https://wiki.guildwars2.com/wiki/API:2/novelties)
+```cs
+Task<IList<int>> GetAllNoveltyIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Novelty> GetNoveltyAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Novelty>> GetNoveltiesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Novelty>> GetAllNoveltiesAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Novelty>>> GetNoveltiesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+## Pvp
+
+### [pvp/stats](https://wiki.guildwars2.com/wiki/API:2/pvp/stats)
+```cs
+Task<PvpStats> GetPvpStatsAsync(string accessToken = null, CancellationToken token = default);
+```
+
+### [pvp/games](https://wiki.guildwars2.com/wiki/API:2/pvp/games)
+```cs
+Task<IList<Guid>> GetAllPvpGameIdsAsync(string accessToken = null, CancellationToken token = default);
+```
+```cs
+Task<PvpGame> GetPvpGameAsync(Guid id, string accessToken = null, CancellationToken token = default);
+```
+```cs
+Task<IList<PvpGame>> GetPvpGamesAsync(IEnumerable<Guid> ids, string accessToken = null, CancellationToken token = default);
+```
+```cs
+Task<IList<PvpGame>> Get10MostRecentPvpGamesAsync(string accessToken = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<PvpGame>>> GetPvpGamesAsync(int page = 0, int pageSize = -1, string accessToken = null, CancellationToken token = default);
+```
+
+### [pvp/standings](https://wiki.guildwars2.com/wiki/API:2/pvp/standings)
+Currently no methods implemented because I don't have access to an account with standings data. If you would like to donate an api key for an account that has this data for testing and deserialization verification, that would be greatly appreciated.
+
+### [pvp/amulets](https://wiki.guildwars2.com/wiki/API:2/pvp/amulets)
+```cs
+Task<IList<int>> GetAllPvpAmuletIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<PvpAmulet> GetPvpAmuletAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<PvpAmulet>> GetPvpAmuletsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<PvpAmulet>> GetAllPvpAmuletsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<PvpAmulet>>> GetPvpAmuletsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [pvp/ranks](https://wiki.guildwars2.com/wiki/API:2/pvp/ranks)
+```cs
+Task<IList<int>> GetAllPvpRankIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<PvpRank> GetPvpRankAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<PvpRank>> GetPvpRanksAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<PvpRank>> GetAllPvpRanksAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<PvpRank>>> GetPvpRanksAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [pvp/seasons](https://wiki.guildwars2.com/wiki/API:2/pvp/seasons)
+```cs
+Task<IList<Guid>> GetAllPvpSeasonIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<PvpSeason> GetPvpSeasonAsync(Guid id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<PvpSeason>> GetPvpSeasonsAsync(IEnumerable<Guid> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<PvpSeason>> GetAllPvpSeasonsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<PvpSeason>>> GetPvpSeasonsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [pvp/seasons/:id/leaderboards](https://wiki.guildwars2.com/wiki/API:2/pvp/seasons/:id/leaderboards)
+```cs
+Task<IList<LeaderboardResult>> GetAllPvpLeaderboardResultsAsync(Guid seasonId, LeaderboardType leaderboardType, LeagueType leagueType, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<LeaderboardResult>>> GetPvpLeaderboardResultsAsync(Guid seasonId, LeaderboardType leaderboardType, LeagueType leagueType, int page = 0, int pageSize = -1, CancellationToken token = default);
 ```
