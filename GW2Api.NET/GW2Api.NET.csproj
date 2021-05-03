@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>0.2.0</Version>
+		<Version>0.3.0</Version>
 		<Authors>Ryan Clements; Github Contributors</Authors>
 		<Description>A wrapper around https://api.guildwars2.com/ written as a dotnet core library</Description>
 		<Copyright>Copyright Ryan Clements</Copyright>
 		<TargetFramework>net5.0</TargetFramework>
 		<Features>strict</Features>
-		<PackageTags>gw2;guild wars 2;guild wars</PackageTags>
+		<PackageTags>gw2;guild;wars;2</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<IncludeSymbols>true</IncludeSymbols>
