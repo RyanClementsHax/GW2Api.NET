@@ -9,8 +9,6 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
-    environment: prod
-
     steps:
     - uses: actions/checkout@v2
     - name: Setup
@@ -24,5 +22,5 @@ jobs:
     - name: Publish
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
-          PROJECT_FILE_PATH: GW2Api.NET/GW2Api.NET.csproj
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+        PROJECT_FILE_PATH: GW2Api.NET/GW2Api.NET.csproj
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
