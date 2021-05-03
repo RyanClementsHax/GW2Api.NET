@@ -99,7 +99,19 @@
     - [guild/:id/storage](#guildidstorage)
     - [guild/:id/treasury](#guildidtreasury)
     - [guild/:id/teams](#guildidteams)
-    - [guild/:id/teams](#guildidteams-1)
+    - [guild/:id/upgrades](#guildidupgrades)
+  - [Home](#home)
+    - [home/cats](#homecats)
+    - [home/nodes](#homenodes)
+  - [Items](#items)
+    - [finishers](#finishers)
+    - [items](#items-1)
+    - [itemstats](#itemstats)
+    - [materials](#materials)
+    - [recipes](#recipes)
+    - [recipes/search](#recipessearch)
+    - [skins](#skins)
+    - [minis](#minis)
 
 ## Accounts
 
@@ -939,4 +951,160 @@ Task<IList<GuildTeam>> GetGuildTeamsAsync(Guid guildId, string accessToken = nul
 ### [guild/:id/upgrades](https://wiki.guildwars2.com/wiki/API:2/guild/:id/upgrades)
 ```cs
 Task<IList<int>> GetGuildUpgradesAsync(Guid guildId, string accessToken = null, CancellationToken token = default);
+```
+
+## Home
+
+### [home/cats](https://wiki.guildwars2.com/wiki/API:2/home/cats)
+```cs
+Task<IList<int>> GetAllHomeCatIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<HomeCat> GetHomeCatAsync(int id, CancellationToken token = default);
+```
+```cs
+Task<IList<HomeCat>> GetHomeCatsAsync(IEnumerable<int> ids, CancellationToken token = default);
+```
+```cs
+Task<IList<HomeCat>> GetAllHomeCatsAsync(CancellationToken token = default);
+```
+```cs
+Task<Page<IList<HomeCat>>> GetHomeCatsAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+### [home/nodes](https://wiki.guildwars2.com/wiki/API:2/home/nodes)
+```cs
+Task<IList<string>> GetAllHomeNodeIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<HomeNode> GetHomeNodeAsync(string id, CancellationToken token = default);
+```
+```cs
+Task<IList<HomeNode>> GetHomeNodesAsync(IEnumerable<string> ids, CancellationToken token = default);
+```
+```cs
+Task<IList<HomeNode>> GetAllHomeNodesAsync(CancellationToken token = default);
+```
+```cs
+Task<Page<IList<HomeNode>>> GetHomeNodesAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+## Items
+
+### [finishers](https://wiki.guildwars2.com/wiki/API:2/finishers)
+```cs
+Task<IList<int>> GetAllFinisherIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Finisher> GetFinisherAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Finisher>> GetFinishersAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Finisher>> GetAllFinishersAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Finisher>>> GetFinishersAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [items](https://wiki.guildwars2.com/wiki/API:2/items)
+```cs
+Task<IList<int>> GetAllItemIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Item> GetItemAync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Item>> GetItemsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Item>>> GetItemsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [itemstats](https://wiki.guildwars2.com/wiki/API:2/itemstats)
+```cs
+Task<IList<int>> GetAllItemStatsIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<ItemStats> GetItemStatsAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IEnumerable<ItemStats>> GetItemStatsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IEnumerable<ItemStats>> GetAllItemStatsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<ItemStats>>> GetItemStatsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [materials](https://wiki.guildwars2.com/wiki/API:2/materials)
+```cs
+Task<IList<int>> GetAllMaterialIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Material> GetMaterialAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Material>> GetMaterialsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Material>> GetAllMaterialsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Material>>> GetMaterialsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [recipes](https://wiki.guildwars2.com/wiki/API:2/recipes)
+```cs
+Task<IList<int>> GetAllRecipeIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Recipe> GetRecipeAsync(int id, CancellationToken token = default);
+```
+```cs
+Task<IList<Recipe>> GetRecipesAsync(IEnumerable<int> ids, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Recipe>>> GetRecipesAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+### [recipes/search](https://wiki.guildwars2.com/wiki/API:2/recipes/search)
+```cs
+Task<IList<int>> SearchRecipesByInputAsync(int inputId, CancellationToken token = default);
+```
+```cs
+Task<IList<int>> SearchRecipesByOutputAsync(int outputId, CancellationToken token = default);
+```
+
+### [skins](https://wiki.guildwars2.com/wiki/API:2/skins)
+```cs
+Task<IList<int>> GetAllSkinIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Skin> GetSkinAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Skin>> GetSkinsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Skin>>> GetSkinsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [minis](https://wiki.guildwars2.com/wiki/API:2/minis)
+```cs
+Task<IList<int>> GetAllMiniIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Mini> GetMiniAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Mini>> GetMinisAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Mini>> GetAllMinisAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Mini>>> GetMinisAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
 ```
