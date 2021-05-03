@@ -85,6 +85,21 @@
     - [dungeons](#dungeons)
     - [raids](#raids)
     - [titles](#titles)
+  - [Guilds](#guilds)
+    - [guild/:id](#guildid)
+    - [emblem/backgrounds](#emblembackgrounds)
+    - [emblem/foregrounds](#emblemforegrounds)
+    - [guild/permissions](#guildpermissions)
+    - [guild/search](#guildsearch)
+    - [guild/upgrades](#guildupgrades)
+    - [guild/:id/log](#guildidlog)
+    - [guild/:id/members](#guildidmembers)
+    - [guild/:id/ranks](#guildidranks)
+    - [guild/:id/stash](#guildidstash)
+    - [guild/:id/storage](#guildidstorage)
+    - [guild/:id/treasury](#guildidtreasury)
+    - [guild/:id/teams](#guildidteams)
+    - [guild/:id/teams](#guildidteams-1)
 
 ## Accounts
 
@@ -804,4 +819,124 @@ Task<IList<Title>> GetAllTitlesAsync(CultureInfo lang = null, CancellationToken 
 ```
 ```cs
 Task<Page<IList<Title>>> GetTitlesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+## Guilds
+
+### [guild/:id](https://wiki.guildwars2.com/wiki/API:2/guild/:id)
+```cs
+Task<IList<int>> GetAllTitleIdsAsync(CancellationToken token = default);
+```
+
+### [emblem/backgrounds](https://wiki.guildwars2.com/wiki/API:2/emblem/backgrounds)
+```cs
+Task<IList<int>> GetAllEmblemBackgroundIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<EmblemLayer> GetEmblemBackgroundAsync(int id, CancellationToken token = default);
+```
+```cs
+Task<IList<EmblemLayer>> GetEmblemBackgroundsAsync(IEnumerable<int> ids, CancellationToken token = default);
+```
+```cs
+Task<IList<EmblemLayer>> GetAllEmblemBackgroundsAsync(CancellationToken token = default);
+```
+```cs
+Task<Page<IList<EmblemLayer>>> GetEmblemBackgroundsAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+### [emblem/foregrounds](https://wiki.guildwars2.com/wiki/API:2/emblem/foregrounds)
+```cs
+Task<IList<int>> GetAllEmblemForegroundIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<EmblemLayer> GetEmblemForegroundAsync(int id, CancellationToken token = default);
+```
+```cs
+Task<IList<EmblemLayer>> GetEmblemForegroundsAsync(IEnumerable<int> ids, CancellationToken token = default);
+```
+```cs
+Task<IList<EmblemLayer>> GetAllEmblemForegroundsAsync(CancellationToken token = default);
+```
+```cs
+Task<Page<IList<EmblemLayer>>> GetEmblemForegroundsAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+### [guild/permissions](https://wiki.guildwars2.com/wiki/API:2/guild/permissions)
+```cs
+Task<IList<string>> GetAllGuildPermissionIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<GuildPermission> GetGuildPermissionAsync(string id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<GuildPermission>> GetGuildPermissionsAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<GuildPermission>> GetAllGuildPermissionsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<GuildPermission>>> GetGuildPermissionsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [guild/search](https://wiki.guildwars2.com/wiki/API:2/guild/search)
+```cs
+Task<IList<Guid>> SearchGuildsByNameAsync(string name, CancellationToken token);
+```
+
+### [guild/upgrades](https://wiki.guildwars2.com/wiki/API:2/guild/upgrades)
+```cs
+Task<IList<int>> GetAllGuildUpgradeIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<GuildUpgrade> GetGuildUpgradeAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<GuildUpgrade>> GetGuildUpgradesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<GuildUpgrade>> GetAllGuildUpgradesAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<GuildUpgrade>>> GetGuildUpgradesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [guild/:id/log](https://wiki.guildwars2.com/wiki/API:2/guild/:id/log)
+```cs
+Task<IList<GuildLog>> GetGuildLogsAsync(Guid guildId, int since = -1, string accessToken = null, CancellationToken token = default);
+```
+
+### [guild/:id/members](https://wiki.guildwars2.com/wiki/API:2/guild/:id/members)
+```cs
+Task<IList<GuildMember>> GetGuildMembersAsync(Guid guildId, string accessToken = null, CancellationToken token = default);
+```
+
+### [guild/:id/ranks](https://wiki.guildwars2.com/wiki/API:2/guild/:id/ranks)
+```cs
+Task<IList<GuildRank>> GetGuildRanksAsync(Guid guildId, string accessToken = null, CancellationToken token = default);
+```
+
+### [guild/:id/stash](https://wiki.guildwars2.com/wiki/API:2/guild/:id/stash)
+```cs
+Task<IList<GuildVaultSection>> GetGuildStashAsync(Guid guildId, string accessToken = null, CancellationToken token = default);
+```
+
+### [guild/:id/storage](https://wiki.guildwars2.com/wiki/API:2/guild/:id/storage)
+```cs
+Task<IList<GuildStorageSlot>> GetGuildStorageAsync(Guid guildId, string accessToken = null, CancellationToken token = default);
+```
+
+### [guild/:id/treasury](https://wiki.guildwars2.com/wiki/API:2/guild/:id/treasury)
+```cs
+Task<IList<GuildTreasurySlot>> GetGuildTreasuryAsync(Guid guildId, string accessToken = null, CancellationToken token = default);
+```
+
+### [guild/:id/teams](https://wiki.guildwars2.com/wiki/API:2/guild/:id/teams)
+```cs
+Task<IList<GuildTeam>> GetGuildTeamsAsync(Guid guildId, string accessToken = null, CancellationToken token = default);
+```
+
+### [guild/:id/upgrades](https://wiki.guildwars2.com/wiki/API:2/guild/:id/upgrades)
+```cs
+Task<IList<int>> GetGuildUpgradesAsync(Guid guildId, string accessToken = null, CancellationToken token = default);
 ```
