@@ -114,6 +114,12 @@
     - [minis](#minis)
   - [Maps](#maps)
     - [continents](#continents)
+    - [continents/:continentId/floors](#continentscontinentidfloors)
+    - [continents/:continentId/floors/:floorId/regions](#continentscontinentidfloorsflooridregions)
+    - [continents/:continentId/floors/:floorId/regions/:regionId/maps](#continentscontinentidfloorsflooridregionsregionidmaps)
+    - [continents/:continentId/floors/:floorId/regions/:regionId/maps/:mapId/sectors](#continentscontinentidfloorsflooridregionsregionidmapsmapidsectors)
+    - [continents/:continentId/floors/:floorId/regions/:regionId/maps/:mapId/pois](#continentscontinentidfloorsflooridregionsregionidmapsmapidpois)
+    - [continents/:continentId/floors/:floorId/regions/:regionId/maps/:mapId/tasks](#continentscontinentidfloorsflooridregionsregionidmapsmapidtasks)
     - [maps](#maps-1)
   - [Novelties](#novelties)
     - [novelties](#novelties-1)
@@ -1160,6 +1166,8 @@ Task<IList<Continent>> GetAllContinentsAsync(CultureInfo lang = null, Cancellati
 ```cs
 Task<Page<IList<Continent>>> GetContinentsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
 ```
+
+### [continents/:continentId/floors](https://wiki.guildwars2.com/wiki/API:2/continents)
 ```cs
 Task<IList<int>> GetAllFloorIdsAsync(int continentId, CancellationToken token = default);
 ```
@@ -1175,6 +1183,8 @@ Task<IList<Floor>> GetAllFloorsAsync(int continentId, CultureInfo lang = null, C
 ```cs
 Task<Page<IList<Floor>>> GetFloorsAsync(int continentId, int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
 ```
+
+### [continents/:continentId/floors/:floorId/regions](https://wiki.guildwars2.com/wiki/API:2/continents)
 ```cs
 Task<IList<int>> GetAllFloorRegionIdsAsync(int continentId, int floorId, CancellationToken token = default);
 ```
@@ -1190,6 +1200,8 @@ Task<IList<FloorRegion>> GetAllFloorRegionsAsync(int continentId, int floorId, C
 ```cs
 Task<Page<IList<FloorRegion>>> GetFloorRegionsAsync(int continentId, int floorId, int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
 ```
+
+### [continents/:continentId/floors/:floorId/regions/:regionId/maps](https://wiki.guildwars2.com/wiki/API:2/continents)
 ```cs
 Task<IList<int>> GetAllRegionMapIdsAsync(int continentId, int floorId, int regionId, CancellationToken token = default);
 ```
@@ -1205,6 +1217,8 @@ Task<IList<RegionMap>> GetAllRegionMapsAsync(int continentId, int floorId, int r
 ```cs
 Task<Page<IList<RegionMap>>> GetRegionMapsAsync(int continentId, int floorId, int regionId, int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
 ```
+
+### [continents/:continentId/floors/:floorId/regions/:regionId/maps/:mapId/sectors](https://wiki.guildwars2.com/wiki/API:2/continents)
 ```cs
 Task<IList<int>> GetAllSectorIdsAsync(int continentId, int floorId, int regionId, int mapId, CancellationToken token = default);
 ```
@@ -1220,6 +1234,8 @@ Task<IList<Sector>> GetAllSectorsAsync(int continentId, int floorId, int regionI
 ```cs
 Task<Page<IList<Sector>>> GetSectorsAsync(int continentId, int floorId, int regionId, int mapId, int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
 ```
+
+### [continents/:continentId/floors/:floorId/regions/:regionId/maps/:mapId/pois](https://wiki.guildwars2.com/wiki/API:2/continents)
 ```cs
 Task<IList<int>> GetAllPointOfInterestIdsAsync(int continentId, int floorId, int regionId, int mapId, CancellationToken token = default);
 ```
@@ -1235,6 +1251,8 @@ Task<IList<PointOfInterest>> GetAllPointsOfInterestAsync(int continentId, int fl
 ```cs
 Task<Page<IList<PointOfInterest>>> GetPointsOfInterestAsync(int continentId, int floorId, int regionId, int mapId, int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
 ```
+
+### [continents/:continentId/floors/:floorId/regions/:regionId/maps/:mapId/tasks](https://wiki.guildwars2.com/wiki/API:2/continents)
 ```cs
 Task<IList<int>> GetAllMapTaskIdsAsync(int continentId, int floorId, int regionId, int mapId, CancellationToken token = default);
 ```
