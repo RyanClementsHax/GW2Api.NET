@@ -10,10 +10,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4B059BC1-6FBB-426C-A5AB-3EC616259A1F}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		.github\workflows\ci.yml = .github\workflows\ci.yml
 		README.md = README.md
+		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2Api.NET.Tests", "GW2Api.NET.Tests\GW2Api.NET.Tests.csproj", "{9E5002C6-7BD4-4FF8-BB0E-409C183872D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GW2Api.NET.Tests", "GW2Api.NET.Tests\GW2Api.NET.Tests.csproj", "{9E5002C6-7BD4-4FF8-BB0E-409C183872D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

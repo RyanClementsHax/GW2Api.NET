@@ -1,6 +1,6 @@
 # GW2Api.NET
 
-This is a C# wrapper around `https://api.guildwars2.com/` written as a dotnet core library.
+A wrapper around `https://api.guildwars2.com/` written as a dotnet core library
 
 - [GW2Api.NET](#gw2apinet)
   - [Arenanet api documentation](#arenanet-api-documentation)
