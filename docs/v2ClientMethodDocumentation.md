@@ -70,6 +70,21 @@
   - [Files](#files)
     - [files](#files-1)
     - [quaggans](#quaggans)
+  - [Game Mechanics](#game-mechanics)
+    - [masteries](#masteries)
+    - [mounts/skins](#mountsskins)
+    - [mounts/types](#mountstypes)
+    - [outfits](#outfits)
+    - [pets](#pets)
+    - [professions](#professions)
+    - [races](#races)
+    - [specializations](#specializations)
+    - [skills](#skills)
+    - [traits](#traits)
+    - [legends](#legends)
+    - [dungeons](#dungeons)
+    - [raids](#raids)
+    - [titles](#titles)
 
 ## Accounts
 
@@ -549,4 +564,244 @@ Task<IList<Quaggan>> GetAllQuaggansAsync(CancellationToken token = default);
 ```
 ```cs
 Task<Page<IList<Quaggan>>> GetQuaggansAsync(int page = 0, int pageSize = -1, CancellationToken token = default);
+```
+
+## Game Mechanics
+
+### [masteries](https://wiki.guildwars2.com/wiki/API:2/masteries)
+```cs
+Task<IList<int>> GetAllMasteryIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Mastery> GetMasteryAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Mastery>> GetMasteriesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Mastery>> GetAllMasteriesAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Mastery>>> GetMasteriesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [mounts/skins](https://wiki.guildwars2.com/wiki/API:2/mounts/skins)
+```cs
+Task<IList<int>> GetAllMountSkinIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<MountSkin> GetMountSkinAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<MountSkin>> GetMountSkinsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<MountSkin>> GetAllMountSkinsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<MountSkin>>> GetMountSkinsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [mounts/types](https://wiki.guildwars2.com/wiki/API:2/mounts/types)
+```cs
+Task<IList<string>> GetAllMountTypeIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<MountType> GetMountTypeAsync(string id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<MountType>> GetMountTypesAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<MountType>> GetAllMountTypesAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<MountType>>> GetMountTypesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [outfits](https://wiki.guildwars2.com/wiki/API:2/outfits)
+```cs
+Task<IList<int>> GetAllOutfitIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Outfit> GetOutfitAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Outfit>> GetOutfitsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Outfit>> GetAllOutfitsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Outfit>>> GetOutfitsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [pets](https://wiki.guildwars2.com/wiki/API:2/pets)
+```cs
+Task<IList<int>> GetAllPetIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Pet> GetPetAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Pet>> GetPetsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Pet>> GetAllPetsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Pet>>> GetPetsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [professions](https://wiki.guildwars2.com/wiki/API:2/professions)
+```cs
+Task<IList<string>> GetAllProfessionIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<ProfessionDetails> GetProfessionAsync(string id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<ProfessionDetails>> GetProfessionsAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<ProfessionDetails>> GetAllProfessionsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<ProfessionDetails>>> GetProfessionsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [races](https://wiki.guildwars2.com/wiki/API:2/races)
+```cs
+Task<IList<string>> GetAllRaceIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<RaceDetails> GetRaceAsync(string id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<RaceDetails>> GetRacesAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<RaceDetails>> GetAllRacesAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<RaceDetails>>> GetRacesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [specializations](https://wiki.guildwars2.com/wiki/API:2/specializations)
+```cs
+Task<IList<int>> GetAllSpecializationIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Specialization> GetSpecializationAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Specialization>> GetSpecializationsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Specialization>> GetAllSpecializationsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Specialization>>> GetSpecializationsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [skills](https://wiki.guildwars2.com/wiki/API:2/skills)
+```cs
+Task<IList<int>> GetAllSkillIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Skill> GetSkillAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Skill>> GetSkillsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Skill>> GetAllSkillsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Skill>>> GetSkillsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [traits](https://wiki.guildwars2.com/wiki/API:2/traits)
+```cs
+Task<IList<int>> GetAllTraitIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Trait> GetTraitAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Trait>> GetTraitsAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Trait>> GetAllTraitsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Trait>>> GetTraitsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [legends](https://wiki.guildwars2.com/wiki/API:2/legends)
+```cs
+Task<IList<string>> GetAllLegendIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Legend> GetLegendAsync(string id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Legend>> GetLegendsAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Legend>> GetAllLegendsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Legend>>> GetLegendsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [dungeons](https://wiki.guildwars2.com/wiki/API:2/dungeons)
+```cs
+Task<IList<string>> GetAllDungeonIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Dungeon> GetDungeonAsync(string id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Dungeon>> GetDungeonsAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Dungeon>> GetAllDungeonsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Dungeon>>> GetDungeonsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [raids](https://wiki.guildwars2.com/wiki/API:2/raids)
+```cs
+Task<IList<string>> GetAllRaidIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Raid> GetRaidAsync(string id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Raid>> GetRaidsAsync(IEnumerable<string> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Raid>> GetAllRaidsAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Raid>>> GetRaidsAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
+```
+
+### [titles](https://wiki.guildwars2.com/wiki/API:2/titles)
+```cs
+Task<IList<int>> GetAllTitleIdsAsync(CancellationToken token = default);
+```
+```cs
+Task<Title> GetTitleAsync(int id, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Title>> GetTitlesAsync(IEnumerable<int> ids, CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<IList<Title>> GetAllTitlesAsync(CultureInfo lang = null, CancellationToken token = default);
+```
+```cs
+Task<Page<IList<Title>>> GetTitlesAsync(int page = 0, int pageSize = -1, CultureInfo lang = null, CancellationToken token = default);
 ```
