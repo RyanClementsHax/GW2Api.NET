@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-
 	<PropertyGroup>
-		<Version>0.1.0</Version>
+		<Version>0.2.0</Version>
 		<Authors>Ryan Clements; Github Contributors</Authors>
 		<Description>A wrapper around https://api.guildwars2.com/ written as a dotnet core library</Description>
 		<Copyright>Copyright Ryan Clements</Copyright>
